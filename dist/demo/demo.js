@@ -1,4 +1,4 @@
-const API="https://had-instant-coupons-license.trycloudflare.com";
+const API="https://rom-optimization-affair-tested.trycloudflare.com";
 const MAX_BYTES=2000*1000*1000,allowed=new Set(["wav","flac","m4a"]);
 const input=document.querySelector("#audio-file"),zone=document.querySelector("#drop-zone"),result=document.querySelector("#file-result"),error=document.querySelector("#upload-error"),nameEl=document.querySelector("#file-name"),metaEl=document.querySelector("#file-meta"),preview=document.querySelector("#preview-player"),audio=document.querySelector("#audio-preview"),previewStatus=document.querySelector("#preview-status"),uploadButton=document.querySelector("#upload-button"),progress=document.querySelector("#upload-progress"),fill=document.querySelector("#progress-fill"),percent=document.querySelector("#progress-percent"),progressText=document.querySelector("#progress-text");
 const analyzeButton=document.querySelector("#analyze-button"),analysisStatus=document.querySelector("#analysis-status"),analysisState=document.querySelector("#analysis-state"),analysisText=document.querySelector("#analysis-text");

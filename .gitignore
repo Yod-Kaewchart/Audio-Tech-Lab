@@ -3,3 +3,4 @@ tools/cloudflared.exe
 
 __pycache__/
 exports/
+quick-tunnel.log
