@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0f">
+  <meta name="description" content="Fosi Audio ZA3 Modification Project — ปรับแต่ง Analog Stage, Op-Amp, Power Supply, Capacitor และ Internal Wiring โดย Audio Tech Lab">
+  <title>Fosi Audio ZA3 Modification | Audio Tech Lab</title>
+  <link rel="canonical" href="https://yod-kaewchart.github.io/Audio-Tech-Lab/projects/fosi-za3/">
+  <meta property="og:title" content="Fosi Audio ZA3 Modification | Audio Tech Lab">
+  <meta property="og:description" content="Technical Project: Analog Stage, HDAM 9988SQ, Dual OPA627, OPA1642, Power Supply และ Internal Wiring">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yod-kaewchart.github.io/Audio-Tech-Lab/projects/fosi-za3/">
+  <meta property="og:image" content="https://yod-kaewchart.github.io/Audio-Tech-Lab/assets/projects/fosi-za3/fosi-za3-final-board.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+  <header class="site-header" id="top">    <div class="header-inner shell">
+      <a class="brand" href="../../index.html" aria-label="Audio Tech Lab หน้าหลัก">
+        <span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">Audio <b>Tech Lab</b></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="เปิดเมนูนำทาง">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primary-nav" aria-label="เมนูหลัก">
+        <a href="../../index.html#about">เกี่ยวกับเรา</a>
+        <a href="../../index.html#earbuds">DIY Earbuds</a>
+        <a href="../../index.html#services">บริการ</a>
+        <a href="../../index.html#projects">ผลงาน</a>
+        <a href="../../index.html#reviews">รีวิวและทดสอบ</a>
+        <a href="../../index.html#knowledge">ความรู้เสียง</a>
+        <a class="nav-contact" href="../../index.html#contact">ติดต่อเรา</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="project-hero">
+      <div class="shell project-hero-grid">
+        <div class="project-hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> TECHNICAL PROJECT / POWER AMPLIFIER</p>          <h1>Fosi Audio<br><span>ZA3 Modification</span></h1>
+          <p class="project-kicker">Analog Stage · Op-Amp · Power Supply · Capacitor · Internal Wiring</p>
+          <p class="project-lead">โปรเจกต์ปรับแต่ง Fosi Audio ZA3 โดยเริ่มจากการศึกษาบอร์ดจริง แยกหน้าที่ของแต่ละภาค และปรับแต่งเฉพาะตำแหน่งที่มีเหตุผลทางเทคนิค ก่อนตรวจสอบการทำงานและประเมินผลกับระบบเสียงจริง</p>
+          <div class="project-actions">
+            <a class="button button-primary" href="#final-configuration">Final Configuration</a>
+            <a class="button button-outline" href="../../index.html#projects">กลับไป Projects</a>
+          </div>
+        </div>
+        <figure class="project-hero-media">
+          <img src="../../assets/projects/fosi-za3/fosi-za3-final-board.webp" alt="แผงวงจร Fosi Audio ZA3 หลังการปรับแต่ง Final Configuration" width="1200" height="1200">
+          <figcaption>Final board configuration / Audio Tech Lab</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="project-summary">
+      <div class="shell project-facts">
+        <div><span>DEVICE</span><strong>Fosi Audio ZA3</strong></div>
+        <div><span>TYPE</span><strong>Class-D Power Amplifier</strong></div>
+        <div><span>INPUT</span><strong>RCA / Balanced XLR</strong></div>
+        <div><span>METHOD</span><strong>Modify · Test · Listen</strong></div>
+      </div>
+    </section>
+
+    <article class="project-article">
+      <section class="project-section shell project-intro">
+        <p class="section-index">01 / PROJECT APPROACH</p>
+        <div class="project-copy-grid">          <h2>Analyze.<br><em>Modify. Test. Listen.</em></h2>
+          <div class="project-prose">
+            <p class="lead">Fosi Audio ZA3 เป็น Class-D Power Amplifier ขนาดกะทัดรัดที่รองรับทั้ง RCA และ Balanced XLR และมีโครงสร้างวงจรที่เปิดโอกาสให้ปรับแต่งภาค Analog และ Op-Amp ได้หลายตำแหน่ง</p>
+            <p>เป้าหมายของโปรเจกต์นี้ไม่ใช่การเปลี่ยนอุปกรณ์ให้มากที่สุดหรือแพงที่สุด แต่เป็นการศึกษาหน้าที่ของวงจรเดิม แล้วปรับแต่งเป็นจุด ๆ เพื่อให้สามารถตรวจสอบผลของการเปลี่ยนแปลงแต่ละส่วนได้อย่างเป็นระบบ</p>
+            <p>แนวทางของ Audio Tech Lab คือศึกษาวงจรก่อนแก้ไข รักษาความเข้ากันได้ทางไฟฟ้า ตรวจสอบความเสถียร แล้วจึงประเมินผลจากการใช้งานจริง</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section project-dark">
+        <div class="shell">
+          <p class="section-index">02 / ORIGINAL BOARD & PREPARATION</p>
+          <div class="project-copy-grid">
+            <h2>เริ่มจาก<br><em>บอร์ดจริง</em></h2>
+            <div class="project-prose">
+              <p class="lead">ขั้นตอนแรกคือถอด ZA3 ออกจากตัวถังและตรวจสอบ PCB ทั้งระบบ ตั้งแต่ Input, Balanced XLR, Main L/R Op-Amp, Subwoofer Stage ไปจนถึง Power Supply</p>
+              <p>อุปกรณ์บางตำแหน่งถูกถอดออกเพื่อเตรียมบอร์ดสำหรับการปรับแต่ง โดยเฉพาะจุด Op-Amp และ Capacitor พร้อมติดตั้ง Socket ในตำแหน่งที่ต้องการให้สามารถเปลี่ยนหรือบำรุงรักษาได้โดยไม่ต้องบัดกรี PCB ซ้ำหลายครั้ง</p>
+            </div>
+          </div>
+          <div class="figure-pair">
+            <figure><img src="../../assets/projects/fosi-za3/fosi-za3-original-board.webp" alt="PCB Fosi Audio ZA3 ระหว่างเตรียมบอร์ดก่อนติดตั้งอุปกรณ์ปรับแต่ง" loading="lazy"><figcaption>Original board / circuit preparation</figcaption></figure>            <figure><img src="../../assets/projects/fosi-za3/fosi-za3-sockets-angle.webp" alt="ตำแหน่ง Socket Op-Amp บนบอร์ด Fosi Audio ZA3" loading="lazy"><figcaption>Op-Amp sockets prepared for service and configuration changes</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section shell">
+        <p class="section-index">03 / ANALOG STAGE & OP-AMP</p>
+        <div class="project-copy-grid">
+          <h2>แยกหน้าที่<br><em>แต่ละ Stage</em></h2>
+          <div class="project-prose">
+            <p class="lead">Final Configuration ใช้ Op-Amp แตกต่างกันตามหน้าที่ของวงจรแต่ละส่วน แทนการใช้รุ่นเดียวกันทั้งเครื่อง</p>
+            <p>การเลือกอุปกรณ์พิจารณาจากตำแหน่งใช้งาน ความเข้ากันได้ทางไฟฟ้า ความเสถียร และลักษณะโหลดของวงจร ไม่ได้เลือกจากชื่อรุ่นหรือราคาเพียงอย่างเดียว</p>
+          </div>
+        </div>
+        <div class="stage-grid">
+          <article><span>BALANCED / INPUT</span><h3>HDAM 9988SQ</h3><p>ใช้งานในภาค Balanced / Input Stage ของระบบ</p></article>
+          <article><span>MAIN LEFT / RIGHT</span><h3>Dual OPA627</h3><p>ใช้ในช่องสัญญาณหลักซ้ายและขวาก่อนเข้าสู่ภาคขยายกำลัง</p></article>
+          <article><span>SUBWOOFER STAGE</span><h3>OPA1642</h3><p>ใช้ในส่วน Subwoofer Stage ตามหน้าที่ของวงจร</p></article>
+        </div>
+        <div class="figure-pair compact">
+          <figure><img src="../../assets/projects/fosi-za3/fosi-za3-opamp-stage.webp" alt="รายละเอียด Op-Amp และ Capacitor บน Fosi Audio ZA3 หลังการปรับแต่ง" loading="lazy"><figcaption>Analog / Op-Amp stage detail</figcaption></figure>
+          <figure><img src="../../assets/projects/fosi-za3/fosi-za3-final-configuration.webp" alt="ชุด Op-Amp Final Configuration บน Fosi Audio ZA3" loading="lazy"><figcaption>Final Op-Amp configuration</figcaption></figure>
+        </div>      </section>
+
+      <section class="project-section project-dark">
+        <div class="shell">
+          <p class="section-index">04 / POWER SUPPLY</p>
+          <div class="project-copy-grid">
+            <h2>Power Supply<br><em>เป็นส่วนของระบบ</em></h2>
+            <div class="project-prose">
+              <p class="lead">ภาคจ่ายไฟเป็นอีกจุดที่ให้ความสำคัญ เพราะ Power Amplifier ต้องรับมือกับกระแสที่เปลี่ยนแปลงตามสัญญาณเสียงตลอดเวลา</p>
+              <p>Reservoir Capacitor ในโปรเจกต์นี้อยู่ในระดับ 2,200 µF / 63 V พร้อมปรับ Capacitor ในจุดย่อยของวงจร Analog และภาค Op-Amp รวมถึงใช้ Film Bypass ในตำแหน่งที่พิจารณาแล้วว่าเหมาะสม</p>
+              <p>การเลือก Capacitor ไม่ได้พิจารณาเฉพาะค่าความจุ แต่ดู ESR, Ripple Current, Voltage Rating, ขนาดจริง และตำแหน่งใช้งานร่วมกันด้วย ค่า capacitance ที่มากกว่าไม่ได้หมายความว่าจะเหมาะกว่าเสมอไป</p>
+            </div>
+          </div>
+          <div class="figure-pair">
+            <figure><img src="../../assets/projects/fosi-za3/fosi-za3-power-supply.webp" alt="Reservoir Capacitor และ Power Supply บน Fosi Audio ZA3 หลังการปรับแต่ง" loading="lazy"><figcaption>Reservoir capacitor and power-supply section</figcaption></figure>
+            <figure><img src="../../assets/projects/fosi-za3/fosi-za3-power-section-prep.webp" alt="ภาค Power Supply ของ Fosi Audio ZA3 ระหว่างเตรียมการปรับแต่ง" loading="lazy"><figcaption>Power section during preparation</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section shell">
+        <p class="section-index">05 / INTERNAL WIRING</p>
+        <div class="project-copy-grid">
+          <h2>รายละเอียดเล็ก<br><em>ที่ไม่ควรมองข้าม</em></h2>
+          <div class="project-prose">
+            <p class="lead">ระบบสายภายในได้รับการจัดใหม่ โดยเฉพาะเส้นทาง Speaker Output เพื่อให้ทางเดินสายเป็นระเบียบและลดพื้นที่ loop ในบริเวณที่มีกระแสสูง</p>
+            <p>การเดินสาย จุดบัดกรี และตำแหน่งของสายที่อยู่ใกล้ภาคกำลังเป็นส่วนหนึ่งของงานโมดิฟาย ไม่ใช่เพียงเรื่องความสวยงามของงานประกอบ</p>
+          </div>
+        </div>
+        <figure class="wide-figure"><img src="../../assets/projects/fosi-za3/fosi-za3-speaker-wiring.webp" alt="การเดินสาย Speaker Output ภายใน Fosi Audio ZA3" loading="lazy"><figcaption>Internal speaker-output wiring</figcaption></figure>
+      </section>      <section class="project-section project-final" id="final-configuration">
+        <div class="shell">
+          <p class="section-index">06 / FINAL CONFIGURATION</p>
+          <div class="project-copy-grid">
+            <h2>Final<br><em>Configuration</em></h2>
+            <p class="project-final-lead">ชุดสุดท้ายที่เลือกใช้งานหลังจากการปรับแต่งและตรวจสอบแต่ละส่วนของวงจร</p>
+          </div>
+          <dl class="spec-grid">
+            <div><dt>Device</dt><dd>Fosi Audio ZA3</dd></div>
+            <div><dt>Amplifier Type</dt><dd>Class-D Power Amplifier</dd></div>
+            <div><dt>Inputs</dt><dd>RCA / Balanced XLR</dd></div>
+            <div><dt>Balanced / Input Stage</dt><dd>HDAM 9988SQ</dd></div>
+            <div><dt>Main Left / Right</dt><dd>Dual OPA627</dd></div>
+            <div><dt>Subwoofer Stage</dt><dd>OPA1642</dd></div>
+            <div><dt>Reservoir Capacitor</dt><dd>2,200 µF / 63 V</dd></div>
+            <div><dt>Modification Areas</dt><dd>Analog Stage, Op-Amp, Power Supply, Capacitor, Bypass, Internal Wiring</dd></div>
+            <div><dt>Project</dt><dd>Audio Tech Lab</dd></div>
+            <div><dt>Method</dt><dd>Modification / Testing / Listening Evaluation</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="project-section shell">
+        <p class="section-index">07 / PROJECT GALLERY</p>
+        <div class="gallery-heading"><h2>Technical <em>Gallery</em></h2><p>ภาพรายละเอียดจากขั้นตอนการเตรียมบอร์ด การปรับแต่ง และการประกอบ Final Configuration</p></div>
+        <div class="project-gallery">          <figure><img src="../../assets/projects/fosi-za3/fosi-za3-input-stage-prep.webp" alt="รายละเอียดการเตรียม Input Stage ของ Fosi Audio ZA3" loading="lazy"><figcaption>Input stage preparation</figcaption></figure>
+          <figure><img src="../../assets/projects/fosi-za3/fosi-za3-pcb-underside.webp" alt="ด้านล่าง PCB ของ Fosi Audio ZA3" loading="lazy"><figcaption>PCB underside</figcaption></figure>
+          <figure><img src="../../assets/projects/fosi-za3/fosi-za3-rear-panel.webp" alt="แผงเชื่อมต่อด้านหลัง Fosi Audio ZA3 และ PCB ภายใน" loading="lazy"><figcaption>Rear I/O and internal board</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="project-section project-closing">
+        <div class="shell closing-grid">
+          <div>
+            <p class="section-index">08 / WHAT THIS PROJECT SHOWS</p>
+            <h2>เปลี่ยนเฉพาะสิ่งที่<br><em>มีเหตุผล</em></h2>
+          </div>
+          <div class="project-prose">
+            <p class="lead">โปรเจกต์ ZA3 แสดงให้เห็นว่าการโมดิฟายเครื่องเสียงไม่จำเป็นต้องหมายถึงการเปลี่ยนอุปกรณ์ทุกชิ้น แต่ต้องเข้าใจว่าแต่ละตำแหน่งทำหน้าที่อะไรและสัมพันธ์กับวงจรเดิมอย่างไร</p>
+            <p>สำหรับ Audio Tech Lab งานโมดิฟายควรอธิบายได้ว่าเปลี่ยนอะไร เพราะอะไร อยู่ส่วนไหนของวงจร และตรวจสอบผลอย่างไร มากกว่าการอธิบายด้วยความรู้สึกเพียงอย่างเดียว</p>
+            <blockquote>Analyze. Modify. Test. Listen.</blockquote>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner"><span>Audio Tech Lab</span><span>Fosi Audio ZA3 / Technical Project</span><a href="#top">กลับด้านบน</a></div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>
