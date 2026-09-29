@@ -8,3 +8,8 @@
 .analysis-status{margin-top:12px;padding:16px;border:1px solid var(--line);background:#0d1011}
 .analysis-status strong{display:block;letter-spacing:.08em}
 .analysis-status p{margin:6px 0 0;color:var(--muted);font-size:.88rem}
+.track-results{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+.track-results-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:10px}.track-results-head small{color:var(--muted);letter-spacing:.12em}
+.track-list{display:grid;gap:8px}.track-row{display:grid;grid-template-columns:minmax(90px,1fr) minmax(150px,1.6fr) auto;gap:12px;align-items:center;padding:11px 12px;border:1px solid var(--line);background:#0d1011}
+.track-row strong{font-size:.92rem}.track-time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.86rem}.track-play{border:1px solid var(--line);background:transparent;color:inherit;padding:7px 12px;cursor:pointer}.track-play:hover,.track-play.is-playing{border-color:var(--accent);color:var(--accent)}
+@media(max-width:700px){.track-row{grid-template-columns:1fr auto}.track-time{grid-column:1/2}.track-play{grid-column:2;grid-row:1/3}}
