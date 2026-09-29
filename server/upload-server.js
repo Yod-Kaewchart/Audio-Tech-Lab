@@ -1,6 +1,10 @@
 ﻿const http=require("http"),fs=require("fs"),path=require("path"),crypto=require("crypto");
 const PORT=8787,MAX=2000*1000*1000,CHUNK=8*1024*1024,ROOT=path.resolve(__dirname,"..","uploads");
+const RETENTION_MS=24*60*60*1000,CLEANUP_INTERVAL_MS=60*60*1000;
 const sessions=new Map(); fs.mkdirSync(ROOT,{recursive:true});
+function cleanupExpiredUploads(now=Date.now()){let deleted=0;for(const entry of fs.readdirSync(ROOT,{withFileTypes:true})){if(!entry.isFile())continue;const file=path.join(ROOT,entry.name);try{const stat=fs.statSync(file);if(now-stat.mtimeMs>=RETENTION_MS){fs.unlinkSync(file);deleted++}}catch(e){console.error("Cleanup skipped",entry.name,e.message)}}return deleted}
+const initialCleanup=cleanupExpiredUploads();if(initialCleanup)console.log("Cleanup removed",initialCleanup,"expired upload(s)");
+const cleanupTimer=setInterval(()=>{const n=cleanupExpiredUploads();if(n)console.log("Cleanup removed",n,"expired upload(s)")},CLEANUP_INTERVAL_MS);cleanupTimer.unref();
 const cors={"Access-Control-Allow-Origin":"*","Access-Control-Allow-Headers":"Content-Type,X-Upload-Id,X-Chunk-Index","Access-Control-Allow-Methods":"GET,POST,OPTIONS"};
 function send(res,code,obj){res.writeHead(code,{...cors,"Content-Type":"application/json; charset=utf-8"});res.end(JSON.stringify(obj))}
 function body(req,limit=1024*1024){return new Promise((ok,bad)=>{let b=[],n=0;req.on("data",c=>{n+=c.length;if(n>limit){bad(new Error("body too large"));req.destroy();return}b.push(c)});req.on("end",()=>ok(Buffer.concat(b)));req.on("error",bad)})}
