@@ -7,7 +7,7 @@ function showFile(file){const ext=(file.name.split(".").pop()||"").toLowerCase()
 if(!allowed.has(ext))message="รองรับเฉพาะ WAV, FLAC และ ALAC (.m4a)";else if(file.size>MAX_BYTES)message="ไฟล์ใหญ่เกิน 2,000 MB";
 error.hidden=!message;error.textContent=message;result.hidden=Boolean(message);progress.hidden=true;uploadButton.disabled=Boolean(message);
 if(message){selectedFile=null;input.value="";preview.style.display="none";audio.removeAttribute("src");audio.load();return}
-selectedFile=file;nameEl.textContent=file.name;metaEl.textContent=(file.size/1000000).toFixed(2)+" MB · "+ext.toUpperCase();
+selectedFile=file;uploadButton.disabled=false;uploadButton.textContent="Upload to Modify";nameEl.textContent=file.name;metaEl.textContent=(file.size/1000000).toFixed(2)+" MB · "+ext.toUpperCase();
 if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(file);audio.src=objectUrl;audio.load();preview.style.display="block";previewStatus.textContent="พร้อมเล่นจากไฟล์ในอุปกรณ์โดยตรง";
 }
 input.addEventListener("change",()=>input.files[0]&&showFile(input.files[0]));
