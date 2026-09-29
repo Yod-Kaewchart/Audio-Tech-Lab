@@ -2,3 +2,4 @@ uploads/
 tools/cloudflared.exe
 
 __pycache__/
+exports/
