@@ -4,3 +4,7 @@
 .upload-progress strong{display:block;margin-top:12px;font-size:1.25rem}
 .upload-progress p{margin:5px 0 0;color:var(--muted);font-size:.88rem}
 .analyze-button:disabled{cursor:not-allowed;opacity:.45}
+.analyze-action{margin-top:12px}
+.analysis-status{margin-top:12px;padding:16px;border:1px solid var(--line);background:#0d1011}
+.analysis-status strong{display:block;letter-spacing:.08em}
+.analysis-status p{margin:6px 0 0;color:var(--muted);font-size:.88rem}
