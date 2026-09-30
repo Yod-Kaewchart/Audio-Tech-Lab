@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0f">
+  <title>ADuM4165BRIZ คืออะไร? เจาะ USB Isolator ใน HiBy AP10 | Audio Tech Labs</title>
+  <meta name="description" content="ทำความเข้าใจ ADuM4165BRIZ ชิป USB 2.0 High-Speed Digital Isolator ที่รองรับ 480 Mbps พร้อมอธิบาย galvanic isolation, ground noise, jitter และเหตุผลทางวิศวกรรมที่ชิปนี้เหมาะกับ HiBy AP10">
+  <link rel="canonical" href="https://audiotechlabs.com/notes/adum4165briz/">
+  <meta property="og:title" content="ADuM4165BRIZ คืออะไร? เจาะ USB Isolator ใน HiBy AP10 | Audio Tech Labs">
+  <meta property="og:description" content="ทำความเข้าใจ ADuM4165BRIZ ชิป USB 2.0 High-Speed Digital Isolator ที่รองรับ 480 Mbps พร้อมอธิบาย galvanic isolation, ground noise, jitter และเหตุผลทางวิศวกรรมที่ชิปนี้เหมาะกับ HiBy AP10">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://audiotechlabs.com/notes/adum4165briz/">
+  <meta property="og:image" content="https://audiotechlabs.com/assets/notes/adum4165briz-hero.webp">
+  <meta property="og:image:alt" content="ภาพประกอบ HiBy AP10 ในระบบ Audio">
+  <meta property="og:site_name" content="Audio Tech Labs">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="note.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ADuM4165BRIZ คืออะไร?",
+  "alternativeHeadline": "ทำไม HiBy AP10 เลือกใช้ชิป Digital Isolator ตัวนี้",
+  "description": "ทำความเข้าใจ ADuM4165BRIZ ชิป USB 2.0 High-Speed Digital Isolator ที่รองรับ 480 Mbps พร้อมอธิบาย galvanic isolation, ground noise, jitter และเหตุผลทางวิศวกรรมที่ชิปนี้เหมาะกับ HiBy AP10",
+  "url": "https://audiotechlabs.com/notes/adum4165briz/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://audiotechlabs.com/notes/adum4165briz/"
+  },
+  "image": [
+    "https://audiotechlabs.com/assets/notes/adum4165briz-hero.webp"
+  ],
+  "inLanguage": "th",
+  "articleSection": "Audio Tech Notes / USB Audio",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Audio Tech Labs",
+    "url": "https://audiotechlabs.com/"
+  }
+}
+  </script>
+</head>
+<body class="note-page">
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+  <header class="site-header" id="top">
+    <div class="header-inner shell">
+      <a class="brand" href="../../index.html#top" aria-label="Audio Tech Labs หน้าหลัก">
+        <span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">Audio <b>Tech Labs</b></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="เปิดเมนูนำทาง">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primary-nav" aria-label="เมนูหลัก">
+        <a href="../../index.html#about">เกี่ยวกับเรา</a>
+        <a href="../../index.html#earbuds">DIY Earbuds</a>
+        <a href="../../index.html#services">บริการ</a>
+        <a href="../../index.html#projects">ผลงาน</a>
+        <a href="../../index.html#deep-dive">วิเคราะห์เชิงลึก</a>
+        <a href="../../index.html#reviews">รีวิวและทดสอบ</a>
+        <a href="../../index.html#knowledge">Tech Notes</a>
+        <a class="nav-contact" href="../../index.html#contact">ติดต่อเรา</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <article class="note-article" aria-labelledby="note-title">
+      <header class="note-hero note-reading">
+        <nav class="note-breadcrumb" aria-label="เส้นทางนำทาง">
+          <ol><li><a href="../../index.html">Home</a></li><li>Audio Tech Notes</li><li aria-current="page">ADuM4165BRIZ คืออะไร?</li></ol>
+        </nav>
+        <p class="note-kicker">AUDIO TECH NOTES <span aria-hidden="true">·</span> USB AUDIO</p>
+        <h1 id="note-title">ADuM4165BRIZ คืออะไร?</h1>
+        <p class="note-subtitle">ทำไม HiBy AP10 เลือกใช้ชิป Digital Isolator ตัวนี้</p>
+        <figure class="note-hero-image">
+          <img src="../../assets/notes/adum4165briz-hero.webp" alt="ภาพประกอบ HiBy AP10 ในระบบ Audio" width="832" height="832" fetchpriority="high" decoding="async">
+          <figcaption>ภาพประกอบ HiBy AP10 ในระบบ Audio — ใช้เพื่อประกอบเนื้อหา ไม่ใช่ภาพยืนยันโครงสร้างวงจรภายใน</figcaption>
+        </figure>
+      </header>
+      <div class="note-body note-reading">
+          <p>เวลาเราพูดถึง USB Audio หลายคนอาจคิดว่า “USB ส่งข้อมูลดิจิทัล แล้วจะมี Noise เข้ามาเกี่ยวอะไรด้วย?”</p>
+          <p>ความจริงคือสาย USB ไม่ได้เชื่อมกันแค่ข้อมูล 0 และ 1 เท่านั้น แต่ยังมีเส้นทางทางไฟฟ้าระหว่างอุปกรณ์ ทั้ง Power, Ground และสัญญาณความถี่สูง เมื่อ PC เชื่อมต่อกับ DAC โดยตรง กราวด์ของอุปกรณ์ทั้งสองฝั่งจึงสามารถเชื่อมถึงกันผ่าน USB ได้</p>
+          <p>นี่คือจุดที่ USB Isolator เข้ามามีบทบาท</p>
+          <p>หนึ่งในชิปที่ออกแบบมาสำหรับงานนี้โดยตรงคือ <strong>ADuM4165BRIZ</strong> จาก Analog Devices และเป็นชิปที่ถูกนำมาใช้ในบริบทของอุปกรณ์ USB Isolation อย่าง HiBy AP10</p>
+        <section class="note-section" aria-labelledby="note-section-1">
+          <h2 id="note-section-1">เข้าใจง่ายใน 30 วินาที</h2>
+          <p>ADuM4165 คือชิปที่สร้าง “กำแพงทางไฟฟ้า” ระหว่าง USB สองฝั่ง</p>
+          <p>ข้อมูล USB ยังคงสามารถเดินทางข้ามกำแพงนี้ได้ แต่ไม่มีการเชื่อมต่อทางไฟฟ้าโดยตรงของ Ground ระหว่างสองด้าน</p>
+          <p>แนวคิดนี้เรียกว่า <strong>Galvanic Isolation</strong></p>
+          <p>ผลที่ได้คือระบบสามารถตัด direct ground path ระหว่าง PC กับอุปกรณ์ USB ปลายทาง ซึ่งมีประโยชน์เมื่อระบบกำลังประสบปัญหา Ground Loop หรือสัญญาณรบกวนทางไฟฟ้าที่เดินทางผ่านการเชื่อมต่อ USB</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-2">
+          <h2 id="note-section-2">ADuM4165BRIZ คืออะไร?</h2>
+          <p>ADuM4165 เป็น USB 2.0 Digital Isolator จาก Analog Devices ในตระกูลเทคโนโลยี iCoupler</p>
+          <p>จุดสำคัญคือมันรองรับ USB 2.0 ครบทั้งสามระดับความเร็ว:</p>
+          <ul><li>Low-Speed — 1.5 Mbps</li><li>Full-Speed — 12 Mbps</li><li>High-Speed — 480 Mbps</li></ul>
+          <p>ความสามารถรองรับ High-Speed 480 Mbps เป็นจุดต่างสำคัญเมื่อเทียบกับ USB isolator รุ่นเก่าหลายรุ่นที่จำกัดอยู่ที่ Full-Speed 12 Mbps</p>
+          <p>สำหรับ USB DAC และ USB Audio Class 2 สมัยใหม่ ความสามารถนี้ทำให้สามารถใช้งานกับอุปกรณ์ที่ต้องการ High-Speed USB ได้โดยไม่ถูกจำกัดอยู่ที่ 12 Mbps</p>
+          <p>ตัว ADuM4165BRIZ ใช้แพ็กเกจ 20-lead wide-body SOIC_IC ที่มี creepage และ clearance 8.3 mm และได้รับการระบุ isolation rating ที่ 5700 Vrms เป็นเวลา 1 นาทีตาม UL 1577</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-3">
+          <h2 id="note-section-3">Galvanic Isolation ทำอะไรกับ USB?</h2>
+          <p>ลองมองระบบปกติก่อน:</p>
+          <p class="note-flow">PC<br>→ USB Cable<br>→ DAC</p>
+          <p>ในกรณีนี้ PC และ DAC มีเส้นทางทางไฟฟ้าเชื่อมถึงกันผ่าน USB</p>
+          <p>เมื่อเพิ่ม isolator:</p>
+          <p class="note-flow">PC<br>→ USB<br>→ ADuM4165<br>→ Isolation Barrier<br>→ USB<br>→ DAC</p>
+          <p>ข้อมูลยังเดินทางได้ แต่ direct galvanic path ระหว่าง Ground ของสองฝั่งถูกตัดออก</p>
+          <p>สิ่งนี้อาจมีประโยชน์ในระบบที่เกิด:</p>
+          <ul><li>Ground Loop</li><li>Common-mode noise</li><li>Leakage-current path</li><li>Noise ที่นำมาตามกราวด์หรือการเชื่อมต่อ USB</li></ul>
+          <p>แต่ต้องเน้นว่า USB isolation ไม่ได้กำจัด Noise ทุกชนิด</p>
+          <p>หาก Noise เกิดจากภาค Analog, Power Supply หรือวงจรภายใน DAC เอง การใส่ USB isolator ไม่ได้ทำให้ Noise เหล่านั้นหายไปโดยอัตโนมัติ</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-4">
+          <h2 id="note-section-4">แล้ว Hi-Res Audio ต้องการ USB 3.0 หรือไม่?</h2>
+          <p>สำหรับเสียง Stereo โดยทั่วไป ไม่จำเป็น</p>
+          <p>ลองดูเฉพาะ raw audio payload:</p>
+          <p>24-bit / 192 kHz / Stereo</p>
+          <p class="note-calculation">24 × 192,000 × 2<br>≈ 9.22 Mbps</p>
+          <p>ส่วน:</p>
+          <p>32-bit / 384 kHz / Stereo</p>
+          <p class="note-calculation">32 × 384,000 × 2<br>≈ 24.58 Mbps</p>
+          <p>ตัวเลขเหล่านี้ยังต่ำกว่า raw signaling rate ของ USB 2.0 High-Speed ที่ 480 Mbps อยู่มาก</p>
+          <p>แน่นอนว่า USB มี protocol overhead และ 480 Mbps ไม่ใช่ throughput สำหรับ audio payload ทั้งหมด แต่ช่องว่างยังมากพอที่ USB 2.0 High-Speed จะรองรับ Hi-Res Stereo ได้โดยสบายในบริบททั่วไป</p>
+          <p>ดังนั้นสิ่งสำคัญสำหรับ USB Audio ไม่ใช่ว่า “ต้องเป็น USB 3.x ถึงจะเสียงดี” แต่คือ interface และอุปกรณ์ทั้งระบบรองรับ USB Audio mode และ sample format ที่ต้องการหรือไม่</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-5">
+          <h2 id="note-section-5">ADuM4165 กับ Jitter — จุดที่ต้องแยกให้ออก</h2>
+          <p>Analog Devices ระบุว่าใน High-Speed mode ADuM4165 มีการ <strong>redrive และ retime ข้อมูล USB</strong> เพื่อช่วยเรื่อง input jitter และ signal eye quality ที่ระดับ USB physical layer</p>
+          <p>นี่เป็นคุณสมบัติจริงของตัวชิป</p>
+          <p>แต่คำว่า “jitter” ตรงนี้ไม่ควรถูกนำไปสรุปทันทีว่า:</p>
+          <p>“USB isolator ลด jitter ของเสียง”</p>
+          <p>เพราะมันเป็นคนละบริบทกับ sample clock ที่ DAC ใช้ตอนแปลงสัญญาณ Digital → Analog</p>
+          <p>ใน asynchronous USB Audio สมัยใหม่ DAC มักอ้างอิง local clock ของตัวเองสำหรับการแปลงสัญญาณ และใช้ buffering/feedback ในการจัดการข้อมูลจาก USB</p>
+          <p>ดังนั้นการ retime USB PHY ของ ADuM4165 เป็นเรื่องของความสมบูรณ์ของลิงก์ USB ไม่ใช่หลักฐานว่ามันลด DAC conversion-clock jitter หรือทำให้เสียงดีขึ้นโดยตรง</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-6">
+          <h2 id="note-section-6">ADuM4165 ส่งไฟข้าม Isolation Barrier หรือไม่?</h2>
+          <p>ไม่</p>
+          <p>นี่เป็นอีกจุดที่ควรเข้าใจให้ถูกต้อง</p>
+          <p>ADuM4165 ทำหน้าที่ isolation สำหรับ USB communication แต่ไม่ได้ส่งพลังงาน VBUS จากฝั่งหนึ่งข้าม isolation barrier ไปเลี้ยงอีกฝั่งด้วยตัวมันเอง</p>
+          <p>นั่นหมายความว่าฝั่ง downstream ต้องมี power domain ของตัวเอง</p>
+          <p>ในการออกแบบ USB isolator จริง จึงมักต้องมี:</p>
+          <ul><li>Isolated DC/DC</li><li>หรือ External downstream power supply</li></ul>
+          <p>ร่วมอยู่ในระบบด้วย</p>
+          <p>นี่เป็นเหตุผลว่าทำไมเวลาเราวิเคราะห์ USB isolator ไม่ควรมองแค่ “ชิป Data Isolation” แต่ต้องดูการออกแบบภาคจ่ายไฟฝั่งปลายทางด้วย</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-7">
+          <h2 id="note-section-7">ทำไม ADuM4165 จึงเหมาะกับอุปกรณ์อย่าง HiBy AP10?</h2>
+          <p>จุดนี้ต้องแยก Fact ออกจาก Engineering Inference</p>
+          <p class="note-fact-boundary"><strong>ไม่พบคำอธิบายจาก HiBy ที่ระบุเหตุผลในการเลือกชิปรุ่นนี้โดยตรง</strong></p>
+          <p class="note-inference-label">เหตุผลทางวิศวกรรมที่เป็นไปได้</p>
+          <p>แต่จากคุณสมบัติทางวิศวกรรมของตัวชิป เราสามารถอธิบายเหตุผลที่ทำให้มันเหมาะกับงานประเภทนี้ได้:</p>
+          <h3>1. รองรับ USB High-Speed 480 Mbps</h3>
+          <p>สำคัญมากสำหรับความเข้ากันได้กับ USB Audio สมัยใหม่ เมื่อเทียบกับ isolator รุ่นเก่าที่หยุดอยู่ที่ 12 Mbps</p>
+          <h3>2. รองรับ Automatic Speed Detection</h3>
+          <p>ตัวชิปสามารถรองรับ Low, Full และ High-Speed โดยอัตโนมัติ ทำให้เหมาะกับอุปกรณ์ USB หลากหลายประเภท</p>
+          <h3>3. สร้าง Galvanic Isolation ได้ในชิปเดียว</h3>
+          <p>ADuM4165 รวม USB transceiver, isolation, control และส่วนของ USB termination หลายอย่างไว้ในโซลูชันเดียว ช่วยลดความซับซ้อนของระบบเมื่อเทียบกับการสร้าง High-Speed USB isolation จากหลายบล็อกแยกกัน</p>
+          <h3>4. มี High-Speed Data Retiming</h3>
+          <p>ช่วย redrive/retime ลิงก์ USB ในระดับ physical layer เพื่อรักษา signal integrity หลังข้าม isolation barrier</p>
+          <h3>5. ถูกออกแบบมาสำหรับงาน Isolation โดยตรง</h3>
+          <p>Analog Devices ระบุการใช้งานไว้ทั้ง USB host/peripheral isolation, instrumentation, medical และ industrial systems</p>
+          <p>ทั้งหมดนี้ทำให้ ADuM4165 เป็นชิปที่มีคุณสมบัติเหมาะกับอุปกรณ์ USB isolation ที่ต้องรองรับ High-Speed</p>
+          <p>แต่ไม่ได้หมายความว่าเราสามารถสรุปว่า HiBy เลือกมันเพราะ “ให้เสียงดีที่สุด” โดยไม่มีหลักฐานจากผู้ผลิตหรือการวัดรองรับ</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-8">
+          <h2 id="note-section-8">สิ่งที่มักเข้าใจผิด</h2>
+          <h3>“USB Isolator ทำให้เสียงดีขึ้นทุกระบบ”</h3>
+          <p>ไม่จำเป็น</p>
+          <p>หากระบบมี Ground Loop หรือ electrical noise ที่เดินทางผ่าน USB การตัดเส้นทางนั้นอาจสร้างผลที่วัดหรือสังเกตได้</p>
+          <p>แต่หากระบบเดิมไม่มีปัญหาดังกล่าว ผลลัพธ์อาจแตกต่างน้อยมากหรือแทบไม่มีเลย</p>
+          <h3>“USB Isolator ลด Audio Jitter”</h3>
+          <p>ADuM4165 มี High-Speed USB data retiming จริง แต่เป็น jitter/signal-integrity ในระดับ USB PHY</p>
+          <p>ไม่ควรเอาไปเท่ากับ DAC sample-clock jitter</p>
+          <h3>“USB 3.x ต้องดีกว่า USB 2.0 สำหรับ Hi-Res Audio”</h3>
+          <p>ความเร็วบัสสูงกว่าไม่ได้แปลว่าคุณภาพเสียงสูงกว่า</p>
+          <p>USB 2.0 High-Speed มี bandwidth มากเพียงพอสำหรับ Hi-Res Stereo โดยทั่วไปอยู่แล้ว</p>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-9">
+          <h2 id="note-section-9">Technical Specs — ADuM4165BRIZ</h2>
+          <dl class="note-specs">
+            <div><dt>Manufacturer</dt><dd>Analog Devices</dd></div>
+
+            <div><dt>Function</dt><dd>USB 2.0 Digital Isolator</dd></div>
+
+            <div><dt>USB speeds</dt><dd>1.5 / 12 / 480 Mbps</dd></div>
+
+            <div><dt>USB High-Speed</dt><dd>รองรับ</dd></div>
+
+            <div><dt>Speed detection</dt><dd>Automatic</dd></div>
+
+            <div><dt>Isolation technology</dt><dd>Analog Devices iCoupler</dd></div>
+
+            <div><dt>Isolation rating</dt><dd>5700 Vrms / 1 minute</dd></div>
+
+            <div><dt>Package</dt><dd>20-lead wide-body increased-creepage SOIC_IC</dd></div>
+
+            <div><dt>Creepage / Clearance</dt><dd>8.3 mm</dd></div>
+
+            <div><dt>Operating temperature</dt><dd>−55°C ถึง +125°C</dd></div>
+
+            <div><dt>High-Speed feature</dt><dd>USB data redriving and retiming</dd></div>
+
+            <div><dt>Clock</dt><dd>ADuM4165 ใช้ external clock/crystal reference ทาง upstream side สำหรับ High-Speed operation</dd></div>
+
+            <div><dt>Power isolation</dt><dd>ไม่ได้ส่ง VBUS ข้าม isolation barrier ด้วยตัวเอง</dd></div>
+          </dl>
+        </section>
+        <section class="note-section" aria-labelledby="note-section-10">
+          <h2 id="note-section-10">สรุป</h2>
+          <p>ADuM4165BRIZ ไม่ใช่ชิปที่มีหน้าที่ “แต่งเสียง”</p>
+          <p>หน้าที่หลักของมันคือทำให้ USB 2.0 สามารถข้าม isolation barrier ได้ โดยยังรองรับ Low-Speed, Full-Speed และ High-Speed สูงสุด 480 Mbps</p>
+          <p>ในระบบ Audio จุดที่น่าสนใจคือความสามารถในการตัด direct galvanic ground path ระหว่างต้นทางอย่าง PC กับอุปกรณ์ USB ปลายทาง ซึ่งอาจช่วยแก้ปัญหาที่เกี่ยวข้องกับ Ground Loop และ electrical noise ได้</p>
+          <p>ความสามารถรองรับ High-Speed, automatic speed detection และ USB data retiming ทำให้ ADuM4165 เป็นชิปรุ่นใหม่ที่เหมาะกับ USB Audio มากกว่ารุ่น isolator ที่จำกัดอยู่เพียง Full-Speed</p>
+          <p>สำหรับ HiBy AP10 สิ่งที่เราพูดได้อย่างรับผิดชอบคือ ADuM4165 มีคุณสมบัติทางวิศวกรรมที่เหมาะกับ USB High-Speed isolation อย่างมาก</p>
+          <p>ส่วนเหตุผลเชิงผลิตภัณฑ์ว่า HiBy เลือกชิปนี้เพราะเหตุใดโดยเฉพาะนั้น หากไม่มีเอกสารจาก HiBy โดยตรง เราควรแยกให้ชัดว่าเป็น Engineering Rationale ไม่ใช่ Manufacturer-confirmed Fact</p>
+          <p>นี่คือความต่างระหว่างการอ่านสเปกเพื่อการตลาด กับการทำความเข้าใจว่าอุปกรณ์ทำงานอย่างไรจริง ๆ</p>
+        </section>
+        <section class="note-section note-sources" aria-labelledby="note-sources-title">
+          <h2 id="note-sources-title">แหล่งข้อมูลอ้างอิง</h2>
+          <ol>
+            <li><a href="https://www.analog.com/en/products/adum4165.html" target="_blank" rel="noopener noreferrer">Analog Devices — ADuM4165 Product Page ↗</a></li>
+            <li><a href="https://www.analog.com/media/en/technical-documentation/data-sheets/adum4165-4166.pdf" target="_blank" rel="noopener noreferrer">Analog Devices — ADuM4165/ADuM4166 Datasheet Rev. B ↗</a><small>Theory of Operation / Retimer and Other Features; Power Supply Options; Clock Options</small></li>
+            <li><a href="https://www.analog.com/media/en/technical-documentation/user-guides/eval-adum4165-4166-ug-2027.pdf" target="_blank" rel="noopener noreferrer">Analog Devices — EVAL-ADuM4165 User Guide (UG-2027) ↗</a></li>
+          </ol>
+        </section>
+        <aside class="note-related" aria-labelledby="note-related-title">
+          <p class="note-kicker">RELATED NOTES</p>
+          <h2 id="note-related-title">อ่านต่อใน Audio Tech Notes</h2>
+          <ul><li>USB Audio Class 2.0 คืออะไร?</li><li>Ground Loop ในระบบ PC Audio เกิดขึ้นได้อย่างไร?</li><li>Jitter ใน DAC กับ Jitter บน USB ต่างกันอย่างไร?</li></ul>
+          <p class="note-related-status">กำลังเตรียมบทความ</p>
+        </aside>
+        <a class="note-back" href="../../index.html">← กลับหน้า Home</a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><span>Audio Tech Labs</span><span>Audio Tech Notes · USB Audio</span><a href="#top">กลับด้านบน</a></div></footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

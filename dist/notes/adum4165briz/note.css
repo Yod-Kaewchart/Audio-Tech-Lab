@@ -1,0 +1,46 @@
+/* Audio Tech Notes article styles. */
+.note-page .note-reading { width: min(calc(100% - 32px), 820px); margin-inline: auto; }
+.note-page .note-hero { padding-top: 32px; }
+.note-page .note-breadcrumb { margin-bottom: 36px; font-size: 12px; color: var(--muted); }
+.note-page .note-breadcrumb ol { display: flex; flex-wrap: wrap; gap: 8px 12px; list-style: none; padding: 0; margin: 0; }
+.note-page .note-breadcrumb li { min-width: 0; overflow-wrap: anywhere; }
+.note-page .note-breadcrumb li + li::before { content: "→"; margin-right: 12px; color: var(--gold-dark); }
+.note-page .note-breadcrumb a { color: var(--gold); }
+.note-page .note-kicker { margin-bottom: 16px; color: var(--gold); font: 700 11px "DM Sans", sans-serif; letter-spacing: .16em; }
+.note-page .note-kicker span { margin-inline: 8px; }
+.note-page .note-hero h1 { margin: 0 0 18px; font-size: clamp(34px, 5vw, 64px); line-height: 1.22; overflow-wrap: anywhere; }
+.note-page .note-subtitle { margin-bottom: 32px; color: #c9cfcc; font-size: 19px; line-height: 1.6; }
+.note-page .note-hero-image { width: min(100%, 640px); margin: 0 auto 42px; }
+.note-page .note-hero-image img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.note-page .note-hero-image figcaption { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.75; }
+.note-page .note-body { padding-bottom: 64px; font-size: 17px; line-height: 1.9; overflow-wrap: anywhere; }
+.note-page .note-body p { margin-bottom: 22px; }
+.note-page .note-body strong { color: var(--text); }
+.note-page .note-section { padding-top: 32px; margin-top: 36px; border-top: 1px solid var(--line); }
+.note-page .note-section h2, .note-page .note-related h2 { margin-bottom: 22px; font-size: 27px; line-height: 1.4; }
+.note-page .note-section h3 { margin: 28px 0 12px; color: var(--gold); font-size: 21px; line-height: 1.5; }
+.note-page .note-body ul, .note-page .note-body ol { padding-left: 22px; margin-bottom: 24px; }
+.note-page .note-body li { margin-bottom: 10px; }
+.note-page .note-flow, .note-page .note-calculation { padding: 18px 20px; background: var(--surface); border-left: 2px solid var(--gold-dark); font-family: "DM Sans", "Noto Sans Thai", sans-serif; color: #ddc295; }
+.note-page .note-fact-boundary { padding: 20px; border: 1px solid var(--gold-dark); background: #1b1a16; }
+.note-page .note-body .note-inference-label { color: var(--gold); font-size: 14px; font-weight: 700; }
+.note-page .note-specs { margin: 0; }
+.note-page .note-specs > div { display: grid; gap: 6px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.note-page .note-specs dt { color: var(--gold); font: 600 13px "DM Sans", sans-serif; }
+.note-page .note-specs dd { margin: 0; font-size: 16px; }
+.note-page .note-sources a, .note-page .note-back { color: var(--gold); text-underline-offset: 4px; }
+.note-page .note-sources a:hover, .note-page .note-back:hover, .note-page .note-breadcrumb a:hover { text-decoration: underline; }
+.note-page .note-sources small { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.note-page .note-related { margin-top: 44px; padding: 24px; border: 1px solid var(--line); background: var(--surface); }
+.note-page .note-related li { color: #c9cfcc; }
+.note-page .note-body .note-related-status { margin-bottom: 0; font-size: 13px; color: var(--muted); }
+.note-page .note-back { display: inline-flex; align-items: center; min-height: 44px; margin-top: 28px; font-size: 14px; }
+@media (min-width: 701px) {
+  .note-page .note-reading { width: min(calc(100% - 64px), 820px); }
+  .note-page .note-hero { padding-top: 48px; }
+  .note-page .note-subtitle { font-size: 23px; }
+  .note-page .note-body { padding-bottom: 96px; font-size: 18px; }
+  .note-page .note-section { padding-top: 42px; margin-top: 48px; }
+  .note-page .note-section h2, .note-page .note-related h2 { font-size: 32px; }
+  .note-page .note-specs > div { grid-template-columns: minmax(0, .75fr) minmax(0, 1.4fr); gap: 24px; }
+}

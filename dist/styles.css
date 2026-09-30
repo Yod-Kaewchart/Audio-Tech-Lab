@@ -44,3 +44,10 @@
 #knowledge .tech-notes-all:disabled { flex-shrink: 0; border-color: var(--gold-dark); background: transparent; color: var(--gold); cursor: default; opacity: .65; transform: none; }
 @media (max-width: 1000px) { #knowledge .tech-notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 650px) { #knowledge .tech-notes-grid { grid-template-columns: minmax(0, 1fr); } #knowledge .tech-note-mark { font-size: 30px; } #knowledge .tech-notes-footer { align-items: stretch; flex-direction: column; } #knowledge .tech-notes-all { width: 100%; } }
+
+/* Published Audio Tech Note thumbnail and article link. */
+#knowledge .tech-note-thumbnail-image { padding: 0; background: #0e1012; }
+#knowledge .tech-note-thumbnail-image::before, #knowledge .tech-note-thumbnail-image::after { content: none; }
+#knowledge .tech-note-thumbnail-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#knowledge a.tech-note-link { opacity: 1; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+#knowledge a.tech-note-link:hover, #knowledge a.tech-note-link:focus-visible { color: #f3d4a1; text-decoration: underline; text-underline-offset: 4px; }
