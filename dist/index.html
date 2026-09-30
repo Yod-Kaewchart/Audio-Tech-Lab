@@ -36,7 +36,7 @@
         <a href="#projects">ผลงาน</a>
         <a href="#deep-dive">วิเคราะห์เชิงลึก</a>
         <a href="#reviews">รีวิวและทดสอบ</a>
-        <a href="#knowledge">ความรู้เสียง</a>
+        <a href="#knowledge">Tech Notes</a>
         <a class="nav-contact" href="#contact">ติดต่อเรา</a>
       </nav>
     </div>
@@ -162,16 +162,91 @@
 
     <section class="section knowledge-section" id="knowledge" aria-labelledby="knowledge-title">
       <div class="shell">
-        <div class="section-heading"><div><p class="section-index">06 / AUDIO NOTES</p><h2 id="knowledge-title">Audio <em>Knowledge</em></h2></div><p>คำอธิบายพื้นฐานและแนวคิดสำหรับคนที่อยากเข้าใจสิ่งที่อยู่ภายในเครื่องเสียง</p></div>
-        <div class="knowledge-grid">
-          <article><span>01 / DIGITAL AUDIO</span><h3>DAC</h3><p>จากข้อมูลดิจิทัลสู่สัญญาณแอนะล็อก</p></article>
-          <article><span>02 / ANALOG CIRCUIT</span><h3>Op-Amp</h3><p>หน้าที่และข้อควรดูเมื่อต้องการเปลี่ยน</p></article>
-          <article><span>03 / COMPONENTS</span><h3>Capacitor</h3><p>เลือกค่าและประเภทให้เหมาะกับตำแหน่ง</p></article>
-          <article><span>04 / CONNECTION</span><h3>USB Audio</h3><p>สัญญาณ เสียงรบกวน และการเชื่อมต่อ</p></article>
-          <article><span>05 / SIGNAL PATH</span><h3>Balanced XLR</h3><p>หลักการของสัญญาณบาลานซ์และการใช้งาน</p></article>
-          <article><span>06 / HANDS ON</span><h3>DIY Audio</h3><p>เริ่มต้นทดลองอย่างปลอดภัยและเป็นระบบ</p></article>
+        <div class="section-heading"><div><p class="section-index">06 / AUDIO NOTES</p><h2 id="knowledge-title">Audio <em>Tech Notes</em></h2></div><p>เกร็ดความรู้ด้าน Audio Technology ที่สรุปจากการศึกษาอุปกรณ์จริง ผ่าน datasheet, architecture, measurement และการใช้งานจริง</p></div>
+        <div class="tech-notes-grid">
+          <article class="tech-note-card" data-slug="/notes/adum4165briz/">
+            <div class="tech-note-thumbnail" role="img" aria-label="พื้นที่สำหรับภาพประกอบหัวข้อ ADuM4165BRIZ คืออะไร?">
+              <span class="tech-note-index" aria-hidden="true">NOTE / 01</span>
+              <strong class="tech-note-mark" aria-hidden="true">ADuM4165BRIZ</strong>
+              <span class="tech-note-visual-label" aria-hidden="true">THUMBNAIL / COMING SOON</span>
+            </div>
+            <div class="tech-note-content">
+              <p class="tech-note-category">USB AUDIO</p>
+              <h3>ADuM4165BRIZ คืออะไร?</h3>
+              <p class="tech-note-summary">ทำไม HiBy AP10 เลือกใช้ชิป Digital Isolator ตัวนี้</p>
+              <button class="tech-note-link" type="button" disabled aria-label="อ่านต่อ: ADuM4165BRIZ คืออะไร? (กำลังเตรียมบทความ)">อ่านต่อ →</button>
+            </div>
+          </article>
+          <article class="tech-note-card" data-slug="/notes/r2r-dac/">
+            <div class="tech-note-thumbnail" role="img" aria-label="พื้นที่สำหรับภาพประกอบหัวข้อ R-2R DAC ทำงานอย่างไร?">
+              <span class="tech-note-index" aria-hidden="true">NOTE / 02</span>
+              <strong class="tech-note-mark" aria-hidden="true">R-2R</strong>
+              <span class="tech-note-visual-label" aria-hidden="true">THUMBNAIL / COMING SOON</span>
+            </div>
+            <div class="tech-note-content">
+              <p class="tech-note-category">DAC TECHNOLOGY</p>
+              <h3>R-2R DAC ทำงานอย่างไร?</h3>
+              <p class="tech-note-summary">เรียนรู้จากสถาปัตยกรรมของ Gustard R26</p>
+              <button class="tech-note-link" type="button" disabled aria-label="อ่านต่อ: R-2R DAC ทำงานอย่างไร? (กำลังเตรียมบทความ)">อ่านต่อ →</button>
+            </div>
+          </article>
+          <article class="tech-note-card" data-slug="/notes/cs43198-dual-dac/">
+            <div class="tech-note-thumbnail" role="img" aria-label="พื้นที่สำหรับภาพประกอบหัวข้อ CS43198 ทำไมใช้สองตัว?">
+              <span class="tech-note-index" aria-hidden="true">NOTE / 03</span>
+              <strong class="tech-note-mark" aria-hidden="true">CS43198</strong>
+              <span class="tech-note-visual-label" aria-hidden="true">THUMBNAIL / COMING SOON</span>
+            </div>
+            <div class="tech-note-content">
+              <p class="tech-note-category">DAC CHIP</p>
+              <h3>CS43198 ทำไมใช้สองตัว?</h3>
+              <p class="tech-note-summary">ดูแนวคิด Dual DAC จาก Sound Blaster X5</p>
+              <button class="tech-note-link" type="button" disabled aria-label="อ่านต่อ: CS43198 ทำไมใช้สองตัว? (กำลังเตรียมบทความ)">อ่านต่อ →</button>
+            </div>
+          </article>
+          <article class="tech-note-card" data-slug="/notes/tpa3255-class-d/">
+            <div class="tech-note-thumbnail" role="img" aria-label="พื้นที่สำหรับภาพประกอบหัวข้อ TPA3255 ทำหน้าที่อะไร?">
+              <span class="tech-note-index" aria-hidden="true">NOTE / 04</span>
+              <strong class="tech-note-mark" aria-hidden="true">TPA3255</strong>
+              <span class="tech-note-visual-label" aria-hidden="true">THUMBNAIL / COMING SOON</span>
+            </div>
+            <div class="tech-note-content">
+              <p class="tech-note-category">CLASS D</p>
+              <h3>TPA3255 ทำหน้าที่อะไร?</h3>
+              <p class="tech-note-summary">เจาะภาคขยายของ Fosi ZA3</p>
+              <button class="tech-note-link" type="button" disabled aria-label="อ่านต่อ: TPA3255 ทำหน้าที่อะไร? (กำลังเตรียมบทความ)">อ่านต่อ →</button>
+            </div>
+          </article>
+          <article class="tech-note-card" data-slug="/notes/external-10mhz-clock/">
+            <div class="tech-note-thumbnail" role="img" aria-label="พื้นที่สำหรับภาพประกอบหัวข้อ 10 MHz External Clock มีไว้ทำอะไร?">
+              <span class="tech-note-index" aria-hidden="true">NOTE / 05</span>
+              <strong class="tech-note-mark" aria-hidden="true">10 MHz</strong>
+              <span class="tech-note-visual-label" aria-hidden="true">THUMBNAIL / COMING SOON</span>
+            </div>
+            <div class="tech-note-content">
+              <p class="tech-note-category">CLOCKING</p>
+              <h3>10 MHz External Clock มีไว้ทำอะไร?</h3>
+              <p class="tech-note-summary">และไม่ได้หมายความว่าเสียบแล้วเสียงจะดีขึ้นทุกระบบ</p>
+              <button class="tech-note-link" type="button" disabled aria-label="อ่านต่อ: 10 MHz External Clock มีไว้ทำอะไร? (กำลังเตรียมบทความ)">อ่านต่อ →</button>
+            </div>
+          </article>
+          <article class="tech-note-card" data-slug="/notes/opa627-vs-opa2604/">
+            <div class="tech-note-thumbnail" role="img" aria-label="พื้นที่สำหรับภาพประกอบหัวข้อ OPA627 กับ OPA2604 ต่างกันตรงไหน?">
+              <span class="tech-note-index" aria-hidden="true">NOTE / 06</span>
+              <strong class="tech-note-mark" aria-hidden="true">OP-AMP</strong>
+              <span class="tech-note-visual-label" aria-hidden="true">THUMBNAIL / COMING SOON</span>
+            </div>
+            <div class="tech-note-content">
+              <p class="tech-note-category">OP-AMP</p>
+              <h3>OPA627 กับ OPA2604 ต่างกันตรงไหน?</h3>
+              <p class="tech-note-summary">ดูทั้งสเปก วงจร และข้อจำกัดในการใช้งาน</p>
+              <button class="tech-note-link" type="button" disabled aria-label="อ่านต่อ: OPA627 กับ OPA2604 ต่างกันตรงไหน? (กำลังเตรียมบทความ)">อ่านต่อ →</button>
+            </div>
+          </article>
         </div>
-        <p class="sample-note">* หัวข้อบทความเป็นตัวอย่างสำหรับเติมเนื้อหาฉบับเต็มในภายหลัง</p>
+        <div class="tech-notes-footer">
+          <p class="sample-note" id="tech-notes-status">กำลังเตรียมบทความและภาพประกอบ</p>
+          <button class="button button-outline tech-notes-all" type="button" disabled data-slug="/notes/" aria-describedby="tech-notes-status">ดู Audio Tech Notes ทั้งหมด →</button>
+        </div>
       </div>
     </section>
 
