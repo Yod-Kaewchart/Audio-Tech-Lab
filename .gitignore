@@ -3,6 +3,7 @@ tools/cloudflared.exe
 
 __pycache__/
 exports/
+previews/
 quick-tunnel.log
 tools/runtime/
 web-tunnel.log

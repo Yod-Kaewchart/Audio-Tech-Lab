@@ -43,7 +43,7 @@ async function refreshProcessingJobs() {
     for (const job of jobs.slice(0, 8)) {
       const row = document.createElement('div'); row.className = 'upload-file-row';
       const info = document.createElement('div'); info.className = 'upload-file-info';
-      const name = document.createElement('strong'); name.textContent = (job.kind === 'export' ? 'Export · ' : 'Analyze · ') + job.filename;
+      const name = document.createElement('strong'); const kind = ({ export: 'Export', qc: 'Audio QC', merge: 'Merge Audio', preview: 'Browser Preview', analyze: 'Analyze' })[job.kind] || 'Processing'; name.textContent = kind + ' · ' + job.filename;
       const status = document.createElement('span'); status.className = 'upload-file-meta';
       status.textContent = job.status === 'queued' ? 'รอคิวลำดับที่ ' + job.position : ({ running: 'กำลังประมวลผล', succeeded: 'เสร็จแล้ว', failed: 'ไม่สำเร็จ · ' + (job.error || ''), cancelled: 'ยกเลิกแล้ว' })[job.status];
       info.append(name, status); row.append(info);

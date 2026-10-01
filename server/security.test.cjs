@@ -1,7 +1,7 @@
 'use strict';
 const test = require('node:test'), assert = require('node:assert/strict'), fs = require('node:fs'), path = require('node:path'), os = require('node:os'), crypto = require('node:crypto');
 const { createServer } = require('./upload-server.js');
-test('Authentication and file ownership security, including real Analyze/Export', async t => {
+test('Authentication and file ownership security, including real Analyze/QC/Export', async t => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atl-security-'));
   const origin = 'https://security-tests.invalid';
   let server, base, availableDisk = 100e9;
@@ -56,10 +56,10 @@ test('Authentication and file ownership security, including real Analyze/Export'
     await start();
     const temporary = fs.readFileSync(path.join(root, 'tools', 'runtime', 'security', 'first-login.txt'), 'utf8').match(/Temporary password: ([^\r\n]+)/)[1];
     let admin, alice, bob, uploaded, job;
-    await t.test('Anonymous requests cannot list files, download, upload, analyze, export, or delete', async () => {
+    await t.test('Anonymous requests cannot list files, download, upload, analyze, QC, export, or delete', async () => {
       assert.equal((await request('/health')).status, 200);
-      for (const route of ['/uploads', '/download/' + legacyJob + '/old.wav', '/auth/me']) assert.equal((await request(route)).status, 401);
-      for (const route of ['/upload/init', '/upload/chunk', '/upload/complete', '/upload/remove', '/analyze', '/export', '/export/delete']) assert.equal((await request(route, null, {})).status, 401);
+      for (const route of ['/uploads', '/audio/' + legacyId, '/download/' + legacyJob + '/old.wav', '/auth/me']) assert.equal((await request(route)).status, 401);
+      for (const route of ['/upload/init', '/upload/chunk', '/upload/complete', '/upload/remove', '/preview', '/analyze', '/qc', '/export', '/export/delete']) assert.equal((await request(route, null, {})).status, 401);
       assert.equal((await request('/auth/login', null, { username: 'yod', password: 'wrong' })).status, 401);
       assert.equal((await request('/auth/login', null, { username: 'yod', password: temporary }, { headers: { Origin: 'https://attacker.invalid' } })).status, 403);
     });
@@ -102,12 +102,16 @@ test('Authentication and file ownership security, including real Analyze/Export'
       assert.equal((await request('/upload/chunk', alice, wav, { headers })).status, 200);
       const complete = await request('/upload/complete', alice, { uploadId: init.data.uploadId }); assert.equal(complete.status, 200); uploaded = complete.data.fileId;
       assert.equal((await request('/uploads', alice)).data.files.length, 1); assert.equal((await request('/uploads', bob)).data.files.length, 0);
-      for (const route of ['/upload/remove', '/analyze', '/export']) assert.equal((await request(route, bob, { fileId: uploaded, format: 'wav', boundaries: [] })).status, 404);
+      assert.equal((await request('/audio/' + uploaded, bob)).status, 404);
+      const preview = await request('/audio/' + uploaded, alice, undefined, { headers: { Range: 'bytes=0-43' } }); assert.equal(preview.status, 206); assert.equal(preview.data.length, 44); assert.equal(preview.data.subarray(0, 4).toString(), 'RIFF');
+      for (const route of ['/upload/remove', '/preview', '/analyze', '/qc', '/export']) assert.equal((await request(route, bob, { fileId: uploaded, format: 'wav', boundaries: [] })).status, 404);
       assert.equal((await request('/upload/remove', alice, { fileId: uploaded }, { csrf: false })).status, 403);
       assert.equal((await request('/uploads', alice, undefined, { headers: { Origin: 'https://attacker.invalid' } })).status, 403);
     });
-    await t.test('Real audio Analyze, Export and download work for the owner only', async () => {
+    await t.test('Real audio Analyze, QC, Export and download work for the owner only', async () => {
       const analysis = await completed(alice, await request('/analyze', alice, { fileId: uploaded })); assert.equal(analysis.status, 200); assert.equal(analysis.data.duration, 3); assert.ok(Array.isArray(analysis.data.detections));
+      const qc = await completed(alice, await request('/qc', alice, { fileId: uploaded })); assert.equal(qc.status, 200); assert.equal(qc.data.format.sample_rate, 8000); assert.equal(qc.data.format.channels, 1); assert.equal(qc.data.overall.sample_count, 24000); assert.equal(qc.data.channels.length, 1); assert.equal(typeof qc.data.loudness.integrated_lufs, 'number');
+      const browserPreview = await completed(alice, await request('/preview', alice, { fileId: uploaded })); assert.equal(browserPreview.status, 200); assert.match(browserPreview.data.url, /^\/preview\/[0-9a-f-]{36}\.flac$/); const previewBytes = await request(browserPreview.data.url, alice, undefined, { headers: { Range: 'bytes=0-3' } }); assert.equal(previewBytes.status, 206); assert.equal(previewBytes.data.toString(), 'fLaC'); assert.equal((await request(browserPreview.data.url, bob)).status, 404);
       const output = await completed(alice, await request('/export', alice, { fileId: uploaded, format: 'wav', boundaries: [1.5] })); assert.equal(output.status, 200); assert.equal(output.data.success, 2); job = output.data.jobId;
       assert.equal((await request(output.data.files[0].url, alice)).status, 200);
       assert.equal((await request(output.data.files[0].url, bob)).status, 404);
@@ -127,7 +131,7 @@ test('Authentication and file ownership security, including real Analyze/Export'
         }
         assert.equal((await request('/export/delete', alice, { jobId: exported.data.jobId })).status, 200);
       }
-      assert.equal((await request('/upload/remove', alice, { fileId: uploaded })).status, 200);
+      const previewUrl = browserPreview.data.url; assert.equal((await request('/upload/remove', alice, { fileId: uploaded })).status, 200); assert.equal((await request(previewUrl, alice)).status, 404);
       assert.equal((await request('/uploads', alice)).data.files.length, 0);
     });
     await t.test('Quota and changing disk space reject uploads before writing, and limit real exports', async () => {

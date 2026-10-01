@@ -5,6 +5,9 @@
 .merge-page .demo-nav { min-height: 64px; gap: 16px; }
 .merge-page .demo-nav-actions { gap: 16px; font-size: 14px; }
 .merge-page .demo-nav-actions a { display: inline-flex; align-items: center; min-height: 44px; }
+.merge-page .demo-tool-nav { width: min(calc(100% - 64px), 980px); max-width: 980px; margin: 10px auto 0; padding: 0; gap: 8px; }
+.merge-page .demo-tool-nav a { min-height: 44px; font-size: 14px; }
+.merge-page .demo-tool-nav .is-active { background: #211e18; }
 .merge-page .merge-hero { padding: 24px 0 8px; }
 .merge-page .section-index { margin: 0 0 6px; font-size: 12px; line-height: 1.5; letter-spacing: .12em; }
 .merge-page .merge-hero h1 { margin: 0 0 8px; font-size: clamp(48px, 3.9vw, 56px); line-height: 1.12; letter-spacing: -.035em; }
@@ -29,10 +32,17 @@
 .merge-page .merge-track-info { gap: 3px; }
 .merge-page .merge-track-info strong { font-size: 15px; line-height: 1.45; font-weight: 600; overflow-wrap: anywhere; }
 .merge-page .merge-track-info span { font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+.merge-page .merge-track-meta { display: flex; align-items: center; gap: 6px 10px; flex-wrap: wrap; }
+.merge-page .merge-track-meta .merge-location { color: var(--gold); font: 700 11px "DM Sans", "Noto Sans Thai", sans-serif; letter-spacing: .08em; }
 .merge-page .merge-actions { grid-column: auto; gap: 6px; flex-wrap: wrap; }
 .merge-page .merge-actions button { min-width: 44px; min-height: 44px; padding: 6px 10px; font-size: 14px; line-height: 1.25; }
 .merge-page .merge-actions button:disabled { opacity: .4; cursor: default; }
 .merge-page .merge-actions button:hover:not(:disabled) { border-color: var(--gold); background: #1b1f21; }
+.merge-page .merge-actions .play { min-width: 82px; }
+.merge-page .merge-actions .stop { min-width: 82px; }
+.merge-page .merge-play-state { min-height: 16px; color: var(--gold); font-size: 11px; letter-spacing: .04em; }
+.merge-page .merge-actions .remove { min-width: 118px; border-color: #5a625e; color: #c8cfcc; }
+.merge-page .merge-actions .remove:hover:not(:disabled) { border-color: #b96760; color: #efb3aa; background: #211414; }
 .merge-page .merge-settings { grid-template-columns: minmax(0, 1fr) 160px; gap: 12px; }
 .merge-page .merge-settings label { min-width: 0; gap: 5px; font-size: 14px; line-height: 1.5; }
 .merge-page .merge-settings input,
@@ -54,7 +64,8 @@
 
 /* Mobile: give filenames their own row beside the number; controls below. */
 @media (max-width: 767px) {
-  .merge-page .shell { width: calc(100% - 32px); }
+  .merge-page .shell,
+  .merge-page .demo-tool-nav { width: calc(100% - 32px); }
   .merge-page .demo-nav { min-height: 60px; }
   .merge-page .demo-brand { font-size: 14px; letter-spacing: .08em; }
   .merge-page .demo-nav-actions { gap: 12px; }
@@ -81,6 +92,8 @@
   .merge-page .merge-topbar { gap: 2px 10px; font-size: 13px; }
   .merge-page .merge-topbar a { padding-inline: 10px; }
   .merge-page .merge-drop-help { font-size: 14px; }
+  .merge-page .merge-actions { grid-column: 1 / -1; display: grid; grid-template-columns: 44px 44px minmax(82px, 1fr) minmax(82px, 1fr); width: 100%; }
+  .merge-page .merge-actions .remove { grid-column: 1 / -1; width: 100%; min-width: 0; }
   .merge-page .merge-settings { grid-template-columns: minmax(0, 1fr); }
   .merge-page .merge-section { padding-bottom: 24px; }
 }

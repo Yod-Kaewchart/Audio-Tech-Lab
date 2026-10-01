@@ -20,7 +20,7 @@ function directoryBytes(directory) {
   }
   return size;
 }
-function createStorageLimits({ uploads, exports, sessions, limits = {}, freeBytes }) {
+function createStorageLimits({ uploads, exports, previews, sessions, limits = {}, freeBytes }) {
   const policy = { ...limitsFromEnv(), ...limits }, reservations = new Map();
   for (const value of Object.values(policy)) if (!Number.isSafeInteger(value) || value <= 0) throw new Error('Invalid storage limit');
   // Both roots are under the same application directory/volume.
@@ -31,7 +31,7 @@ function createStorageLimits({ uploads, exports, sessions, limits = {}, freeByte
     for (const reservation of reservations.values()) if (!owner || reservation.owner === owner) bytes += reservation.bytes;
     return bytes;
   }
-  function usage(owner) { return directoryBytes(owner ? path.join(uploads, owner) : uploads) + directoryBytes(owner ? path.join(exports, owner) : exports); }
+  function usage(owner) { const roots = [uploads, exports, ...(previews ? [previews] : [])]; return roots.reduce((total, root) => total + directoryBytes(owner ? path.join(root, owner) : root), 0); }
   function available(owner) {
     return Math.max(0, Math.floor(Math.min(policy.userBytes - usage(owner) - reserved(owner),
       policy.totalBytes - usage() - reserved(), diskFree() - policy.minFreeBytes - reserved())));
