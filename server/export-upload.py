@@ -1,4 +1,4 @@
-import json, os, sys, uuid
+import json, math, os, shutil, sys, uuid
 from pathlib import Path
 
 SPLITTER=Path(r"D:\Projects\Audio Album Splitter AI")
@@ -18,6 +18,18 @@ def main():
     info=read_audio_info(str(source_path))
     duration=float(info["duration"])
     boundaries=[x for x in boundaries if 0<x<duration]
+    budget=request.get("maxOutputBytes")
+    # An already-running older Node process can still invoke this bridge during
+    # an in-place upgrade. Keep it usable until restart, with a disk safety floor.
+    if budget is None:
+        budget=min(4_000_000_000, max(0, shutil.disk_usage(export_root).free-5_000_000_000))
+    # Reserve conservatively for uncompressed 64-bit PCM plus per-track headers,
+    # even when a small compressed input expands substantially during export.
+    if not info.get("metadata_valid") or duration <= 0 or not math.isfinite(duration):
+        raise SystemExit("Invalid audio metadata")
+    estimate=math.ceil(duration*int(info["sample_rate"])*int(info["channel_count"])*8)+(len(boundaries)+1)*65536
+    if not isinstance(budget, int) or budget <= 0 or estimate > budget:
+        raise SystemExit(22)  # Recognized by the process runner; no private paths in the response.
     starts=[0.0,*boundaries]; ends=[*boundaries,duration]
     tracks=tuple(BatchTrack(i+1,f"Track {i+1:02d}",start,end) for i,(start,end) in enumerate(zip(starts,ends)))
     job_id=str(uuid.uuid4())

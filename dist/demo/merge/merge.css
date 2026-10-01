@@ -1,0 +1,86 @@
+/* Merge-only presentation. Loaded after shared styles; never style Split here.
+   The picker uses its own title/help classes, not .drop-zone span (the Split + icon). */
+.merge-page .merge-shell,
+.merge-page .merge-hero .shell { max-width: 980px; }
+.merge-page .demo-nav { min-height: 64px; gap: 16px; }
+.merge-page .demo-nav-actions { gap: 16px; font-size: 14px; }
+.merge-page .demo-nav-actions a { display: inline-flex; align-items: center; min-height: 44px; }
+.merge-page .merge-hero { padding: 24px 0 8px; }
+.merge-page .section-index { margin: 0 0 6px; font-size: 12px; line-height: 1.5; letter-spacing: .12em; }
+.merge-page .merge-hero h1 { margin: 0 0 8px; font-size: clamp(48px, 3.9vw, 56px); line-height: 1.12; letter-spacing: -.035em; }
+.merge-page .merge-hero p:last-child { margin: 0; font-size: 17px; line-height: 1.5; color: var(--muted); }
+.merge-page .merge-section { padding: 8px 0 36px; }
+.merge-page .merge-topbar { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 0 0 10px; padding: 0; font-size: 14px; }
+.merge-page .merge-topbar > span { min-width: 0; overflow-wrap: anywhere; }
+.merge-page .merge-topbar a { min-height: 44px; padding: 0 12px; flex-shrink: 0; }
+.merge-page .merge-card { margin: 0 0 12px; padding: 18px 20px; border-color: var(--line); border-radius: 12px; background: #121617; min-width: 0; }
+.merge-page .merge-card:last-child { margin-bottom: 0; }
+.merge-page .merge-card h2 { margin: 0 0 12px; font-size: 28px; line-height: 1.25; letter-spacing: -.02em; }
+.merge-page .merge-file-input { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.merge-page .merge-file-input:focus-visible + .merge-drop { outline: 2px solid var(--gold); outline-offset: 3px; }
+.merge-page .merge-drop { min-height: 88px; padding: 12px 16px; gap: 4px; background: #0e1112; }
+.merge-page .merge-drop:hover { background: #151817; }
+.merge-page .merge-drop-title { font-size: 17px; line-height: 1.4; color: var(--text); }
+.merge-page .merge-drop-help { display: block; max-width: 100%; font-size: 16px; line-height: 1.5; font-weight: 400; color: var(--muted); }
+.merge-page .track-summary { margin: 10px 0 6px; font-size: 14px; line-height: 1.5; }
+.merge-page .merge-tracks { gap: 6px; }
+.merge-page .merge-track { grid-template-columns: 28px minmax(0, 1fr) auto; gap: 10px; padding: 10px; }
+.merge-page .merge-order { font-size: 14px; }
+.merge-page .merge-track-info { gap: 3px; }
+.merge-page .merge-track-info strong { font-size: 15px; line-height: 1.45; font-weight: 600; overflow-wrap: anywhere; }
+.merge-page .merge-track-info span { font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+.merge-page .merge-actions { grid-column: auto; gap: 6px; flex-wrap: wrap; }
+.merge-page .merge-actions button { min-width: 44px; min-height: 44px; padding: 6px 10px; font-size: 14px; line-height: 1.25; }
+.merge-page .merge-actions button:disabled { opacity: .4; cursor: default; }
+.merge-page .merge-actions button:hover:not(:disabled) { border-color: var(--gold); background: #1b1f21; }
+.merge-page .merge-settings { grid-template-columns: minmax(0, 1fr) 160px; gap: 12px; }
+.merge-page .merge-settings label { min-width: 0; gap: 5px; font-size: 14px; line-height: 1.5; }
+.merge-page .merge-settings input,
+.merge-page .merge-settings select { width: 100%; min-width: 0; min-height: 44px; padding: 8px 10px; font: inherit; font-size: 16px; }
+.merge-page .merge-note { margin: 10px 0 0; font-size: 14px; line-height: 1.6; }
+.merge-page .analyze-button { min-height: 44px; margin-top: 10px; padding: 8px 16px; font-size: 16px; line-height: 1.5; border-radius: 8px; }
+.merge-page .merge-status { margin: 8px 0 0; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.merge-page .merge-status:empty { display: none; }
+.merge-page .merge-error { margin: 10px 0 0; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+
+/* Tablet: keep account navigation and output fields horizontal. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .merge-page .merge-hero { padding-top: 20px; }
+  .merge-page .merge-hero h1 { font-size: clamp(40px, 4.5vw, 46px); }
+  .merge-page .merge-card { padding: 16px 18px; }
+  .merge-page .merge-card h2 { font-size: 26px; }
+  .merge-page .merge-drop-help { font-size: 15px; }
+}
+
+/* Mobile: give filenames their own row beside the number; controls below. */
+@media (max-width: 767px) {
+  .merge-page .shell { width: calc(100% - 32px); }
+  .merge-page .demo-nav { min-height: 60px; }
+  .merge-page .demo-brand { font-size: 14px; letter-spacing: .08em; }
+  .merge-page .demo-nav-actions { gap: 12px; }
+  .merge-page .merge-hero { padding: 16px 0 6px; }
+  .merge-page .merge-hero h1 { font-size: clamp(32px, 5vw, 38px); }
+  .merge-page .merge-hero p:last-child { font-size: 16px; }
+  .merge-page .merge-topbar { margin-bottom: 8px; }
+  .merge-page .merge-card { padding: 14px; margin-bottom: 10px; }
+  .merge-page .merge-card h2 { font-size: 24px; margin-bottom: 10px; }
+  .merge-page .merge-drop { min-height: 88px; padding: 10px 12px; }
+  .merge-page .merge-drop-help { font-size: 15px; }
+  .merge-page .merge-track { grid-template-columns: 26px minmax(0, 1fr); gap: 6px 8px; }
+  .merge-page .merge-actions { grid-column: 2; }
+  .merge-page .merge-settings { grid-template-columns: minmax(0, 1fr) 128px; gap: 10px; }
+}
+
+/* Small phones: output fields stack; long account names may wrap naturally. */
+@media (max-width: 480px) {
+  .merge-page .demo-nav { gap: 8px; flex-wrap: wrap; padding-block: 4px; }
+  .merge-page .demo-brand { font-size: 13px; }
+  .merge-page .demo-nav-actions { gap: 10px; font-size: 13px; }
+  .merge-page .merge-hero h1 { font-size: 36px; }
+  .merge-page .merge-card { padding: 12px; }
+  .merge-page .merge-topbar { gap: 2px 10px; font-size: 13px; }
+  .merge-page .merge-topbar a { padding-inline: 10px; }
+  .merge-page .merge-drop-help { font-size: 14px; }
+  .merge-page .merge-settings { grid-template-columns: minmax(0, 1fr); }
+  .merge-page .merge-section { padding-bottom: 24px; }
+}

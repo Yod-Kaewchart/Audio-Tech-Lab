@@ -1,0 +1,42 @@
+'use strict';
+const http = require('node:http'), fs = require('node:fs'), path = require('node:path');
+const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.webp': 'image/webp', '.woff2': 'font/woff2' };
+function createWebServer({ root = path.resolve(__dirname, '..', 'dist'), backendPort = 8787 } = {}) {
+return http.createServer((req, res) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'same-origin');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Cache-Control', 'no-store');
+  if (req.url === '/api' || req.url.startsWith('/api/')) {
+    const headers = { ...req.headers };
+    const forwarded = headers['x-forwarded-proto'];
+    headers['x-forwarded-proto'] = forwarded === 'https' ? 'https' : 'http';
+    const upstream = http.request({ host: '127.0.0.1', port: backendPort, path: req.url.slice(4) || '/', method: req.method, headers }, response => {
+      response.on('error', () => res.destroy());
+      res.on('close', () => { if (!response.complete) response.destroy(); });
+      res.writeHead(response.statusCode, response.headers); response.pipe(res);
+    });
+    upstream.on('error', () => { if (!res.headersSent) { res.writeHead(502, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'Backend is restarting. Please retry' })); } else res.destroy(); });
+    upstream.setTimeout(120000, () => upstream.destroy(new Error('Backend timeout')));
+    req.on('aborted', () => upstream.destroy());
+    res.on('close', () => { if (!res.writableFinished) upstream.destroy(); });
+    req.pipe(upstream); return;
+  }
+  if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); res.end(); return; }
+  try {
+    let urlPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    if (urlPath.includes('\\') || urlPath.includes('\0') || urlPath.split('/').some(x => x.startsWith('.'))) throw new Error('Invalid path');
+    if (urlPath.endsWith('/')) urlPath += 'index.html';
+    const file = path.resolve(root, '.' + urlPath);
+    if (!file.startsWith(root + path.sep)) throw new Error('Invalid path');
+    const stat = fs.statSync(file);
+    if (stat.isDirectory()) { res.writeHead(302, { Location: urlPath + '/' }); res.end(); return; }
+    const contentType = mime[path.extname(file).toLowerCase()];
+    if (!stat.isFile() || !contentType) throw new Error('Not found');
+    res.writeHead(200, { 'Content-Type': contentType, 'Content-Length': stat.size });
+    if (req.method === 'HEAD') res.end(); else { const stream = fs.createReadStream(file); stream.on('error', () => res.destroy()); stream.pipe(res); }
+  } catch { res.writeHead(404); res.end('Not found'); }
+});
+}
+if (require.main === module) createWebServer().listen(8080, '127.0.0.1', () => console.log('Web Demo listening on loopback port 8080'));
+module.exports = { createWebServer };

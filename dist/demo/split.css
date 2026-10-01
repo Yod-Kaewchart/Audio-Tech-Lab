@@ -1,0 +1,155 @@
+/* Split presentation only. Uses the shared palette and Merge's spacing scale.
+   Keep IDs, visibility flags and JS-driven player/canvas styles intact. */
+.split-page { --accent: var(--gold); }
+.split-page .auth-section > .shell,
+.split-page .demo-hero .shell,
+.split-page .upload-layout { max-width: 980px; }
+.split-page .demo-nav { min-height: 64px; gap: 16px; }
+.split-page .demo-nav-actions { gap: 16px; font-size: 14px; }
+.split-page .demo-nav-actions > a { display: inline-flex; align-items: center; min-height: 44px; }
+.split-page .auth-section { padding: 12px 0 0; }
+.split-page .auth-message:empty { display: none; }
+.split-page .account-bar { gap: 6px 10px; padding: 0; font-size: 14px; }
+.split-page .account-bar > span { min-width: 0; overflow-wrap: anywhere; }
+.split-page .account-bar .admin-nav-button,
+.split-page .account-bar #logout-button { min-height: 44px; padding: 8px 12px; font-size: 14px; border-radius: 8px; }
+.split-page .account-bar #logout-button { background: transparent; color: var(--text); border: 1px solid var(--line); }
+.split-page .auth-card { border-radius: 12px; padding: 20px; border-color: var(--line); }
+.split-page .auth-card h2 { font-size: 26px; line-height: 1.25; }
+.split-page .auth-card form { gap: 12px; }
+.split-page .auth-card label { gap: 5px; }
+.split-page .auth-card input { border-radius: 8px; min-height: 44px; }
+.split-page .auth-card button { border-radius: 8px; }
+.split-page .auth-card .password-toggle { height: 44px; width: 44px; }
+.split-page .auth-link-button { line-height: 2.75; }
+.split-page .demo-tool-nav { width: min(calc(100% - 64px), 980px); max-width: 980px; margin: 10px auto 0; padding: 0; gap: 8px; }
+.split-page .demo-tool-nav a { min-height: 44px; font-size: 14px; }
+.split-page .demo-tool-nav .is-active { background: #211e18; }
+.split-page .demo-hero { padding: 18px 0 12px; background: none; border: 0; }
+.split-page .demo-hero h1 { font-size: clamp(48px, 3.9vw, 56px); line-height: 1.12; letter-spacing: -.035em; margin: 0 0 8px; }
+.split-page .demo-hero p:last-child { margin: 0; font-size: 17px; line-height: 1.5; letter-spacing: normal; color: var(--muted); }
+.split-page .section-index,
+.split-page .track-results-head small,
+.split-page .export-head > small { margin: 0 0 6px; font-size: 12px; line-height: 1.5; font-weight: 700; letter-spacing: .12em; color: var(--gold); }
+.split-page .upload-section { padding: 4px 0 36px; }
+.split-page .upload-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.split-page .upload-panel { padding: 18px 20px; border-radius: 12px; border-color: var(--line); }
+.split-page .input-intro { display: block; padding: 0; }
+.split-page .input-intro h2 { font-size: 28px; line-height: 1.25; letter-spacing: -.02em; margin: 0 0 12px; }
+.split-page .split-drop { min-height: 88px; padding: 12px 16px; gap: 4px; border-radius: 10px; }
+.split-page .split-drop .split-drop-title { font-size: 17px; line-height: 1.4; }
+.split-page .split-drop .split-drop-help { font-size: 16px; line-height: 1.5; color: var(--muted); }
+.split-page .file-input:focus-visible + .split-drop { outline: 2px solid var(--gold); outline-offset: 3px; }
+.split-page .file-result { margin-top: 10px; padding: 12px; grid-template-columns: auto minmax(0, 1fr); }
+.split-page .file-result strong { font-size: 16px; line-height: 1.5; }
+.split-page .file-result p,
+.split-page .preview-player > p { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.split-page .preview-player { margin-top: 10px; padding: 12px; }
+.split-page .preview-head { flex-wrap: wrap; gap: 4px 12px; }
+.split-page .preview-head span { font-size: 12px; }
+.split-page .preview-head strong { font-size: 14px; }
+.split-page .analyze-button { min-height: 44px; margin-top: 10px; padding: 8px 16px; font-size: 16px; line-height: 1.5; border-radius: 8px; }
+.split-page #upload-button:not(:disabled) { background: #151918; border-color: var(--gold); color: var(--gold); }
+.split-page #upload-button:hover:not(:disabled) { background: #24251f; }
+.split-page .analyze-button:disabled { color: #bcc5c1; background: #242928; border-color: #454e49; opacity: 1; }
+.split-page .split-analyze-label { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.split-page .analyze-action { margin-top: 4px; }
+.split-page .upload-progress,
+.split-page .analysis-status { margin-top: 10px; padding: 12px; }
+.split-page .upload-progress strong { font-size: 16px; margin-top: 6px; }
+.split-page .upload-progress p,
+.split-page .analysis-status p { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.split-page .analysis-status strong { font-size: 14px; }
+.split-page .waveform-panel { margin-top: 12px; padding: 12px; border-radius: 10px; }
+.split-page .waveform-head { flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.split-page .waveform-head small { font-size: 12px; }
+.split-page .waveform-head span { font-size: 14px; }
+.split-page .waveform-wrap { width: 100%; height: 220px; }
+.split-page .track-results { margin-top: 14px; padding-top: 14px; }
+.split-page .track-results-head { align-items: center; gap: 10px; margin-bottom: 4px; }
+.split-page .track-results-head small { margin: 0; }
+.split-page .track-results-head strong { font-size: 14px; }
+.split-page .split-track-help { font-size: 13px; line-height: 1.5; color: var(--muted); margin: 0 0 8px; }
+.split-page .track-list { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.split-page .track-row { grid-template-columns: minmax(0, 1fr) minmax(280px, 310px) auto; padding: 10px; gap: 10px; }
+.split-page .track-row > strong { min-width: 0; font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
+.split-page .track-time-edit { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px; grid-column: auto; }
+.split-page .track-time-input { width: 100%; min-width: 0; min-height: 44px; padding: 8px 4px; font-size: 16px; line-height: 1.5; border-radius: 7px; }
+.split-page .track-time-input.is-locked { opacity: 1; color: #a4aaa9; }
+.split-page .track-actions { grid-column: auto; grid-row: auto; gap: 6px; }
+.split-page .track-play,
+.split-page .track-stop { min-width: 64px; min-height: 44px; padding: 8px 10px; font-size: 14px; line-height: 1.5; border-radius: 7px; }
+.split-page .export-panel { margin-top: 14px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: #101414; }
+.split-page .export-head { gap: 8px; margin-bottom: 0; }
+.split-page .export-head > small { margin: 0; }
+.split-page .split-format-label { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.split-page .export-head select { min-height: 44px; min-width: 100px; font: inherit; font-size: 16px; border-radius: 7px; padding: 8px 10px; }
+.split-page .export-panel > p { margin: 8px 0 0; font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.split-page .download-row { border-radius: 8px; }
+.split-page .delete-export-button { min-height: 44px; border-radius: 8px; font-size: 14px; }
+.split-page .uploaded-files-panel { margin-top: 12px; padding: 14px; border-radius: 12px; border-color: var(--line); }
+.split-page .uploaded-files-head { flex-wrap: wrap; gap: 4px 10px; }
+.split-page .uploaded-files-head small { font-size: 12px; }
+.split-page .uploaded-files-head button,
+.split-page .upload-file-actions button { min-height: 44px; font-size: 14px; }
+.split-page .uploaded-files-panel > p { font-size: 14px; line-height: 1.5; margin: 8px 0; overflow-wrap: anywhere; }
+.split-page .upload-file-row { align-items: center; gap: 10px; }
+.split-page .upload-file-info strong { font-size: 15px; line-height: 1.45; }
+.split-page .upload-file-meta { font-size: 13px; line-height: 1.5; white-space: normal; }
+.split-page .privacy-note { font-size: 13px; line-height: 1.6; margin: 12px 0 0; }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .split-page .demo-tool-nav { width: calc(100% - 48px); }
+  .split-page .demo-hero { padding-top: 16px; }
+  .split-page .demo-hero h1 { font-size: clamp(40px, 4.5vw, 48px); }
+  .split-page .upload-panel { padding: 16px 18px; }
+  .split-page .input-intro h2 { font-size: 26px; }
+  .split-page .split-drop .split-drop-help { font-size: 15px; }
+  .split-page .track-row { gap: 8px; grid-template-columns: minmax(0, 1fr) 280px auto; }
+  .split-page .waveform-wrap { height: 200px; }
+}
+
+@media (max-width: 767px) {
+  .split-page .shell,
+  .split-page .demo-tool-nav { width: calc(100% - 32px); }
+  .split-page .demo-nav { min-height: 60px; gap: 8px; flex-wrap: wrap; padding-block: 4px; }
+  .split-page .demo-brand { font-size: 14px; letter-spacing: .08em; }
+  .split-page .demo-nav-actions { font-size: 13px; gap: 10px; }
+  .split-page .demo-hero { padding: 14px 0 10px; }
+  .split-page .demo-hero h1 { font-size: clamp(34px, 5vw, 38px); }
+  .split-page .demo-hero p:last-child { font-size: 16px; }
+  .split-page .auth-card { padding: 16px; }
+  .split-page .auth-card h2 { font-size: 24px; }
+  .split-page .upload-panel { padding: 14px; }
+  .split-page .input-intro h2 { font-size: 24px; margin-bottom: 10px; }
+  .split-page .split-drop { padding: 10px 12px; }
+  .split-page .split-drop .split-drop-help { font-size: 15px; }
+  .split-page .file-result { grid-template-columns: minmax(0, 1fr); gap: 3px; }
+  .split-page .file-result small { grid-row: auto; }
+  .split-page .waveform-wrap { height: 170px; }
+  .split-page .waveform-panel { padding: 10px; }
+  .split-page .track-row { grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+  .split-page .track-row > strong { grid-column: 1; grid-row: 1; }
+  .split-page .track-actions { grid-column: 2; grid-row: 1; }
+  .split-page .track-time-edit { grid-column: 1 / -1; grid-row: 2; }
+  .split-page .export-panel { padding: 12px; }
+  .split-page .upload-file-row { flex-wrap: wrap; }
+  .split-page .upload-file-info { flex: 1 1 200px; }
+  .split-page .upload-file-actions { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .split-page .demo-brand { font-size: 13px; }
+  .split-page .demo-hero h1 { font-size: 36px; }
+  .split-page .account-bar { font-size: 13px; }
+  .split-page .upload-panel { padding: 12px; }
+  .split-page .split-drop .split-drop-help { font-size: 14px; }
+  .split-page .track-row { padding: 8px; grid-template-columns: minmax(0, 1fr); }
+  .split-page .track-row > strong { grid-column: 1; grid-row: 1; }
+  .split-page .track-time-edit { grid-column: 1; grid-row: 2; }
+  .split-page .track-actions { grid-column: 1; grid-row: 3; }
+  .split-page .track-time-input { padding-inline: 2px; font-size: 15px; }
+  .split-page .split-format-label { gap: 6px; }
+  .split-page .export-head select { min-width: 88px; }
+  .split-page .upload-section { padding-bottom: 24px; }
+}

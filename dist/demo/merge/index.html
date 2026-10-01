@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Merge Audio | Audio Tech Labs</title><meta name="robots" content="noindex,follow">
+<link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../demo.css?v=merge2"><link rel="stylesheet" href="merge.css?v=responsive1"></head>
+<body class="merge-page"><header class="demo-header"><div class="shell demo-nav"><a href="../../" class="demo-brand">AUDIO <b>TECH LABS</b></a>
+<div class="demo-nav-actions"><a href="../">Split Audio</a><a href="../../">← Home</a></div></div></header>
+<main><section class="merge-hero"><div class="shell"><p class="section-index">AUDIO TOOLS · WEB DEMO</p><h1>Merge <span>Audio</span></h1>
+<p>หลายเพลง → Album ไฟล์เดียว · WAV / FLAC</p></div></section>
+<section class="merge-section"><div class="shell merge-shell">
+<div id="auth-gate" class="upload-panel merge-card"><strong>กำลังตรวจสอบบัญชี…</strong><p id="auth-status"></p><a href="../" class="merge-link" hidden id="login-link">เข้าสู่ระบบ Web Demo</a></div>
+<div id="merge-workspace" hidden>
+<div class="merge-topbar"><span>เข้าสู่ระบบ: <strong id="account-name"></strong></span><a href="../">ไปหน้า Split Audio</a></div>
+<div class="upload-panel merge-card"><p class="section-index">01 / TRACKS</p><h2>เลือกไฟล์เพลง</h2>
+<input id="merge-files" class="merge-file-input" type="file" multiple accept=".wav,.flac,.m4a,audio/wav,audio/flac,audio/mp4" aria-describedby="merge-drop-help">
+<label for="merge-files" class="merge-drop" id="merge-drop"><strong class="merge-drop-title">＋ Add Audio Tracks</strong><small class="merge-drop-help" id="merge-drop-help">WAV / FLAC / ALAC (.m4a) · เลือกหลายไฟล์พร้อมกัน · สูงสุด 50 Tracks</small></label>
+<p id="merge-error" class="merge-error" hidden></p><div id="track-summary" class="track-summary">ยังไม่ได้เลือกเพลง</div><div id="merge-tracks" class="merge-tracks"></div>
+<button id="upload-tracks" class="analyze-button" disabled>Upload Tracks to Modify</button><p id="upload-status" class="merge-status"></p></div>
+<div class="upload-panel merge-card"><p class="section-index">02 / OUTPUT</p><div class="merge-settings">
+<label>ชื่อ Album<input id="album-name" value="Merged Album" maxlength="140"></label>
+<label>Format<select id="merge-format"><option value="flac">FLAC</option><option value="wav">WAV</option></select></label></div>
+<p class="merge-note">ระบบจะไม่รวมไฟล์ที่ Sample Rate / Channels / Bit Depth ไม่ตรงกัน เพื่อป้องกันการแปลงคุณภาพเสียงโดยไม่ตั้งใจ</p>
+<button id="merge-button" class="analyze-button" disabled>Merge Audio</button><p id="merge-status" class="merge-status">เพิ่มอย่างน้อย 2 Tracks เพื่อเริ่ม</p>
+<div id="merge-download"></div></div></div></div></section></main>
+<audio id="merge-player" hidden></audio><script src="merge.js?v=1"></script></body></html>

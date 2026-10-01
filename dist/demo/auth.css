@@ -1,0 +1,63 @@
+.auth-section{padding:28px 0 8px}
+.auth-card{max-width:560px;padding:26px;border:1px solid #454039;background:#161717;color:#eee}
+.auth-card h2{font-size:28px;margin:0 0 12px}
+.auth-card p{color:#aaa;line-height:1.7}
+.auth-card form{display:grid;gap:16px}
+.auth-card label{display:grid;gap:8px;font-size:15px}
+.auth-card input{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;background:#222;color:#fff;border:1px solid #686154;font-size:16px}
+.auth-card button,.account-bar button{min-height:44px;padding:10px 20px;cursor:pointer;background:#d5a94e;border:0;color:#151515;font-size:16px}
+.auth-card button:disabled{opacity:.6;cursor:wait}
+.account-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.auth-message{color:#d5a94e;min-height:24px;line-height:1.7}
+.admin-panel{margin:24px 0}
+.admin-panel summary{cursor:pointer;padding:12px 0;color:#d5a94e}
+.connection-retry{min-height:44px;padding:10px 18px;border:1px solid #d5a94e;background:transparent;color:#d5a94e;cursor:pointer;margin-bottom:20px}
+.auth-switch{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0 0!important;font-size:14px}
+.auth-switch small{color:#aaa;font-size:15px}
+.auth-signup-callout{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px solid #343434;font-size:17px;color:#d7d7d7}
+.auth-signup-callout .auth-link-button{font-size:18px!important}
+.auth-signup-callout .auth-no-card{font-size:16px;color:#aaa}
+@media(max-width:600px){.auth-signup-callout{font-size:16px;gap:8px 10px}.auth-signup-callout .auth-link-button{font-size:18px!important}.auth-signup-callout .auth-no-card{width:100%;text-align:center;font-size:15px}}
+.auth-link-button{min-height:auto!important;padding:2px 0!important;background:transparent!important;color:#d5a94e!important;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.auth-register-note{margin:14px 0 0!important;font-size:13px;line-height:1.6!important;color:#888!important}
+#register-panel{max-width:560px}
+.admin-users-head{display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid #343434}
+.admin-users-list{display:grid;gap:8px;margin-top:10px}
+.admin-user-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid #383838;background:#1d1f1e}
+.admin-user-info{display:grid;gap:2px;min-width:0}.admin-user-info span{font-size:13px;color:#999;overflow-wrap:anywhere}
+.auth-card .admin-user-delete{width:auto;min-height:36px;padding:7px 12px;background:transparent;border:1px solid #8b4d4d;color:#e19a9a}
+@media(max-width:600px){.admin-user-row{align-items:flex-start}.auth-card .admin-user-delete{flex:0 0 auto}}
+.password-field{position:relative;display:block}
+.auth-card .password-field input{padding-right:64px}
+.auth-card .password-toggle{position:absolute;right:7px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:40px;min-height:38px!important;padding:7px!important;background:transparent!important;border:0!important;color:#d5a94e!important}
+.auth-card .password-toggle svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.auth-card .password-toggle .eye-slash{display:none}
+.auth-card .password-toggle.is-visible .eye-slash{display:block}
+.auth-card .password-toggle:hover,.auth-card .password-toggle:focus-visible{background:#302b22!important;outline:1px solid #6c5a36}
+
+/* Compact admin storage */
+#admin-storage-panel{margin:10px 0 14px;max-width:900px}
+#admin-storage-panel>summary{padding:8px 0;font-size:15px}
+.admin-storage-card{max-width:none;padding:16px 18px;border-color:#3b3933}
+.admin-storage-card .uploaded-files-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 6px}
+.admin-storage-card .uploaded-files-head strong{font-size:14px;letter-spacing:.08em}
+.admin-storage-card #refresh-admin-storage{min-height:36px;padding:7px 14px;font-size:14px}
+#admin-storage-summary{margin:2px 0 10px!important;line-height:1.4!important;font-size:14px;color:#aaa}
+#admin-storage-list{display:grid;gap:8px}
+#admin-storage-list .uploaded-file-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 12px;border:1px solid #363833;background:#111313}
+#admin-storage-list .uploaded-file-row>div{display:grid;gap:4px;min-width:0;flex:1}
+#admin-storage-list strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px;color:#f3f3f3}
+#admin-storage-list small{display:block;font-size:12px;line-height:1.45;color:#aaa;white-space:normal}
+#admin-storage-list button{min-height:36px;padding:7px 13px;font-size:13px;flex:0 0 auto}
+@media(max-width:700px){.auth-section{padding:14px 0 4px}.account-bar{padding:8px 0}.admin-panel{margin:10px 0}.admin-panel summary{padding:8px 0}.admin-storage-card{padding:12px}.admin-storage-card .uploaded-files-head{margin-bottom:4px}#admin-storage-list .uploaded-file-row{align-items:flex-start;padding:10px}#admin-storage-list button{min-width:70px}}
+@media(max-width:430px){#admin-storage-list .uploaded-file-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}#admin-storage-list strong{font-size:14px}#admin-storage-list small{font-size:11px}.admin-storage-card #refresh-admin-storage{padding:6px 11px}}
+
+/* Compact admin control bar */
+.account-bar{justify-content:flex-start;gap:8px;padding:10px 0;flex-wrap:wrap}
+.account-bar #account-name{font-weight:700;margin-right:2px}
+.admin-badge{padding:4px 8px;border:1px solid #5d5138;color:#d5a94e;font-size:12px;line-height:1;text-transform:uppercase;letter-spacing:.08em}
+.account-bar .admin-nav-button{min-height:34px;padding:6px 11px;border:1px solid #4a463d;background:transparent;color:#d5a94e;font-size:13px}
+.account-bar #logout-button{min-height:34px;padding:6px 12px;margin-left:auto;font-size:13px}
+.compact-panel{margin:4px 0 10px}
+.compact-panel>summary{display:none}
+@media(max-width:700px){.account-bar{gap:6px;padding:8px 0}.account-bar #logout-button{margin-left:0}.account-bar .admin-nav-button,.account-bar #logout-button{min-height:32px;padding:5px 9px;font-size:12px}.admin-badge{font-size:10px;padding:4px 6px}.compact-panel{margin:2px 0 8px}}

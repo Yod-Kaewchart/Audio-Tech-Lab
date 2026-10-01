@@ -4,3 +4,10 @@ tools/cloudflared.exe
 __pycache__/
 exports/
 quick-tunnel.log
+tools/runtime/
+web-tunnel.log
+dist/demo/demo.js.tmp
+.site-build/
+.env
+.env.*
+!.env.example

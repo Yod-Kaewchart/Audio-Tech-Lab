@@ -25,10 +25,18 @@ jobs:
         uses: actions/checkout@v6
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Upload dist
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build Pages and verify configured demo endpoint
+        run: node tools/build-pages.cjs
+        env:
+          ATL_DEMO_ORIGIN: ${{ vars.ATL_DEMO_ORIGIN }}
+      - name: Upload Pages build
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist
+          path: ./.site-build/pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
