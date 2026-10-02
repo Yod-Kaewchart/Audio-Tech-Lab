@@ -1,7 +1,7 @@
 import json, math, os, subprocess, sys
 from pathlib import Path
 
-SPLITTER = Path(r"D:\Projects\Audio Album Splitter AI")
+SPLITTER = Path(os.environ.get("ATL_SPLITTER_ROOT", r"D:\Projects\Audio Album Splitter AI"))
 sys.path.insert(0, str(SPLITTER))
 
 from core.audio_info import read_audio_info

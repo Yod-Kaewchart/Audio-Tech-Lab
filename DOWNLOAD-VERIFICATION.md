@@ -4,7 +4,7 @@
 
 แก้ Download ให้เป็น HTTP streaming จากไฟล์บน Modify ผ่าน Node proxy ไปยัง browser/OS download manager โดยตรง ไม่มีการ fetch ไฟล์ Export มาเป็น Blob ในหน้าเว็บ
 
-ตรวจและแก้ใน `D:\Sites\Audio-Tech-Lab` บน branch `main` โดยรักษางานเดิมที่ยังไม่ commit ไว้ ผลด้านล่างมาจากบริการทดสอบแยกและบัญชีสังเคราะห์ ไม่ใช่การยืนยันว่า production process โหลดโค้ดใหม่แล้ว
+ตรวจและแก้ใน `D:\Sites\Audio Tech Labs` บน branch `main` โดยรักษางานเดิมที่ยังไม่ commit ไว้ ผลด้านล่างมาจากบริการทดสอบแยกและบัญชีสังเคราะห์ ไม่ใช่การยืนยันว่า production process โหลดโค้ดใหม่แล้ว
 
 ## Root cause
 

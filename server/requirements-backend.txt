@@ -1,0 +1,7 @@
+# Audio processing only; no Qt, sound device, or GUI dependencies.
+numpy==2.5.3
+soundfile==0.14.0
+mutagen==1.48.1
+cffi==2.1.1
+pycparser==3.0
+typing_extensions==4.16.0

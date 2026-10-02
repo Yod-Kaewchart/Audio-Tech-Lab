@@ -5,7 +5,7 @@
 เปิด **Windows PowerShell → Run as administrator** ด้วยบัญชี **MODIFY\Admin** (ต้องเป็นบัญชีเดียวกับ backend) แล้วรัน:
 
 ```powershell
-& "D:\Sites\Audio-Tech-Lab\tools\setup-spotify.ps1" -RestartBackend
+& "D:\Sites\Audio Tech Labs\tools\setup-spotify.ps1" -RestartBackend
 ```
 
 กรอก Spotify Client ID และ Client Secret ที่ prompt เท่านั้น ไม่ใส่ Secret ใน command line, แชต, environment ตัวอย่าง หรือไฟล์ source
@@ -45,7 +45,7 @@ web proxy แยก process ที่ 127.0.0.1:8080 และ Cloudflared เ�
 เปิด PowerShell Administrator ด้วย MODIFY\Admin แล้วรัน:
 
 ```powershell
-& "D:\Sites\Audio-Tech-Lab\tools\repair-spotify-task-identity.ps1"
+& "D:\Sites\Audio Tech Labs\tools\repair-spotify-task-identity.ps1"
 ```
 
 กรอก **รหัสผ่าน Windows Admin เดิม** ใน prompt ภายในเครื่อง (ไม่ใช่ PIN/Spotify Secret) เพื่อให้ Windows Task Scheduler เก็บไว้สำหรับ Password logon และเริ่มได้ตอนบูตโดยไม่ต้องรอผู้ใช้ล็อกอิน ไม่มีรหัสผ่านใน command line/source/log และไม่เปลี่ยนรหัสผ่านบัญชี ไม่ใช้ S4U หรือเปลี่ยนเป็น logon-only เพราะต้องคง DPAPI และ unattended boot
@@ -59,7 +59,7 @@ web proxy แยก process ที่ 127.0.0.1:8080 และ Cloudflared เ�
 ข้อจำกัดที่ตรวจพบเพิ่มเติม: MODIFY\Admin เป็น Local account, PasswordRequired=False และ PasswordLastSet ว่าง เจ้าของยืนยันว่ายังไม่มี Windows password/ใช้ PIN และอนุญาตให้ Web Demo เริ่มหลัง Admin ล็อกอินแทน จึงรัน repair ด้วย `-AfterLogon` สำเร็จแล้ว:
 
 ```powershell
-powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "D:\Sites\Audio-Tech-Lab\tools\repair-spotify-task-identity.ps1" -AfterLogon
+powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "D:\Sites\Audio Tech Labs\tools\repair-spotify-task-identity.ps1" -AfterLogon
 ```
 
 Task เดิมตอนนี้ใช้ Admin/Interactive/Highest และ Logon trigger เฉพาะ MODIFY\Admin; action, StartWhenAvailable, RestartCount=999, RestartInterval=PT1M, ExecutionTimeLimit=PT0S คงเดิม ไม่เก็บ Windows password และไม่ต้องกรอก Spotify credentials อีก **หลัง reboot ต้องล็อกอิน Admin ก่อน Web Demo จะเริ่ม**; Cloudflared ยังคงเริ่มตอนบูตตามเดิม
@@ -71,7 +71,7 @@ Task เดิมตอนนี้ใช้ Admin/Interactive/Highest และ
 หากบันทึกสำเร็จแต่ restart ติดงานเสียง/ข้อผิดพลาด ให้รันหลังแก้สาเหตุ:
 
 ```powershell
-& "D:\Sites\Audio-Tech-Lab\tools\restart-spotify-backend.ps1"
+& "D:\Sites\Audio Tech Labs\tools\restart-spotify-backend.ps1"
 ```
 
 คำสั่งตรวจการโหลด config, ตัวตนและ Windows owner ของ process, parent supervisor และ queued/running jobs ก่อนหยุดเฉพาะ backend จากนั้นรอ supervisor เปิด backend ใหม่และตรวจ health ไม่หยุด web หรือ Cloudflared

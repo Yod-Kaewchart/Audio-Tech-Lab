@@ -13,8 +13,8 @@ const { createSpotify } = require('./spotify.cjs');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 function createServer(options = {}) {
   const root = options.root || path.resolve(__dirname, '..');
-  const splitter = options.splitter || String.raw`D:\Projects\Audio Album Splitter AI`;
-  const python = path.join(splitter, '.venv', 'Scripts', 'python.exe');
+  const splitter = options.splitter || process.env.ATL_SPLITTER_ROOT || String.raw`D:\Projects\Audio Album Splitter AI`;
+  const python = options.python || process.env.ATL_AUDIO_PYTHON || path.join(splitter, '.venv', 'Scripts', 'python.exe');
   const security = path.join(root, 'tools', 'runtime', 'security');
   const uploads = path.join(root, 'uploads'), exports = path.join(root, 'exports'), previews = path.join(root, 'previews');
   const activity = new ActivityStore(path.join(security, 'activity.sqlite'));
@@ -244,7 +244,7 @@ function createServer(options = {}) {
         return send(res, 202, job);
       }
       if (req.method === 'POST' && route === '/merge') {
-        return handleMerge({
+        return await handleMerge({
           req, res, user, json, send, fail, fileFor, queue, storage, runner,
           scripts: options.scripts || __dirname,
           exportsRoot: exports, userRoot

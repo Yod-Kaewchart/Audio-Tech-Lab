@@ -34,7 +34,7 @@ Cloudflare Named Tunnel → http://127.0.0.1:8080
 4. เปิด PowerShell **Run as administrator** แล้วรันคำสั่งด้านล่าง สคริปต์ตรวจงานค้างก่อน restart และไม่หยุด Windows service `Cloudflared`:
 
 ```powershell
-& 'D:\Sites\Audio-Tech-Lab\tools\start-web-demo.ps1' -Restart
+& 'D:\Sites\Audio Tech Labs\tools\start-web-demo.ps1' -Restart
 ```
 
 5. ตรวจว่าไม่มีงานกำลังประมวลผลก่อน restart บริการ แล้วตรวจ `GET /api/health` บนโดเมนเดโม: ต้องเป็น JSON ที่มี `service=audio-tech-labs-demo`, `apiVersion=1`, `authentication=true`

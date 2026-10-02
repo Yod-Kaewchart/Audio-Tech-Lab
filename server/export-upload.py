@@ -1,13 +1,26 @@
 import json, math, os, shutil, sys, uuid
 from pathlib import Path
 
-SPLITTER=Path(r"D:\Projects\Audio Album Splitter AI")
+SPLITTER=Path(os.environ.get("ATL_SPLITTER_ROOT", r"D:\Projects\Audio Album Splitter AI"))
 sys.path.insert(0,str(SPLITTER))
-from core.audio_info import read_audio_info
+from core.audio_info import BIT_DEPTH_BY_SUBTYPE, read_audio_info
+from core.export.codecs import flac_bits_for_source_subtype, wav_codec_for_source_subtype
 from core.export.batch_exporter import BatchExporter
 from core.export.batch_models import BatchExportRequest, BatchTrack, ExportSource
 from core.export.ffmpeg_locator import resolve_ffmpeg_executable
 from core.export.models import TargetFormat
+
+def estimate_output_bytes(info, fmt, track_count):
+    source = ExportSource.from_metadata(info)
+    if fmt is TargetFormat.WAV:
+        wav_codec_for_source_subtype(source.source_subtype)
+        bits = BIT_DEPTH_BY_SUBTYPE[source.source_subtype]
+    else:
+        bits = flac_bits_for_source_subtype(source.source_subtype)
+    # Allow at least 32-bit PCM per sample, FLAC overhead and track headers.
+    # WAV DOUBLE still reserves 64-bit PCM; the 4 GB policy is unchanged.
+    width = max(4, (bits + 7) // 8)
+    return source.total_samples * int(info["channel_count"]) * width + track_count * 65536
 
 def main():
     source_path=Path(sys.argv[1]).resolve()
@@ -23,11 +36,10 @@ def main():
     # an in-place upgrade. Keep it usable until restart, with a disk safety floor.
     if budget is None:
         budget=min(4_000_000_000, max(0, shutil.disk_usage(export_root).free-5_000_000_000))
-    # Reserve conservatively for uncompressed 64-bit PCM plus per-track headers,
-    # even when a small compressed input expands substantially during export.
+    # Bound expansion using the codec selected by the lossless export core.
     if not info.get("metadata_valid") or duration <= 0 or not math.isfinite(duration):
         raise SystemExit("Invalid audio metadata")
-    estimate=math.ceil(duration*int(info["sample_rate"])*int(info["channel_count"])*8)+(len(boundaries)+1)*65536
+    estimate=estimate_output_bytes(info, fmt, len(boundaries)+1)
     if not isinstance(budget, int) or budget <= 0 or estimate > budget:
         raise SystemExit(22)  # Recognized by the process runner; no private paths in the response.
     starts=[0.0,*boundaries]; ends=[*boundaries,duration]

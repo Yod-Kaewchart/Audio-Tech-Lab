@@ -1,6 +1,6 @@
 param([switch]$Restart)
 $ErrorActionPreference = 'Stop'
-$root = 'D:\Sites\Audio-Tech-Lab'
+$root = 'D:\Sites\Audio Tech Labs'
 $runtime = Join-Path $root 'tools\runtime'
 New-Item -ItemType Directory -Path $runtime -Force | Out-Null
 $deploymentFile = Join-Path $runtime 'deployment.json'
@@ -17,9 +17,9 @@ if ($env:ATL_EXTERNAL_TUNNEL -eq '1' -and (Get-Service Cloudflared -ErrorAction 
 }
 function Get-DemoProcesses {
     Get-CimInstance Win32_Process | Where-Object {
-        ($_.Name -eq 'node.exe' -and ($_.CommandLine -like '*D:\Sites\Audio-Tech-Lab\server\upload-server.js*' -or $_.CommandLine -like '*D:\Sites\Audio-Tech-Lab\server\web-server.cjs*' -or $_.CommandLine -like '*D:\Sites\Audio-Tech-Lab\tools\web-demo-supervisor.cjs*')) -or
-        ($_.Name -eq 'python.exe' -and $_.CommandLine -like '*-m http.server 8080*' -and $_.CommandLine -like '*D:\Sites\Audio-Tech-Lab\dist*') -or
-        ($_.Name -eq 'cloudflared.exe' -and $_.CommandLine -match 'tunnel --url http://127\.0\.0\.1:(8080|8787)(\s|$)' -and $_.ExecutablePath -eq 'D:\Sites\Audio-Tech-Lab\tools\cloudflared.exe')
+        ($_.Name -eq 'node.exe' -and ($_.CommandLine -like '*D:\Sites\Audio Tech Labs\server\upload-server.js*' -or $_.CommandLine -like '*D:\Sites\Audio Tech Labs\server\web-server.cjs*' -or $_.CommandLine -like '*D:\Sites\Audio Tech Labs\tools\web-demo-supervisor.cjs*')) -or
+        ($_.Name -eq 'python.exe' -and $_.CommandLine -like '*-m http.server 8080*' -and $_.CommandLine -like '*D:\Sites\Audio Tech Labs\dist*') -or
+        ($_.Name -eq 'cloudflared.exe' -and $_.CommandLine -match 'tunnel --url http://127\.0\.0\.1:(8080|8787)(\s|$)' -and $_.ExecutablePath -eq 'D:\Sites\Audio Tech Labs\tools\cloudflared.exe')
     }
 }
 if ($Restart) {

@@ -1,7 +1,7 @@
-import json, math, shutil, subprocess, sys, uuid
+import json, math, os, shutil, subprocess, sys, uuid
 from pathlib import Path
 
-SPLITTER=Path(r"D:\Projects\Audio Album Splitter AI")
+SPLITTER=Path(os.environ.get("ATL_SPLITTER_ROOT", r"D:\Projects\Audio Album Splitter AI"))
 sys.path.insert(0,str(SPLITTER))
 from core.audio_info import read_audio_info
 from core.export.ffmpeg_locator import resolve_ffmpeg_executable
@@ -42,16 +42,17 @@ def main():
     out_dir.mkdir(parents=True,exist_ok=False)
     name=safe_name(request.get("name","Merged Album"))+"."+fmt
     output=out_dir/name
-    concat=out_dir/"concat.txt"
     try:
-        lines=[]
-        for p in sources:
-            escaped=str(p).replace("'","'\\''")
-            lines.append("file '"+escaped+"'")
-        concat.write_text("\n".join(lines)+"\n",encoding="utf-8")
+        inputs=[]
+        filters=[]
+        for index, source in enumerate(sources):
+            inputs.extend(["-i", str(source)])
+            filters.append(f"[{index}:a:0]asetpts=PTS-STARTPTS[a{index}]")
+        labels="".join(f"[a{index}]" for index in range(len(sources)))
+        filters.append(labels+f"concat=n={len(sources)}:v=0:a=1[out]")
         ffmpeg=resolve_ffmpeg_executable(repo_root=SPLITTER)
         codec="flac" if fmt=="flac" else ("pcm_s16le" if bits<=16 else "pcm_s24le" if bits<=24 else "pcm_s32le")
-        proc=subprocess.run([str(ffmpeg),"-hide_banner","-loglevel","error","-f","concat","-safe","0","-i",str(concat),"-map_metadata","-1","-c:a",codec,str(output)],capture_output=True,text=True)
+        proc=subprocess.run([str(ffmpeg),"-hide_banner","-loglevel","error",*inputs,"-filter_complex",";".join(filters),"-map","[out]","-map_metadata","-1","-c:a",codec,str(output)],capture_output=True,text=True)
         if proc.returncode:
             raise RuntimeError("FFmpeg merge failed")
         if not output.exists() or output.stat().st_size<=0:
@@ -60,8 +61,6 @@ def main():
     except Exception:
         shutil.rmtree(out_dir,ignore_errors=True)
         raise
-    finally:
-        concat.unlink(missing_ok=True)
 
 if __name__=="__main__":
     main()

@@ -2,7 +2,7 @@
 
 ## ขอบเขตและสถานะเริ่มต้น
 
-- Repository: `D:\Sites\Audio-Tech-Lab`, branch `main`
+- Repository: `D:\Sites\Audio Tech Labs`, branch `main`
 - HEAD: `d2dbd44c60e9857bd3b6bcc744269cf3a4119f41`
 - ก่อนแก้ `git status --short` ว่าง ไม่มีงานค้างที่ต้องทับ
 - ตรวจและแก้เฉพาะ lifecycle ของไฟล์, dependency, History/Audit และ state ที่เกี่ยวกับ Delete

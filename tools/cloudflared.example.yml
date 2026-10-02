@@ -1,7 +1,7 @@
 # Template only: replace the tunnel UUID and credentials path after creating a named tunnel.
 # Keep the actual config and credential JSON in tools/runtime/ (ignored by Git).
 tunnel: REPLACE_WITH_TUNNEL_UUID
-credentials-file: 'D:\Sites\Audio-Tech-Lab\tools\runtime\REPLACE_WITH_TUNNEL_UUID.json'
+credentials-file: 'D:\Sites\Audio Tech Labs\tools\runtime\REPLACE_WITH_TUNNEL_UUID.json'
 ingress:
   - hostname: demo.audiotechlabs.com
     service: http://127.0.0.1:8080
