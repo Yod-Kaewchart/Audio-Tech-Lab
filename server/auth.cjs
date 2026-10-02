@@ -44,7 +44,7 @@ function createAuth(directory, { onActivity = () => {} } = {}) {
     try { return await verify(password, user); } finally { hashing--; }
   }
   function secureCookie(req, token, maxAge = 28800) {
-    const secure = req.headers['x-forwarded-proto'] === 'https' || !!req.socket.encrypted;
+    const secure = Boolean(process.env.ATL_DEMO_ORIGIN) || req.headers['x-forwarded-proto'] === 'https' || !!req.socket.encrypted;
     return 'atl_session=' + token + '; Path=/; HttpOnly; SameSite=Strict; Max-Age=' + maxAge + (secure ? '; Secure' : '');
   }
   function sessionFor(req) {

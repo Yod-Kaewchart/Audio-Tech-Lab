@@ -1,6 +1,6 @@
 param([switch]$Restart)
 $ErrorActionPreference = 'Stop'
-$root = 'D:\Sites\Audio Tech Labs'
+$root = Split-Path -Parent $PSScriptRoot
 $runtime = Join-Path $root 'tools\runtime'
 New-Item -ItemType Directory -Path $runtime -Force | Out-Null
 $deploymentFile = Join-Path $runtime 'deployment.json'
@@ -9,6 +9,14 @@ if (Test-Path -LiteralPath $deploymentFile) {
     $env:ATL_DEMO_ORIGIN = $deployment.demoOrigin
     $env:ATL_EXTERNAL_TUNNEL = if ($deployment.tunnelMode -eq 'external') { '1' } else { '' }
     $env:ATL_TUNNEL_CONFIG = $deployment.tunnelConfig
+    if ($deployment.audioPython) {
+        if (-not (Test-Path -LiteralPath $deployment.audioPython -PathType Leaf)) { throw 'Configured audioPython does not exist' }
+        $env:ATL_AUDIO_PYTHON = $deployment.audioPython
+    }
+    if ($deployment.splitterRoot) {
+        if (-not (Test-Path -LiteralPath $deployment.splitterRoot -PathType Container)) { throw 'Configured splitterRoot does not exist' }
+        $env:ATL_SPLITTER_ROOT = $deployment.splitterRoot
+    }
 }
 & 'C:\Program Files\nodejs\node.exe' -e "require(process.argv[1]).deploymentMode()" (Join-Path $root 'tools\deployment-config.cjs')
 if ($LASTEXITCODE -ne 0) { throw 'Invalid deployment configuration; existing services were not stopped' }

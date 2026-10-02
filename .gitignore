@@ -12,3 +12,8 @@ dist/demo/demo.js.tmp
 .env
 .env.*
 !.env.example
+.cloudflared/
+cert.pem
+*.key
+*.p12
+*.pfx

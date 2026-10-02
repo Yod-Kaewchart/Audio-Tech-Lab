@@ -1,6 +1,38 @@
 'use strict';
 const test = require('node:test'), assert = require('node:assert/strict'), http = require('node:http');
 const { createWebServer } = require('./web-server.cjs');
+test('Public demo requires its expected Host and HTTPS before requests reach the API', async t => {
+  let forwarded = 0;
+  const backend = http.createServer((req, res) => { forwarded++; res.writeHead(401, { 'Content-Type': 'application/json' }); res.end('{}'); });
+  await new Promise(resolve => backend.listen(0, '127.0.0.1', resolve));
+  const web = createWebServer({ backendPort: backend.address().port, publicOrigin: 'https://demo.audiotechlabs.com' });
+  await new Promise(resolve => web.listen(0, '127.0.0.1', resolve));
+  t.after(async () => { await new Promise(resolve => web.close(resolve)); await new Promise(resolve => backend.close(resolve)); });
+  const request = (url, headers, method = 'GET') => new Promise((resolve, reject) => {
+    const req = http.request({ hostname: '127.0.0.1', port: web.address().port, path: url, headers, method }, res => {
+      res.resume(); res.on('end', () => resolve({ status: res.statusCode, headers: res.headers }));
+    });
+    req.on('error', reject); req.end();
+  });
+  const publicHost = { Host: 'demo.audiotechlabs.com' };
+  const secure = { ...publicHost, 'X-Forwarded-Proto': 'https' };
+  const redirect = await request('/demo?view=split', publicHost);
+  assert.equal(redirect.status, 308); assert.equal(redirect.headers.location, 'https://demo.audiotechlabs.com/demo?view=split');
+  assert.equal((await request('/api/auth/login', publicHost, 'POST')).status, 403);
+  assert.equal((await request('/api/auth/me', { Host: 'attacker.invalid', 'X-Forwarded-Proto': 'https' })).status, 421);
+  assert.equal((await request('//attacker.invalid/', publicHost)).status, 403);
+  assert.equal(forwarded, 0);
+  const authenticated = await request('/api/auth/me', secure);
+  assert.equal(authenticated.status, 401); assert.equal(forwarded, 1);
+  assert.equal(authenticated.headers['cache-control'], 'no-store');
+  assert.equal(authenticated.headers['strict-transport-security'], 'max-age=86400');
+  assert.match(authenticated.headers['content-security-policy'], /frame-ancestors 'none'/);
+  assert.match(authenticated.headers['permissions-policy'], /microphone=\(\)/);
+  assert.equal((await request('/demo', secure)).headers.location, '/demo/');
+  assert.equal((await request('/demo/', secure)).status, 200);
+  const local = await request('/demo/', { Host: '127.0.0.1:' + web.address().port });
+  assert.equal(local.status, 200); assert.equal(local.headers['strict-transport-security'], undefined);
+});
 test('Demo and API share one origin; proxy preserves authentication and hides non-public files', async t => {
   const backend = http.createServer((req, res) => {
     res.writeHead(401, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });

@@ -1,12 +1,11 @@
 'use strict';
 const http = require('node:http'), fs = require('node:fs'), path = require('node:path');
+const { webSecurity } = require('./web-security.cjs');
 const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.webp': 'image/webp', '.woff2': 'font/woff2' };
-function createWebServer({ root = path.resolve(__dirname, '..', 'dist'), backendPort = 8787 } = {}) {
+function createWebServer({ root = path.resolve(__dirname, '..', 'dist'), backendPort = 8787, publicOrigin = process.env.ATL_DEMO_ORIGIN } = {}) {
+const secureRequest = webSecurity(publicOrigin);
 return http.createServer((req, res) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('Referrer-Policy', 'same-origin');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('Cache-Control', 'no-store');
+  if (!secureRequest(req, res)) return;
   if (req.url === '/api' || req.url.startsWith('/api/')) {
     const headers = { ...req.headers };
     const forwarded = headers['x-forwarded-proto'];
