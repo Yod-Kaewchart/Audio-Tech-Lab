@@ -3,10 +3,11 @@ const fs = require('node:fs'), path = require('node:path');
 const { DatabaseSync } = require('node:sqlite');
 const ACTIVE = new Set(['queued', 'running']);
 const eventStatus = { queued: 'queued', running: 'started', succeeded: 'completed', failed: 'failed', cancelled: 'cancelled' };
-const TYPES = new Set(['analyze', 'qc', 'preview', 'export', 'merge', 'upload', 'delete', 'login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed']);
-const CATEGORIES = new Set(['processing', 'file', 'authentication', 'admin']);
+const TYPES = new Set(['analyze', 'qc', 'preview', 'export', 'merge', 'upload', 'delete', 'login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed', 'openai-connected', 'openai-disconnected', 'openai-test-failed']);
+const CATEGORIES = new Set(['processing', 'file', 'authentication', 'admin', 'integration']);
 const STATUSES = new Set(['queued', 'started', 'completed', 'failed', 'cancelled', 'manual-delete', 'auto-cleanup']);
 const ACCOUNT_TYPES = new Set(['login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed']);
+const INTEGRATION_TYPES = new Set(['openai-connected', 'openai-disconnected', 'openai-test-failed']);
 const TYPE_SQL = "COALESCE(json_extract(data,'$.type'), CASE WHEN json_extract(data,'$.status') IN ('manual-delete','auto-cleanup') THEN 'delete' ELSE json_extract(data,'$.kind') END)";
 const CATEGORY_SQL = "COALESCE(json_extract(data,'$.category'), CASE WHEN json_extract(data,'$.status') IN ('manual-delete','auto-cleanup') THEN 'file' ELSE 'processing' END)";
 const username = value => typeof value === 'string' && /^[a-z0-9][a-z0-9_.-]{2,31}$/.test(value) ? value : null;
@@ -78,9 +79,10 @@ class ActivityStore {
         actorId: actorId || null, actorUsername: actorUsername || null }));
   }
   event({ type, status = 'completed', ownerId, username: name, actorId, actorUsername, fileId, filename, size } = {}) {
-    if (!ACCOUNT_TYPES.has(type) && type !== 'upload') throw new Error('Invalid activity event');
-    if (!['completed', 'failed'].includes(status) || (status === 'failed' && type !== 'login')) throw new Error('Invalid activity status');
-    const timestamp = Date.now(), category = type === 'upload' ? 'file' : type.startsWith('user-') ? 'admin' : 'authentication';
+    if (!ACCOUNT_TYPES.has(type) && !INTEGRATION_TYPES.has(type) && type !== 'upload') throw new Error('Invalid activity event');
+    if (!['completed', 'failed'].includes(status) || (status === 'failed' && !['login', 'openai-test-failed'].includes(type)) ||
+        (type === 'openai-test-failed' && status !== 'failed')) throw new Error('Invalid activity status');
+    const timestamp = Date.now(), category = type === 'upload' ? 'file' : INTEGRATION_TYPES.has(type) ? 'integration' : type.startsWith('user-') ? 'admin' : 'authentication';
     const data = { timestamp, type, category, status, ownerId: identity(ownerId), username: username(name), actorId: identity(actorId), actorUsername: username(actorUsername) };
     if (type === 'upload') Object.assign(data, { fileId: identity(fileId), filename: typeof filename === 'string' ? filename.slice(0, 180) : '', size: Number.isSafeInteger(size) && size >= 0 ? size : null });
     this.append.run('event:' + require('node:crypto').randomUUID(), timestamp, JSON.stringify(data));

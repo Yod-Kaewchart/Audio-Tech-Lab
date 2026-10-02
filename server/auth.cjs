@@ -7,7 +7,7 @@ const passwordOK = value => typeof value === 'string' && value.length >= 12 && v
 const emailOK = value => typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 254;
 const digest = value => crypto.createHash('sha256').update(value).digest('hex');
 function fail(status, message) { return Object.assign(new Error(message), { status }); }
-function createAuth(directory, { onActivity = () => {} } = {}) {
+function createAuth(directory, { onActivity = () => {}, onUserDeleted = () => {} } = {}) {
   fs.mkdirSync(directory, { recursive: true });
   function activity(type, status, subject, actor = subject) {
     // Pass only known account identities; never forward credentials, request bodies or unknown login input.
@@ -161,7 +161,9 @@ function createAuth(directory, { onActivity = () => {} } = {}) {
           const db = read(), index = db.users.findIndex(x => x.id === userId);
           if (index < 0) throw fail(404, 'User not found');
           if (db.users[index].role === 'admin') throw fail(400, 'Administrator account cannot be deleted');
-          deleted = db.users[index]; db.users.splice(index, 1); save(db);
+          deleted = db.users[index];
+          await onUserDeleted(deleted);
+          db.users.splice(index, 1); save(db);
           for (const [key, value] of sessions) if (value.userId === userId) sessions.delete(key);
         });
         activity('user-deleted', 'completed', deleted, auth.user);

@@ -10,6 +10,8 @@ const { createStorageLimits } = require('./storage-limits.cjs');
 const { download } = require('./download.cjs');
 const { handleMerge } = require('./merge-handler.cjs');
 const { createSpotify } = require('./spotify.cjs');
+const { createOpenAICredentialStore } = require('./openai-credential-store.cjs');
+const { createOpenAIProvider } = require('./openai.cjs');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 function createServer(options = {}) {
   const root = options.root || path.resolve(__dirname, '..');
@@ -18,8 +20,9 @@ function createServer(options = {}) {
   const security = path.join(root, 'tools', 'runtime', 'security');
   const uploads = path.join(root, 'uploads'), exports = path.join(root, 'exports'), previews = path.join(root, 'previews');
   const activity = new ActivityStore(path.join(security, 'activity.sqlite'));
-  const auth = createAuth(security, { onActivity: event => activity.event(event) }), sessions = new Map();
-  let spotify;
+  const openaiStore = options.openaiStore || createOpenAICredentialStore({ directory: path.join(security, 'openai-credentials') });
+  const auth = createAuth(security, { onActivity: event => activity.event(event), onUserDeleted: user => openaiStore.delete(user.id) }), sessions = new Map();
+  let spotify, openai;
   const runner = options.runJob || createProcessRunner({ marker: path.join(security, 'worker.json'), python, cwd: splitter, worker: path.join(options.scripts || __dirname, 'queue-worker.py'), timeout: options.workerTimeout });
   function userNames() { return new Map(JSON.parse(fs.readFileSync(path.join(security, 'users.json'), 'utf8')).users.map(u => [u.id, u.username])); }
   function describeJob(job) {
@@ -60,6 +63,7 @@ function createServer(options = {}) {
     res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' }); res.end(JSON.stringify(data));
   }
   spotify = createSpotify({ auth, send, allowedOrigins, redirectUri: options.spotifyRedirectUri });
+  openai = createOpenAIProvider({ store: openaiStore, activity, fetchImpl: options.openaiFetch || global.fetch, timeoutMs: options.openaiTimeoutMs });
   async function body(req, limit = 1024 * 1024) {
     const parts = []; let size = 0;
     for await (const chunk of req) { size += chunk.length; if (size > limit) throw fail(413, 'Request is too large'); parts.push(chunk); }
@@ -114,6 +118,7 @@ function createServer(options = {}) {
       if (await auth.handle(req, res, route, json, send, allowedOrigins)) return;
       auth.originOK(req, allowedOrigins);
       const { user } = auth.requireUser(req);
+      if (await openai.handle(req, res, route, user, json, send)) return;
       cleanup();
       if (req.method === 'GET' && route === '/admin/audit') {
         if (user.role !== 'admin') throw fail(403, 'Administrator access required');

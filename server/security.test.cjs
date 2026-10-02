@@ -58,8 +58,8 @@ test('Authentication and file ownership security, including real Analyze/QC/Expo
     let admin, alice, bob, uploaded, job;
     await t.test('Anonymous requests cannot list files, download, upload, analyze, QC, export, or delete', async () => {
       assert.equal((await request('/health')).status, 200);
-      for (const route of ['/uploads', '/audio/' + legacyId, '/download/' + legacyJob + '/old.wav', '/auth/me']) assert.equal((await request(route)).status, 401);
-      for (const route of ['/upload/init', '/upload/chunk', '/upload/complete', '/upload/remove', '/preview', '/analyze', '/qc', '/export', '/export/delete']) assert.equal((await request(route, null, {})).status, 401);
+      for (const route of ['/uploads', '/audio/' + legacyId, '/download/' + legacyJob + '/old.wav', '/auth/me', '/ai/providers']) assert.equal((await request(route)).status, 401);
+      for (const route of ['/upload/init', '/upload/chunk', '/upload/complete', '/upload/remove', '/preview', '/analyze', '/qc', '/export', '/export/delete', '/ai/openai/test']) assert.equal((await request(route, null, {})).status, 401);
       assert.equal((await request('/auth/login', null, { username: 'yod', password: 'wrong' })).status, 401);
       assert.equal((await request('/auth/login', null, { username: 'yod', password: temporary }, { headers: { Origin: 'https://attacker.invalid' } })).status, 403);
     });
@@ -69,6 +69,7 @@ test('Authentication and file ownership security, including real Analyze/QC/Expo
       assert.equal((await request('/uploads', admin)).status, 403);
       assert.equal((await request('/auth/password', admin, { currentPassword: temporary, newPassword: 'Owner-Changed-Password-123' }, { csrf: false })).status, 403);
       await change(admin, temporary, 'Owner-Changed-Password-123');
+      assert.equal((await request('/ai/openai/test', admin, {}, { csrf: false })).status, 403);
       assert.ok(!fs.existsSync(path.join(root, 'tools', 'runtime', 'security', 'first-login.txt')));
       const files = (await request('/uploads', admin)).data.files; assert.equal(files.length, 1); assert.equal(files[0].fileId, legacyId);
       assert.equal((await request('/download/' + legacyJob + '/old.wav', admin)).status, 200);

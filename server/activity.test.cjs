@@ -11,6 +11,8 @@ test('Audit filters query all rows, preserve legacy events, and paginate while n
   try {
     store.record({ id: crypto.randomUUID(), owner: ownerId, username: 'yod', kind: 'analyze', fileId: crypto.randomUUID(), queuedAt: Date.now(), startedAt: Date.now(), finishedAt: Date.now(), status: 'succeeded', error: 'SECRET-STACK', result: { waveform: ['SECRET-RESULT'] } });
     store.deletion({ ownerId, username: 'deleteduser', kind: 'upload', filename: 'Album.wav', reason: 'auto-cleanup' });
+    store.event({ type: 'openai-connected', ownerId, username: 'yod' });
+    store.event({ type: 'openai-test-failed', status: 'failed', ownerId, username: 'yod' });
     for (let i = 0; i < 130; i++) store.event({ type: 'login', status: i % 2 ? 'failed' : 'completed', ownerId, username: 'yod', password: 'SECRET-PASSWORD', sessionToken: 'SECRET-TOKEN', csrf: 'SECRET-CSRF', spotifyToken: 'SECRET-SPOTIFY', error: 'SECRET-ERROR' });
     const first = store.audit({ limit: 7, type: 'login', status: 'failed', username: 'yod' });
     assert.equal(first.entries.length, 7); assert.ok(first.nextCursor);
@@ -22,6 +24,8 @@ test('Audit filters query all rows, preserve legacy events, and paginate while n
     }
     assert.equal(ids.length, 65); assert.equal(new Set(ids).size, ids.length);
     assert.equal(store.audit({ category: 'processing', type: 'analyze', status: 'completed' }).entries.length, 1);
+    assert.equal(store.audit({ category: 'integration', type: 'openai-connected', username: 'yod' }).entries.length, 1);
+    assert.equal(store.audit({ category: 'integration', type: 'openai-test-failed', status: 'failed' }).entries.length, 1);
     assert.equal(store.audit({ category: 'file', type: 'delete', username: 'deleteduser' }).entries[0].status, 'auto-cleanup');
     assert.equal(store.audit({ username: 'nobody' }).entries.length, 0);
     for (const input of [{ limit: 101 }, { before: 0 }, { type: 'secret' }, { category: 'invalid' }, { status: 'invalid' }, { username: "yod' OR 1=1" }]) assert.throws(() => store.audit(input), { status: 400 });
@@ -32,8 +36,9 @@ test('Audit filters query all rows, preserve legacy events, and paginate while n
 });
 test('Account events are admin-only, identify actor and deleted user, and never persist credentials', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atl-audit-api-')), origin = 'https://audit-tests.invalid';
+  const integrationSecrets = new Set(), openaiStore = { delete: id => integrationSecrets.delete(id) };
   let server;
-  async function start() { server = createServer({ root, origin, runJob: async () => '{}' }); await new Promise(resolve => server.listen(0, '127.0.0.1', resolve)); }
+  async function start() { server = createServer({ root, origin, openaiStore, runJob: async () => '{}' }); await new Promise(resolve => server.listen(0, '127.0.0.1', resolve)); }
   const close = () => new Promise(resolve => server.close(resolve));
   async function req(route, client, data, method) {
     const headers = { Origin: origin, 'Content-Type': 'application/json' };
@@ -60,7 +65,9 @@ test('Account events are admin-only, identify actor and deleted user, and never 
     assert.equal((await req('/auth/logout', user, {})).status, 200);
     assert.equal((await req('/admin/users', admin, { username: 'deleteme', password: 'Delete-Temporary-Password-123' })).status, 201);
     const deleted = (await req('/admin/users', admin)).data.users.find(u => u.username === 'deleteme');
+    integrationSecrets.add(deleted.id);
     assert.equal((await req('/admin/users/' + deleted.id, admin, undefined, 'DELETE')).status, 200);
+    assert.equal(integrationSecrets.has(deleted.id), false);
     // Rejected administrative operations must not appear as successful events.
     assert.equal((await req('/admin/users/' + deleted.id, admin, undefined, 'DELETE')).status, 404);
     for (const params of ['limit=101', 'before=0', 'category=invalid', 'status=invalid', 'type=invalid', 'username=x%27']) assert.equal((await req('/admin/audit?' + params, admin)).status, 400);
