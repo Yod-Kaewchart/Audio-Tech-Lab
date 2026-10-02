@@ -1,0 +1,20 @@
+#admin-activity-panel{max-width:900px;margin:10px 0 14px}
+.admin-activity-card{max-width:none;padding:16px 18px;border-color:#3b3933}
+.activity-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.activity-head strong{font-size:14px;letter-spacing:.06em}
+.admin-activity-card button{min-height:38px;padding:8px 13px;font-size:14px}
+.auth-card .activity-filters{display:grid;grid-template-columns:1fr 1.2fr 1fr 1fr;gap:10px;margin-top:14px}
+.activity-filters label{min-width:0;font-size:14px}
+.activity-filters input,.activity-filters select{width:100%;min-width:0;box-sizing:border-box;min-height:42px;padding:8px;background:#222;color:#eee;border:1px solid #686154;font-family:inherit;font-size:14px}
+#admin-activity-status{margin:12px 0;font-size:14px;line-height:1.5}
+.activity-list{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.activity-row{display:grid;grid-template-columns:100px minmax(0,1fr);gap:14px;padding:12px;border:1px solid #363833;background:#111313}
+.activity-time{display:grid;align-content:start;gap:5px;font-size:14px;color:#eee;font-variant-numeric:tabular-nums}
+.activity-time span{font-size:12px;color:#aaa}
+.activity-body{min-width:0}.activity-line{display:flex;align-items:baseline;gap:7px 12px;flex-wrap:wrap;font-size:14px}
+.activity-user{overflow-wrap:anywhere}.activity-type{color:#d5a94e}
+.activity-status{font-size:14px;color:#b8c1c0}.status-completed{color:#a9d6b0}.status-failed{color:#f0aaaa}.status-cancelled{color:#e3c183}
+.admin-activity-card .activity-detail{margin:6px 0 0;line-height:1.5;font-size:14px;color:#aaa;overflow-wrap:anywhere}
+.activity-footer{display:flex;justify-content:center;margin-top:14px}
+.admin-activity-card :focus-visible{outline:2px solid #d5a94e;outline-offset:2px}
+@media(max-width:700px){.admin-activity-card{padding:12px}.auth-card .activity-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.activity-row{grid-template-columns:1fr;gap:8px}.activity-time{display:flex;align-items:baseline;gap:10px}.activity-head{flex-wrap:wrap}.activity-head strong{letter-spacing:0}.admin-activity-card button{min-height:42px}}

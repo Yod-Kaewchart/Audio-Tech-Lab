@@ -3,6 +3,14 @@ const fs = require('node:fs'), path = require('node:path');
 const { DatabaseSync } = require('node:sqlite');
 const ACTIVE = new Set(['queued', 'running']);
 const eventStatus = { queued: 'queued', running: 'started', succeeded: 'completed', failed: 'failed', cancelled: 'cancelled' };
+const TYPES = new Set(['analyze', 'qc', 'preview', 'export', 'merge', 'upload', 'delete', 'login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed']);
+const CATEGORIES = new Set(['processing', 'file', 'authentication', 'admin']);
+const STATUSES = new Set(['queued', 'started', 'completed', 'failed', 'cancelled', 'manual-delete', 'auto-cleanup']);
+const ACCOUNT_TYPES = new Set(['login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed']);
+const TYPE_SQL = "COALESCE(json_extract(data,'$.type'), CASE WHEN json_extract(data,'$.status') IN ('manual-delete','auto-cleanup') THEN 'delete' ELSE json_extract(data,'$.kind') END)";
+const CATEGORY_SQL = "COALESCE(json_extract(data,'$.category'), CASE WHEN json_extract(data,'$.status') IN ('manual-delete','auto-cleanup') THEN 'file' ELSE 'processing' END)";
+const username = value => typeof value === 'string' && /^[a-z0-9][a-z0-9_.-]{2,31}$/.test(value) ? value : null;
+const identity = value => typeof value === 'string' && /^[0-9a-f-]{36}$/.test(value) ? value : null;
 // Only these fields may reach durable audit storage. Never copy job results or errors.
 function metadata(job) {
   return { jobId: job.id, ownerId: job.owner, username: job.username || null,
@@ -19,6 +27,10 @@ class ActivityStore {
       CREATE TABLE IF NOT EXISTS user_history (job_id TEXT PRIMARY KEY, owner_id TEXT NOT NULL, queued_at INTEGER NOT NULL, data TEXT NOT NULL);
       CREATE INDEX IF NOT EXISTS history_owner ON user_history(owner_id, queued_at DESC);
       CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, event_key TEXT UNIQUE NOT NULL, occurred_at INTEGER NOT NULL, data TEXT NOT NULL);`);
+    this.db.exec(`CREATE INDEX IF NOT EXISTS idx_audit_username ON audit(json_extract(data,'$.username'), id DESC);
+      CREATE INDEX IF NOT EXISTS idx_audit_type ON audit(${TYPE_SQL}, id DESC);
+      CREATE INDEX IF NOT EXISTS idx_audit_category ON audit(${CATEGORY_SQL}, id DESC);
+      PRAGMA optimize;`);
     this.upsert = this.db.prepare('INSERT INTO user_history VALUES (?, ?, ?, ?) ON CONFLICT(job_id) DO UPDATE SET data=excluded.data');
     this.append = this.db.prepare('INSERT OR IGNORE INTO audit(event_key, occurred_at, data) VALUES (?, ?, ?)');
   }
@@ -54,11 +66,26 @@ class ActivityStore {
     this.append.run('delete:' + require('node:crypto').randomUUID(), timestamp,
       JSON.stringify({ timestamp, ownerId, username, fileId, filename, size, kind, status: reason, actorId: actorId || null, actorUsername: actorUsername || null }));
   }
-  audit({ limit = 50, before } = {}) {
+  event({ type, status = 'completed', ownerId, username: name, actorId, actorUsername, fileId, filename, size } = {}) {
+    if (!ACCOUNT_TYPES.has(type) && type !== 'upload') throw new Error('Invalid activity event');
+    if (!['completed', 'failed'].includes(status) || (status === 'failed' && type !== 'login')) throw new Error('Invalid activity status');
+    const timestamp = Date.now(), category = type === 'upload' ? 'file' : type.startsWith('user-') ? 'admin' : 'authentication';
+    const data = { timestamp, type, category, status, ownerId: identity(ownerId), username: username(name), actorId: identity(actorId), actorUsername: username(actorUsername) };
+    if (type === 'upload') Object.assign(data, { fileId: identity(fileId), filename: typeof filename === 'string' ? filename.slice(0, 180) : '', size: Number.isSafeInteger(size) && size >= 0 ? size : null });
+    this.append.run('event:' + require('node:crypto').randomUUID(), timestamp, JSON.stringify(data));
+  }
+  audit({ limit = 50, before, type, category, status, username: name } = {}) {
     if (!Number.isInteger(limit) || limit < 1 || limit > 100 || (before !== undefined && (!Number.isSafeInteger(before) || before < 1)))
       throw Object.assign(new Error('Invalid audit page'), { status: 400 });
-    const rows = this.db.prepare('SELECT id, data FROM audit WHERE id < ? ORDER BY id DESC LIMIT ?').all(before || Number.MAX_SAFE_INTEGER, limit + 1);
-    const entries = rows.slice(0, limit).map(row => ({ ...JSON.parse(row.data), auditId: row.id }));
+    if ((type !== undefined && !TYPES.has(type)) || (category !== undefined && !CATEGORIES.has(category)) ||
+        (status !== undefined && !STATUSES.has(status)) || (name !== undefined && !username(name)))
+      throw Object.assign(new Error('Invalid audit filter'), { status: 400 });
+    const clauses = ['id < ?'], values = [before || Number.MAX_SAFE_INTEGER];
+    for (const [expression, value] of [[TYPE_SQL, type], [CATEGORY_SQL, category], ["json_extract(data,'$.status')", status], ["json_extract(data,'$.username')", name]]) {
+      if (value !== undefined) { clauses.push(expression + ' = ?'); values.push(value); }
+    }
+    const rows = this.db.prepare('SELECT id, data, ' + TYPE_SQL + ' AS type, ' + CATEGORY_SQL + ' AS category FROM audit WHERE ' + clauses.join(' AND ') + ' ORDER BY id DESC LIMIT ?').all(...values, limit + 1);
+    const entries = rows.slice(0, limit).map(row => ({ ...JSON.parse(row.data), type: row.type, category: row.category, auditId: row.id }));
     return { entries, nextCursor: rows.length > limit ? entries.at(-1).auditId : null };
   }
   close() { this.db.close(); }

@@ -98,7 +98,7 @@ test('History follows its source beyond 20 jobs; audit is private, paged and exc
     assert.equal((await f.req('/upload/remove', f.admin, { fileId: id })).status, 200);
     assert.equal((await f.req('/jobs', f.admin)).data.jobs.length, 0);
     const audit = (await f.req('/admin/audit?limit=100', f.admin)).data.entries;
-    assert.equal(audit.filter(e => e.status === 'completed').length, 23);
+    assert.equal(audit.filter(e => e.status === 'completed' && e.kind === 'analyze').length, 23);
     assert.ok(audit.some(e => e.status === 'manual-delete' && e.fileId === id));
   } finally { await f.close(); }
 });
@@ -186,9 +186,9 @@ test('Legacy jobs migrate once, recover interrupted work and drop orphan histori
     assert.equal((await f.req('/jobs', f.admin)).data.jobs.length, 2);
     assert.equal((await f.req('/jobs/' + legacy[0].id, f.admin)).data.result.duration, 42);
     assert.equal((await f.req('/jobs/' + legacy[1].id, f.admin)).data.status, 'failed');
-    const before = (await f.req('/admin/audit?limit=100', f.admin)).data.entries.length;
+    const before = (await f.req('/admin/audit?limit=100&category=processing', f.admin)).data.entries.length;
     await f.restart();
-    assert.equal((await f.req('/admin/audit?limit=100', f.admin)).data.entries.length, before);
+    assert.equal((await f.req('/admin/audit?limit=100&category=processing', f.admin)).data.entries.length, before);
     assert.equal((await f.req('/jobs', f.admin)).data.jobs.length, 2);
     const store = new ActivityStore(path.join(f.root, 'tools/runtime/security/activity.sqlite'));
     assert.ok(store.audit({ limit: 100 }).entries.some(e => e.fileId === vanished)); store.close();

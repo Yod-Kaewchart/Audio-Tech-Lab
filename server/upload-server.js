@@ -16,10 +16,10 @@ function createServer(options = {}) {
   const python = path.join(splitter, '.venv', 'Scripts', 'python.exe');
   const security = path.join(root, 'tools', 'runtime', 'security');
   const uploads = path.join(root, 'uploads'), exports = path.join(root, 'exports'), previews = path.join(root, 'previews');
-  const auth = createAuth(security), sessions = new Map();
+  const activity = new ActivityStore(path.join(security, 'activity.sqlite'));
+  const auth = createAuth(security, { onActivity: event => activity.event(event) }), sessions = new Map();
   let spotify;
   const runner = options.runJob || createProcessRunner({ marker: path.join(security, 'worker.json'), python, cwd: splitter, worker: path.join(options.scripts || __dirname, 'queue-worker.py'), timeout: options.workerTimeout });
-  const activity = new ActivityStore(path.join(security, 'activity.sqlite'));
   function userNames() { return new Map(JSON.parse(fs.readFileSync(path.join(security, 'users.json'), 'utf8')).users.map(u => [u.id, u.username])); }
   function describeJob(job) {
     const names = userNames(), directory = path.join(uploads, job.owner);
@@ -116,7 +116,9 @@ function createServer(options = {}) {
         if (user.role !== 'admin') throw fail(403, 'Administrator access required');
         const params = new URL(req.url, 'http://localhost').searchParams;
         return send(res, 200, activity.audit({ limit: params.has('limit') ? Number(params.get('limit')) : 50,
-          before: params.has('before') ? Number(params.get('before')) : undefined }));
+          before: params.has('before') ? Number(params.get('before')) : undefined,
+          type: params.has('type') ? params.get('type') : undefined, category: params.has('category') ? params.get('category') : undefined,
+          status: params.has('status') ? params.get('status') : undefined, username: params.has('username') ? params.get('username') : undefined }));
       }
       if (['GET', 'HEAD'].includes(req.method) && req.url.startsWith('/download/')) return download(req, res, exports, user);
       if (req.method === 'GET' && route === '/storage') return send(res, 200, storage.summary(user.id));
@@ -178,6 +180,7 @@ function createServer(options = {}) {
         if (!session || session.owner !== user.id) throw fail(404, 'Upload session not found');
         if (session.writing || session.received !== session.size) throw fail(409, 'Upload is incomplete');
         fs.renameSync(session.file, path.join(userRoot(uploads, user), session.id + '-' + session.name)); sessions.delete(session.id);
+        activity.event({ type: 'upload', ownerId: user.id, username: user.username, actorId: user.id, actorUsername: user.username, fileId: session.id, filename: session.name, size: session.size });
         return send(res, 200, { ok: true, fileId: session.id, name: session.name, size: session.size });
       }
       if (req.method === 'GET' && route.startsWith('/audio/')) {

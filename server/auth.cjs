@@ -7,8 +7,13 @@ const passwordOK = value => typeof value === 'string' && value.length >= 12 && v
 const emailOK = value => typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 254;
 const digest = value => crypto.createHash('sha256').update(value).digest('hex');
 function fail(status, message) { return Object.assign(new Error(message), { status }); }
-function createAuth(directory) {
+function createAuth(directory, { onActivity = () => {} } = {}) {
   fs.mkdirSync(directory, { recursive: true });
+  function activity(type, status, subject, actor = subject) {
+    // Pass only known account identities; never forward credentials, request bodies or unknown login input.
+    try { onActivity({ type, status, ownerId: subject?.id, username: subject?.username, actorId: actor?.id, actorUsername: actor?.username }); }
+    catch { console.error('Account activity could not be recorded'); }
+  }
   const dbPath = path.join(directory, 'users.json'), sessions = new Map(), attempts = new Map(), registrations = new Map();
   function save(db) {
     fs.writeFileSync(dbPath + '.tmp', JSON.stringify(db, null, 2), { mode: 0o600 });
@@ -97,31 +102,35 @@ function createAuth(directory) {
         db.users.push(user); save(db);
       });
       registrations.set(ip, { count: entry && entry.until > now ? entry.count + 1 : 1, until: now + 15 * 60 * 1000 });
+      activity('register', 'completed', user);
       send(res, 201, { ok: true, user: publicUser(user) }); return true;
     }
     if (req.method === 'POST' && route === '/auth/login') {
       const data = await json(req, 16384), login = String(data.username || '').trim().toLowerCase();
-      if (!usernameOK(login) && !emailOK(login)) throw fail(401, 'Incorrect username/email or password');
+      if (!usernameOK(login) && !emailOK(login)) { activity('login', 'failed'); throw fail(401, 'Incorrect username/email or password'); }
       const password = typeof data.password === 'string' && data.password.length <= 128 ? data.password : '';
       const ip = String(req.headers['cf-connecting-ip'] || req.socket.remoteAddress || 'unknown').slice(0, 80);
       const now = Date.now(), keys = ['login:' + login, 'ip:' + ip];
       for (const key of keys) { const entry = attempts.get(key); if (entry && entry.until > now && entry.count >= 8) throw fail(429, 'Too many attempts. Try again in 15 minutes'); }
       const user = read().users.find(x => x.username === login || String(x.email || '').toLowerCase() === login);
       if (!await limitedVerify(password, user)) {
+        activity('login', 'failed', user);
         if (attempts.size >= 8192 && keys.some(key => !attempts.has(key))) throw fail(429, 'Please try again later');
         for (const key of keys) { const prior = attempts.get(key); attempts.set(key, { count: prior && prior.until > now ? prior.count + 1 : 1, until: now + 15 * 60 * 1000 }); }
         throw fail(401, 'Incorrect username/email or password');
       }
-      if ((user.status || 'active') !== 'active') throw fail(403, 'Account is disabled');
+      if ((user.status || 'active') !== 'active') { activity('login', 'failed', user); throw fail(403, 'Account is disabled'); }
       if (sessions.size >= 1000) throw fail(429, 'Too many active sessions');
       const token = crypto.randomBytes(32).toString('base64url'), securityToken = crypto.randomBytes(32).toString('base64url');
       sessions.set(digest(token), { userId: user.id, version: user.version, csrf: securityToken, seen: now, expires: now + 8 * 60 * 60 * 1000 });
       res.setHeader('Set-Cookie', secureCookie(req, token));
+      activity('login', 'completed', user);
       send(res, 200, { user: publicUser(user), csrf: securityToken }); return true;
     }
     const auth = requireUser(req, { allowPasswordChange: true });
     if (req.method === 'GET' && route === '/auth/me') { send(res, 200, { user: publicUser(auth.user), csrf: auth.session.csrf }); return true; }
     if (req.method === 'POST' && route === '/auth/logout') {
+      activity('logout', 'completed', auth.user);
       sessions.delete(auth.key); res.setHeader('Set-Cookie', secureCookie(req, '', 0)); send(res, 200, { ok: true }); return true;
     }
     if (req.method === 'POST' && route === '/auth/password') {
@@ -138,6 +147,7 @@ function createAuth(directory) {
         auth.session.version = user.version; auth.user = user;
       });
       if (auth.user.role === 'admin') fs.rmSync(path.join(directory, 'first-login.txt'), { force: true });
+      activity('password-changed', 'completed', auth.user);
       send(res, 200, { user: publicUser(auth.user), csrf: auth.session.csrf }); return true;
     }
     if (route === '/admin/users' || route.startsWith('/admin/users/')) {
@@ -154,13 +164,16 @@ function createAuth(directory) {
           deleted = db.users[index]; db.users.splice(index, 1); save(db);
           for (const [key, value] of sessions) if (value.userId === userId) sessions.delete(key);
         });
+        activity('user-deleted', 'completed', deleted, auth.user);
         send(res, 200, { ok: true, user: { id: deleted.id, username: deleted.username } }); return true;
       }
       if (req.method === 'POST') {
         const data = await json(req, 16384), username = String(data.username || '').trim().toLowerCase();
         if (!usernameOK(username) || !passwordOK(data.password)) throw fail(400, 'Use a username of 3–32 letters/numbers and a password of 12–128 characters');
         const salt = crypto.randomBytes(16).toString('hex'), hash = (await scrypt(data.password, salt, 64, HASH_OPTIONS)).toString('hex');
-        await mutate(async () => { const db = read(); if (db.users.some(x => x.username === username)) throw fail(409, 'Username already exists'); if (db.users.length >= 100) throw fail(409, 'Account limit reached'); db.users.push({ id: crypto.randomUUID(), username, role: 'user', mustChange: true, version: 1, salt, hash }); save(db); });
+        let created;
+        await mutate(async () => { const db = read(); if (db.users.some(x => x.username === username)) throw fail(409, 'Username already exists'); if (db.users.length >= 100) throw fail(409, 'Account limit reached'); created = { id: crypto.randomUUID(), username, role: 'user', mustChange: true, version: 1, salt, hash }; db.users.push(created); save(db); });
+        activity('user-created', 'completed', created, auth.user);
         send(res, 201, { ok: true, username }); return true;
       }
     }
@@ -175,4 +188,3 @@ function createAuth(directory) {
   return { handle, requireUser, originOK, ownerId: () => read().users.find(x => x.role === 'admin').id, close: () => clearInterval(timer) };
 }
 module.exports = { createAuth, fail };
-
