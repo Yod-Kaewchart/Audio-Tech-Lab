@@ -37,7 +37,7 @@ def main():
     estimate=math.ceil(duration*sr*ch*max(bits,24)/8)+65536
     if not isinstance(budget,int) or budget<=0 or estimate>budget:
         raise SystemExit(22)
-    job_id=str(uuid.uuid4())
+    job_id=str(uuid.UUID(request["jobId"])) if request.get("jobId") else str(uuid.uuid4())
     out_dir=export_root/job_id
     out_dir.mkdir(parents=True,exist_ok=False)
     name=safe_name(request.get("name","Merged Album"))+"."+fmt

@@ -47,7 +47,9 @@ test('HTTP queue is shared, private, idempotent and protects files while process
     assert.equal((await req('/jobs/' + second.data.jobId + '/cancel', bob, {})).status, 409);
     assert.equal((await req('/jobs/' + third.data.jobId + '/cancel', alice, {})).data.status, 'cancelled');
     assert.equal((await req('/upload/remove', alice, { fileId: c })).status, 200);
-    controls[1](JSON.stringify({ jobId: crypto.randomUUID(), files: [], success: 0, failed: 0 })); await until(() => current === 0);
+    const outputId = crypto.randomUUID();
+    fs.mkdirSync(path.join(root, 'exports', users.find(x => x.username === 'bobby').id, outputId), { recursive: true });
+    controls[1](JSON.stringify({ jobId: outputId, files: [], success: 0, failed: 0 })); await until(() => current === 0);
     assert.equal((await req('/jobs/' + first.data.jobId, alice)).data.result.duration, 3);
     assert.equal((await req('/jobs/' + second.data.jobId, bob)).data.status, 'succeeded');
     assert.equal(maximum, 1); assert.equal(controls.length, 2);

@@ -30,20 +30,11 @@ class ProcessingQueue {
     const completed = [...this.jobs.values()].filter(job => !active(job)).sort((a, b) => b.finishedAt - a.finishedAt);
     for (let i = 0; i < completed.length; i++) if (i >= this.historyLimit || Date.now() - completed[i].finishedAt > this.retention) this.jobs.delete(completed[i].id);
   }
-  forgetFile(owner, fileId) {
-    if (this.isBusy(owner, fileId)) throw failure(409, 'File has a queued or running job');
-    const ids = [];
-    for (const job of this.jobs.values()) if (job.owner === owner && (job.fileIds || [job.fileId]).includes(fileId)) {
-      ids.push(job.id); this.jobs.delete(job.id);
-    }
-    this.save(); return ids;
-  }
-  forgetExport(owner, outputId) {
-    const ids = [];
-    for (const job of this.jobs.values()) if (job.owner === owner && !active(job) && job.result?.jobId === outputId) {
-      ids.push(job.id); this.jobs.delete(job.id);
-    }
-    this.save(); return ids;
+  forgetJobs(ids) {
+    const saved = new Map(this.jobs);
+    if (ids.some(id => active(this.jobs.get(id) || {}))) throw failure(409, 'File has a queued or running job');
+    for (const id of ids) this.jobs.delete(id);
+    try { this.save(); } catch (error) { this.jobs = saved; throw error; }
   }
   view(job, includeResult = true) {
     return { jobId: job.id, kind: job.kind, fileId: job.fileId, filename: job.filename, status: job.status,
@@ -54,7 +45,7 @@ class ProcessingQueue {
   get(owner, id) { const job = this.jobs.get(id); if (!job || job.owner !== owner) throw failure(404, 'Job not found'); return this.view(job); }
   list(owner) { this.prune(); return [...this.jobs.values()].filter(job => job.owner === owner).sort((a, b) => b.queuedAt - a.queuedAt).map(job => this.view(job, false)); }
   isBusy(owner, fileId) { return [...this.jobs.values()].some(job => job.owner === owner && active(job) && (job.fileIds || [job.fileId]).includes(fileId)); }
-  submit({ owner, kind, fileId, fileIds, filename, requestId, signature, execute }) {
+  submit({ owner, kind, fileId, fileIds, filename, requestId, signature, outputId, execute }) {
     if (this.closed) throw failure(503, 'Backend is restarting. Please retry');
     this.prune();
     if (requestId) {
@@ -65,7 +56,7 @@ class ProcessingQueue {
     if (resources.some(id => this.isBusy(owner, id))) throw failure(409, 'One or more files already have a queued or running job');
     if ([...this.jobs.values()].filter(job => job.owner === owner && active(job)).length >= this.maxPerUser) throw failure(429, 'You already have ' + this.maxPerUser + ' active jobs. Please wait');
     if (this.pending.length >= this.maxWaiting) throw failure(429, 'The processing queue is full. Please retry later');
-    const job = { id: crypto.randomUUID(), owner, kind, fileId, ...(resources.length > 1 ? { fileIds: resources } : {}), filename, requestId, signature, status: 'queued', queuedAt: Date.now(), execute };
+    const job = { id: crypto.randomUUID(), owner, kind, fileId, ...(resources.length > 1 ? { fileIds: resources } : {}), filename, requestId, signature, outputId, status: 'queued', queuedAt: Date.now(), execute };
     Object.assign(job, this.describe?.(job) || {});
     this.jobs.set(job.id, job); this.pending.push(job.id);
     try { this.save(); this.onChange?.(job); } catch (error) { this.jobs.delete(job.id); this.pending.pop(); throw error; }

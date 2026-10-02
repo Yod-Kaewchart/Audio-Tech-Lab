@@ -194,3 +194,27 @@ test('Legacy jobs migrate once, recover interrupted work and drop orphan histori
     assert.ok(store.audit({ limit: 100 }).entries.some(e => e.fileId === vanished)); store.close();
   } finally { await f.close(); }
 });
+
+test('Delete API rejects anonymous/foreign/forged requests, supports normal owner and admin, and serializes double delete', async () => {
+  const f = await fixture();
+  try {
+    const id = f.file(f.bid, 'owned.wav'); await f.done('/qc', f.bob, { fileId: id });
+    assert.equal((await f.req('/upload/remove', null, { fileId: id })).status, 401);
+    assert.equal((await f.req('/admin/storage/delete', f.bob, { ownerId: f.aid, id, type: 'upload' })).status, 403);
+    assert.equal((await f.req('/upload/remove', f.admin, { ownerId: f.bid, fileId: id })).status, 404);
+    for (const fileId of ['../outside', 'C:\\Windows', [id], {}, id + '/..']) assert.equal((await f.req('/upload/remove', f.bob, { fileId })).status, 400);
+    const replies = await Promise.all([f.req('/upload/remove', f.bob, { fileId: id, ownerId: f.aid }), f.req('/upload/remove', f.bob, { fileId: id })]);
+    assert.deepEqual(replies.map(r => r.status).sort(), [200, 404]);
+    assert.equal(fs.readdirSync(path.join(f.root, 'uploads', f.bid)).length, 0);
+    assert.equal((await f.req('/jobs', f.bob)).data.jobs.length, 0);
+    await f.restart(); assert.equal((await f.req('/uploads', f.bob)).data.files.length, 0);
+    const own = f.file(f.bid, 'admin-target.wav'), out = await f.done('/export', f.bob, { fileId: own, format: 'wav', boundaries: [] });
+    assert.equal((await f.req('/admin/storage/delete', f.admin, { ownerId: f.bid, id: out.result.jobId, type: 'export' })).status, 200);
+    assert.ok(!fs.existsSync(path.join(f.root, 'exports', f.bid, out.result.jobId)));
+    assert.equal((await f.req('/uploads', f.bob)).data.files.length, 1);
+    assert.equal((await f.req('/admin/storage/delete', f.admin, { ownerId: f.bid, id: own, type: 'upload' })).status, 200);
+    const audit = (await f.req('/admin/audit?type=delete', f.admin)).data.entries;
+    assert.ok(audit.some(e => e.source === 'admin-delete' && e.actorUsername === 'yod' && e.ownerId === f.bid && e.result === 'success'));
+    assert.ok(audit.some(e => e.source === 'user-remove' && e.actorUsername === 'bobby' && e.resourceId === id));
+  } finally { await f.close(); }
+});

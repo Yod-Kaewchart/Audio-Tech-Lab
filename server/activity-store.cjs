@@ -61,10 +61,21 @@ class ActivityStore {
     const live = new Set(ids);
     this.forget(this.db.prepare('SELECT job_id FROM user_history').all().map(row => row.job_id).filter(id => !live.has(id)));
   }
-  deletion({ ownerId, username, fileId, filename, size, kind, reason, actorId, actorUsername }) {
+  completeDeletion(ids, events) {
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      const remove = this.db.prepare('DELETE FROM user_history WHERE job_id=?');
+      for (const id of ids) remove.run(id);
+      for (const event of events) this.deletion(event);
+      this.db.exec('COMMIT');
+    } catch (error) { this.db.exec('ROLLBACK'); throw error; }
+  }
+  deletion({ eventId, ownerId, username, fileId, resourceId, filename, size, kind, reason, source, actorId, actorUsername, result = 'success', errorCode }) {
     const timestamp = Date.now();
-    this.append.run('delete:' + require('node:crypto').randomUUID(), timestamp,
-      JSON.stringify({ timestamp, ownerId, username, fileId, filename, size, kind, status: reason, actorId: actorId || null, actorUsername: actorUsername || null }));
+    this.append.run('delete:' + (eventId || require('node:crypto').randomUUID()), timestamp,
+      JSON.stringify({ timestamp, type: 'delete', category: 'file', ownerId, username, fileId, resourceId: resourceId || fileId || null,
+        filename, size, kind, status: result === 'failure' ? 'failed' : reason, reason, source: source || reason, result, errorCode,
+        actorId: actorId || null, actorUsername: actorUsername || null }));
   }
   event({ type, status = 'completed', ownerId, username: name, actorId, actorUsername, fileId, filename, size } = {}) {
     if (!ACCOUNT_TYPES.has(type) && type !== 'upload') throw new Error('Invalid activity event');

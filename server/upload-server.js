@@ -3,6 +3,7 @@ const http = require('node:http'), fs = require('node:fs'), path = require('node
 const { createAuth, fail } = require('./auth.cjs');
 const { ActivityStore } = require('./activity-store.cjs');
 const { createFileLifecycle, RETENTION } = require('./file-lifecycle.cjs');
+const { storagePath, validId } = require('./storage-path.cjs');
 const { ProcessingQueue } = require('./processing-queue.cjs');
 const { createProcessRunner } = require('./process-runner.cjs');
 const { createStorageLimits } = require('./storage-limits.cjs');
@@ -65,21 +66,29 @@ function createServer(options = {}) {
     return Buffer.concat(parts);
   }
   async function json(req, limit) { try { return JSON.parse((await body(req, limit)).toString('utf8') || '{}'); } catch (error) { if (error.status) throw error; throw fail(400, 'Invalid JSON request'); } }
-  function userRoot(base, user) { const directory = path.join(base, user.id); fs.mkdirSync(directory, { recursive: true }); return directory; }
+  function userRoot(base, user) { const directory = storagePath(base, user.id); fs.mkdirSync(directory, { recursive: true }); return directory; }
   function fileFor(user, id) {
-    if (!UUID.test(String(id || ''))) throw fail(400, 'Invalid file ID');
+    if (!validId(id)) throw fail(400, 'Invalid file ID');
+    lifecycle.assertAvailable(user.id, id);
     const directory = userRoot(uploads, user), matches = fs.readdirSync(directory, { withFileTypes: true }).filter(x => x.isFile() && x.name.startsWith(id + '-'));
     if (matches.length !== 1) throw fail(404, 'Uploaded file not found');
-    return path.join(directory, matches[0].name);
+    return storagePath(uploads, user.id, matches[0].name);
   }
   function previewFor(user, id) {
     if (!UUID.test(String(id || ''))) throw fail(400, 'Invalid preview ID');
-    const file = path.join(userRoot(previews, user), id + '.flac');
+    lifecycle.assertAvailable(user.id, id);
+    const file = storagePath(userRoot(previews, user), id + '.flac');
     if (!fs.existsSync(file) || !fs.statSync(file).isFile()) throw fail(404, 'Preview not found');
     return file;
   }
   function streamAudio(req, res, file, type) {
     const stat = fs.statSync(file), range = req.headers.range;
+    function pipe(options) {
+      const stream = fs.createReadStream(file, options);
+      stream.on('error', () => res.destroy());
+      res.on('close', () => stream.destroy());
+      return stream.pipe(res);
+    }
     if (range) {
       const match = /^bytes=(\d*)-(\d*)$/.exec(range);
       if (!match) { res.writeHead(416, { 'Content-Range': 'bytes */' + stat.size }); return res.end(); }
@@ -87,18 +96,12 @@ function createServer(options = {}) {
       if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 0 || start >= stat.size || end < start) { res.writeHead(416, { 'Content-Range': 'bytes */' + stat.size }); return res.end(); }
       end = Math.min(end, stat.size - 1);
       res.writeHead(206, { 'Content-Type': type, 'Content-Length': end - start + 1, 'Content-Range': 'bytes ' + start + '-' + end + '/' + stat.size, 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
-      return fs.createReadStream(file, { start, end }).pipe(res);
+      return pipe({ start, end });
     }
     res.writeHead(200, { 'Content-Type': type, 'Content-Length': stat.size, 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
-    return fs.createReadStream(file).pipe(res);
+    return pipe();
   }
-  function exportJob(user, id) {
-    if (!UUID.test(String(id || ''))) throw fail(400, 'Invalid export job');
-    const directory = path.join(userRoot(exports, user), id);
-    if (!fs.existsSync(directory) || !fs.statSync(directory).isDirectory()) throw fail(404, 'Export job not found');
-    return directory;
-  }
-  const lifecycle = createFileLifecycle({ uploads, exports, previews, sessions, queue, activity, username: id => userNames().get(id) || null });
+  const lifecycle = createFileLifecycle({ uploads, exports, previews, sessions, queue, activity, username: id => userNames().get(id) || null, journal: path.join(security, 'pending-deletions.json') });
   const cleanup = lifecycle.cleanup;
   cleanup();
   const timer = setInterval(() => { try { cleanup(); } catch { console.error('Cleanup could not complete'); } }, 60 * 1000); timer.unref();
@@ -120,8 +123,16 @@ function createServer(options = {}) {
           type: params.has('type') ? params.get('type') : undefined, category: params.has('category') ? params.get('category') : undefined,
           status: params.has('status') ? params.get('status') : undefined, username: params.has('username') ? params.get('username') : undefined }));
       }
-      if (['GET', 'HEAD'].includes(req.method) && req.url.startsWith('/download/')) return download(req, res, exports, user);
+      if (['GET', 'HEAD'].includes(req.method) && req.url.startsWith('/download/')) {
+        lifecycle.assertAvailable(user.id, req.url.split('/')[2]);
+        return download(req, res, exports, user);
+      }
       if (req.method === 'GET' && route === '/storage') return send(res, 200, storage.summary(user.id));
+      if (req.method === 'GET' && route === '/resources') {
+        const files = fs.readdirSync(userRoot(uploads, user), { withFileTypes: true }).filter(e => e.isFile() && !e.name.endsWith('.part')).map(e => e.name.slice(0, 36)).filter(validId);
+        const outputs = fs.readdirSync(userRoot(exports, user), { withFileTypes: true }).filter(e => e.isDirectory() && validId(e.name)).map(e => e.name);
+        return send(res, 200, { files, exports: outputs });
+      }
       if (req.method === 'GET' && route === '/admin/storage') {
         if (user.role !== 'admin') throw fail(403, 'Administrator access required');
         const db = JSON.parse(fs.readFileSync(path.join(security, 'users.json'), 'utf8'));
@@ -144,7 +155,7 @@ function createServer(options = {}) {
             const target = path.join(directory, entry.name), files = fs.readdirSync(target, { withFileTypes: true }).filter(item => item.isFile());
             const stat = fs.statSync(target), modified = Math.max(stat.mtimeMs, ...files.map(item => fs.statSync(path.join(target, item.name)).mtimeMs));
             const size = files.reduce((total, item) => total + fs.statSync(path.join(target, item.name)).size, 0);
-            items.push({ type: 'export', ownerId: owner.name, username: usernames.get(owner.name) || 'unknown', id: entry.name, name: entry.name, size, modified, busy: false });
+            items.push({ type: 'export', ownerId: owner.name, username: usernames.get(owner.name) || 'unknown', id: entry.name, name: entry.name, size, modified, busy: lifecycle.exportBusy(owner.name, entry.name) });
           }
         }
         return send(res, 200, { retentionMs: RETENTION, items: items.sort((a, b) => b.modified - a.modified) });
@@ -194,10 +205,10 @@ function createServer(options = {}) {
       if (req.method === 'GET' && previewRoute) return streamAudio(req, res, previewFor(user, previewRoute[1]), 'audio/flac');
       if (req.method === 'POST' && route === '/admin/storage/delete') {
         if (user.role !== 'admin') throw fail(403, 'Administrator access required');
-        const data = await json(req), ownerId = String(data.ownerId || ''), id = String(data.id || ''), type = String(data.type || '');
-        if (!UUID.test(ownerId) || !UUID.test(id) || !['upload', 'export'].includes(type)) throw fail(400, 'Invalid storage item');
-        if (type === 'upload') lifecycle.removeFile(ownerId, id, 'manual-delete', user);
-        else lifecycle.removeExport(ownerId, id, 'manual-delete', user);
+        const data = await json(req), { ownerId, id, type } = data;
+        if (!validId(ownerId) || !validId(id) || !['upload', 'export'].includes(type)) throw fail(400, 'Invalid storage item');
+        if (type === 'upload') lifecycle.removeFile(ownerId, id, 'manual-delete', { ...user, source: 'admin-delete' });
+        else lifecycle.removeExport(ownerId, id, 'manual-delete', { ...user, source: 'admin-delete' });
         return send(res, 200, { ok: true, type, id });
       }
       if (req.method === 'POST' && route === '/upload/remove') {
@@ -245,14 +256,14 @@ function createServer(options = {}) {
         if (exporting && (!['wav', 'flac'].includes(data.format) || !Array.isArray(data.boundaries) || data.boundaries.length > 1000 || !data.boundaries.every(x => typeof x === 'number' && Number.isFinite(x) && x >= 0))) throw fail(400, 'Invalid export request');
         if (data.requestId !== undefined && !UUID.test(String(data.requestId))) throw fail(400, 'Invalid request ID');
         const script = path.join(options.scripts || __dirname, exporting ? 'export-upload.py' : qc ? 'audio-qc-upload.py' : 'analyze-upload.py');
-        const args = exporting ? [file, userRoot(exports, user)] : [file];
-        const job = queue.submit({ owner: user.id, kind: exporting ? 'export' : qc ? 'qc' : 'analyze', fileId: data.fileId, filename: path.basename(file).slice(37), requestId: data.requestId,
+        const args = exporting ? [file, userRoot(exports, user)] : [file], outputId = exporting ? crypto.randomUUID() : undefined;
+        const job = queue.submit({ owner: user.id, kind: exporting ? 'export' : qc ? 'qc' : 'analyze', fileId: data.fileId, filename: path.basename(file).slice(37), requestId: data.requestId, outputId,
           signature: JSON.stringify({ route, fileId: data.fileId, format: data.format, boundaries: data.boundaries }),
           execute: async () => {
             const reservation = exporting ? storage.reserveExport(user.id) : null;
             let stdout;
             try {
-              const input = exporting ? JSON.stringify({ format: data.format, boundaries: data.boundaries, maxOutputBytes: reservation.bytes }) : undefined;
+              const input = exporting ? JSON.stringify({ format: data.format, boundaries: data.boundaries, maxOutputBytes: reservation.bytes, jobId: outputId }) : undefined;
               stdout = await runner(script, args, input);
             } finally { reservation?.release(); }
             let result;

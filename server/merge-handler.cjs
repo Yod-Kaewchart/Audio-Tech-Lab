@@ -1,5 +1,6 @@
 'use strict';
 const path = require('node:path');
+const crypto = require('node:crypto');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 async function handleMerge({ req, res, user, json, send, fail, fileFor, queue, storage, runner, scripts, exportsRoot, userRoot }) {
@@ -13,8 +14,9 @@ async function handleMerge({ req, res, user, json, send, fail, fileFor, queue, s
   if (data.requestId !== undefined && !UUID.test(String(data.requestId))) throw fail(400, 'Invalid request ID');
   const files = ids.map(id => fileFor(user, id));
   const script = path.join(scripts, 'merge-upload.py');
+  const outputId = crypto.randomUUID();
   const job = queue.submit({
-    owner: user.id, kind: 'merge', fileId: ids[0], fileIds: ids,
+    owner: user.id, kind: 'merge', fileId: ids[0], fileIds: ids, outputId,
     filename: ids.length + ' tracks', requestId: data.requestId,
     signature: JSON.stringify({ route: '/merge', fileIds: ids, format: data.format, name }),
     execute: async () => {
@@ -22,7 +24,7 @@ async function handleMerge({ req, res, user, json, send, fail, fileFor, queue, s
       let stdout;
       try {
         stdout = await runner(script, [...files, userRoot(exportsRoot, user)],
-          JSON.stringify({ format: data.format, name, maxOutputBytes: reservation.bytes }));
+          JSON.stringify({ format: data.format, name, maxOutputBytes: reservation.bytes, jobId: outputId }));
       } finally { reservation.release(); }
       let result;
       try { result = JSON.parse(stdout); } catch { throw new Error('Invalid processing response'); }

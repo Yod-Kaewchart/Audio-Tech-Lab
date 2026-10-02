@@ -32,7 +32,7 @@ def main():
         raise SystemExit(22)  # Recognized by the process runner; no private paths in the response.
     starts=[0.0,*boundaries]; ends=[*boundaries,duration]
     tracks=tuple(BatchTrack(i+1,f"Track {i+1:02d}",start,end) for i,(start,end) in enumerate(zip(starts,ends)))
-    job_id=str(uuid.uuid4())
+    job_id=str(uuid.UUID(request["jobId"])) if request.get("jobId") else str(uuid.uuid4())
     output_dir=export_root/job_id
     output_dir.mkdir(parents=True,exist_ok=False)
     batch=BatchExportRequest(source=ExportSource.from_metadata(info),tracks=tracks,output_dir=output_dir,target_format=fmt,overwrite=False)

@@ -4,7 +4,7 @@ const API='/api';
 const input=document.querySelector('#merge-files'),list=document.querySelector('#merge-tracks');
 const upload=document.querySelector('#upload-tracks'),merge=document.querySelector('#merge-button'),error=document.querySelector('#merge-error');
 const uploadStatus=document.querySelector('#upload-status'),mergeStatus=document.querySelector('#merge-status'),download=document.querySelector('#merge-download');
-let tracks=[],csrf='',epoch=0,uploadBusy=false,mergeBusy=false,playingTrack=null,playUrl=null,previewPreparing=false;
+let tracks=[],csrf='',epoch=0,deleteBusy=false,currentExportId=null,uploadBusy=false,mergeBusy=false,playingTrack=null,playUrl=null,previewPreparing=false;
 const player=document.querySelector('#merge-player');
 function updatePlaybackUi(){if(!playingTrack)return;const rows=[...list.querySelectorAll('.merge-track')],i=tracks.indexOf(playingTrack),row=rows[i];if(!row)return;const state=row.querySelector('.merge-play-state'),play=row.querySelector('.play'),stop=row.querySelector('.stop');if(state)state.textContent=(player.paused?'PAUSED':'PLAYING')+' · '+clock(player.currentTime)+' / '+clock(player.duration);if(play)play.textContent=player.paused?'▶ Play':'❚❚ Pause';if(stop){stop.disabled=false;stop.removeAttribute('disabled')}}
 player.ontimeupdate=updatePlaybackUi;
@@ -27,11 +27,11 @@ const format=file=>(file.name.split('.').pop()||'').toUpperCase();
 
 function clearMergeResult(){
   epoch++;
-  download.replaceChildren();
+  currentExportId=null;download.replaceChildren();
   if(!mergeBusy)mergeStatus.textContent=tracks.length<2?'เพิ่มอย่างน้อย 2 Tracks เพื่อเริ่ม':tracks.every(t=>t.uploaded)?'พร้อม Merge Audio':'Upload Tracks to Modify ก่อน Merge';
 }
 
-const clockLegacy=s=>{if(!Number.isFinite(s))return'0:00';const m=Math.floor(s/60),sec=String(Math.floor(s%60)).padStart(2,'0');return m+':'+sec};
+const clock=s=>{if(!Number.isFinite(s))return'0:00';const m=Math.floor(s/60),sec=String(Math.floor(s%60)).padStart(2,'0');return m+':'+sec};
 function stopPlayback(reset=true){player.pause();if(reset)try{player.currentTime=0}catch{};if(playUrl){URL.revokeObjectURL(playUrl);playUrl=null}player.removeAttribute('src');player.load();playingTrack=null;render()}
 function setPlayerSource(track,url,mode){player.pause();player.src=url;player.load();playingTrack=track;track.previewMode=mode;player.play().then(updatePlaybackUi).catch(()=>{})}
 async function playTrack(track){
@@ -44,7 +44,7 @@ async function playTrack(track){
 async function prepareTrackPreview(track){if(previewPreparing||!track.uploaded)return;previewPreparing=true;track.previewStatus='PREPARING PREVIEW';render();try{let job=await post('/preview',{fileId:track.id,requestId:crypto.randomUUID()});for(;;){if(!tracks.includes(track))return;if(job.status==='succeeded')break;if(job.status==='failed'||job.status==='cancelled')throw new Error(job.error||'Preview conversion failed');await new Promise(r=>setTimeout(r,1200));job=await request('/jobs/'+job.jobId)}if(!tracks.includes(track))return;track.previewStatus='';setPlayerSource(track,API+job.result.url,'converted')}catch(e){track.previewStatus='PREVIEW FAILED';error.hidden=false;error.textContent='Preview failed · '+e.message;render()}finally{previewPreparing=false}}
 function render(){
   list.replaceChildren();
-  const busy=uploadBusy||mergeBusy;
+  const busy=uploadBusy||mergeBusy||deleteBusy;
   const hasUploaded=tracks.some(t=>t.uploaded);
   tracks.forEach((t,i)=>{
     const row=document.createElement('div');row.className='merge-track';
@@ -89,7 +89,7 @@ function render(){
 }
 
 function addFiles(files){
-  if(uploadBusy||mergeBusy)return;
+  if(uploadBusy||mergeBusy||deleteBusy)return;
   let added=0;
   for(const file of files){
     const ext=(file.name.split('.').pop()||'').toLowerCase();
@@ -101,21 +101,22 @@ function addFiles(files){
 }
 
 async function removeTrack(track,button){
-  if(uploadBusy||mergeBusy)return;
+  if(uploadBusy||mergeBusy||deleteBusy)return;
   const index=tracks.indexOf(track);if(index<0)return;
-  if(playingTrack===track)stopPlayback();
-  if(!track.uploaded){
+  if(!track.uploaded&&!track.pendingId){
+    if(playingTrack===track)stopPlayback();
     tracks.splice(index,1);clearMergeResult();uploadStatus.textContent='';render();return;
   }
   if(!confirm('Remove from Modify?\n\n'+track.file.name))return;
-  button.disabled=true;button.textContent='Removing…';error.hidden=true;
+  deleteBusy=true;render();error.hidden=true;
   try{
-    await post('/upload/remove',{fileId:track.id});
+    await post('/upload/remove',{fileId:track.id||track.pendingId});
+    if(playingTrack===track)stopPlayback();
     const current=tracks.indexOf(track);if(current>=0)tracks.splice(current,1);
-    clearMergeResult();uploadStatus.textContent='';render();
+    clearMergeResult();uploadStatus.textContent='';window.demoResourcesChanged();render();
   }catch(e){
-    error.hidden=false;error.textContent='Remove failed · '+e.message;render();
-  }
+    error.hidden=false;error.textContent='Remove failed · '+e.message;
+  }finally{deleteBusy=false;render()}
 }
 
 input.onchange=()=>{addFiles(input.files);input.value=''};
@@ -124,8 +125,9 @@ drop.ondragover=e=>e.preventDefault();
 drop.ondrop=e=>{e.preventDefault();if(!uploadBusy&&!mergeBusy)addFiles(e.dataTransfer.files)};
 
 async function uploadOne(t,index){
+  if(t.pendingId){await post('/upload/remove',{fileId:t.pendingId});t.pendingId=null}
   const init=await post('/upload/init',{name:t.file.name,size:t.file.size});
-  let sent=0,n=0;
+  t.pendingId=init.uploadId;let sent=0,n=0;
   while(sent<t.file.size){
     const end=Math.min(sent+init.chunkSize,t.file.size);
     const r=await request('/upload/chunk',{method:'POST',headers:{'Content-Type':'application/octet-stream','X-Upload-Id':init.uploadId,'X-Chunk-Index':String(n)},body:t.file.slice(sent,end)});
@@ -133,11 +135,11 @@ async function uploadOne(t,index){
     uploadStatus.textContent='Uploading '+(index+1)+' / '+tracks.length+' · '+Math.floor(sent/t.file.size*100)+'%';
   }
   const done=await post('/upload/complete',{uploadId:init.uploadId});
-  t.id=done.fileId;t.uploaded=true;if(playingTrack===t)stopPlayback();else render();
+  t.pendingId=null;t.id=done.fileId;t.uploaded=true;if(playingTrack===t)stopPlayback();else render();
 }
 
 upload.onclick=async()=>{
-  if(uploadBusy||mergeBusy)return;
+  if(uploadBusy||mergeBusy||deleteBusy)return;
   uploadBusy=true;error.hidden=true;clearMergeResult();render();
   try{
     for(let i=0;i<tracks.length;i++)if(!tracks[i].uploaded)await uploadOne(tracks[i],i);
@@ -160,12 +162,12 @@ async function waitJob(job){
 }
 
 merge.onclick=async()=>{
-  if(uploadBusy||mergeBusy)return;
+  if(uploadBusy||mergeBusy||deleteBusy)return;
   mergeBusy=true;error.hidden=true;const my=++epoch;render();
   try{
     let job=await post('/merge',{fileIds:tracks.map(t=>t.id),format:document.querySelector('#merge-format').value,name:document.querySelector('#album-name').value.trim(),requestId:crypto.randomUUID()});
     const out=await waitJob(job);if(my!==epoch)return;
-    const f=out.files[0];download.replaceChildren();
+    const f=out.files[0];currentExportId=out.jobId;download.replaceChildren();
     const a=document.createElement('a');a.href=API+'/download/'+encodeURIComponent(out.jobId)+'/'+encodeURIComponent(f.name);a.target='_blank';a.rel='noopener';a.textContent='Download '+f.name+' · '+size(f.size);download.append(a);
     mergeStatus.textContent='MERGE COMPLETE · '+out.tracks+' Tracks · ไฟล์หมดอายุหลัง 59 นาที';
   }catch(e){
@@ -187,3 +189,10 @@ merge.onclick=async()=>{
     document.querySelector('#login-link').hidden=false;
   }
 })();
+
+window.demoResourceView=()=>({ids:tracks.filter(t=>t.uploaded).map(t=>t.id),exportId:currentExportId});
+window.addEventListener('demo-resources',({detail:{view,state}})=>{
+ const removed=tracks.filter(t=>t.uploaded&&view.ids.includes(t.id)&&!state.files.includes(t.id));
+ if(removed.length){if(removed.includes(playingTrack))stopPlayback();tracks=tracks.filter(t=>!removed.includes(t));clearMergeResult();render()}
+ else if(view.exportId&&view.exportId===currentExportId&&!state.exports.includes(view.exportId)){clearMergeResult();render()}
+});

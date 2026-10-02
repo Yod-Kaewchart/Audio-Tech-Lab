@@ -19,15 +19,8 @@ addPasswordToggles();
 const workspace = document.querySelector('#demo-workspace'), accountBar = document.querySelector('#account-bar');
 const authMessage = document.querySelector('#auth-message'), adminPanel = document.querySelector('#admin-panel');
 function resetPrivateView() {
-  processingEpoch++; exportButton.disabled = false; deleteExportButton.disabled = false; document.querySelector("#processing-jobs").replaceChildren();
-  audio.pause(); stopTrackPlayback(); selectedFile = null; uploadedFileId = null; lastAnalysis = null; currentExportJobId = null;
-  delete window.lastAnalysis;
-  if (objectUrl) { URL.revokeObjectURL(objectUrl); objectUrl = null; }
-  input.value = ''; audio.removeAttribute('src'); audio.load(); preview.style.display = 'none';
-  result.hidden = true; progress.hidden = true; analysisStatus.hidden = true; waveformPanel.hidden = true;
-  trackResults.hidden = true; exportPanel.hidden = true; error.hidden = true;
-  trackList.replaceChildren(); downloadList.replaceChildren(); uploadsList.replaceChildren();
-  uploadButton.disabled = true; analyzeButton.disabled = true; analyzeButton.textContent = 'Analyze';
+  resetAudioWorkspaceSelection(); uploadsRequest++;
+  document.querySelector('#processing-jobs').replaceChildren(); uploadsList.replaceChildren();
 }
 function renderAuth(value) {
   window.demoAuth = value;
