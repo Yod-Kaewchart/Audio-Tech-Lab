@@ -34,6 +34,6 @@ function syncAdminControls(value) {
   adminBadge.hidden = !admin; accountToggle.hidden = !admin; storageToggle.hidden = !admin;
   if (!admin) { adminPanel.open = false; adminStoragePanel.open = false; }
 }
-accountToggle.addEventListener('click', () => { adminPanel.open = !adminPanel.open; if (adminPanel.open) { adminStoragePanel.open = false; loadAdminUsers(); } });
-storageToggle.addEventListener('click', () => { adminStoragePanel.open = !adminStoragePanel.open; if (adminStoragePanel.open) { adminPanel.open = false; loadAdminStorage(); } });
+accountToggle.addEventListener('click', () => { adminPanel.open = !adminPanel.open; if (adminPanel.open) { adminStoragePanel.open = false; document.querySelector('#ai-integrations-panel').open = false; loadAdminUsers(); } });
+storageToggle.addEventListener('click', () => { adminStoragePanel.open = !adminStoragePanel.open; if (adminStoragePanel.open) { adminPanel.open = false; document.querySelector('#ai-integrations-panel').open = false; loadAdminStorage(); } });
 document.querySelector('#refresh-admin-users').addEventListener('click', loadAdminUsers);

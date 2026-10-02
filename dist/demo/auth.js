@@ -2,7 +2,7 @@
 window.demoAuth = null;
 const loginPanel = document.querySelector('#login-panel'), registerPanel = document.querySelector('#register-panel'), passwordPanel = document.querySelector('#password-panel');
 function addPasswordToggles() {
-  document.querySelectorAll('.auth-card input[type="password"]').forEach(input => {
+  document.querySelectorAll('.auth-card input[type="password"]:not([data-no-password-toggle])').forEach(input => {
     if (input.parentElement?.classList.contains('password-field')) return;
     const wrap = document.createElement('span'); wrap.className = 'password-field';
     input.parentNode.insertBefore(wrap, input); wrap.appendChild(input);

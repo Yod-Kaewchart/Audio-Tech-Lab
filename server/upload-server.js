@@ -118,7 +118,7 @@ function createServer(options = {}) {
       if (await auth.handle(req, res, route, json, send, allowedOrigins)) return;
       auth.originOK(req, allowedOrigins);
       const { user } = auth.requireUser(req);
-      if (await openai.handle(req, res, route, user, json, send)) return;
+      if (route.startsWith('/ai/')) { await openai.handle(req, res, route, user, json, send); return; }
       cleanup();
       if (req.method === 'GET' && route === '/admin/audit') {
         if (user.role !== 'admin') throw fail(403, 'Administrator access required');

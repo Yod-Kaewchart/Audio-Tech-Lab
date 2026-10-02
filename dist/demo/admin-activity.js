@@ -8,7 +8,7 @@
   const isAdmin = () => window.demoAuth?.user?.role === 'admin' && !window.demoAuth.user.mustChange;
   const date = new Intl.DateTimeFormat('th-TH', { day: '2-digit', month: 'short', year: 'numeric' });
   const time = new Intl.DateTimeFormat('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' });
-  const labels = { 'user-created': 'USER CREATED', 'user-deleted': 'USER DELETED', 'password-changed': 'PASSWORD CHANGED', 'manual-delete': 'DELETED', 'auto-cleanup': 'AUTO CLEANUP' };
+  const labels = { 'user-created': 'USER CREATED', 'user-deleted': 'USER DELETED', 'password-changed': 'PASSWORD CHANGED', 'openai-connected': 'OPENAI CONNECTED', 'openai-disconnected': 'OPENAI DISCONNECTED', 'openai-test-failed': 'OPENAI TEST FAILED', 'manual-delete': 'DELETED', 'auto-cleanup': 'AUTO CLEANUP' };
   function element(tag, className, text) {
     const node = document.createElement(tag); node.className = className; node.textContent = text; return node;
   }
@@ -77,13 +77,13 @@
   }
   toggle.addEventListener('click', () => {
     panel.open = !panel.open;
-    if (panel.open) { document.querySelector('#admin-panel').open = false; document.querySelector('#admin-storage-panel').open = false; load(); }
+    if (panel.open) { document.querySelector('#admin-panel').open = false; document.querySelector('#admin-storage-panel').open = false; document.querySelector('#ai-integrations-panel').open = false; load(); }
   });
   panel.addEventListener('toggle', () => {
     toggle.setAttribute('aria-expanded', String(panel.open));
     if (panel.open && !loaded && !loading) load();
   });
-  for (const id of ['account-toggle', 'storage-toggle']) document.querySelector('#' + id).addEventListener('click', () => { panel.open = false; });
+  for (const id of ['account-toggle', 'storage-toggle', 'ai-integrations-toggle']) document.querySelector('#' + id).addEventListener('click', () => { panel.open = false; });
   refresh.addEventListener('click', () => load()); more.addEventListener('click', () => load(true));
   form.addEventListener('submit', event => { event.preventDefault(); if (form.reportValidity()) load(); });
   form.addEventListener('change', () => { if (form.checkValidity()) load(); });
