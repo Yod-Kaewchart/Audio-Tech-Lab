@@ -17,7 +17,7 @@
   }
   function renderStatus(data) {
     section.hidden = false; connect.hidden = data.connected; disconnect.hidden = !data.connected; form.hidden = !data.connected;
-    message.textContent = !data.configured ? 'Spotify module พร้อมแล้ว · รอ Client ID / Client Secret บนเครื่อง Modify' : data.connected ? 'Spotify connected · พร้อมค้นหา Album metadata' : 'พร้อมเชื่อมต่อ Spotify';
+    message.textContent = !data.configured ? 'Spotify module พร้อมแล้ว · รอ Client ID / Client Secret บนเครื่อง Server' : data.connected ? 'Spotify connected · พร้อมค้นหา Album metadata' : 'พร้อมเชื่อมต่อ Spotify';
   }
   async function refresh() {
     if (!window.demoAuth || window.demoAuth.user?.mustChange) { section.hidden = true; results.replaceChildren(); return; }

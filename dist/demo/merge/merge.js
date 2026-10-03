@@ -29,7 +29,7 @@ const format=file=>(file.name.split('.').pop()||'').toUpperCase();
 function clearMergeResult(){
   epoch++;
   currentExportId=null;download.replaceChildren();
-  if(!mergeBusy)mergeStatus.textContent=tracks.length<2?'เพิ่มอย่างน้อย 2 Tracks เพื่อเริ่ม':tracks.every(t=>t.uploaded)?'พร้อม Merge Audio':'Upload Tracks to Modify ก่อน Merge';
+  if(!mergeBusy)mergeStatus.textContent=tracks.length<2?'เพิ่มอย่างน้อย 2 Tracks เพื่อเริ่ม':tracks.every(t=>t.uploaded)?'พร้อม Merge Audio':'Upload Tracks to Server ก่อน Merge';
 }
 
 const clock=s=>{if(!Number.isFinite(s))return'0:00';const m=Math.floor(s/60),sec=String(Math.floor(s%60)).padStart(2,'0');return m+':'+sec};
@@ -56,7 +56,7 @@ function render(){
     const name=document.createElement('strong');name.textContent=t.file.name;
     const meta=document.createElement('div');meta.className='merge-track-meta';
     const detail=document.createElement('span');detail.textContent=size(t.file.size)+' · '+format(t.file);
-    const location=document.createElement('small');location.className='merge-location';location.textContent=t.uploaded?'ON MODIFY':'READY';
+    const location=document.createElement('small');location.className='merge-location';location.textContent=t.uploaded?'ON Server':'READY';
     meta.append(detail,location);
     const playState=document.createElement('small');playState.className='merge-play-state';
     if(t.previewStatus)playState.textContent=t.previewStatus;
@@ -75,7 +75,7 @@ function render(){
     const stop=document.createElement('button');stop.type='button';stop.className='stop';stop.textContent='■ Stop';stop.disabled=busy;stop.onclick=()=>{if(playingTrack)stopPlayback()};actions.append(stop);
 
     const del=document.createElement('button');del.type='button';del.className='remove';
-    del.textContent=t.uploaded?'Remove from Modify':'Remove';del.disabled=busy;
+    del.textContent=t.uploaded?'Remove from Server':'Remove';del.disabled=busy;
     del.onclick=()=>removeTrack(t,del);
     actions.append(del);
     row.append(order,info,actions);list.append(row);
@@ -86,7 +86,7 @@ function render(){
   upload.disabled=serverOffline||busy||tracks.length<2||tracks.every(t=>t.uploaded);
   merge.disabled=serverOffline||busy||tracks.length<2||tracks.some(t=>!t.uploaded);
   if(!busy&&tracks.length<2)mergeStatus.textContent='เพิ่มอย่างน้อย 2 Tracks เพื่อเริ่ม';
-  else if(!busy&&tracks.some(t=>!t.uploaded))mergeStatus.textContent='Upload Tracks to Modify ก่อน Merge';
+  else if(!busy&&tracks.some(t=>!t.uploaded))mergeStatus.textContent='Upload Tracks to Server ก่อน Merge';
   else if(!busy&&!download.childElementCount)mergeStatus.textContent='พร้อม Merge Audio';
 }
 
@@ -109,7 +109,7 @@ async function removeTrack(track,button){
     if(playingTrack===track)stopPlayback();
     tracks.splice(index,1);clearMergeResult();uploadStatus.textContent='';render();return;
   }
-  if(!confirm('Remove from Modify?\n\n'+track.file.name))return;
+  if(!confirm('Remove from Server?\n\n'+track.file.name))return;
   deleteBusy=true;render();error.hidden=true;
   try{
     await post('/upload/remove',{fileId:track.id||track.pendingId});

@@ -17,7 +17,7 @@ async function loadAdminStorage() {
       const remaining = Math.max(0, Math.ceil((value.retentionMs - (now - item.modified)) / 60000));
       meta.textContent = item.username + ' · ' + item.type.toUpperCase() + ' · ' + storageSize(item.size) + ' · cleanup ~' + remaining + ' min' + (item.busy ? ' · PROCESSING' : '');
       info.append(title, meta); const button = document.createElement('button'); button.type = 'button'; button.textContent = item.busy ? 'In use' : 'Delete'; button.disabled = item.busy;
-      button.addEventListener('click', async () => { if (!confirm('Delete this ' + item.type + ' from Modify?')) return; button.disabled = true; try { await authRequest('/admin/storage/delete', { type: item.type, ownerId: item.ownerId, id: item.id }); window.demoResourcesChanged(); await loadAdminStorage(); } catch (error) { adminStorageSummary.textContent = error.message; button.disabled = false; } });
+      button.addEventListener('click', async () => { if (!confirm('Delete this ' + item.type + ' from Server?')) return; button.disabled = true; try { await authRequest('/admin/storage/delete', { type: item.type, ownerId: item.ownerId, id: item.id }); window.demoResourcesChanged(); await loadAdminStorage(); } catch (error) { adminStorageSummary.textContent = error.message; button.disabled = false; } });
       row.append(info, button); adminStorageList.append(row);
     }
   } catch (error) { adminStorageSummary.textContent = error.message; }
