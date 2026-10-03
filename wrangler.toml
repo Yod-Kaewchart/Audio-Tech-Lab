@@ -1,0 +1,6 @@
+name = "audio-tech-labs-demo"
+pages_build_output_dir = ".site-build/pages"
+compatibility_date = "2026-10-03"
+
+[vars]
+BACKEND_ORIGIN = "https://backend.audiotechlabs.com"

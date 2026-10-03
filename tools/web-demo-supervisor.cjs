@@ -4,6 +4,7 @@ const path = require('node:path');
 const { spawn } = require('node:child_process');
 const { deploymentMode } = require('./deployment-config.cjs');
 const { origin: publicOrigin, config: tunnelConfig, quick: quickTunnel, external: externalTunnel } = deploymentMode();
+const pagesMode = process.env.ATL_PAGES_MODE === '1';
 const root = path.resolve(__dirname, '..');
 const runtime = path.join(__dirname, 'runtime');
 fs.mkdirSync(runtime, { recursive: true });
@@ -18,7 +19,9 @@ function log(message) {
     fs.appendFileSync(logFile, new Date().toISOString() + ' ' + message + '\n');
   } catch (error) { console.error(error.message); }
 }
-const state = { startedAt: new Date().toISOString(), supervisorPid: process.pid, services: {}, backendUrl: null, webUrl: publicOrigin, mode: externalTunnel ? 'external-named-tunnel' : publicOrigin ? 'named-tunnel' : quickTunnel ? 'development-tunnel' : 'local' };
+process.on('uncaughtException', error => { log('Supervisor fatal: ' + (error?.stack || error)); process.exit(1); });
+process.on('unhandledRejection', error => { log('Supervisor rejection: ' + (error?.stack || error)); process.exit(1); });
+const state = { startedAt: new Date().toISOString(), supervisorPid: process.pid, services: {}, backendUrl: null, webUrl: publicOrigin, mode: pagesMode ? 'cloudflare-pages-backend' : externalTunnel ? 'external-named-tunnel' : publicOrigin ? 'named-tunnel' : quickTunnel ? 'development-tunnel' : 'local' };
 function saveState() {
   const target = path.join(runtime, 'state.json');
   fs.writeFileSync(target + '.tmp', JSON.stringify(state, null, 2));
@@ -32,10 +35,10 @@ function publishURLs() {
 const tunnel = path.join(__dirname, 'cloudflared.exe');
 const specs = [
   { name: 'backend', exe: process.execPath, args: [path.join(root, 'server', 'upload-server.js')] },
-  { name: 'web', exe: process.execPath, args: [path.join(root, 'server', 'web-server.cjs')] },
 ];
-if (publicOrigin && !externalTunnel) specs.push({ name: 'webTunnel', exe: tunnel, args: ['tunnel', '--config', path.resolve(tunnelConfig), '--no-autoupdate', 'run'] });
-else if (quickTunnel) specs.push({ name: 'webTunnel', exe: tunnel, args: ['tunnel', '--url', 'http://127.0.0.1:8080', '--no-autoupdate'] });
+if (!pagesMode) specs.push({ name: 'web', exe: process.execPath, args: [path.join(root, 'server', 'web-server.cjs')] });
+if (!pagesMode && publicOrigin && !externalTunnel) specs.push({ name: 'webTunnel', exe: tunnel, args: ['tunnel', '--config', path.resolve(tunnelConfig), '--no-autoupdate', 'run'] });
+else if (!pagesMode && quickTunnel) specs.push({ name: 'webTunnel', exe: tunnel, args: ['tunnel', '--url', 'http://127.0.0.1:8080', '--no-autoupdate'] });
 const children = new Map();
 let stopping = false;
 function launch(spec) {

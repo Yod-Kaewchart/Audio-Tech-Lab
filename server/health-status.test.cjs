@@ -4,14 +4,13 @@ const fs = require('node:fs'), os = require('node:os'), path = require('node:pat
 const { createServer } = require('./upload-server.js');
 const { createWebServer } = require('./web-server.cjs');
 const healthHeaders = require('./health-headers.cjs');
-const source = fs.readFileSync(path.join(__dirname, '../dist/demo/auth.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../dist/demo/server-state.js'), 'utf8');
 const contract = { ok: true, service: 'audio-tech-labs-demo', apiVersion: 1, authentication: true };
 const reply = (url, value = {}, status = 200) => new Response(JSON.stringify({ ...contract, nonce: new URL(url, 'http://localhost').searchParams.get('nonce'), ...value }), { status, headers: { 'Content-Type': 'application/json' } });
 const turn = () => new Promise(resolve => setImmediate(resolve));
 
-// Execute the complete production auth script, including boot, retry and polling.
-// Only the DOM and scheduler are replaced; health parsing and state transitions run unchanged.
-function browser(fetchHealth, fetchAuth = () => Promise.resolve(new Response('{}', { status: 401, headers: { 'Content-Type': 'application/json' } }))) {
+// Execute the production server-state module with only the DOM and scheduler replaced.
+function browser(fetchHealth) {
   const nodes = new Map(), timers = new Map(), intervals = [], events = new Map(), states = [];
   let timerId = 0;
   function node(selector) {
@@ -22,21 +21,35 @@ function browser(fetchHealth, fetchAuth = () => Promise.resolve(new Response('{}
     return nodes.get(selector);
   }
   Object.defineProperty(node('#server-status'), 'className', { set(value) { states.push(value); }, get() { return states.at(-1); } });
-  const document = { querySelector: node, querySelectorAll: () => [], hidden: false, addEventListener: (name, callback) => events.set(name, callback) };
-  const window = { addEventListener: (name, callback) => events.set(name, callback), dispatchEvent() {} };
-  const context = vm.createContext({ document, window, API: '/api', crypto, AbortController, AbortSignal, Date,
-    CustomEvent: class {}, syncAdminControls() {}, adminStoragePanel: {},
+  const document = {
+    documentElement: { dataset: {} },
+    querySelector: node,
+    hidden: false,
+    addEventListener: (name, callback) => events.set(name, callback)
+  };
+  const windowEvents = [];
+  const window = {
+    addEventListener: (name, callback) => events.set(name, callback),
+    dispatchEvent: event => windowEvents.push(event),
+    demoServer: null,
+    demoServerState: 'checking'
+  };
+  const context = vm.createContext({
+    document, window, crypto, AbortController, Date,
+    CustomEvent: class { constructor(type, init) { this.type = type; this.detail = init?.detail; } },
     setTimeout: (callback, ms) => { timers.set(++timerId, { callback, ms }); return timerId; },
-    clearTimeout: id => timers.delete(id), setInterval: (callback, ms) => intervals.push({ callback, ms }),
-    fetch: (url, options) => url.startsWith('/api/health') ? fetchHealth(url, options) : fetchAuth(url, options)
+    clearTimeout: id => timers.delete(id),
+    setInterval: (callback, ms) => intervals.push({ callback, ms }),
+    fetch: fetchHealth
   });
   vm.runInContext(source, context);
   return {
-    node, states, timers, intervals, events,
+    node, states, timers, intervals, events, windowEvents,
     status: () => node('#server-status span').textContent,
-    boot: () => vm.runInContext('connectionRequest', context),
-    check: () => vm.runInContext('checkServerStatus()', context),
-    connect: () => vm.runInContext('connectDemo()', context)
+    state: () => vm.runInContext('window.demoServer.state', context),
+    boot: () => vm.runInContext('window.demoServer.check()', context),
+    check: visibleChecking => vm.runInContext('window.demoServer.check(' + JSON.stringify({ visibleChecking: !!visibleChecking }) + ')', context),
+    whenOnline: () => vm.runInContext('window.demoServer.whenOnline()', context)
   };
 }
 
@@ -70,7 +83,7 @@ test('Browser requires every contract field and a fresh nonce; errors and edge/s
   });
 });
 
-test('Polling discards old success immediately, deduplicates requests and recovers automatically', async () => {
+test('Background polling keeps the prior online UI stable, deduplicates requests and recovers automatically', async () => {
   const requests = [];
   let fail = false, pending = false, finish;
   const page = browser((url, options) => {
@@ -83,16 +96,15 @@ test('Polling discards old success immediately, deduplicates requests and recove
   assert.equal(page.intervals.length, 1); assert.equal(page.intervals[0].ms, 15000);
   pending = true;
   const check = page.check();
-  assert.equal(page.status(), 'SERVER CHECKING');
-  assert.equal(page.check(), check);
-  const reconnect = page.connect(); assert.equal(page.connect(), reconnect);
-  assert.equal(requests.length, 2);
-  finish(); await Promise.all([check, reconnect]);
+  assert.equal(page.status(), 'SERVER ONLINE', 'background health checks must not flicker to checking');
+  page.check();
+  assert.equal(requests.length, 2, 'concurrent health checks must share one request');
+  finish(); await check;
   assert.equal(page.status(), 'SERVER ONLINE');
   pending = false; fail = true;
-  await page.intervals[0].callback(); assert.equal(page.status(), 'SERVER OFFLINE');
+  page.intervals[0].callback(); await page.boot(); assert.equal(page.status(), 'SERVER OFFLINE');
   fail = false;
-  await page.intervals[0].callback(); assert.equal(page.status(), 'SERVER ONLINE');
+  page.intervals[0].callback(); await page.boot(); assert.equal(page.status(), 'SERVER ONLINE');
   assert.equal(new Set(requests.map(r => r.url)).size, requests.length);
   for (const { url, options } of requests) {
     assert.match(url, /^\/api\/health\?nonce=/);
@@ -102,21 +114,27 @@ test('Polling discards old success immediately, deduplicates requests and recove
   }
   for (const event of ['online', 'pageshow', 'visibilitychange']) {
     const count = requests.length;
-    page.events.get(event)(); await turn();
+    page.events.get(event)(); await page.boot();
     assert.equal(requests.length, count + 1);
   }
 });
 
-test('A pending session lookup never prevents health polling or overwrites its offline result', async () => {
-  let offline = false, finishSession;
+test('Offline waiters resume only after a fresh successful health check', async () => {
+  let offline = false, resumed = false;
   const page = browser(url => {
     if (offline) throw new TypeError('Backend stopped');
     return reply(url);
-  }, () => new Promise(resolve => { finishSession = () => resolve(new Response('{}', { status: 401, headers: { 'Content-Type': 'application/json' } })); }));
-  const boot = page.boot(); await turn(); assert.equal(page.status(), 'SERVER ONLINE');
+  });
+  await page.boot(); assert.equal(page.status(), 'SERVER ONLINE');
   offline = true;
-  await page.intervals[0].callback(); assert.equal(page.status(), 'SERVER OFFLINE');
-  finishSession(); await boot; assert.equal(page.status(), 'SERVER OFFLINE');
+  page.intervals[0].callback(); await page.boot(); assert.equal(page.status(), 'SERVER OFFLINE');
+  const waiting = page.whenOnline().then(() => { resumed = true; });
+  await turn(); assert.equal(resumed, false);
+  offline = false;
+  page.intervals[0].callback(); await page.boot();
+  await waiting;
+  assert.equal(page.status(), 'SERVER ONLINE');
+  assert.equal(resumed, true);
 });
 
 test('Timeout covers fetch and JSON body; late success cannot revive online and the next poll recovers', async t => {
@@ -129,13 +147,13 @@ test('Timeout covers fetch and JSON body; late success cannot revive online and 
       return stage === 'fetch' ? pending : { ok: true, headers: new Headers({ 'Content-Type': 'application/json' }), json: () => pending };
     });
     await page.boot(); hang = true;
-    const check = page.check(); await turn();
+    const check = page.check(true); await turn();
     assert.equal(page.status(), 'SERVER CHECKING');
     const deadline = [...page.timers.values()][0]; assert.equal(deadline.ms, 5000);
     deadline.callback(); assert.equal(await check, false);
     assert.equal(signal.aborted, true); assert.equal(page.status(), 'SERVER OFFLINE');
     finish(); await turn(); assert.equal(page.status(), 'SERVER OFFLINE');
-    hang = false; await page.intervals[0].callback(); assert.equal(page.status(), 'SERVER ONLINE');
+    hang = false; page.intervals[0].callback(); await page.boot(); assert.equal(page.status(), 'SERVER ONLINE');
   });
 });
 
@@ -182,14 +200,13 @@ test('Real runtime through public-host proxy: backend stop, offline reload, rest
   const staticPage = await proxied('/demo/'); assert.equal(staticPage.status, 200); await staticPage.text();
   const offline = await proxied('/api/health?nonce=backend-stopped');
   assert.equal(offline.status, 502); assertNoCache(offline); await offline.text();
-  await page.intervals[0].callback(); assert.equal(page.status(), 'SERVER OFFLINE');
+  page.intervals[0].callback(); await page.boot(); assert.equal(page.status(), 'SERVER OFFLINE');
   const reloaded = browser(proxied); await reloaded.boot(); assert.equal(reloaded.status(), 'SERVER OFFLINE');
   assert.ok(!reloaded.states.includes('server-status is-online'));
   backend = createServer({ root }); await listen(backend, port);
-  await page.intervals[0].callback(); assert.equal(page.status(), 'SERVER ONLINE');
-  await reloaded.intervals[0].callback(); assert.equal(reloaded.status(), 'SERVER ONLINE');
-  assert.equal(reloaded.node('#login-form button').disabled, false);
-  assert.equal(reloaded.node('#retry-connection').hidden, true);
+  page.intervals[0].callback(); await page.boot(); assert.equal(page.status(), 'SERVER ONLINE');
+  reloaded.intervals[0].callback(); await reloaded.boot(); assert.equal(reloaded.status(), 'SERVER ONLINE');
+  assert.equal(reloaded.state(), 'online');
 });
 
 test('Proxy preserves invalid health, prevents caching and bounds an unresponsive backend', async t => {
@@ -213,5 +230,5 @@ test('Proxy preserves invalid health, prevents caching and bounds an unresponsiv
   hang = true;
   const timeout = await fetch(base + '/api/health?nonce=timeout', { signal: AbortSignal.timeout(7000) });
   assert.equal(timeout.status, 504); assertNoCache(timeout); await timeout.text();
-  await page.intervals[0].callback(); assert.equal(page.status(), 'SERVER OFFLINE');
+  page.intervals[0].callback(); await page.boot(); assert.equal(page.status(), 'SERVER OFFLINE');
 });

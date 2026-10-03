@@ -14,9 +14,12 @@ player.onended=()=>{if(playingTrack){player.currentTime=0;player.pause();updateP
 player.onerror=()=>{const t=playingTrack;if(!t)return;const ext=(t.file.name.split('.').pop()||'').toLowerCase();if(t.previewMode==='stream'&&ext==='m4a'&&t.uploaded){prepareTrackPreview(t);return}t.previewStatus='PLAYBACK UNAVAILABLE';render()};
 
 async function request(route,options={}){
+  window.demoServer?.requireOnline();
   const h=new Headers(options.headers||{});
   if(options.method&&options.method!=='GET'&&csrf)h.set('X-CSRF-Token',csrf);
-  const r=await fetch(API+route,{...options,headers:h,credentials:'same-origin',cache:'no-store'});
+  let r;
+  try { r=await fetch(API+route,{...options,headers:h,credentials:'same-origin',cache:'no-store'}); }
+  catch(cause){ void window.demoServer?.check(); throw Object.assign(new Error(window.demoServer?.offlineText||'เซิร์ฟเวอร์ประมวลผลออฟไลน์ชั่วคราว'),{offline:true,cause}); }
   const j=await r.json();
   if(!r.ok)throw Object.assign(new Error(j.error||'Request failed'),{status:r.status});
   return j;
@@ -45,6 +48,7 @@ async function prepareTrackPreview(track){if(previewPreparing||!track.uploaded)r
 function render(){
   list.replaceChildren();
   const busy=uploadBusy||mergeBusy||deleteBusy;
+  const serverOffline=window.demoServer?.isOnline()!==true;
   const hasUploaded=tracks.some(t=>t.uploaded);
   tracks.forEach((t,i)=>{
     const row=document.createElement('div');row.className='merge-track';
@@ -81,8 +85,8 @@ function render(){
 
   document.querySelector('#track-summary').textContent=tracks.length?tracks.length+' Tracks · '+size(tracks.reduce((a,t)=>a+t.file.size,0)):'ยังไม่ได้เลือกเพลง';
   input.disabled=busy;
-  upload.disabled=busy||tracks.length<2||tracks.every(t=>t.uploaded);
-  merge.disabled=busy||tracks.length<2||tracks.some(t=>!t.uploaded);
+  upload.disabled=serverOffline||busy||tracks.length<2||tracks.every(t=>t.uploaded);
+  merge.disabled=serverOffline||busy||tracks.length<2||tracks.some(t=>!t.uploaded);
   if(!busy&&tracks.length<2)mergeStatus.textContent='เพิ่มอย่างน้อย 2 Tracks เพื่อเริ่ม';
   else if(!busy&&tracks.some(t=>!t.uploaded))mergeStatus.textContent='Upload Tracks to Modify ก่อน Merge';
   else if(!busy&&!download.childElementCount)mergeStatus.textContent='พร้อม Merge Audio';
@@ -157,7 +161,8 @@ async function waitJob(job){
     if(job.status==='succeeded')return job.result;
     if(job.status==='failed'||job.status==='cancelled')throw new Error(job.error||'Merge cancelled');
     await new Promise(r=>setTimeout(r,2000));
-    job=await request('/jobs/'+job.jobId);
+    try{job=await request('/jobs/'+job.jobId)}
+    catch(e){if(!e.offline)throw e;mergeStatus.textContent='ขาดการเชื่อมต่อ · รอ Server กลับมาเพื่อโหลดสถานะงาน';await window.demoServer.whenOnline()}
   }
 }
 
@@ -177,18 +182,36 @@ merge.onclick=async()=>{
   }
 };
 
-(async()=>{
-  try{
-    const me=await request('/auth/me');csrf=me.csrf;
-    document.querySelector('#account-name').textContent=me.user.username;
-    document.querySelector('#auth-gate').hidden=true;
-    document.querySelector('#merge-workspace').hidden=me.user.mustChange;
-    if(me.user.mustChange)throw new Error('กรุณาตั้งรหัสผ่านใหม่ที่หน้า Split Audio ก่อน');
-  }catch(e){
-    document.querySelector('#auth-status').textContent=e.message||'กรุณาเข้าสู่ระบบก่อน';
-    document.querySelector('#login-link').hidden=false;
-  }
-})();
+let authConnect=null;
+function connectMerge(){
+  if(authConnect||window.demoServer?.isOnline()!==true)return authConnect;
+  authConnect=(async()=>{
+    try{
+      const me=await request('/auth/me');csrf=me.csrf;
+      document.querySelector('#account-name').textContent=me.user.username;
+      if(me.user.mustChange)throw Object.assign(new Error('กรุณาตั้งรหัสผ่านใหม่ที่หน้า Split Audio ก่อน'),{mustChange:true});
+      document.querySelector('#auth-gate').hidden=true;
+      document.querySelector('#merge-workspace').hidden=false;
+      document.querySelector('#auth-status').textContent='';
+      document.querySelector('#login-link').hidden=true;
+      render();
+    }catch(e){
+      document.querySelector('#merge-workspace').hidden=true;
+      document.querySelector('#auth-gate').hidden=false;
+      document.querySelector('#auth-status').textContent=e.status===401?'เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง':e.message||'กรุณาเข้าสู่ระบบก่อน';
+      document.querySelector('#login-link').hidden=false;
+    }
+  })().finally(()=>{authConnect=null});
+  return authConnect;
+}
+window.addEventListener('demo-server-state',({detail})=>{
+  render();
+  if(detail.state==='offline'){document.querySelector('#auth-status').textContent=window.demoServer.offlineText;return}
+  if(detail.state==='online'&&detail.previous!=='online')void connectMerge();
+});
+render();
+if(window.demoServer?.isOnline()===true)void connectMerge();
+else if(window.demoServer?.state==='offline'){document.querySelector('#auth-status').textContent=window.demoServer.offlineText;document.querySelector('#login-link').hidden=false}
 
 window.demoResourceView=()=>({ids:tracks.filter(t=>t.uploaded).map(t=>t.id),exportId:currentExportId});
 window.addEventListener('demo-resources',({detail:{view,state}})=>{

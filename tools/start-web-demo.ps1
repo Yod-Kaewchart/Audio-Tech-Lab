@@ -10,6 +10,8 @@ if (Test-Path -LiteralPath $deploymentFile) {
     $env:ATL_MAIN_ORIGIN = $deployment.mainOrigin
     $env:ATL_INSTANCE_ID = $deployment.instanceId
     $env:ATL_EXTERNAL_TUNNEL = if ($deployment.tunnelMode -eq 'external') { '1' } else { '' }
+    $env:ATL_PAGES_MODE = if ($deployment.pagesMode -eq $true) { '1' } else { '' }
+    $env:ATL_BACKEND_ORIGIN = $deployment.backendOrigin
     $env:ATL_TUNNEL_CONFIG = $deployment.tunnelConfig
     if ($deployment.audioPython) {
         if (-not (Test-Path -LiteralPath $deployment.audioPython -PathType Leaf)) { throw 'Configured audioPython does not exist' }

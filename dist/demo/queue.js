@@ -15,7 +15,12 @@ async function runProcessingJob(route, data, progress) {
   for (let attempt = 0; !job; attempt++) {
     checkView();
     try { job = await queuedJSON(route, request); }
-    catch (error) { checkView(); if (error.status || attempt >= 2) throw error; await pausePolling(1500); }
+    catch (error) {
+      checkView();
+      if (error.offline) { await window.demoServer.whenOnline(); continue; }
+      if (error.status || attempt >= 2) throw error;
+      await pausePolling(1500);
+    }
   }
   refreshProcessingJobs();
   let networkFailures = 0;
@@ -27,7 +32,11 @@ async function runProcessingJob(route, data, progress) {
     if (!['queued', 'running'].includes(job.status)) throw new Error('กรุณารีเฟรชหน้าเว็บแล้วลองใหม่');
     await pausePolling(2000); checkView();
     try { job = await queuedJSON('/jobs/' + job.jobId); networkFailures = 0; }
-    catch (error) { checkView(); if (error.status || ++networkFailures >= 5) throw error; }
+    catch (error) {
+      checkView();
+      if (error.offline) { progress({ ...job, reconnecting: true }); await window.demoServer.whenOnline(); continue; }
+      if (error.status || ++networkFailures >= 5) throw error;
+    }
   }
 }
 let jobsRefreshing = false;

@@ -94,7 +94,8 @@ test('Main and demo public hosts are separated on one web server', async t => {
   });
   const demoRoot = await request('/', 'demo.audiotechlabs.com');
   assert.equal(demoRoot.status, 302); assert.equal(demoRoot.headers.location, '/demo/');
-  assert.equal((await request('/styles.css', 'demo.audiotechlabs.com')).status, 404);
+  const sharedStyle = await request('/styles.css', 'demo.audiotechlabs.com');
+  assert.equal(sharedStyle.status, 200); assert.match(sharedStyle.headers['content-type'], /^text\/css/);
   const main = await request('/', 'www.audiotechlabs.com');
   assert.equal(main.status, 200); assert.match(main.body, /Audio Tech Labs/);
   const mainApi = await request('/api/health', 'www.audiotechlabs.com');

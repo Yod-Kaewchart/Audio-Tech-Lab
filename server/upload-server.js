@@ -14,8 +14,12 @@ const { createOpenAICredentialStore } = require('./openai-credential-store.cjs')
 const { createOpenAIProvider } = require('./openai.cjs');
 const healthHeaders = require('./health-headers.cjs');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const loopback = address => ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(address);
+const localHost = host => /^(?:localhost|127\.0\.0\.1|\[::1\])(?::\d{1,5})?$/.test(host);
 function createServer(options = {}) {
   const root = options.root || path.resolve(__dirname, '..');
+  const backendOrigin = options.backendOrigin || process.env.ATL_BACKEND_ORIGIN || '';
+  const backendHost = backendOrigin ? new URL(backendOrigin).host.toLowerCase() : '';
   const splitter = options.splitter || process.env.ATL_SPLITTER_ROOT || String.raw`D:\Projects\Audio Album Splitter AI`;
   const python = options.python || process.env.ATL_AUDIO_PYTHON || path.join(splitter, '.venv', 'Scripts', 'python.exe');
   const security = path.join(root, 'tools', 'runtime', 'security');
@@ -112,6 +116,16 @@ function createServer(options = {}) {
   const timer = setInterval(() => { try { cleanup(); } catch { console.error('Cleanup could not complete'); } }, 60 * 1000); timer.unref();
   const server = http.createServer(async (req, res) => {
     try {
+      const host = String(req.headers.host || '').toLowerCase();
+      if (backendHost) {
+        const local = localHost(host) && loopback(req.socket.remoteAddress);
+        const tunneled = host === backendHost && loopback(req.socket.remoteAddress) && req.headers['x-forwarded-proto'] === 'https';
+        if (!local && !tunneled) {
+          res.writeHead(host === backendHost ? 403 : 421, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+          res.end(JSON.stringify({ error: host === backendHost ? 'HTTPS proxy required' : 'Unrecognized host' }));
+          return;
+        }
+      }
       const rawPath = req.url.split('?')[0];
       const route = rawPath.startsWith('/download/') ? rawPath : new URL(req.url, 'http://localhost').pathname;
       if (req.method === 'GET' && route === '/health') {

@@ -1,42 +1,31 @@
-name: Deploy Audio Tech Lab to GitHub Pages
+name: Validate Cloudflare Pages build
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "cloudflare-pages-validate"
+  cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Build Pages and verify configured demo endpoint
+      - name: Test backend and Pages integration
+        run: node --test server/*.test.cjs tools/*.test.cjs
+      - name: Build Cloudflare Pages artifact
         run: node tools/build-pages.cjs
-        env:
-          ATL_DEMO_ORIGIN: ${{ vars.ATL_DEMO_ORIGIN }}
-      - name: Upload Pages build
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./.site-build/pages
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Verify patch cleanliness
+        run: git diff --check
