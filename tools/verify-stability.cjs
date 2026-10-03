@@ -6,6 +6,7 @@ const {createServer}=require('../server/upload-server.js');
 const {createWebServer}=require('../server/web-server.cjs');
 const output=path.resolve(__dirname,'runtime/stability-qa');
 const listen=s=>new Promise(r=>s.listen(0,'127.0.0.1',r));
+function wave(){const n=12*8000,b=Buffer.alloc(44+n*2);b.write('RIFF');b.writeUInt32LE(b.length-8,4);b.write('WAVEfmt ',8);b.writeUInt32LE(16,16);b.writeUInt16LE(1,20);b.writeUInt16LE(1,22);b.writeUInt32LE(8000,24);b.writeUInt32LE(16000,28);b.writeUInt16LE(2,32);b.writeUInt16LE(16,34);b.write('data',36);b.writeUInt32LE(n*2,40);for(let i=0;i<n;i++)b.writeInt16LE(Math.round(5000*Math.sin(2*Math.PI*440*i/8000)),44+i*2);return b}
 async function close(s){if(s?.listening){s.closeAllConnections();await new Promise(r=>s.close(r))}}
 async function main(){
  fs.mkdirSync(output,{recursive:true});
@@ -55,9 +56,22 @@ async function main(){
   assert.equal(loginRequests,1);release();await page.locator('#demo-workspace').waitFor({state:'visible'});await page.unroute('**/api/auth/login');
   results.push({check:'login single flight and real authentication',passed:true});
 
+  await page.locator('#audio-file').setInputFiles({name:'reconnect.wav',mimeType:'audio/wav',buffer:wave()});
+  await page.locator('#upload-button').click();await page.waitForFunction(()=>!document.querySelector('#analyze-button').disabled);
+  let jobReadFailed=false,analyzePosts=0,holdHealth=true;
+  page.on('request',r=>{if(r.url().endsWith('/api/analyze'))analyzePosts++});
+  await page.route('**/api/jobs/*',async route=>{if(!jobReadFailed){jobReadFailed=true;await route.abort('failed')}else await route.continue()});
+  await page.route('**/api/health?*',route=>jobReadFailed&&holdHealth?route.fulfill({status:502,contentType:'application/json',body:'{"error":"simulated tunnel outage"}'}):route.continue());
+  await page.locator('#analyze-button').click();await state('offline');
+  assert.equal(await page.locator('#analyze-button').isDisabled(),true);
+  holdHealth=false;
+  await state('online');await page.locator('#waveform-panel').waitFor({state:'visible',timeout:30000});
+  assert.equal(analyzePosts,1);await page.unroute('**/api/jobs/*');await page.unroute('**/api/health?*');
+  results.push({check:'real Analyze continues after interrupted job polling; one POST and automatic status recovery',passed:true});
+
   // Lose a mutation reply after the backend accepts it. Never replay on recovery.
-  let mutations=0;await page.route('**/api/analyze',async route=>{mutations++;await route.abort('failed')});
-  await page.evaluate(async()=>{try{await runProcessingJob('/analyze',{fileId:'00000000-0000-4000-8000-000000000000'},()=>{})}catch{}});
+  let mutations=0;await page.route('**/api/analyze',async route=>{mutations++;const accepted=await route.fetch();assert.equal(accepted.status(),202);await route.abort('failed')});
+  await page.evaluate(async()=>{try{await runProcessingJob('/analyze',{fileId:uploadedFileId},()=>{})}catch{}});
   await state('offline');await page.evaluate(()=>window.demoServer.check());await state('online');
   await page.evaluate(()=>window.demoServer.check());assert.equal(mutations,1);await page.unroute('**/api/analyze');
   results.push({check:'failed Analyze POST is never replayed on recovery',passed:true});
@@ -89,7 +103,13 @@ async function main(){
    assert.ok(await page.evaluate(()=>[...document.styleSheets].every(s=>s.cssRules.length>0)));
   }
   assert.deepEqual(errors,[]);results.push({check:'desktop/mobile styles and JavaScript errors',passed:true});
- }finally{await browser?.close();await close(web);await close(backend);fs.rmSync(root,{recursive:true,force:true});fs.writeFileSync(path.join(output,'results.json'),JSON.stringify({timestamp:new Date().toISOString(),results,errors},null,2))}
+ }finally{
+  await browser?.close();await close(web);await close(backend);
+  fs.writeFileSync(path.join(output,'results.json'),JSON.stringify({timestamp:new Date().toISOString(),results,errors},null,2));
+  assert.ok(path.resolve(root).startsWith(path.resolve(os.tmpdir())+path.sep+'atl-stability-'));
+  // Worker shutdown/SQLite close is asynchronous on Windows; yield between retries.
+  await fs.promises.rm(root,{recursive:true,force:true,maxRetries:10,retryDelay:200});
+ }
  console.log(JSON.stringify(results,null,2));
 }
 main().catch(e=>{console.error(e);process.exitCode=1});
