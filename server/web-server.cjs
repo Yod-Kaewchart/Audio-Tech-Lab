@@ -15,9 +15,10 @@ return http.createServer((req, res) => {
   if (host === mainHost && isApi) { res.writeHead(404); res.end('Not found'); return; }
   if (host === mainHost && (pathOnly === '/demo' || pathOnly.startsWith('/demo/')) && publicOrigin) { res.writeHead(302, { Location: publicOrigin + req.url }); res.end(); return; }
   if (host === demoHost && !isApi && !pathOnly.startsWith('/demo')) {
-    if (pathOnly === '/') { res.writeHead(302, { Location: '/demo/' }); res.end(); }
-    else { res.writeHead(404); res.end('Not found'); }
-    return;
+    if (pathOnly === '/') { res.writeHead(302, { Location: '/demo/' }); res.end(); return; }
+    // Demo pages inherit the shared site stylesheet from /styles.css.
+    // Keep all other non-demo paths unavailable on the demo hostname.
+    if (pathOnly !== '/styles.css') { res.writeHead(404); res.end('Not found'); return; }
   }
   if (isApi) {
     const health = req.url.split('?')[0] === '/api/health';
