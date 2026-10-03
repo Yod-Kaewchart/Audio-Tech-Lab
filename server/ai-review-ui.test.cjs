@@ -1,0 +1,31 @@
+'use strict';
+const test = require('node:test'), assert = require('node:assert/strict');
+const fs = require('node:fs'), path = require('node:path');
+
+test('Phase 3 AI Review UI is advisory, explicit-apply and model-provider driven', () => {
+  const root = path.resolve(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'dist/demo/index.html'), 'utf8');
+  const js = fs.readFileSync(path.join(root, 'dist/demo/ai-review.js'), 'utf8');
+  const demo = fs.readFileSync(path.join(root, 'dist/demo/demo.js'), 'utf8');
+  const queue = fs.readFileSync(path.join(root, 'dist/demo/queue.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'dist/demo/ai-review.css'), 'utf8');
+  for (const id of ['ai-review-panel','ai-review-state','ai-review-run','ai-review-connect','ai-review-apply','ai-review-clear','ai-review-status','ai-review-summary','ai-review-list']) assert.ok(html.includes('id="' + id + '"'), id);
+  assert.ok(html.includes('04 / AI REVIEW')); assert.ok(html.includes('05 / EXPORT')); assert.ok(html.includes('Audio stays on the Server'));
+  assert.ok(html.includes('ai-review.css?v=phase3')); assert.ok(html.includes('ai-review.js?v=phase3'));
+  assert.ok(html.includes('<option value="ai-review">AI REVIEW</option>'));
+  assert.ok(queue.includes("'ai-review': 'AI Review'"));
+  assert.ok(js.includes("runProcessingJob('/ai/review'"));
+  assert.ok(js.includes("window.audioTechLabsAIModel || 'auto'"));
+  assert.equal(/gpt-[a-z0-9.-]+/i.test(js + html), false, 'frontend must not hard-code an AI Review model ID');
+  assert.equal(/localStorage|sessionStorage|indexedDB/.test(js), false);
+  assert.ok(js.includes("checkbox.disabled = item.recommendation === 'reject'"));
+  assert.ok(js.includes("checkbox.checked = item.recommendation === 'accept'"));
+  assert.ok(js.includes("apply.addEventListener('click'"));
+  assert.ok(js.includes("window.demoSplitAI?.applyBoundaries?.(times)"));
+  assert.ok(js.includes('current.busy'));
+  assert.ok(js.includes('NO CANDIDATES')); assert.ok(js.includes('No OpenAI request will be sent.'));
+  assert.ok(demo.includes('demo-split-busy')); assert.ok(demo.includes('applyBoundaries:times=>'));
+  assert.ok(js.includes('reason.textContent = item.rationale'));
+  assert.equal(js.includes('innerHTML'), false);
+  assert.match(css, /@media\(max-width:700px\)/); assert.match(css, /@media\(max-width:430px\)/);
+});

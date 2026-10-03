@@ -68,7 +68,7 @@ function createServer(options = {}) {
     res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...headers }); res.end(JSON.stringify(data));
   }
   spotify = createSpotify({ auth, send, allowedOrigins, redirectUri: options.spotifyRedirectUri });
-  openai = createOpenAIProvider({ store: openaiStore, activity, fetchImpl: options.openaiFetch || global.fetch, timeoutMs: options.openaiTimeoutMs });
+  openai = createOpenAIProvider({ store: openaiStore, activity, fetchImpl: options.openaiFetch || global.fetch, timeoutMs: options.openaiTimeoutMs, reviewTimeoutMs: options.openaiReviewTimeoutMs });
   async function body(req, limit = 1024 * 1024) {
     const parts = []; let size = 0;
     for await (const chunk of req) { size += chunk.length; if (size > limit) throw fail(413, 'Request is too large'); parts.push(chunk); }
@@ -159,6 +159,51 @@ function createServer(options = {}) {
       if (await auth.handle(req, res, route, json, send, allowedOrigins)) return;
       auth.originOK(req, allowedOrigins);
       const { user } = auth.requireUser(req);
+      if (route === '/ai/review' && req.method === 'POST') {
+        cleanup();
+        const data = await json(req, 4096), file = fileFor(user, data.fileId);
+        if (data.requestId !== undefined && !UUID.test(String(data.requestId))) throw fail(400, 'Invalid request ID');
+        if (data.model !== undefined && (typeof data.model !== 'string' || data.model.length > 80)) throw fail(400, 'Invalid AI Review model');
+        const analyzeJobs = [...queue.jobs.values()].filter(job => job.owner === user.id && job.fileId === data.fileId && job.kind === 'analyze');
+        if (analyzeJobs.some(job => job.status === 'queued' || job.status === 'running')) throw fail(409, 'Analyze is still running; wait before AI Review');
+        const analysisJob = analyzeJobs
+          .filter(job => job.status === 'succeeded' && job.result)
+          .sort((a, b) => (b.finishedAt || 0) - (a.finishedAt || 0))[0];
+        if (!analysisJob) throw fail(409, 'Run Analyze before AI Review');
+        if (!Array.isArray(analysisJob.result.detections) || analysisJob.result.detections.length === 0) throw fail(409, 'Analyze found no candidates for AI Review');
+        if (!openaiStore.has(user.id)) throw fail(409, 'OpenAI is not connected');
+        const script = path.join(options.scripts || __dirname, 'ai-review-bridge.py');
+        const model = data.model || 'auto';
+        const job = queue.submit({
+          owner: user.id,
+          kind: 'ai-review',
+          fileId: data.fileId,
+          filename: path.basename(file).slice(37),
+          requestId: data.requestId,
+          signature: JSON.stringify({ route, fileId: data.fileId, analyzeJobId: analysisJob.id, model }),
+          execute: async () => {
+            let preparedText = await runner(script, [file, 'prepare'], JSON.stringify(analysisJob.result));
+            let prepared;
+            try { prepared = JSON.parse(preparedText); } catch { throw new Error('AI Review request preparation failed'); }
+            const response = await openai.reviewPrepared(user, prepared, model);
+            const validatedText = await runner(script, [file, 'validate'], JSON.stringify({
+              candidateCount: prepared.candidateCount,
+              outputText: response.outputText
+            }));
+            let validated;
+            try { validated = JSON.parse(validatedText); } catch { throw new Error('AI Review validation failed'); }
+            if (!Array.isArray(prepared.candidates) || !Array.isArray(validated.items) ||
+                prepared.candidates.length !== validated.items.length) throw new Error('AI Review validation failed');
+            const items = prepared.candidates.map((candidate, index) => {
+              const item = validated.items[index];
+              if (item.candidateIndex !== candidate.candidateIndex) throw new Error('AI Review candidate mapping failed');
+              return { ...candidate, ...item };
+            });
+            return { model: response.model, summary: validated.summary, shortlist: prepared.shortlist, items };
+          }
+        });
+        return send(res, 202, job);
+      }
       if (route.startsWith('/ai/')) { await openai.handle(req, res, route, user, json, send); return; }
       cleanup();
       if (req.method === 'GET' && route === '/admin/audit') {

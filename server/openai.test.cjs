@@ -66,3 +66,30 @@ test('OpenAI provider sanitizes failures and records only safe audit metadata', 
   );
   assert.throws(() => x.store.read(x.userA.id), error => error.status === 409);
 });
+
+test('AI Review uses Responses API structured outputs without leaking the stored key', async () => {
+  const key = 'sk-test-' + 'R'.repeat(28) + 'R7vQ', calls = [];
+  const store = {
+    read: () => key,
+    has: () => true,
+    validate: value => value,
+    fingerprintFrom: () => '••••R7vQ',
+    status: () => ({ connected: true, fingerprint: '••••R7vQ' })
+  };
+  const fetchImpl = async (url, options) => {
+    calls.push({ url, options });
+    if (url.endsWith('/v1/models')) return new Response(JSON.stringify({ data: [{ id: 'gpt-6-sol' }] }), { status: 200, headers: { 'content-type': 'application/json' } });
+    assert.equal(url, 'https://api.openai.com/v1/responses');
+    return new Response(JSON.stringify({ output: [{ type: 'reasoning', id: 'rs_1' }, { type: 'message', content: [{ type: 'output_text', text: '{"summary":"ok","items":[]}' }] }] }), { status: 200, headers: { 'content-type': 'application/json' } });
+  };
+  const provider = createOpenAIProvider({ store, fetchImpl });
+  const prepared = { instructions: 'system', input: '{"schema_version":1}', format: { type: 'json_schema', name: 'review', strict: true, schema: { type: 'object' } }, candidateCount: 1 };
+  const result = await provider.reviewPrepared({ id: '11111111-1111-4111-8111-111111111111', username: 'alice' }, prepared, 'auto');
+  assert.equal(result.model, 'gpt-6-sol'); assert.equal(result.outputText, '{"summary":"ok","items":[]}');
+  assert.equal(calls.length, 2);
+  const body = JSON.parse(calls[1].options.body);
+  assert.equal(body.model, 'gpt-6-sol'); assert.equal(body.store, false); assert.deepEqual(body.reasoning, { effort: 'high' });
+  assert.deepEqual(body.text.format, prepared.format); assert.equal(body.instructions, 'system'); assert.equal(body.input, prepared.input);
+  assert.equal(calls[1].options.headers.Authorization, 'Bearer ' + key);
+  assert.equal(JSON.stringify(body).includes(key), false);
+});

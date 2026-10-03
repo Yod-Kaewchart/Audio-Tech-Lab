@@ -10,6 +10,7 @@ test('Audit filters query all rows, preserve legacy events, and paginate while n
   let store = new ActivityStore(file);
   try {
     store.record({ id: crypto.randomUUID(), owner: ownerId, username: 'yod', kind: 'analyze', fileId: crypto.randomUUID(), queuedAt: Date.now(), startedAt: Date.now(), finishedAt: Date.now(), status: 'succeeded', error: 'SECRET-STACK', result: { waveform: ['SECRET-RESULT'] } });
+    store.record({ id: crypto.randomUUID(), owner: ownerId, username: 'yod', kind: 'ai-review', fileId: crypto.randomUUID(), queuedAt: Date.now(), startedAt: Date.now(), finishedAt: Date.now(), status: 'succeeded', result: { rationale: 'SECRET-AI-RESULT' } });
     store.deletion({ ownerId, username: 'deleteduser', kind: 'upload', filename: 'Album.wav', reason: 'auto-cleanup' });
     store.event({ type: 'openai-connected', ownerId, username: 'yod' });
     store.event({ type: 'openai-test-failed', status: 'failed', ownerId, username: 'yod' });
@@ -24,12 +25,14 @@ test('Audit filters query all rows, preserve legacy events, and paginate while n
     }
     assert.equal(ids.length, 65); assert.equal(new Set(ids).size, ids.length);
     assert.equal(store.audit({ category: 'processing', type: 'analyze', status: 'completed' }).entries.length, 1);
+    assert.equal(store.audit({ category: 'processing', type: 'ai-review', status: 'completed' }).entries.length, 1);
     assert.equal(store.audit({ category: 'integration', type: 'openai-connected', username: 'yod' }).entries.length, 1);
     assert.equal(store.audit({ category: 'integration', type: 'openai-test-failed', status: 'failed' }).entries.length, 1);
     assert.equal(store.audit({ category: 'file', type: 'delete', username: 'deleteduser' }).entries[0].status, 'auto-cleanup');
     assert.equal(store.audit({ username: 'nobody' }).entries.length, 0);
     for (const input of [{ limit: 101 }, { before: 0 }, { type: 'secret' }, { category: 'invalid' }, { status: 'invalid' }, { username: "yod' OR 1=1" }]) assert.throws(() => store.audit(input), { status: 400 });
     const login = JSON.stringify(store.audit({ type: 'login', limit: 100 })); assert.ok(!login.includes('SECRET-'));
+    const processing = JSON.stringify(store.audit({ category: 'processing', limit: 100 })); assert.ok(!processing.includes('SECRET-AI-RESULT')); assert.ok(!processing.includes('SECRET-RESULT')); assert.ok(!processing.includes('SECRET-STACK'));
     const all = store.audit({ limit: 100 }).entries.map(e => e.auditId);
     store.close(); store = new ActivityStore(file); assert.deepEqual(store.audit({ limit: 100 }).entries.map(e => e.auditId), all);
   } finally { store.close(); fs.rmSync(root, { recursive: true, force: true }); }

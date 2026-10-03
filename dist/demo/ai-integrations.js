@@ -47,6 +47,8 @@
       ? 'OpenAI is connected. AI Review can use this provider when the feature is enabled.'
       : 'Connect your own OpenAI API key to unlock AI Review and intelligent analysis.';
     if (!connected) setModels([]);
+    window.audioTechLabsOpenAIConnected = connected;
+    window.dispatchEvent(new CustomEvent('demo-ai-provider-changed', { detail: { connected } }));
   }
   function clearKey() { input.value = ''; input.type = 'password'; }
   async function loadModels() {

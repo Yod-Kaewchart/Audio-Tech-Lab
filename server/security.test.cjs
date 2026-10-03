@@ -59,7 +59,7 @@ test('Authentication and file ownership security, including real Analyze/QC/Expo
     await t.test('Anonymous requests cannot list files, download, upload, analyze, QC, export, or delete', async () => {
       assert.equal((await request('/health')).status, 200);
       for (const route of ['/uploads', '/audio/' + legacyId, '/download/' + legacyJob + '/old.wav', '/auth/me', '/ai/providers']) assert.equal((await request(route)).status, 401);
-      for (const route of ['/upload/init', '/upload/chunk', '/upload/complete', '/upload/remove', '/preview', '/analyze', '/qc', '/export', '/export/delete', '/ai/openai/test']) assert.equal((await request(route, null, {})).status, 401);
+      for (const route of ['/upload/init', '/upload/chunk', '/upload/complete', '/upload/remove', '/preview', '/analyze', '/qc', '/export', '/export/delete', '/ai/openai/test', '/ai/review']) assert.equal((await request(route, null, {})).status, 401);
       assert.equal((await request('/auth/login', null, { username: 'yod', password: 'wrong' })).status, 401);
       assert.equal((await request('/auth/login', null, { username: 'yod', password: temporary }, { headers: { Origin: 'https://attacker.invalid' } })).status, 403);
     });

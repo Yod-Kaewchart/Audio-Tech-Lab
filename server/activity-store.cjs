@@ -3,7 +3,7 @@ const fs = require('node:fs'), path = require('node:path');
 const { DatabaseSync } = require('node:sqlite');
 const ACTIVE = new Set(['queued', 'running']);
 const eventStatus = { queued: 'queued', running: 'started', succeeded: 'completed', failed: 'failed', cancelled: 'cancelled' };
-const TYPES = new Set(['analyze', 'qc', 'preview', 'export', 'merge', 'upload', 'delete', 'login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed', 'openai-connected', 'openai-disconnected', 'openai-test-failed']);
+const TYPES = new Set(['analyze', 'ai-review', 'qc', 'preview', 'export', 'merge', 'upload', 'delete', 'login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed', 'openai-connected', 'openai-disconnected', 'openai-test-failed']);
 const CATEGORIES = new Set(['processing', 'file', 'authentication', 'admin', 'integration']);
 const STATUSES = new Set(['queued', 'started', 'completed', 'failed', 'cancelled', 'manual-delete', 'auto-cleanup']);
 const ACCOUNT_TYPES = new Set(['login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed']);

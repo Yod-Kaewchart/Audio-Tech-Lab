@@ -1,4 +1,5 @@
 import json, os, sys
+from dataclasses import asdict
 from pathlib import Path
 
 SPLITTER = Path(os.environ.get("ATL_SPLITTER_ROOT", r"D:\Projects\Audio Album Splitter AI"))
@@ -25,9 +26,10 @@ def main():
         "channels": source.channels,
         "total_samples": source.total_samples,
         "detections": [
-            {"time": d.time, "confidence": d.confidence, "source": d.source}
+            {"frame": d.frame, "time": d.time, "confidence": d.confidence, "source": d.source}
             for d in result.detections
         ],
+        "level_diagnostics": asdict(result.level_diagnostics) if result.level_diagnostics is not None else None,
         "waveform": {
             "minimum": preview.minimum.tolist(),
             "maximum": preview.maximum.tolist(),
