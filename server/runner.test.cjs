@@ -23,3 +23,16 @@ test('Windows timeout and backend recovery stop the whole audio process tree', {
     assert.equal(alive(orphan.pid), false); assert.equal(alive(priorChild), false); assert.equal(fs.existsSync(marker), false);
   } finally { if (orphan?.pid && alive(orphan.pid)) execFileSync(kill, ['/PID', String(orphan.pid), '/T', '/F']); fs.rmSync(root, { recursive: true, force: true }); }
 });
+
+test('AbortSignal cancellation stops the active audio process tree', { skip: process.platform !== 'win32' }, async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atl-runner-cancel-')), marker = path.join(root, 'worker.json'), script = path.join(root, 'bridge.py'), worker = path.join(__dirname, 'queue-worker.py');
+  fs.writeFileSync(script, 'import subprocess,sys,time\np=subprocess.Popen([sys.executable,"-c","import time;time.sleep(60)"])\nopen(sys.argv[1],"w").write(str(p.pid))\ntime.sleep(60)\n');
+  try {
+    const source = path.join(root, 'cancel.pid'), runner = createProcessRunner({ marker, python, cwd: root, worker, timeout: 30000 });
+    const controller = new AbortController(), task = runner(script, [source], undefined, { signal: controller.signal });
+    await waitFile(source); const descendant = Number(fs.readFileSync(source, 'utf8'));
+    controller.abort();
+    await assert.rejects(task, error => error.cancelled === true && error.safeCode === 'USER_CANCELLED');
+    assert.equal(alive(descendant), false); assert.equal(fs.existsSync(marker), false);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});

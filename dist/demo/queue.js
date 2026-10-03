@@ -4,22 +4,22 @@ const pausePolling = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function queuedJSON(route, data) {
   const options = data === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) };
   const response = await apiFetch(route, options), value = await response.json();
-  if (!response.ok) throw Object.assign(new Error(value.error || 'Request failed'), { status: response.status });
+  if (!response.ok) throw Object.assign(new Error(value.error || 'Request failed'), { status: response.status, ...(value.errorCode ? { errorCode: value.errorCode } : {}) });
   return value;
 }
-async function runProcessingJob(route, data, progress) {
+async function runProcessingJob(route, data, progress, { onSubmitted, onCompleted } = {}) {
   const epoch = processingEpoch, username = window.demoAuth?.user.username;
   const request = { ...data, requestId: crypto.randomUUID() };
   function checkView() { if (epoch !== processingEpoch || username !== window.demoAuth?.user.username) throw Object.assign(new Error('Processing view changed'), { stale: true }); }
   checkView();
   let job = await queuedJSON(route, request);
-  refreshProcessingJobs();
+  onSubmitted?.(job); refreshProcessingJobs();
   let networkFailures = 0;
   for (;;) {
     checkView(); progress(job);
-    if (job.status === 'succeeded') return job.result;
-    if (job.status === 'failed') throw new Error(job.error || 'Processing failed');
-    if (job.status === 'cancelled') throw Object.assign(new Error('ยกเลิกงานที่รอคิวแล้ว'), { cancelled: true });
+    if (job.status === 'succeeded') { onCompleted?.(job); return job.result; }
+    if (job.status === 'failed') throw Object.assign(new Error(job.error || 'Processing failed'), { ...(job.errorCode ? { errorCode: job.errorCode } : {}) });
+    if (job.status === 'cancelled') throw Object.assign(new Error('ยกเลิกงานแล้ว'), { cancelled: true, errorCode: job.errorCode || 'USER_CANCELLED' });
     if (!['queued', 'running'].includes(job.status)) throw new Error('กรุณารีเฟรชหน้าเว็บแล้วลองใหม่');
     await pausePolling(2000); checkView();
     try { job = await queuedJSON('/jobs/' + job.jobId); networkFailures = 0; }
@@ -47,8 +47,9 @@ async function refreshProcessingJobs() {
       const status = document.createElement('span'); status.className = 'upload-file-meta';
       status.textContent = job.status === 'queued' ? 'รอคิวลำดับที่ ' + job.position : ({ running: 'กำลังประมวลผล', succeeded: 'เสร็จแล้ว', failed: 'ไม่สำเร็จ · ' + (job.error || ''), cancelled: 'ยกเลิกแล้ว' })[job.status];
       info.append(name, status); row.append(info);
-      if (job.status === 'queued') {
-        const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'upload-delete-button'; cancel.textContent = 'ยกเลิกคิว';
+      if (job.canCancel) {
+        const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'upload-delete-button';
+        cancel.textContent = job.status === 'running' && job.kind === 'ai-review' ? 'Cancel AI Review' : 'ยกเลิกคิว';
         cancel.addEventListener('click', async () => { cancel.disabled = true; try { await queuedJSON('/jobs/' + job.jobId + '/cancel', {}); await refreshProcessingJobs(); } catch (error) { jobsMessage.textContent = error.message; cancel.disabled = false; } });
         row.append(cancel);
       }

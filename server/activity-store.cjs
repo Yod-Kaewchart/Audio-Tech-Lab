@@ -8,17 +8,27 @@ const CATEGORIES = new Set(['processing', 'file', 'authentication', 'admin', 'in
 const STATUSES = new Set(['queued', 'started', 'completed', 'failed', 'cancelled', 'manual-delete', 'auto-cleanup']);
 const ACCOUNT_TYPES = new Set(['login', 'logout', 'register', 'user-created', 'user-deleted', 'password-changed']);
 const INTEGRATION_TYPES = new Set(['openai-connected', 'openai-disconnected', 'openai-test-failed']);
+const AI_ERROR_CODES = new Set(['USER_CANCELLED', 'OPENAI_AUTH', 'OPENAI_FORBIDDEN', 'OPENAI_QUOTA', 'OPENAI_TIMEOUT', 'OPENAI_UNAVAILABLE', 'AI_INVALID_OUTPUT', 'STALE_ANALYSIS']);
 const TYPE_SQL = "COALESCE(json_extract(data,'$.type'), CASE WHEN json_extract(data,'$.status') IN ('manual-delete','auto-cleanup') THEN 'delete' ELSE json_extract(data,'$.kind') END)";
 const CATEGORY_SQL = "COALESCE(json_extract(data,'$.category'), CASE WHEN json_extract(data,'$.status') IN ('manual-delete','auto-cleanup') THEN 'file' ELSE 'processing' END)";
 const username = value => typeof value === 'string' && /^[a-z0-9][a-z0-9_.-]{2,31}$/.test(value) ? value : null;
 const identity = value => typeof value === 'string' && /^[0-9a-f-]{36}$/.test(value) ? value : null;
 // Only these fields may reach durable audit storage. Never copy job results or errors.
 function metadata(job) {
-  return { jobId: job.id, ownerId: job.owner, username: job.username || null,
+  const data = { jobId: job.id, ownerId: job.owner, username: job.username || null,
     fileId: job.fileId, fileIds: job.fileIds || [job.fileId], filename: job.filename || '',
     size: Number.isSafeInteger(job.size) ? job.size : null, kind: job.kind,
     status: eventStatus[job.status], queuedAt: job.queuedAt, startedAt: job.startedAt || null,
     finishedAt: job.finishedAt || null, durationMs: job.finishedAt && job.startedAt ? Math.max(0, job.finishedAt - job.startedAt) : null };
+  if (job.kind === 'ai-review') {
+    const telemetry = job.telemetry && typeof job.telemetry === 'object' ? job.telemetry : {};
+    if (typeof telemetry.model === 'string' && /^[A-Za-z0-9._-]{1,80}$/.test(telemetry.model)) data.model = telemetry.model;
+    for (const key of ['candidateCount', 'shortlistBefore', 'shortlistSelected', 'inputTokens', 'outputTokens', 'totalTokens']) {
+      if (Number.isSafeInteger(telemetry[key]) && telemetry[key] >= 0) data[key] = telemetry[key];
+    }
+    if (AI_ERROR_CODES.has(job.errorCode)) data.errorCode = job.errorCode;
+  }
+  return data;
 }
 class ActivityStore {
   constructor(file) {

@@ -27,6 +27,17 @@
     if (entry.type === 'delete' && entry.kind) detail.push(entry.kind.toUpperCase());
     if (Number.isSafeInteger(entry.size)) detail.push(storageSize(entry.size));
     if (Number.isFinite(entry.durationMs)) detail.push((entry.durationMs / 1000).toFixed(1) + ' sec');
+    if (entry.type === 'ai-review') {
+      if (entry.model) detail.push(entry.model);
+      if (Number.isSafeInteger(entry.shortlistSelected) && Number.isSafeInteger(entry.shortlistBefore)) detail.push(entry.shortlistSelected + '/' + entry.shortlistBefore + ' candidates');
+      if (Number.isSafeInteger(entry.totalTokens)) {
+        const parts = [];
+        if (Number.isSafeInteger(entry.inputTokens)) parts.push(entry.inputTokens + ' in');
+        if (Number.isSafeInteger(entry.outputTokens)) parts.push(entry.outputTokens + ' out');
+        detail.push(entry.totalTokens + ' tokens' + (parts.length ? ' (' + parts.join(' / ') + ')' : ''));
+      }
+      if (entry.errorCode) detail.push(entry.errorCode);
+    }
     if (entry.actorUsername && entry.actorId !== entry.ownerId) detail.push('By ' + entry.actorUsername);
     if (entry.status === 'auto-cleanup') detail.push('System');
     if (detail.length) body.append(element('p', 'activity-detail', detail.join(' · ')));

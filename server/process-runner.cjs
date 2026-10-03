@@ -20,7 +20,8 @@ function createProcessRunner({ marker, python, cwd, worker, timeout = 30 * 60 * 
     fs.rmSync(marker, { force: true });
   }
   let current = null;
-  function run(script, args, input) {
+  function run(script, args, input, { signal } = {}) {
+    if (signal?.aborted) return Promise.reject(Object.assign(new Error('Processing cancelled'), { cancelled: true, safeCode: 'USER_CANCELLED' }));
     if (current) return Promise.reject(new Error('Another worker is still active'));
     return new Promise((resolve, reject) => {
       const child = spawn(python, [worker, script, ...args], { cwd, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'] });
@@ -28,14 +29,16 @@ function createProcessRunner({ marker, python, cwd, worker, timeout = 30 * 60 * 
       let stdout = '', bytes = 0, error = null, closed = false, stopping = false, killDone = true;
       function finish() {
         if (!closed || !killDone) return;
-        clearTimeout(timer); current = null; fs.rmSync(marker, { force: true });
+        clearTimeout(timer); signal?.removeEventListener('abort', onAbort); current = null; fs.rmSync(marker, { force: true });
         if (error) reject(error); else resolve(stdout);
       }
-      function stop(message) {
-        if (stopping) return; stopping = true; error = new Error(message); killDone = false;
+      function stop(message, cancelled = false) {
+        if (stopping) return; stopping = true; error = Object.assign(new Error(message), cancelled ? { cancelled: true, safeCode: 'USER_CANCELLED' } : {}); killDone = false;
         if (!child.pid) { killDone = true; finish(); return; }
         execFile(taskkill, ['/PID', String(child.pid), '/T', '/F'], { windowsHide: true, timeout: 10000 }, () => { killDone = true; finish(); });
       }
+      const onAbort = () => stop('Processing cancelled', true);
+      signal?.addEventListener('abort', onAbort, { once: true });
       child.stopTree = () => stop('Backend restarted. Please submit the job again');
       child.once('spawn', () => {
         try { fs.writeFileSync(marker + '.tmp', JSON.stringify({ pid: child.pid, worker, script, source: args[0], startedAt: Date.now() })); fs.renameSync(marker + '.tmp', marker); }

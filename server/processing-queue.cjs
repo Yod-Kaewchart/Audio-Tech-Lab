@@ -22,7 +22,7 @@ class ProcessingQueue {
   }
   save() {
     if (!this.file) return;
-    const jobs = [...this.jobs.values()].map(({ execute, ...job }) => job);
+    const jobs = [...this.jobs.values()].map(({ execute, abortController, ...job }) => job);
     fs.writeFileSync(this.file + '.tmp', JSON.stringify({ version: 1, jobs }));
     fs.renameSync(this.file + '.tmp', this.file);
   }
@@ -37,15 +37,17 @@ class ProcessingQueue {
     try { this.save(); } catch (error) { this.jobs = saved; throw error; }
   }
   view(job, includeResult = true) {
+    const canCancel = job.status === 'queued' || (job.status === 'running' && job.cancellable === true && !job.cancelRequested);
     return { jobId: job.id, kind: job.kind, fileId: job.fileId, filename: job.filename, status: job.status,
       position: job.status === 'queued' ? this.pending.indexOf(job.id) + 1 : 0,
       queuedAt: job.queuedAt, startedAt: job.startedAt || null, finishedAt: job.finishedAt || null,
+      canCancel, ...(job.phase ? { phase: job.phase } : {}), ...(job.errorCode ? { errorCode: job.errorCode } : {}),
       ...(job.error ? { error: job.error } : {}), ...(includeResult && job.status === 'succeeded' ? { result: job.result } : {}) };
   }
   get(owner, id) { const job = this.jobs.get(id); if (!job || job.owner !== owner) throw failure(404, 'Job not found'); return this.view(job); }
   list(owner) { this.prune(); return [...this.jobs.values()].filter(job => job.owner === owner).sort((a, b) => b.queuedAt - a.queuedAt).map(job => this.view(job, false)); }
   isBusy(owner, fileId) { return [...this.jobs.values()].some(job => job.owner === owner && active(job) && (job.fileIds || [job.fileId]).includes(fileId)); }
-  submit({ owner, kind, fileId, fileIds, filename, requestId, signature, outputId, execute }) {
+  submit({ owner, kind, fileId, fileIds, filename, requestId, signature, outputId, cancellable = false, execute }) {
     if (this.closed) throw failure(503, 'Backend is restarting. Please retry');
     this.prune();
     if (requestId) {
@@ -56,7 +58,7 @@ class ProcessingQueue {
     if (resources.some(id => this.isBusy(owner, id))) throw failure(409, 'One or more files already have a queued or running job');
     if ([...this.jobs.values()].filter(job => job.owner === owner && active(job)).length >= this.maxPerUser) throw failure(429, 'You already have ' + this.maxPerUser + ' active jobs. Please wait');
     if (this.pending.length >= this.maxWaiting) throw failure(429, 'The processing queue is full. Please retry later');
-    const job = { id: crypto.randomUUID(), owner, kind, fileId, ...(resources.length > 1 ? { fileIds: resources } : {}), filename, requestId, signature, outputId, status: 'queued', queuedAt: Date.now(), execute };
+    const job = { id: crypto.randomUUID(), owner, kind, fileId, ...(resources.length > 1 ? { fileIds: resources } : {}), filename, requestId, signature, outputId, cancellable: Boolean(cancellable), abortController: cancellable ? new AbortController() : null, status: 'queued', queuedAt: Date.now(), execute };
     Object.assign(job, this.describe?.(job) || {});
     this.jobs.set(job.id, job); this.pending.push(job.id);
     try { this.save(); this.onChange?.(job); } catch (error) { this.jobs.delete(job.id); this.pending.pop(); throw error; }
@@ -65,9 +67,15 @@ class ProcessingQueue {
   }
   cancel(owner, id) {
     const job = this.jobs.get(id); if (!job || job.owner !== owner) throw failure(404, 'Job not found');
-    if (job.status !== 'queued') throw failure(409, 'Only a waiting job can be cancelled');
-    this.pending = this.pending.filter(value => value !== id);
-    Object.assign(job, { status: 'cancelled', finishedAt: Date.now() }); delete job.execute; this.save(); this.onChange?.(job);
+    if (job.status === 'queued') {
+      this.pending = this.pending.filter(value => value !== id);
+      Object.assign(job, { status: 'cancelled', errorCode: 'USER_CANCELLED', finishedAt: Date.now() }); delete job.execute; delete job.abortController; this.save(); this.onChange?.(job);
+      return this.view(job);
+    }
+    if (job.status !== 'running' || job.cancellable !== true) throw failure(409, 'This running job cannot be cancelled');
+    if (!job.cancelRequested) {
+      job.cancelRequested = true; job.phase = 'cancelling'; job.abortController?.abort(); this.save(); this.onChange?.(job);
+    }
     return this.view(job);
   }
   async pump() {
@@ -75,11 +83,21 @@ class ProcessingQueue {
     const id = this.pending.shift(); if (!id) return;
     const job = this.jobs.get(id); this.running = id;
     Object.assign(job, { status: 'running', startedAt: Date.now() });
+    const setPhase = phase => {
+      if (job.status !== 'running' || job.cancelRequested || typeof phase !== 'string' || !/^[a-z][a-z0-9-]{0,31}$/.test(phase)) return;
+      job.phase = phase; this.save(); this.onChange?.(job);
+    };
+    const setTelemetry = telemetry => { if (job.status === 'running' && telemetry && typeof telemetry === 'object') job.telemetry = { ...telemetry }; };
     try {
-      this.save(); this.onChange?.(job); job.result = await job.execute(); job.status = 'succeeded';
-    } catch (error) { job.status = 'failed'; job.error = error.message || 'Processing failed. Please retry'; }
+      this.save(); this.onChange?.(job); const result = await job.execute({ signal: job.abortController?.signal || null, setPhase, setTelemetry });
+      if (job.abortController?.signal.aborted) throw Object.assign(new Error('Processing cancelled'), { cancelled: true, safeCode: 'USER_CANCELLED' });
+      job.result = result; job.status = 'succeeded';
+    } catch (error) {
+      if (error?.cancelled || job.abortController?.signal.aborted) { job.status = 'cancelled'; job.errorCode = 'USER_CANCELLED'; }
+      else { job.status = 'failed'; job.error = error.message || 'Processing failed. Please retry'; if (error?.safeCode) job.errorCode = error.safeCode; }
+    }
     finally {
-      job.finishedAt = Date.now(); delete job.execute; this.running = null;
+      job.finishedAt = Date.now(); delete job.execute; delete job.abortController; this.running = null;
       this.prune(); this.save(); this.onChange?.(job); this.afterRunning?.(); queueMicrotask(() => this.pump());
     }
   }

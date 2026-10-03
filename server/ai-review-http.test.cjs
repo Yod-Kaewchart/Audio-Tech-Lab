@@ -1,12 +1,13 @@
 'use strict';
 const test = require('node:test'), assert = require('node:assert/strict');
-const fs = require('node:fs'), path = require('node:path'), os = require('node:os');
+const fs = require('node:fs'), path = require('node:path'), os = require('node:os'), crypto = require('node:crypto');
 const { createServer } = require('./upload-server.js');
 
-test('Phase 3 AI Review uses server Analyze state, queue isolation and validated advisory output', async () => {
+test('Phase 4 AI Review is snapshot-bound, cancellable and returns validated advisory output', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atl-ai-review-http-'));
   const origin = 'https://ai-review-tests.invalid', secrets = new Map(), calls = [];
   const apiKey = 'sk-test-' + 'K'.repeat(28) + 'K4pQ';
+  let holdReview = false, sawAbort = false;
   const validate = value => {
     const key = typeof value === 'string' ? value.trim() : '';
     if (!/^sk-[A-Za-z0-9_-]{17,509}$/.test(key)) throw Object.assign(new Error('Enter a valid OpenAI API key'), { status: 400 });
@@ -24,12 +25,25 @@ test('Phase 3 AI Review uses server Analyze state, queue isolation and validated
     const token = String(options?.headers?.Authorization || '').replace(/^Bearer /, '');
     if (token !== apiKey) return new Response('{}', { status: 401, headers: { 'content-type': 'application/json' } });
     if (url.endsWith('/v1/models')) return new Response(JSON.stringify({ data: [{ id: 'gpt-6-sol' }] }), { status: 200, headers: { 'content-type': 'application/json' } });
-    if (url.endsWith('/v1/responses')) return new Response(JSON.stringify({ output: [{ type: 'message', content: [{ type: 'output_text', text: JSON.stringify({ summary: 'One strong candidate', items: [{ candidate_index: 0, recommendation: 'accept', confidence: 0.91, rationale: 'Low interval and spectral transition align.', reason_code: 'strong_boundary_evidence' }] }) }] }] }), { status: 200, headers: { 'content-type': 'application/json' } });
+    if (url.endsWith('/v1/responses') && holdReview) return new Promise((resolve, reject) => {
+      const abort = () => { sawAbort = true; const error = new Error('provider-private-abort'); error.name = 'AbortError'; reject(error); };
+      if (options.signal.aborted) abort(); else options.signal.addEventListener('abort', abort, { once: true });
+    });
+    if (url.endsWith('/v1/responses')) return new Response(JSON.stringify({
+      output: [{ type: 'message', content: [{ type: 'output_text', text: JSON.stringify({
+        summary: 'One strong candidate',
+        items: [{ candidate_index: 0, recommendation: 'accept', confidence: 0.91, rationale: 'Low interval and spectral transition align.', reason_code: 'strong_boundary_evidence' }]
+      }) }] }],
+      usage: { input_tokens: 120, output_tokens: 30, total_tokens: 150 }
+    }), { status: 200, headers: { 'content-type': 'application/json' } });
     throw new Error('Unexpected OpenAI URL');
   };
   const runJob = async (script, args, input) => {
     const name = path.basename(script), mode = args[1];
-    if (name === 'analyze-upload.py') { if (String(args[0]).includes('Race.wav')) await new Promise(resolve => setTimeout(resolve, 150)); return JSON.stringify({ source_id: 'source-test', duration: 10, detections: String(args[0]).includes('Empty.wav') ? [] : [{ frame: 100, time: 5, confidence: 2.5, source: 'Silence Transition' }], level_diagnostics: null, waveform: { minimum: [0], maximum: [0] } }); }
+    if (name === 'analyze-upload.py') {
+      if (String(args[0]).includes('Race.wav')) await new Promise(resolve => setTimeout(resolve, 150));
+      return JSON.stringify({ source_id: 'source-test', duration: 10, detections: String(args[0]).includes('Empty.wav') ? [] : [{ frame: 100, time: 5, confidence: 2.5, source: 'Silence Transition' }], level_diagnostics: null, waveform: { minimum: [0], maximum: [0] } });
+    }
     if (name === 'ai-review-bridge.py' && mode === 'prepare') return JSON.stringify({
       instructions: 'system instructions', input: '{"schema_version":1}', candidateCount: 1,
       format: { type: 'json_schema', name: 'audio_album_splitter_ai_review', strict: true, schema: { type: 'object' } },
@@ -62,12 +76,20 @@ test('Phase 3 AI Review uses server Analyze state, queue isolation and validated
   }
   async function completed(client, submitted) {
     assert.equal(submitted.status, 202);
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 200; i++) {
       const current = await request('/jobs/' + submitted.data.jobId, client);
-      if (current.data.status === 'succeeded' || current.data.status === 'failed') return current;
+      if (['succeeded', 'failed', 'cancelled'].includes(current.data.status)) return current;
       await new Promise(resolve => setTimeout(resolve, 10));
     }
     throw new Error('job did not finish');
+  }
+  async function waitJob(client, id, predicate) {
+    for (let i = 0; i < 200; i++) {
+      const current = await request('/jobs/' + id, client);
+      if (predicate(current.data)) return current.data;
+      await new Promise(resolve => setTimeout(resolve, 10));
+    }
+    throw new Error('job did not reach expected state');
   }
   async function upload(client, name = 'Album.wav') {
     const payload = Buffer.from('synthetic-audio');
@@ -87,45 +109,66 @@ test('Phase 3 AI Review uses server Analyze state, queue isolation and validated
       const created = await request('/auth/register', null, { method: 'POST', data: { username, email, password } });
       assert.equal(created.status, 201);
     }
-    const alice = await login('alice', 'Alice-Review-Test-123');
-    const bob = await login('bobby', 'Bobby-Review-Test-123');
-    const fileId = await upload(alice);
-    assert.equal((await request('/ai/review', alice, { method: 'POST', data: { fileId } })).status, 409);
-    assert.equal((await request('/ai/review', alice, { method: 'POST', data: { fileId }, csrf: false })).status, 403);
-    assert.equal((await request('/ai/review', bob, { method: 'POST', data: { fileId } })).status, 404);
+    const alice = await login('alice', 'Alice-Review-Test-123'), bob = await login('bobby', 'Bobby-Review-Test-123');
+    const fileId = await upload(alice), fakeAnalysisId = crypto.randomUUID();
+    let response = await request('/ai/review', alice, { method: 'POST', data: { fileId, analysisJobId: fakeAnalysisId } });
+    assert.equal(response.status, 409); assert.equal(response.data.errorCode, 'STALE_ANALYSIS');
+    assert.equal((await request('/ai/review', alice, { method: 'POST', data: { fileId, analysisJobId: fakeAnalysisId }, csrf: false })).status, 403);
+    assert.equal((await request('/ai/review', bob, { method: 'POST', data: { fileId, analysisJobId: fakeAnalysisId } })).status, 404);
+
     let job = await completed(alice, await request('/analyze', alice, { method: 'POST', data: { fileId } }));
-    assert.equal(job.data.status, 'succeeded');
+    assert.equal(job.data.status, 'succeeded'); const analysisJobId = job.data.jobId;
     const beforeConnectCalls = calls.length;
-    const disconnectedReview = await request('/ai/review', alice, { method: 'POST', data: { fileId } });
-    assert.equal(disconnectedReview.status, 409); assert.equal(disconnectedReview.data.error, 'OpenAI is not connected');
-    assert.equal(calls.length, beforeConnectCalls);
+    response = await request('/ai/review', alice, { method: 'POST', data: { fileId, analysisJobId } });
+    assert.equal(response.status, 409); assert.equal(response.data.error, 'OpenAI is not connected'); assert.equal(calls.length, beforeConnectCalls);
+
     let connected = await request('/ai/openai/credential', alice, { method: 'PUT', data: { apiKey } });
     assert.equal(connected.status, 200);
-    job = await completed(alice, await request('/ai/review', alice, { method: 'POST', data: { fileId, model: 'auto' } }));
+    const responseCalls = calls.filter(call => call.url.endsWith('/v1/responses')).length;
+    response = await request('/ai/review', alice, { method: 'POST', data: { fileId, analysisJobId: fakeAnalysisId } });
+    assert.equal(response.status, 409); assert.equal(response.data.errorCode, 'STALE_ANALYSIS');
+    assert.equal(calls.filter(call => call.url.endsWith('/v1/responses')).length, responseCalls);
+
+    job = await completed(alice, await request('/ai/review', alice, { method: 'POST', data: { fileId, analysisJobId, model: 'auto' } }));
     assert.equal(job.data.status, 'succeeded');
     const result = job.data.result;
-    assert.equal(result.model, 'gpt-6-sol'); assert.equal(result.summary, 'One strong candidate');
+    assert.equal(result.analysisJobId, analysisJobId); assert.equal(result.model, 'gpt-6-sol'); assert.equal(result.summary, 'One strong candidate');
     assert.equal(result.items.length, 1); assert.equal(result.items[0].recommendation, 'accept'); assert.equal(result.items[0].time, 5);
     assert.equal(result.items[0].reasonCode, 'strong_boundary_evidence');
     const serialized = JSON.stringify(result);
     assert.equal(serialized.includes(apiKey), false); assert.equal(serialized.includes('system instructions'), false); assert.equal(serialized.includes('schema_version'), false);
-    assert.ok(calls.some(call => call.url.endsWith('/v1/responses')));
     const history = await request('/jobs', alice);
     assert.ok(history.data.jobs.some(item => item.kind === 'ai-review' && item.fileId === fileId));
+
+    const newerAnalyze = await completed(alice, await request('/analyze', alice, { method: 'POST', data: { fileId } }));
+    assert.equal(newerAnalyze.data.status, 'succeeded'); assert.notEqual(newerAnalyze.data.jobId, analysisJobId);
+    response = await request('/ai/review', alice, { method: 'POST', data: { fileId, analysisJobId } });
+    assert.equal(response.status, 409); assert.equal(response.data.errorCode, 'STALE_ANALYSIS');
+
     const emptyId = await upload(alice, 'Empty.wav');
     job = await completed(alice, await request('/analyze', alice, { method: 'POST', data: { fileId: emptyId } }));
     assert.equal(job.data.status, 'succeeded'); assert.equal(job.data.result.detections.length, 0);
-    const responseCalls = calls.filter(call => call.url.endsWith('/v1/responses')).length;
-    const emptyReview = await request('/ai/review', alice, { method: 'POST', data: { fileId: emptyId } });
+    const emptyReview = await request('/ai/review', alice, { method: 'POST', data: { fileId: emptyId, analysisJobId: job.data.jobId } });
     assert.equal(emptyReview.status, 409); assert.equal(emptyReview.data.error, 'Analyze found no candidates for AI Review');
-    assert.equal(calls.filter(call => call.url.endsWith('/v1/responses')).length, responseCalls);
-    const raceId = await upload(alice, 'Race.wav');
-    const pendingAnalyze = await request('/analyze', alice, { method: 'POST', data: { fileId: raceId } });
+
+    const raceId = await upload(alice, 'Race.wav'), pendingAnalyze = await request('/analyze', alice, { method: 'POST', data: { fileId: raceId } });
     assert.equal(pendingAnalyze.status, 202);
-    const duringAnalyze = await request('/ai/review', alice, { method: 'POST', data: { fileId: raceId } });
+    const duringAnalyze = await request('/ai/review', alice, { method: 'POST', data: { fileId: raceId, analysisJobId: crypto.randomUUID() } });
     assert.equal(duringAnalyze.status, 409); assert.equal(duringAnalyze.data.error, 'Analyze is still running; wait before AI Review');
     await completed(alice, pendingAnalyze);
-    assert.equal(calls.filter(call => call.url.endsWith('/v1/responses')).length, responseCalls);
+
+    const cancelId = await upload(alice, 'Cancel.wav');
+    const cancelAnalyze = await completed(alice, await request('/analyze', alice, { method: 'POST', data: { fileId: cancelId } }));
+    holdReview = true; sawAbort = false;
+    const cancelReview = await request('/ai/review', alice, { method: 'POST', data: { fileId: cancelId, analysisJobId: cancelAnalyze.data.jobId, model: 'gpt-6-sol' } });
+    assert.equal(cancelReview.status, 202);
+    const running = await waitJob(alice, cancelReview.data.jobId, value => value.status === 'running' && value.phase === 'calling-openai');
+    assert.equal(running.canCancel, true);
+    const cancelResponse = await request('/jobs/' + cancelReview.data.jobId + '/cancel', alice, { method: 'POST', data: {} });
+    assert.equal(cancelResponse.status, 200); assert.equal(cancelResponse.data.phase, 'cancelling'); assert.equal(cancelResponse.data.canCancel, false);
+    const cancelledJob = await completed(alice, cancelReview);
+    assert.equal(cancelledJob.data.status, 'cancelled'); assert.equal(cancelledJob.data.errorCode, 'USER_CANCELLED'); assert.equal(sawAbort, true);
+    holdReview = false;
   } finally {
     await new Promise(resolve => server.close(resolve));
     fs.rmSync(root, { recursive: true, force: true });

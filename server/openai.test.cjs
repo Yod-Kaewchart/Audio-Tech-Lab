@@ -80,16 +80,55 @@ test('AI Review uses Responses API structured outputs without leaking the stored
     calls.push({ url, options });
     if (url.endsWith('/v1/models')) return new Response(JSON.stringify({ data: [{ id: 'gpt-6-sol' }] }), { status: 200, headers: { 'content-type': 'application/json' } });
     assert.equal(url, 'https://api.openai.com/v1/responses');
-    return new Response(JSON.stringify({ output: [{ type: 'reasoning', id: 'rs_1' }, { type: 'message', content: [{ type: 'output_text', text: '{"summary":"ok","items":[]}' }] }] }), { status: 200, headers: { 'content-type': 'application/json' } });
+    return new Response(JSON.stringify({ output: [{ type: 'reasoning', id: 'rs_1' }, { type: 'message', content: [{ type: 'output_text', text: '{"summary":"ok","items":[]}' }] }], usage: { input_tokens: 120, output_tokens: 30, total_tokens: 150 } }), { status: 200, headers: { 'content-type': 'application/json' } });
   };
   const provider = createOpenAIProvider({ store, fetchImpl });
   const prepared = { instructions: 'system', input: '{"schema_version":1}', format: { type: 'json_schema', name: 'review', strict: true, schema: { type: 'object' } }, candidateCount: 1 };
   const result = await provider.reviewPrepared({ id: '11111111-1111-4111-8111-111111111111', username: 'alice' }, prepared, 'auto');
   assert.equal(result.model, 'gpt-6-sol'); assert.equal(result.outputText, '{"summary":"ok","items":[]}');
+  assert.deepEqual(result.usage, { inputTokens: 120, outputTokens: 30, totalTokens: 150 });
   assert.equal(calls.length, 2);
   const body = JSON.parse(calls[1].options.body);
   assert.equal(body.model, 'gpt-6-sol'); assert.equal(body.store, false); assert.deepEqual(body.reasoning, { effort: 'high' });
   assert.deepEqual(body.text.format, prepared.format); assert.equal(body.instructions, 'system'); assert.equal(body.input, prepared.input);
   assert.equal(calls[1].options.headers.Authorization, 'Bearer ' + key);
   assert.equal(JSON.stringify(body).includes(key), false);
+});
+
+test('AI Review aborts a running Responses request and exposes only safe error codes', async () => {
+  const key = 'sk-test-' + 'C'.repeat(28) + 'C7zQ';
+  const store = { read: () => key, has: () => true, validate: value => value, fingerprintFrom: () => '••••C7zQ', status: () => ({ connected: true, fingerprint: '••••C7zQ' }) };
+  let sawAbort = false;
+  const fetchImpl = async (url, options) => {
+    if (url.endsWith('/v1/responses')) return new Promise((resolve, reject) => {
+      options.signal.addEventListener('abort', () => { sawAbort = true; const error = new Error('private abort detail'); error.name = 'AbortError'; reject(error); }, { once: true });
+    });
+    return new Response(JSON.stringify({ data: [{ id: 'gpt-6-sol' }] }), { status: 200, headers: { 'content-type': 'application/json' } });
+  };
+  const provider = createOpenAIProvider({ store, fetchImpl, reviewTimeoutMs: 30000 });
+  const prepared = { instructions: 'system', input: '{}', format: { type: 'json_schema', name: 'review', strict: true, schema: { type: 'object' } }, candidateCount: 1 };
+  const controller = new AbortController();
+  const task = provider.reviewPrepared({ id: '11111111-1111-4111-8111-111111111111', username: 'alice' }, prepared, 'gpt-6-sol', { signal: controller.signal });
+  controller.abort();
+  await assert.rejects(task, error => error.cancelled === true && error.safeCode === 'USER_CANCELLED' && !error.message.includes('private'));
+  assert.equal(sawAbort, true);
+});
+
+test('AI Review maps provider failures to stable safe codes without automatic retries', async () => {
+  const key = 'sk-test-' + 'D'.repeat(28) + 'D7wQ';
+  const store = { read: () => key, has: () => true, validate: value => value, fingerprintFrom: () => '••••D7wQ', status: () => ({ connected: true, fingerprint: '••••D7wQ' }) };
+  const prepared = { instructions: 'system', input: '{}', format: { type: 'json_schema', name: 'review', strict: true, schema: { type: 'object' } }, candidateCount: 1 };
+  for (const [status, code] of [[401, 'OPENAI_AUTH'], [403, 'OPENAI_FORBIDDEN'], [429, 'OPENAI_QUOTA'], [500, 'OPENAI_UNAVAILABLE']]) {
+    let calls = 0;
+    const provider = createOpenAIProvider({ store, fetchImpl: async () => { calls++; return new Response('{}', { status }); } });
+    await assert.rejects(provider.reviewPrepared({ id: '11111111-1111-4111-8111-111111111111', username: 'alice' }, prepared, 'gpt-6-sol'),
+      error => error.safeCode === code);
+    assert.equal(calls, 1);
+  }
+  const timeoutProvider = createOpenAIProvider({ store, fetchImpl: async () => { const error = new Error('private timeout'); error.name = 'TimeoutError'; throw error; } });
+  await assert.rejects(timeoutProvider.reviewPrepared({ id: '11111111-1111-4111-8111-111111111111', username: 'alice' }, prepared, 'gpt-6-sol'),
+    error => error.safeCode === 'OPENAI_TIMEOUT' && !error.message.includes('private'));
+  const invalidProvider = createOpenAIProvider({ store, fetchImpl: async () => new Response(JSON.stringify({ output: [] }), { status: 200, headers: { 'content-type': 'application/json' } }) });
+  await assert.rejects(invalidProvider.reviewPrepared({ id: '11111111-1111-4111-8111-111111111111', username: 'alice' }, prepared, 'gpt-6-sol'),
+    error => error.safeCode === 'AI_INVALID_OUTPUT');
 });

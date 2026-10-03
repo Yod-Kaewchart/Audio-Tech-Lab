@@ -2,7 +2,9 @@
 const SUPPORTED_MODELS = new Map([
   ['gpt-6-sol', { id: 'gpt-6-sol', label: 'GPT-6 Sol', default: true }]
 ]);
-function fail(status, message) { return Object.assign(new Error(message), { status }); }
+function fail(status, message, safeCode) { return Object.assign(new Error(message), { status, ...(safeCode ? { safeCode } : {}) }); }
+function cancelled() { return Object.assign(new Error('AI Review cancelled'), { cancelled: true, safeCode: 'USER_CANCELLED' }); }
+function requestSignal(signal, timeoutMs) { return signal ? AbortSignal.any([signal, AbortSignal.timeout(timeoutMs)]) : AbortSignal.timeout(timeoutMs); }
 
 function createOpenAIProvider({ store, activity, fetchImpl = global.fetch, timeoutMs = 15000, reviewTimeoutMs = 90000 } = {}) {
   if (!store || typeof fetchImpl !== 'function') throw new Error('OpenAI provider dependencies are required');
@@ -12,27 +14,28 @@ function createOpenAIProvider({ store, activity, fetchImpl = global.fetch, timeo
   function identity(user) {
     return { ownerId: user.id, username: user.username, actorId: user.id, actorUsername: user.username };
   }
-  async function availableModels(apiKey) {
+  async function availableModels(apiKey, signal) {
     let response;
     try {
       response = await fetchImpl('https://api.openai.com/v1/models', {
         method: 'GET',
         headers: { Authorization: 'Bearer ' + apiKey, Accept: 'application/json' },
-        signal: AbortSignal.timeout(timeoutMs)
+        signal: requestSignal(signal, timeoutMs)
       });
     } catch (error) {
-      if (error?.name === 'TimeoutError' || error?.name === 'AbortError') throw fail(504, 'OpenAI connection timed out');
-      throw fail(502, 'OpenAI is temporarily unavailable');
+      if (signal?.aborted) throw cancelled();
+      if (error?.name === 'TimeoutError' || error?.name === 'AbortError') throw fail(504, 'OpenAI connection timed out', 'OPENAI_TIMEOUT');
+      throw fail(502, 'OpenAI is temporarily unavailable', 'OPENAI_UNAVAILABLE');
     }
     if (!response.ok) {
-      if (response.status === 401) throw fail(401, 'OpenAI API key was rejected');
-      if (response.status === 403) throw fail(403, 'OpenAI API access is not permitted');
-      if (response.status === 429) throw fail(429, 'OpenAI quota or request limit was reached');
-      throw fail(502, 'OpenAI is temporarily unavailable');
+      if (response.status === 401) throw fail(401, 'OpenAI API key was rejected', 'OPENAI_AUTH');
+      if (response.status === 403) throw fail(403, 'OpenAI API access is not permitted', 'OPENAI_FORBIDDEN');
+      if (response.status === 429) throw fail(429, 'OpenAI quota or request limit was reached', 'OPENAI_QUOTA');
+      throw fail(502, 'OpenAI is temporarily unavailable', 'OPENAI_UNAVAILABLE');
     }
     let data;
-    try { data = await response.json(); } catch { throw fail(502, 'OpenAI returned an invalid response'); }
-    if (!Array.isArray(data?.data)) throw fail(502, 'OpenAI returned an invalid response');
+    try { data = await response.json(); } catch { throw fail(502, 'OpenAI returned an invalid response', 'OPENAI_UNAVAILABLE'); }
+    if (!Array.isArray(data?.data)) throw fail(502, 'OpenAI returned an invalid response', 'OPENAI_UNAVAILABLE');
     const ids = new Set(data.data.map(item => item?.id).filter(id => typeof id === 'string'));
     return [...SUPPORTED_MODELS.values()].filter(model => ids.has(model.id));
   }
@@ -47,14 +50,14 @@ function createOpenAIProvider({ store, activity, fetchImpl = global.fetch, timeo
     }
     return parts.join('\n').trim();
   }
-  async function reviewPrepared(user, prepared, requestedModel = 'auto') {
+  async function reviewPrepared(user, prepared, requestedModel = 'auto', { signal } = {}) {
     if (!prepared || typeof prepared.instructions !== 'string' || typeof prepared.input !== 'string' ||
         !prepared.format || typeof prepared.format !== 'object' || !Number.isInteger(prepared.candidateCount) || prepared.candidateCount < 1)
       throw fail(500, 'AI Review request could not be prepared');
     const apiKey = store.read(user.id);
     let model = requestedModel;
     if (model === undefined || model === null || model === '' || model === 'auto') {
-      const models = await availableModels(apiKey);
+      const models = await availableModels(apiKey, signal);
       model = models.find(item => item.default)?.id || models[0]?.id;
       if (!model) throw fail(409, 'No supported AI Review model is available for this API account');
     }
@@ -72,23 +75,29 @@ function createOpenAIProvider({ store, activity, fetchImpl = global.fetch, timeo
           input: prepared.input,
           text: { format: prepared.format }
         }),
-        signal: AbortSignal.timeout(reviewTimeoutMs)
+        signal: requestSignal(signal, reviewTimeoutMs)
       });
     } catch (error) {
-      if (error?.name === 'TimeoutError' || error?.name === 'AbortError') throw fail(504, 'OpenAI AI Review timed out');
-      throw fail(502, 'OpenAI is temporarily unavailable');
+      if (signal?.aborted) throw cancelled();
+      if (error?.name === 'TimeoutError' || error?.name === 'AbortError') throw fail(504, 'OpenAI AI Review timed out', 'OPENAI_TIMEOUT');
+      throw fail(502, 'OpenAI is temporarily unavailable', 'OPENAI_UNAVAILABLE');
     }
     if (!response.ok) {
-      if (response.status === 401) throw fail(401, 'OpenAI API key was rejected');
-      if (response.status === 403) throw fail(403, 'OpenAI API access is not permitted');
-      if (response.status === 429) throw fail(429, 'OpenAI quota or request limit was reached');
-      throw fail(502, 'OpenAI could not complete AI Review');
+      if (response.status === 401) throw fail(401, 'OpenAI API key was rejected', 'OPENAI_AUTH');
+      if (response.status === 403) throw fail(403, 'OpenAI API access is not permitted', 'OPENAI_FORBIDDEN');
+      if (response.status === 429) throw fail(429, 'OpenAI quota or request limit was reached', 'OPENAI_QUOTA');
+      throw fail(502, 'OpenAI could not complete AI Review', 'OPENAI_UNAVAILABLE');
     }
     let data;
-    try { data = await response.json(); } catch { throw fail(502, 'OpenAI returned an invalid response'); }
+    try { data = await response.json(); } catch { throw fail(502, 'OpenAI returned an invalid response', 'AI_INVALID_OUTPUT'); }
     const outputText = extractOutputText(data);
-    if (!outputText) throw fail(502, 'OpenAI response did not contain AI Review output');
-    return { model, outputText };
+    if (!outputText) throw fail(502, 'OpenAI response did not contain AI Review output', 'AI_INVALID_OUTPUT');
+    const usage = data?.usage && typeof data.usage === 'object' ? {
+      inputTokens: Number.isSafeInteger(data.usage.input_tokens) ? data.usage.input_tokens : null,
+      outputTokens: Number.isSafeInteger(data.usage.output_tokens) ? data.usage.output_tokens : null,
+      totalTokens: Number.isSafeInteger(data.usage.total_tokens) ? data.usage.total_tokens : null,
+    } : { inputTokens: null, outputTokens: null, totalTokens: null };
+    return { model, outputText, usage };
   }
   async function testKey(user, apiKey) {
     const key = store.validate(apiKey);

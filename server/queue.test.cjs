@@ -59,3 +59,38 @@ test('Restart reports interrupted jobs and completed results survive without re-
     queue.close(); restored.close();
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });
+
+test('Running cancellation is opt-in and releases the shared worker safely', async () => {
+  const queue = new ProcessingQueue(); let secondRan = false;
+  const running = queue.submit({
+    owner: 'a', fileId: 'one', kind: 'ai-review', cancellable: true,
+    execute: ({ signal, setPhase }) => new Promise((resolve, reject) => {
+      setPhase('calling-openai');
+      signal.addEventListener('abort', () => reject(Object.assign(new Error('cancelled'), { cancelled: true, safeCode: 'USER_CANCELLED' })), { once: true });
+    })
+  });
+  const waiting = queue.submit({ owner: 'b', fileId: 'two', kind: 'analyze', execute: async () => { secondRan = true; return {}; } });
+  await until(() => queue.get('a', running.jobId).status === 'running');
+  let view = queue.get('a', running.jobId);
+  assert.equal(view.canCancel, true); assert.equal(view.phase, 'calling-openai');
+  view = queue.cancel('a', running.jobId);
+  assert.equal(view.status, 'running'); assert.equal(view.phase, 'cancelling'); assert.equal(view.canCancel, false);
+  await until(() => queue.get('a', running.jobId).status === 'cancelled');
+  assert.equal(queue.get('a', running.jobId).errorCode, 'USER_CANCELLED');
+  await until(() => queue.get('b', waiting.jobId).status === 'succeeded');
+  assert.equal(secondRan, true); assert.ok(!queue.isBusy('a', 'one')); queue.close();
+});
+
+test('Cancellation wins if a cancellable execute ignores abort and resolves afterward', async () => {
+  const queue = new ProcessingQueue(); let release;
+  const job = queue.submit({
+    owner: 'a', fileId: 'race', kind: 'ai-review', cancellable: true,
+    execute: () => new Promise(resolve => { release = resolve; })
+  });
+  await until(() => queue.get('a', job.jobId).status === 'running');
+  queue.cancel('a', job.jobId); release({ shouldNotWin: true });
+  await until(() => queue.get('a', job.jobId).status === 'cancelled');
+  const view = queue.get('a', job.jobId);
+  assert.equal(view.status, 'cancelled'); assert.equal(view.errorCode, 'USER_CANCELLED'); assert.equal(view.result, undefined);
+  queue.close();
+});

@@ -14,6 +14,8 @@ const { createOpenAICredentialStore } = require('./openai-credential-store.cjs')
 const { createOpenAIProvider } = require('./openai.cjs');
 const healthHeaders = require('./health-headers.cjs');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const SAFE_ERROR_CODES = new Set(['USER_CANCELLED', 'OPENAI_AUTH', 'OPENAI_FORBIDDEN', 'OPENAI_QUOTA', 'OPENAI_TIMEOUT', 'OPENAI_UNAVAILABLE', 'AI_INVALID_OUTPUT', 'STALE_ANALYSIS']);
+const aiFailure = (message, safeCode) => Object.assign(new Error(message), { safeCode });
 const loopback = address => ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(address);
 const localHost = host => /^(?:localhost|127\.0\.0\.1|\[::1\])(?::\d{1,5})?$/.test(host);
 function createServer(options = {}) {
@@ -163,13 +165,16 @@ function createServer(options = {}) {
         cleanup();
         const data = await json(req, 4096), file = fileFor(user, data.fileId);
         if (data.requestId !== undefined && !UUID.test(String(data.requestId))) throw fail(400, 'Invalid request ID');
+        if (!UUID.test(String(data.analysisJobId || ''))) throw Object.assign(fail(409, 'Analysis changed. Run Analyze again before AI Review'), { safeCode: 'STALE_ANALYSIS' });
         if (data.model !== undefined && (typeof data.model !== 'string' || data.model.length > 80)) throw fail(400, 'Invalid AI Review model');
         const analyzeJobs = [...queue.jobs.values()].filter(job => job.owner === user.id && job.fileId === data.fileId && job.kind === 'analyze');
         if (analyzeJobs.some(job => job.status === 'queued' || job.status === 'running')) throw fail(409, 'Analyze is still running; wait before AI Review');
-        const analysisJob = analyzeJobs
-          .filter(job => job.status === 'succeeded' && job.result)
+        const analysisJob = queue.jobs.get(data.analysisJobId);
+        const latestAnalysis = analyzeJobs.filter(job => job.status === 'succeeded' && job.result)
           .sort((a, b) => (b.finishedAt || 0) - (a.finishedAt || 0))[0];
-        if (!analysisJob) throw fail(409, 'Run Analyze before AI Review');
+        if (!analysisJob || analysisJob.owner !== user.id || analysisJob.fileId !== data.fileId || analysisJob.kind !== 'analyze' ||
+            analysisJob.status !== 'succeeded' || !analysisJob.result || latestAnalysis?.id !== analysisJob.id)
+          throw Object.assign(fail(409, 'Analysis changed. Run Analyze again before AI Review'), { safeCode: 'STALE_ANALYSIS' });
         if (!Array.isArray(analysisJob.result.detections) || analysisJob.result.detections.length === 0) throw fail(409, 'Analyze found no candidates for AI Review');
         if (!openaiStore.has(user.id)) throw fail(409, 'OpenAI is not connected');
         const script = path.join(options.scripts || __dirname, 'ai-review-bridge.py');
@@ -180,26 +185,45 @@ function createServer(options = {}) {
           fileId: data.fileId,
           filename: path.basename(file).slice(37),
           requestId: data.requestId,
-          signature: JSON.stringify({ route, fileId: data.fileId, analyzeJobId: analysisJob.id, model }),
-          execute: async () => {
-            let preparedText = await runner(script, [file, 'prepare'], JSON.stringify(analysisJob.result));
+          signature: JSON.stringify({ route, fileId: data.fileId, analysisJobId: analysisJob.id, model }),
+          cancellable: true,
+          execute: async ({ signal, setPhase, setTelemetry }) => {
+            setPhase('preparing-evidence');
+            const preparedText = await runner(script, [file, 'prepare'], JSON.stringify(analysisJob.result), { signal });
             let prepared;
-            try { prepared = JSON.parse(preparedText); } catch { throw new Error('AI Review request preparation failed'); }
-            const response = await openai.reviewPrepared(user, prepared, model);
-            const validatedText = await runner(script, [file, 'validate'], JSON.stringify({
+            try { prepared = JSON.parse(preparedText); } catch { throw aiFailure('AI Review request preparation failed', 'AI_INVALID_OUTPUT'); }
+            const baseTelemetry = {
               candidateCount: prepared.candidateCount,
-              outputText: response.outputText
-            }));
+              shortlistBefore: prepared.shortlist?.before,
+              shortlistSelected: prepared.shortlist?.selected,
+            };
+            setTelemetry(baseTelemetry);
+            setPhase('calling-openai');
+            const response = await openai.reviewPrepared(user, prepared, model, { signal });
+            setTelemetry({ ...baseTelemetry, model: response.model, inputTokens: response.usage?.inputTokens,
+              outputTokens: response.usage?.outputTokens, totalTokens: response.usage?.totalTokens });
+            setPhase('validating-response');
+            let validatedText;
+            try {
+              validatedText = await runner(script, [file, 'validate'], JSON.stringify({
+                candidateCount: prepared.candidateCount,
+                outputText: response.outputText
+              }), { signal });
+            } catch (error) {
+              if (error?.cancelled) throw error;
+              throw aiFailure('AI Review validation failed', 'AI_INVALID_OUTPUT');
+            }
             let validated;
-            try { validated = JSON.parse(validatedText); } catch { throw new Error('AI Review validation failed'); }
+            try { validated = JSON.parse(validatedText); } catch { throw aiFailure('AI Review validation failed', 'AI_INVALID_OUTPUT'); }
             if (!Array.isArray(prepared.candidates) || !Array.isArray(validated.items) ||
-                prepared.candidates.length !== validated.items.length) throw new Error('AI Review validation failed');
+                prepared.candidates.length !== validated.items.length) throw aiFailure('AI Review validation failed', 'AI_INVALID_OUTPUT');
             const items = prepared.candidates.map((candidate, index) => {
               const item = validated.items[index];
-              if (item.candidateIndex !== candidate.candidateIndex) throw new Error('AI Review candidate mapping failed');
+              if (item.candidateIndex !== candidate.candidateIndex) throw aiFailure('AI Review candidate mapping failed', 'AI_INVALID_OUTPUT');
               return { ...candidate, ...item };
             });
-            return { model: response.model, summary: validated.summary, shortlist: prepared.shortlist, items };
+            setPhase('review-ready');
+            return { analysisJobId: analysisJob.id, model: response.model, summary: validated.summary, shortlist: prepared.shortlist, items };
           }
         });
         return send(res, 202, job);
@@ -372,7 +396,7 @@ function createServer(options = {}) {
         lifecycle.removeExport(user.id, data.jobId, 'manual-delete', user); return send(res, 200, { ok: true, jobId: data.jobId });
       }
       throw fail(404, 'Not found');
-    } catch (error) { send(res, error.status || 500, { error: error.status ? error.message : 'Request could not be completed' }); }
+    } catch (error) { send(res, error.status || 500, { error: error.status ? error.message : 'Request could not be completed', ...(SAFE_ERROR_CODES.has(error.safeCode) ? { errorCode: error.safeCode } : {}) }); }
   });
   server.on('close', () => { clearInterval(timer); queue.close(); runner.close?.(); spotify.close(); auth.close(); if (queue.running) queue.afterRunning = () => activity.close(); else activity.close(); });
   return server;

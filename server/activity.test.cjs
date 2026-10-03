@@ -10,7 +10,8 @@ test('Audit filters query all rows, preserve legacy events, and paginate while n
   let store = new ActivityStore(file);
   try {
     store.record({ id: crypto.randomUUID(), owner: ownerId, username: 'yod', kind: 'analyze', fileId: crypto.randomUUID(), queuedAt: Date.now(), startedAt: Date.now(), finishedAt: Date.now(), status: 'succeeded', error: 'SECRET-STACK', result: { waveform: ['SECRET-RESULT'] } });
-    store.record({ id: crypto.randomUUID(), owner: ownerId, username: 'yod', kind: 'ai-review', fileId: crypto.randomUUID(), queuedAt: Date.now(), startedAt: Date.now(), finishedAt: Date.now(), status: 'succeeded', result: { rationale: 'SECRET-AI-RESULT' } });
+    store.record({ id: crypto.randomUUID(), owner: ownerId, username: 'yod', kind: 'ai-review', fileId: crypto.randomUUID(), queuedAt: Date.now(), startedAt: Date.now(), finishedAt: Date.now(), status: 'succeeded', result: { rationale: 'SECRET-AI-RESULT' }, telemetry: { model: 'gpt-6-sol', candidateCount: 16, shortlistBefore: 20, shortlistSelected: 16, inputTokens: 1200, outputTokens: 300, totalTokens: 1500, prompt: 'SECRET-AI-PROMPT', rawResponse: 'SECRET-AI-RAW' } });
+    store.record({ id: crypto.randomUUID(), owner: ownerId, username: 'yod', kind: 'ai-review', fileId: crypto.randomUUID(), queuedAt: Date.now(), startedAt: Date.now(), finishedAt: Date.now(), status: 'failed', error: 'SECRET-PROVIDER-STACK', errorCode: 'OPENAI_TIMEOUT', telemetry: { model: 'gpt-6-sol', candidateCount: 8, shortlistBefore: 12, shortlistSelected: 8, apiKey: 'SECRET-API-KEY' } });
     store.deletion({ ownerId, username: 'deleteduser', kind: 'upload', filename: 'Album.wav', reason: 'auto-cleanup' });
     store.event({ type: 'openai-connected', ownerId, username: 'yod' });
     store.event({ type: 'openai-test-failed', status: 'failed', ownerId, username: 'yod' });
@@ -32,7 +33,10 @@ test('Audit filters query all rows, preserve legacy events, and paginate while n
     assert.equal(store.audit({ username: 'nobody' }).entries.length, 0);
     for (const input of [{ limit: 101 }, { before: 0 }, { type: 'secret' }, { category: 'invalid' }, { status: 'invalid' }, { username: "yod' OR 1=1" }]) assert.throws(() => store.audit(input), { status: 400 });
     const login = JSON.stringify(store.audit({ type: 'login', limit: 100 })); assert.ok(!login.includes('SECRET-'));
-    const processing = JSON.stringify(store.audit({ category: 'processing', limit: 100 })); assert.ok(!processing.includes('SECRET-AI-RESULT')); assert.ok(!processing.includes('SECRET-RESULT')); assert.ok(!processing.includes('SECRET-STACK'));
+    const aiReview = store.audit({ type: 'ai-review', status: 'completed' }).entries[0];
+    assert.equal(aiReview.model, 'gpt-6-sol'); assert.equal(aiReview.candidateCount, 16); assert.equal(aiReview.shortlistBefore, 20); assert.equal(aiReview.shortlistSelected, 16); assert.equal(aiReview.totalTokens, 1500);
+    const failedReview = store.audit({ type: 'ai-review', status: 'failed' }).entries[0]; assert.equal(failedReview.errorCode, 'OPENAI_TIMEOUT'); assert.equal(failedReview.candidateCount, 8);
+    const processing = JSON.stringify(store.audit({ category: 'processing', limit: 100 })); assert.ok(!processing.includes('SECRET-AI-RESULT')); assert.ok(!processing.includes('SECRET-RESULT')); assert.ok(!processing.includes('SECRET-STACK')); assert.ok(!processing.includes('SECRET-AI-PROMPT')); assert.ok(!processing.includes('SECRET-AI-RAW')); assert.ok(!processing.includes('SECRET-PROVIDER-STACK')); assert.ok(!processing.includes('SECRET-API-KEY'));
     const all = store.audit({ limit: 100 }).entries.map(e => e.auditId);
     store.close(); store = new ActivityStore(file); assert.deepEqual(store.audit({ limit: 100 }).entries.map(e => e.auditId), all);
   } finally { store.close(); fs.rmSync(root, { recursive: true, force: true }); }
