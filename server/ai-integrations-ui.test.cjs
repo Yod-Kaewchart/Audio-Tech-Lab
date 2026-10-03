@@ -17,7 +17,7 @@ test('AI & Integrations UI is user-visible, provider-driven and never stores API
   assert.match(html, /id="ai-openai-key" type="password"[^>]*data-no-password-toggle[^>]*autocomplete="off"/);
   assert.ok(auth.includes(':not([data-no-password-toggle])'));
   assert.ok(html.includes('ai-integrations.css?v=phase2'));
-  assert.ok(html.indexOf('ai-integrations.js?v=phase3') < html.indexOf('auth.js?v=ai-integrations2'));
+  assert.ok(html.indexOf('ai-integrations.js?v=phase3') < html.indexOf('auth.js?v=performance1'));
   assert.equal(/localStorage|sessionStorage|indexedDB/.test(js), false);
   for (const route of ['/ai/providers', '/ai/openai/test', '/ai/openai/credential', '/ai/openai/models']) assert.ok(js.includes(route), route);
   assert.equal(/gpt-[a-z0-9.-]+/i.test(html + js), false, 'frontend must not hard-code model IDs');

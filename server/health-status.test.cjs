@@ -141,9 +141,34 @@ test('Background polling keeps the prior online UI stable, deduplicates requests
   }
   for (const event of ['online', 'pageshow', 'visibilitychange']) {
     const count = requests.length;
-    page.events.get(event)(); await page.boot();
+    page.events.get(event)({ persisted: true }); await page.boot();
     assert.equal(requests.length, count + 1);
   }
+});
+
+test('Initial pageshow does not duplicate health/auth work; unchanged polls do not repaint status', async () => {
+  let calls = 0;
+  const page = browser(url => { calls++; return reply(url); });
+  await page.boot();
+  const renders = page.states.length;
+  page.events.get('pageshow')({ persisted: false }); await turn();
+  assert.equal(calls, 1);
+  await page.check(); assert.equal(calls, 2);
+  assert.equal(page.states.length, renders);
+  page.events.get('pageshow')({ persisted: true }); await turn();
+  assert.equal(calls, 3);
+});
+
+test('Network transition holds the health flight until the aborted request settles', async () => {
+  let calls = 0, finish;
+  const page = browser(url => { calls++; return new Promise(resolve => { finish = () => resolve(reply(url)); }); });
+  page.events.get('offline')();
+  page.events.get('online')();
+  const pending = page.check();
+  assert.equal(calls, 1, 'no overlapping probe after invalidation');
+  finish(); assert.equal(await pending, false); assert.equal(page.state(), 'offline');
+  const next = page.check(); assert.equal(calls, 2);
+  finish(); assert.equal(await next, true); assert.equal(page.state(), 'online');
 });
 
 test('Offline waiters resume only after a fresh successful health check', async () => {

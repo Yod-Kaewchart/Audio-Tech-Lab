@@ -56,7 +56,7 @@ async function main(){
   await page.locator('#file-remove').click();await page.locator('#file-result').waitFor({state:'hidden'});
   assert.ok(!source(first));assert.ok(!existsOutput(exported));assert.ok(!fs.existsSync(path.join(root,'previews',owner,first+'.flac')));
   assert.equal((await api(context,'/jobs')).data.jobs.length,0);assert.equal(await page.locator('#waveform-panel').isVisible(),false);assert.equal(await page.locator('#track-results').isVisible(),false);
-  await page.reload();await page.waitForFunction(()=>document.querySelector('#uploads-status').textContent==='No uploaded files on Modify');
+  await page.reload();await page.waitForFunction(()=>document.querySelector('#uploads-status').textContent==='No uploaded files on Server');
   results.push('Split remove: source/preview/export/history gone, waveform/tracks reset, reload stays deleted');
   await page.goto(base+'/demo/merge/');await page.locator('#merge-workspace').waitFor({state:'visible'});
   await page.locator('#merge-files').setInputFiles([{name:'merge-a.wav',mimeType:'audio/wav',buffer:wave()},{name:'merge-b.wav',mimeType:'audio/wav',buffer:wave()}]);
@@ -80,8 +80,9 @@ async function main(){
   await admin.locator('#storage-toggle').click();await admin.locator('#refresh-admin-storage').click();
   await admin.route('**/api/admin/storage/delete',r=>r.fulfill({status:500,contentType:'application/json',body:'{"error":"Injected admin delete failure"}'}));
   await admin.locator('#admin-storage-list .uploaded-file-row').filter({hasText:'Export '+adminExport.jobId.slice(0,8)}).getByRole('button',{name:'Delete',exact:true}).click();
-  await admin.waitForFunction(()=>document.querySelector('#admin-storage-summary').textContent.includes('Injected admin delete failure'));assert.ok(existsOutput(adminExport.jobId));
+  await admin.waitForFunction(()=>window.demoServer.state==='offline'&&document.querySelector('#admin-storage-summary').textContent===window.demoServer.offlineText);assert.ok(existsOutput(adminExport.jobId));
   await admin.unroute('**/api/admin/storage/delete');
+  await admin.evaluate(()=>window.demoServer.check());await admin.waitForFunction(()=>window.demoServer.state==='online');
   await admin.locator('#admin-storage-list .uploaded-file-row').filter({hasText:'Export '+adminExport.jobId.slice(0,8)}).getByRole('button',{name:'Delete',exact:true}).click();
   await admin.waitForFunction(id=>![...document.querySelectorAll('#admin-storage-list strong')].some(e=>e.textContent.includes(id.slice(0,8))),adminExport.jobId);assert.ok(!existsOutput(adminExport.jobId));assert.ok(source(adminTarget));
   await admin.locator('#admin-storage-list .uploaded-file-row').filter({hasText:'admin-delete-target.wav'}).getByRole('button',{name:'Delete',exact:true}).click();

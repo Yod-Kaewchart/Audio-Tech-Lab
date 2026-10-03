@@ -18,7 +18,7 @@ test('Phase 4 AI Review UI is cancellable, snapshot-bound and protects manual ed
   assert.ok(html.includes('04 / AI REVIEW')); assert.ok(html.includes('05 / EXPORT'));
   assert.ok(html.includes('Audio stays on the Server'));
   assert.ok(html.includes('ai-review.css?v=phase4')); assert.ok(html.includes('ai-review.js?v=phase4'));
-  assert.ok(html.includes('demo.js?v=phase4')); assert.ok(html.includes('queue.js?v=phase4'));
+  assert.ok(html.includes('demo.js?v=performance1')); assert.ok(html.includes('queue.js?v=performance1'));
   assert.ok(js.includes("runProcessingJob('/ai/review'")); assert.ok(js.includes('analysisJobId: snapshot.analysisJobId'));
   assert.ok(js.includes("queuedJSON('/jobs/' + currentJobId + '/cancel'"));
   assert.ok(js.includes("phaseText[job.phase]")); assert.ok(js.includes("'calling-openai'"));

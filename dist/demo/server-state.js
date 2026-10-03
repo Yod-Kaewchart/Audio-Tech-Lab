@@ -31,7 +31,7 @@
     const previous = state;
     state = next;
     window.demoServerState = next;
-    render(next);
+    if (previous !== next) render(next);
     if (next === 'online') {
       for (const resolve of waiters) resolve();
       waiters.clear();
@@ -84,7 +84,7 @@
         clearTimeout(timeout);
         controller.abort();
       }
-    })().finally(() => { if (requestId === sequence) { inFlight = null; activeController = null; } });
+    })().finally(() => { inFlight = null; activeController = null; });
     return inFlight;
   }
 
@@ -102,7 +102,8 @@
   }
   function isFresh() { return state === 'online' && Date.now() - verifiedAt >= 0 && Date.now() - verifiedAt < maxAge; }
   function unavailable() {
-    ++sequence; activeController?.abort(); activeController = null; inFlight = null; verifiedAt = 0;
+    // Keep the flight locked until the aborted request settles or times out.
+    ++sequence; activeController?.abort(); verifiedAt = 0;
     setState('offline');
     return Object.assign(new Error(offlineText), { offline: true });
   }
@@ -140,7 +141,7 @@
   setInterval(() => { if (!document.hidden) void probe(); }, 15000);
   window.addEventListener('offline', unavailable);
   window.addEventListener('online', () => { void probe({ reason: 'resume' }); });
-  window.addEventListener('pageshow', () => { void probe({ reason: 'resume' }); });
+  window.addEventListener('pageshow', event => { if (event.persisted) void probe({ reason: 'resume' }); });
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) void probe({ reason: 'resume', visibleChecking: state === 'online' && !isFresh() });
   });

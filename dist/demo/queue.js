@@ -30,15 +30,19 @@ async function runProcessingJob(route, data, progress, { onSubmitted, onComplete
     }
   }
 }
-let jobsRefreshing = false;
+let jobsRefreshing = false, jobsActive = false, jobsCheckedAt = 0, jobsSnapshot = null;
 async function refreshProcessingJobs() {
   if (jobsRefreshing || !window.demoServer?.isOnline() || !window.demoAuth || window.demoAuth.user.mustChange) return;
   const username = window.demoAuth.user.username; jobsRefreshing = true;
   try {
     const value = await queuedJSON('/jobs');
     if (username !== window.demoAuth?.user.username) return;
-    jobsContainer.replaceChildren();
     const jobs = value.jobs || [], active = jobs.filter(job => ['queued', 'running'].includes(job.status));
+    jobsActive = active.length > 0; jobsCheckedAt = Date.now();
+    const snapshot = JSON.stringify([username, active.length, jobs.slice(0, 8)]);
+    if (snapshot === jobsSnapshot) return;
+    jobsSnapshot = snapshot;
+    jobsContainer.replaceChildren();
     jobsMessage.textContent = active.length ? active.length + ' งานของคุณ · ประมวลผลร่วมกันครั้งละหนึ่งงาน' : 'ไม่มีงานรอคิว · ประมวลผลครั้งละหนึ่งงาน';
     for (const job of jobs.slice(0, 8)) {
       const row = document.createElement('div'); row.className = 'upload-file-row';
@@ -55,8 +59,12 @@ async function refreshProcessingJobs() {
       }
       jobsContainer.append(row);
     }
-  } catch (error) { if (username === window.demoAuth?.user.username) jobsMessage.textContent = error.message; }
+  } catch (error) { jobsSnapshot = null; if (username === window.demoAuth?.user.username) jobsMessage.textContent = error.message; }
   finally { jobsRefreshing = false; }
 }
 document.querySelector('#refresh-processing-jobs').addEventListener('click', refreshProcessingJobs);
-setInterval(refreshProcessingJobs, 3000);
+setInterval(() => {
+  if (!document.hidden && (jobsActive || Date.now() - jobsCheckedAt >= 15000)) refreshProcessingJobs();
+}, 3000);
+window.addEventListener('demo-auth-changed', () => { jobsSnapshot = null; jobsCheckedAt = 0; });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshProcessingJobs(); });

@@ -48,7 +48,7 @@ function renderAuth(value) {
   workspace.hidden = !signedIn || mustChange;
   adminPanel.hidden = !signedIn || mustChange || value.user.role !== 'admin';
   adminStoragePanel.hidden = !signedIn || mustChange || value.user.role !== 'admin';
-  if (signedIn && !mustChange && value.user.role === 'admin') loadAdminStorage();
+  if (signedIn && !mustChange && value.user.role === 'admin' && adminStoragePanel.open) loadAdminStorage();
   document.querySelector('#account-name').textContent = signedIn ? value.user.username : '';
   if (signedIn && !mustChange) { loadUploads(); refreshProcessingJobs(); }
 }
