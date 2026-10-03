@@ -56,3 +56,22 @@
 @media(max-width:800px){.hero-image{background-image:linear-gradient(90deg,#0d0f11 0%,rgba(13,15,17,.12) 45%,rgba(13,15,17,.3) 100%),url('hero-audio-lab-mobile.webp')}}
 .project-detail.is-pending,.tech-note-link.is-pending,.tech-notes-all.is-pending{border:0;padding:0;min-height:0;color:var(--muted);font-size:14px;opacity:1;cursor:default;background:transparent}
 .project-detail.is-pending:hover{background:transparent;color:var(--muted)}
+
+/* Home: Web Demo introduction, following OhmGadget. */
+#web-demo{background:radial-gradient(ellipse at 90% 0%,#27271f 0%,#111516 55%);border-bottom:1px solid var(--line)}
+#web-demo .demo-home-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+#web-demo .demo-home-tool{min-width:0;padding:30px;border:1px solid var(--line);background:rgba(11,13,15,.55)}
+#web-demo .demo-home-tool-index{font:700 11px "DM Sans",sans-serif;letter-spacing:.16em;color:var(--gold)}
+#web-demo .demo-home-tool h3{font:600 26px "DM Sans",sans-serif;margin:28px 0 14px}
+#web-demo .demo-home-tool p{margin:0;color:var(--muted);font-size:15px;line-height:1.8}
+#web-demo .demo-home-details{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,5vw,70px);margin-top:40px;padding-top:36px;border-top:1px solid var(--line)}
+#web-demo .demo-home-details h3{font-size:21px;line-height:1.5;margin-bottom:16px}
+#web-demo .demo-home-purpose p{color:var(--muted);font-size:16px;line-height:1.85;margin-bottom:18px}
+#web-demo .demo-home-purpose .demo-home-ai{padding-left:18px;border-left:2px solid var(--gold-dark);font-size:14px;margin-bottom:0}
+#web-demo .demo-home-steps{margin:0 0 24px;padding-left:24px;color:#c5cbc9;font-size:15px;line-height:1.8}
+#web-demo .demo-home-steps li{padding-left:6px;margin-bottom:6px}
+#web-demo .demo-home-steps li::marker{color:var(--gold);font-weight:700}
+#web-demo .demo-home-start .button{gap:18px;min-height:50px}
+#web-demo .demo-home-note{font-size:13px;color:var(--muted);margin:14px 0 0}
+@media(max-width:1000px){#web-demo .demo-home-tool{padding:22px}#web-demo .demo-home-tools{gap:14px}#web-demo .demo-home-details{grid-template-columns:1fr;gap:30px}}
+@media(max-width:700px){#web-demo .demo-home-tools{grid-template-columns:1fr}#web-demo .demo-home-tool h3{margin-top:18px}#web-demo .demo-home-details{margin-top:28px;padding-top:28px}}
