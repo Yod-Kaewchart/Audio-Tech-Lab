@@ -105,31 +105,54 @@ function setServerStatus(state) {
   serverStatus.className = 'server-status is-' + state;
   serverStatus.querySelector('span').textContent = state === 'online' ? 'SERVER ONLINE' : state === 'offline' ? 'SERVER OFFLINE' : 'SERVER CHECKING';
 }
-async function checkServerStatus() {
-  try {
-    const health = await authRequest('/health');
-    const online = health.authentication === true && (!health.service || health.service === 'audio-tech-labs-demo') && (!health.apiVersion || health.apiVersion === 1);
-    setServerStatus(online ? 'online' : 'offline');
-    return online;
-  } catch { setServerStatus('offline'); return false; }
+let healthRequest = null, connectionRequest = null, connectionNeedsRetry = true;
+function checkServerStatus() {
+  if (healthRequest) return healthRequest;
+  // Previous success is not evidence for the request now being checked.
+  setServerStatus('checking');
+  healthRequest = (async () => {
+    const controller = new AbortController(), started = Date.now();
+    let timeout;
+    try {
+      const nonce = crypto.randomUUID();
+      const deadline = new Promise((_, reject) => {
+        timeout = setTimeout(() => { controller.abort(); reject(new Error('Health timeout')); }, 5000);
+      });
+      const probe = (async () => {
+        const response = await fetch(API + '/health?nonce=' + encodeURIComponent(nonce), {
+          cache: 'no-store', credentials: 'same-origin', redirect: 'error', signal: controller.signal,
+          headers: { Accept: 'application/json', 'Cache-Control': 'no-store, no-cache', Pragma: 'no-cache' }
+        });
+        if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) return false;
+        const health = await response.json();
+        return health?.ok === true && health.service === 'audio-tech-labs-demo' && health.apiVersion === 1 && health.authentication === true && health.nonce === nonce;
+      })();
+      const online = await Promise.race([probe, deadline]) === true && Date.now() - started < 5000;
+      setServerStatus(online ? 'online' : 'offline');
+      return online;
+    } catch { setServerStatus('offline'); return false; }
+    finally { clearTimeout(timeout); controller.abort(); }
+  })().finally(() => { healthRequest = null; });
+  return healthRequest;
 }
-async function connectDemo() {
+function connectDemo() {
+  if (connectionRequest) return connectionRequest;
+  connectionRequest = connectDemoSession().finally(() => { connectionRequest = null; });
+  return connectionRequest;
+}
+async function connectDemoSession() {
   const retry = document.querySelector('#retry-connection');
   const loginButton = document.querySelector('#login-form button');
   retry.hidden = true; loginButton.disabled = true;
   authMessage.textContent = 'กำลังตรวจสอบบริการเดโม…';
-  setServerStatus('checking');
   try {
-    const health = await authRequest('/health');
-    setServerStatus('online');
-    // The existing authenticated backend may still be serving during restart.
-    // Public deployment separately requires the versioned health contract.
-    if (health.authentication !== true || (health.service && health.service !== 'audio-tech-labs-demo') || (health.apiVersion && health.apiVersion !== 1)) throw new Error('บริการเดโมยังไม่พร้อม');
+    if (!await checkServerStatus()) throw new Error('บริการเดโมยังไม่พร้อม');
     try { renderAuth(await authRequest('/auth/me')); }
     catch (error) { if (error.status !== 401) throw error; renderAuth(null); }
     authMessage.textContent = ''; loginButton.disabled = false;
+    connectionNeedsRetry = false;
   } catch {
-    setServerStatus('offline');
+    connectionNeedsRetry = true;
     authMessage.textContent = 'บริการเดโมไม่พร้อมใช้งานในขณะนี้ กรุณาลองเชื่อมต่ออีกครั้งภายหลัง';
     retry.hidden = false;
   }
@@ -137,4 +160,8 @@ async function connectDemo() {
 document.querySelector('#retry-connection').addEventListener('click', connectDemo);
 renderAuth(null);
 connectDemo();
-setInterval(checkServerStatus, 15000);
+function refreshServerStatus() { return connectionNeedsRetry && !connectionRequest ? connectDemo() : checkServerStatus(); }
+setInterval(refreshServerStatus, 15000);
+window.addEventListener('online', refreshServerStatus);
+window.addEventListener('pageshow', refreshServerStatus);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshServerStatus(); });

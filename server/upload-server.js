@@ -12,6 +12,7 @@ const { handleMerge } = require('./merge-handler.cjs');
 const { createSpotify } = require('./spotify.cjs');
 const { createOpenAICredentialStore } = require('./openai-credential-store.cjs');
 const { createOpenAIProvider } = require('./openai.cjs');
+const healthHeaders = require('./health-headers.cjs');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 function createServer(options = {}) {
   const root = options.root || path.resolve(__dirname, '..');
@@ -58,9 +59,9 @@ function createServer(options = {}) {
     if (process.env.ATL_DEMO_ORIGIN) origins.add(new URL(process.env.ATL_DEMO_ORIGIN).origin);
     return origins;
   }
-  function send(res, code, data) {
+  function send(res, code, data, headers = {}) {
     if (res.destroyed || res.writableEnded) return;
-    res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' }); res.end(JSON.stringify(data));
+    res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...headers }); res.end(JSON.stringify(data));
   }
   spotify = createSpotify({ auth, send, allowedOrigins, redirectUri: options.spotifyRedirectUri });
   openai = createOpenAIProvider({ store: openaiStore, activity, fetchImpl: options.openaiFetch || global.fetch, timeoutMs: options.openaiTimeoutMs });
@@ -113,7 +114,13 @@ function createServer(options = {}) {
     try {
       const rawPath = req.url.split('?')[0];
       const route = rawPath.startsWith('/download/') ? rawPath : new URL(req.url, 'http://localhost').pathname;
-      if (req.method === 'GET' && route === '/health') return send(res, 200, { ok: true, service: 'audio-tech-labs-demo', apiVersion: 1, maxMB: 2000, chunkMB: 8, authentication: true, processingConcurrency: 1 });
+      if (req.method === 'GET' && route === '/health') {
+        const nonce = new URL(req.url, 'http://localhost').searchParams.get('nonce');
+        // A fresh challenge ties the response to this runtime request, even if an
+        // intermediary mistakenly serves a cached health response.
+        return send(res, 200, { ok: true, service: 'audio-tech-labs-demo', apiVersion: 1, maxMB: 2000, chunkMB: 8, authentication: true, processingConcurrency: 1,
+          ...(nonce && /^[a-zA-Z0-9-]{1,64}$/.test(nonce) ? { nonce } : {}) }, healthHeaders);
+      }
       if (await spotify.handle(req, res, route)) return;
       if (await auth.handle(req, res, route, json, send, allowedOrigins)) return;
       auth.originOK(req, allowedOrigins);
