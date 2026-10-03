@@ -84,6 +84,7 @@ test('Health proxy strips validators, never caches and reports unreachable backe
   assert.equal(headers.get('cache-control'), 'no-store, no-cache');
   assert.equal(response.headers.get('cache-control'), 'no-store, no-cache, must-revalidate');
   assert.equal(response.headers.get('cloudflare-cdn-cache-control'), 'no-store');
+  assert.deepEqual(await response.json(), { ok: true }, 'Proxy must never invent the backend health contract');
 
   global.fetch = async () => { throw new TypeError('tunnel unavailable'); };
   const offline = await onRequest({

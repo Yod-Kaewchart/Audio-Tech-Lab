@@ -114,6 +114,7 @@ function createServer(options = {}) {
   const cleanup = lifecycle.cleanup;
   cleanup();
   const timer = setInterval(() => { try { cleanup(); } catch { console.error('Cleanup could not complete'); } }, 60 * 1000); timer.unref();
+  let maintenanceUntil = 0, mutations = 0;
   const server = http.createServer(async (req, res) => {
     try {
       const host = String(req.headers.host || '').toLowerCase();
@@ -128,6 +129,23 @@ function createServer(options = {}) {
       }
       const rawPath = req.url.split('?')[0];
       const route = rawPath.startsWith('/download/') ? rawPath : new URL(req.url, 'http://localhost').pathname;
+      if (route === '/internal/maintenance') {
+        if (!localHost(host) || !loopback(req.socket.remoteAddress) || req.headers.origin || req.headers['x-forwarded-proto'] || req.headers['x-forwarded-host']) throw fail(403, 'Local maintenance only');
+        if (req.method !== 'POST') throw fail(405, 'POST required');
+        const data = await json(req);
+        if (data.enabled !== true && data.enabled !== false) throw fail(400, 'enabled must be boolean');
+        const activeJobs = [...queue.jobs.values()].filter(job => ['queued', 'running'].includes(job.status)).length;
+        if (data.enabled && (activeJobs || sessions.size || mutations)) return send(res, 409, { error: 'Backend is busy; nothing was stopped', activeJobs, uploads: sessions.size, mutations });
+        maintenanceUntil = data.enabled ? Date.now() + 120000 : 0;
+        return send(res, 200, { ok: true, maintenance: data.enabled, expiresAt: maintenanceUntil });
+      }
+      if (maintenanceUntil > Date.now() && (route === '/health' || !['GET', 'HEAD'].includes(req.method))) return send(res, 503, { error: 'Backend maintenance' }, healthHeaders);
+      if (!['GET', 'HEAD'].includes(req.method)) {
+        mutations++;
+        let finished = false;
+        const done = () => { if (!finished) { finished = true; mutations--; } };
+        res.once('finish', done); res.once('close', done);
+      }
       if (req.method === 'GET' && route === '/health') {
         const nonce = new URL(req.url, 'http://localhost').searchParams.get('nonce');
         // A fresh challenge ties the response to this runtime request, even if an

@@ -34,8 +34,9 @@ function browser(fetchHealth) {
     demoServer: null,
     demoServerState: 'checking'
   };
+  let now = Date.now();
   const context = vm.createContext({
-    document, window, crypto, AbortController, Date,
+    document, window, crypto, AbortController, Date: class extends Date { static now() { return now; } },
     CustomEvent: class { constructor(type, init) { this.type = type; this.detail = init?.detail; } },
     setTimeout: (callback, ms) => { timers.set(++timerId, { callback, ms }); return timerId; },
     clearTimeout: id => timers.delete(id),
@@ -44,7 +45,10 @@ function browser(fetchHealth) {
   });
   vm.runInContext(source, context);
   return {
-    node, states, timers, intervals, events, windowEvents,
+    node, states, timers, intervals, events, windowEvents, document,
+    advance: ms => { now += ms; },
+    request: (url, options) => window.demoServer.request(url, options),
+    reloadModule: () => vm.runInContext(source, context),
     status: () => node('#server-status span').textContent,
     state: () => vm.runInContext('window.demoServer.state', context),
     boot: () => vm.runInContext('window.demoServer.check()', context),
@@ -81,6 +85,29 @@ test('Browser requires every contract field and a fresh nonce; errors and edge/s
     if (!online) assert.ok(!page.states.includes('server-status is-online'), 'boot must never flash online');
     assert.equal(page.timers.size, 0);
   });
+});
+
+test('Stale health is rechecked before mutation; offline invalidates an older successful response', async () => {
+  let healthCalls = 0, posts = 0, fail = false, finish;
+  const page = browser((url, options) => {
+    if (!url.includes('/health')) { posts++; return new Response('{}', { headers: { 'Content-Type': 'application/json' } }); }
+    healthCalls++;
+    if (fail) throw new Error('unreachable');
+    return reply(url);
+  });
+  await page.boot();
+  page.advance(21000); fail = true;
+  await assert.rejects(page.request('/api/auth/login', { method: 'POST' }), error => error.offline);
+  assert.equal(posts, 0); assert.equal(healthCalls, 2); assert.equal(page.state(), 'offline');
+  fail = false; await page.check();
+  await page.request('/api/auth/login', { method: 'POST' }); assert.equal(posts, 1);
+  page.reloadModule(); assert.equal(page.intervals.length, 1);
+  page.document.hidden = true;
+  const count = healthCalls; page.intervals[0].callback(); assert.equal(healthCalls, count);
+
+  const racing = browser(url => new Promise(resolve => { finish = () => resolve(reply(url)); }));
+  racing.events.get('offline')(); finish(); await turn();
+  assert.equal(racing.state(), 'offline');
 });
 
 test('Background polling keeps the prior online UI stable, deduplicates requests and recovers automatically', async () => {

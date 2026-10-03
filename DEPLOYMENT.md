@@ -1,5 +1,7 @@
 # Audio Tech Labs: การเผยแพร่และ Web Demo
 
+> Current Cloudflare Pages + EliteBook topology and restart/rollback instructions: [STABILITY.md](STABILITY.md). The GitHub Pages / port 8080 topology below is historical.
+
 ## ปลายทางที่ใช้งาน
 
 - เว็บหลัก `https://audiotechlabs.com` ใช้ **GitHub Pages** ตามการยืนยันของเจ้าของโครงการ

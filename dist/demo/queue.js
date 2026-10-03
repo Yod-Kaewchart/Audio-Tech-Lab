@@ -11,17 +11,8 @@ async function runProcessingJob(route, data, progress) {
   const epoch = processingEpoch, username = window.demoAuth?.user.username;
   const request = { ...data, requestId: crypto.randomUUID() };
   function checkView() { if (epoch !== processingEpoch || username !== window.demoAuth?.user.username) throw Object.assign(new Error('Processing view changed'), { stale: true }); }
-  let job;
-  for (let attempt = 0; !job; attempt++) {
-    checkView();
-    try { job = await queuedJSON(route, request); }
-    catch (error) {
-      checkView();
-      if (error.offline) { await window.demoServer.whenOnline(); continue; }
-      if (error.status || attempt >= 2) throw error;
-      await pausePolling(1500);
-    }
-  }
+  checkView();
+  let job = await queuedJSON(route, request);
   refreshProcessingJobs();
   let networkFailures = 0;
   for (;;) {
@@ -41,7 +32,7 @@ async function runProcessingJob(route, data, progress) {
 }
 let jobsRefreshing = false;
 async function refreshProcessingJobs() {
-  if (jobsRefreshing || !window.demoAuth || window.demoAuth.user.mustChange) return;
+  if (jobsRefreshing || !window.demoServer?.isOnline() || !window.demoAuth || window.demoAuth.user.mustChange) return;
   const username = window.demoAuth.user.username; jobsRefreshing = true;
   try {
     const value = await queuedJSON('/jobs');

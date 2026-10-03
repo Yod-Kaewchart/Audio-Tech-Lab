@@ -14,12 +14,10 @@ player.onended=()=>{if(playingTrack){player.currentTime=0;player.pause();updateP
 player.onerror=()=>{const t=playingTrack;if(!t)return;const ext=(t.file.name.split('.').pop()||'').toLowerCase();if(t.previewMode==='stream'&&ext==='m4a'&&t.uploaded){prepareTrackPreview(t);return}t.previewStatus='PLAYBACK UNAVAILABLE';render()};
 
 async function request(route,options={}){
-  window.demoServer?.requireOnline();
   const h=new Headers(options.headers||{});
   if(options.method&&options.method!=='GET'&&csrf)h.set('X-CSRF-Token',csrf);
-  let r;
-  try { r=await fetch(API+route,{...options,headers:h,credentials:'same-origin',cache:'no-store'}); }
-  catch(cause){ void window.demoServer?.check(); throw Object.assign(new Error(window.demoServer?.offlineText||'เซิร์ฟเวอร์ประมวลผลออฟไลน์ชั่วคราว'),{offline:true,cause}); }
+  const r=await window.demoServer.request(API+route,{...options,headers:h});
+  if(r.status===401)window.dispatchEvent(new Event('auth-required'));
   const j=await r.json();
   if(!r.ok)throw Object.assign(new Error(j.error||'Request failed'),{status:r.status});
   return j;
@@ -212,6 +210,8 @@ window.addEventListener('demo-server-state',({detail})=>{
 render();
 if(window.demoServer?.isOnline()===true)void connectMerge();
 else if(window.demoServer?.state==='offline'){document.querySelector('#auth-status').textContent=window.demoServer.offlineText;document.querySelector('#login-link').hidden=false}
+window.addEventListener('demo-server-verified',({detail})=>{if(detail.reason==='resume')void connectMerge()});
+window.addEventListener('auth-required',()=>{csrf='';document.querySelector('#merge-workspace').hidden=true;document.querySelector('#auth-gate').hidden=false;document.querySelector('#auth-status').textContent='เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง';document.querySelector('#login-link').hidden=false});
 
 window.demoResourceView=()=>({ids:tracks.filter(t=>t.uploaded).map(t=>t.id),exportId:currentExportId});
 window.addEventListener('demo-resources',({detail:{view,state}})=>{

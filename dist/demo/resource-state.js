@@ -5,7 +5,7 @@
   let refreshing = false;
   const channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel('demo-resource-changes') : null;
   async function refresh() {
-    if (refreshing || !window.demoResourceView) return;
+    if (refreshing || !window.demoResourceView || !window.demoServer?.isOnline()) return;
     const view = window.demoResourceView();
     refreshing = true;
     try {

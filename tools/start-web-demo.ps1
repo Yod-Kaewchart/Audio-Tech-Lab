@@ -42,13 +42,16 @@ function Get-DemoProcesses {
     }
 }
 if ($Restart) {
-    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-    if (-not ([Security.Principal.WindowsPrincipal]$identity).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { throw 'Restart requires PowerShell Run as administrator' }
     $jobsFile = Join-Path $runtime 'security\processing-jobs.json'
     $existing = @(Get-DemoProcesses)
     if ($existing.Count -gt 0 -and (Test-Path -LiteralPath $jobsFile)) {
         $jobs = (Get-Content -LiteralPath $jobsFile -Raw | ConvertFrom-Json).jobs
         if (@($jobs | Where-Object { $_.status -in 'queued','running' }).Count -gt 0) { throw 'Audio jobs are active; retry after they finish' }
+    }
+    if (Get-NetTCPConnection -LocalPort 8787 -State Listen -ErrorAction SilentlyContinue) {
+        # Atomically refuse active jobs/uploads and block new mutations before stopping.
+        $drain = Invoke-RestMethod 'http://127.0.0.1:8787/internal/maintenance' -Method Post -ContentType 'application/json' -Body '{"enabled":true}' -TimeoutSec 5
+        if (-not $drain.ok) { throw 'Could not enter maintenance; nothing was stopped' }
     }
     $ordered = $existing | Sort-Object @{ Expression = { if ($_.CommandLine -like '*web-demo-supervisor.cjs*') { 0 } else { 1 } } }
     foreach ($process in $ordered) { if (Get-Process -Id $process.ProcessId -ErrorAction SilentlyContinue) { Stop-Process -Id $process.ProcessId -Force -ErrorAction Stop } }
@@ -59,12 +62,12 @@ try {
     try { $held = $mutex.WaitOne($(if ($Restart) { 10000 } else { 0 })) } catch [System.Threading.AbandonedMutexException] { $held = $true }
     if (-not $held) { exit 0 }
     Add-Content (Join-Path $runtime 'startup.log') "$(Get-Date -Format o) Starting Web Demo"
-    $legacy = Get-DemoProcesses
-    foreach ($process in $legacy) {
-        Stop-Process -Id $process.ProcessId -Force -ErrorAction SilentlyContinue
+    $legacy = @(Get-DemoProcesses)
+    if ($legacy.Count -gt 0 -or (Get-NetTCPConnection -LocalPort 8787 -State Listen -ErrorAction SilentlyContinue)) {
+        throw 'An existing backend is running without this launcher mutex; inspect it before using -Restart'
     }
     & 'C:\Program Files\nodejs\node.exe' (Join-Path $root 'tools\web-demo-supervisor.cjs')
-    if ($LASTEXITCODE -ne 0) { throw "Web Demo supervisor exited with code $LASTEXITCODE" }
+    if ($LASTEXITCODE -ne 0) { throw "Web Demo supervisor exited with code $LASTEXITCODE; Scheduled Task recovery will retry" }
 } catch {
     Add-Content (Join-Path $runtime 'startup.log') "$(Get-Date -Format o) ERROR: $($_.Exception.Message)"
     exit 1

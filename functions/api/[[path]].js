@@ -49,6 +49,7 @@ export async function onRequest(context) {
       method: request.method,
       headers,
       redirect: 'manual',
+      cache: 'no-store',
       signal: controller?.signal
     };
     if (!['GET', 'HEAD'].includes(request.method)) {
@@ -59,7 +60,9 @@ export async function onRequest(context) {
     if (!health) return upstream;
     const responseHeaders = new Headers(upstream.headers);
     for (const [name, value] of Object.entries(noStore())) responseHeaders.set(name, value);
-    return new Response(upstream.body, {
+    // Keep the deadline active through the health body, not just its headers.
+    const body = await upstream.arrayBuffer();
+    return new Response([204, 205, 304].includes(upstream.status) ? null : body, {
       status: upstream.status,
       statusText: upstream.statusText,
       headers: responseHeaders

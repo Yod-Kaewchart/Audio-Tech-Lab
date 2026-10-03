@@ -23,8 +23,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Test backend and Pages integration
-        run: node --test server/*.test.cjs tools/*.test.cjs
+      - name: Test portable backend and Pages integration (audio core is verified on EliteBook)
+        run: node tools/test-portable.cjs
       - name: Build Cloudflare Pages artifact
         run: node tools/build-pages.cjs
       - name: Verify patch cleanliness

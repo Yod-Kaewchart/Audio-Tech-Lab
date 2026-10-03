@@ -21,13 +21,17 @@ const authMessage = document.querySelector('#auth-message'), adminPanel = docume
 const offlineMessage = document.querySelector('#server-offline-message'), retryConnection = document.querySelector('#retry-connection');
 const loginButton = document.querySelector('#login-form button[type="submit"]'), registerButton = document.querySelector('#register-form button[type="submit"]');
 const showRegisterButton = document.querySelector('#show-register');
-let loginPending = false, registerPending = false, connectionRequest = null;
+let loginPending = false, registerPending = false, passwordPending = false, createUserPending = false, connectionRequest = null, authRevision = 0;
 
 function syncServerControls() {
   const online = window.demoServer?.isOnline() === true;
-  loginButton.disabled = !online || loginPending;
-  registerButton.disabled = !online || registerPending;
-  showRegisterButton.disabled = !online;
+  if (online && authMessage.textContent === window.demoServer.offlineText) authMessage.textContent = '';
+  const busy = loginPending || registerPending || !!connectionRequest;
+  loginButton.disabled = !online || busy;
+  registerButton.disabled = !online || busy;
+  showRegisterButton.disabled = !online || busy;
+  document.querySelector('#password-form button[type="submit"]').disabled = !online || passwordPending;
+  document.querySelector('#create-user-form button[type="submit"]').disabled = !online || createUserPending;
   retryConnection.hidden = online || window.demoServer?.state === 'checking';
   offlineMessage.hidden = window.demoServer?.state !== 'offline';
 }
@@ -49,14 +53,12 @@ function renderAuth(value) {
   if (signedIn && !mustChange) { loadUploads(); refreshProcessingJobs(); }
 }
 async function authRequest(route, data, method) {
-  window.demoServer?.requireOnline();
   const headers = { 'Content-Type': 'application/json' };
   if (window.demoAuth?.csrf) headers['X-CSRF-Token'] = window.demoAuth.csrf;
   let response;
   try {
-    response = await fetch(API + route, { method: method || (data ? 'POST' : 'GET'), headers, credentials: 'same-origin', cache: 'no-store', signal: AbortSignal.timeout(15000), body: data ? JSON.stringify(data) : undefined });
+    response = await window.demoServer.request(API + route, { method: method || (data ? 'POST' : 'GET'), headers, signal: AbortSignal.timeout(15000), body: data ? JSON.stringify(data) : undefined });
   } catch (error) {
-    void window.demoServer?.check();
     throw Object.assign(new Error(window.demoServer?.offlineText || 'บริการเดโมยังไม่พร้อม กรุณาลองใหม่ภายหลัง'), { cause: error, offline: true });
   }
   if (!response.headers.get('content-type')?.includes('application/json')) throw new Error('บริการเดโมยังไม่พร้อม กรุณาลองใหม่ภายหลัง');
@@ -66,8 +68,9 @@ async function authRequest(route, data, method) {
 }
 document.querySelector('#login-form').addEventListener('submit', async event => {
   event.preventDefault();
+  if (loginPending || registerPending || connectionRequest) return;
   if (window.demoServer?.isOnline() !== true) { syncServerControls(); authMessage.textContent = window.demoServer?.offlineText || 'บริการเดโมยังไม่พร้อม'; return; }
-  loginPending = true; syncServerControls(); authMessage.textContent = 'กำลังเข้าสู่ระบบ…';
+  loginPending = true; ++authRevision; syncServerControls(); authMessage.textContent = 'กำลังเข้าสู่ระบบ…';
   const loginInput = document.querySelector('#login-username'), passwordInput = document.querySelector('#login-password');
   try {
     const login = loginInput.value.trim().toLowerCase(), password = passwordInput.value;
@@ -90,8 +93,9 @@ document.querySelector('#show-login').addEventListener('click', () => {
 });
 document.querySelector('#register-form').addEventListener('submit', async event => {
   event.preventDefault();
+  if (registerPending || loginPending || connectionRequest) return;
   if (window.demoServer?.isOnline() !== true) { syncServerControls(); authMessage.textContent = window.demoServer?.offlineText || 'บริการเดโมยังไม่พร้อม'; return; }
-  registerPending = true; syncServerControls(); authMessage.textContent = '';
+  registerPending = true; ++authRevision; syncServerControls(); authMessage.textContent = '';
   try {
     const username = document.querySelector('#register-username').value.trim().toLowerCase();
     const email = document.querySelector('#register-email').value.trim().toLowerCase();
@@ -104,45 +108,50 @@ document.querySelector('#register-form').addEventListener('submit', async event 
   } catch (err) { authMessage.textContent = err.message; } finally { registerPending = false; syncServerControls(); }
 });
 document.querySelector('#password-form').addEventListener('submit', async event => {
-  event.preventDefault(); const button = event.currentTarget.querySelector('button'); button.disabled = true; authMessage.textContent = '';
+  event.preventDefault(); if (passwordPending || !window.demoServer?.isOnline()) return;
+  passwordPending = true; ++authRevision; syncServerControls(); authMessage.textContent = '';
   try {
     const password = document.querySelector('#new-password').value;
     if (password !== document.querySelector('#confirm-password').value) throw new Error('รหัสผ่านใหม่ทั้งสองช่องต้องตรงกัน');
     const value = await authRequest('/auth/password', { currentPassword: document.querySelector('#current-password').value, newPassword: password });
     event.target.reset(); renderAuth(value); authMessage.textContent = 'เปลี่ยนรหัสผ่านเรียบร้อย';
-  } catch (err) { authMessage.textContent = err.message; } finally { button.disabled = false; }
+  } catch (err) { authMessage.textContent = err.message; } finally { passwordPending = false; syncServerControls(); }
 });
 document.querySelector('#logout-button').addEventListener('click', async () => {
+  ++authRevision;
   try { await authRequest('/auth/logout', {}); resetPrivateView(); renderAuth(null); authMessage.textContent = 'ออกจากระบบแล้ว'; }
   catch (err) { authMessage.textContent = err.message; }
 });
-window.addEventListener('auth-required', () => { resetPrivateView(); renderAuth(null); authMessage.textContent = 'เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง'; });
+window.addEventListener('auth-required', () => { ++authRevision; resetPrivateView(); renderAuth(null); authMessage.textContent = 'เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง'; });
 document.querySelector('#create-user-form').addEventListener('submit', async event => {
-  event.preventDefault(); const button = event.currentTarget.querySelector('button'); button.disabled = true;
+  event.preventDefault(); if (createUserPending || !window.demoServer?.isOnline()) return;
+  createUserPending = true; syncServerControls();
   const message = document.querySelector('#create-user-message'); message.textContent = '';
   try {
     const value = await authRequest('/admin/users', { username: document.querySelector('#new-username').value, password: document.querySelector('#user-temporary-password').value });
     event.target.reset(); message.textContent = 'สร้างบัญชี ' + value.username + ' แล้ว ผู้ใช้ต้องเปลี่ยนรหัสผ่านเมื่อเข้าใช้ครั้งแรก';
-  } catch (err) { message.textContent = err.message; } finally { button.disabled = false; }
+  } catch (err) { message.textContent = err.message; } finally { createUserPending = false; syncServerControls(); }
 });
 function connectDemo() {
-  if (connectionRequest || window.demoServer?.isOnline() !== true) return connectionRequest;
-  connectionRequest = connectDemoSession().finally(() => { connectionRequest = null; });
+  if (connectionRequest || loginPending || registerPending || passwordPending || window.demoServer?.isOnline() !== true) return connectionRequest;
+  connectionRequest = connectDemoSession().finally(() => { connectionRequest = null; syncServerControls(); });
+  syncServerControls();
   return connectionRequest;
 }
 async function connectDemoSession() {
-  authMessage.textContent = window.demoAuth ? '' : 'กำลังตรวจสอบบริการเดโม…';
+  const revision = authRevision;
   try {
-    try { renderAuth(await authRequest('/auth/me')); }
+    try { const value = await authRequest('/auth/me'); if (revision === authRevision && window.demoServer.isOnline()) renderAuth(value); }
     catch (error) {
       if (error.status !== 401) throw error;
+      if (revision !== authRevision) return;
+      const expired = !!window.demoAuth;
       if (window.demoAuth) resetPrivateView();
       renderAuth(null);
+      if (expired) authMessage.textContent = 'เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง';
     }
-    authMessage.textContent = '';
   } catch (error) {
-    if (error.offline) void window.demoServer?.check();
-    else authMessage.textContent = error.message;
+    if (!error.offline && revision === authRevision && !authMessage.textContent) authMessage.textContent = error.message;
   } finally {
     syncServerControls();
   }
@@ -159,12 +168,10 @@ retryConnection.addEventListener('click', async () => {
 window.addEventListener('demo-server-state', event => {
   const { state, previous } = event.detail;
   syncServerControls();
-  if (state === 'offline') {
-    if (!window.demoAuth) authMessage.textContent = '';
-    return;
-  }
+  if (state === 'offline') return;
   if (state === 'online' && previous !== 'online') void connectDemo();
 });
+window.addEventListener('demo-server-verified', ({ detail }) => { if (detail.reason === 'resume') void connectDemo(); });
 renderAuth(null);
 syncServerControls();
 if (window.demoServer?.isOnline() === true) void connectDemo();

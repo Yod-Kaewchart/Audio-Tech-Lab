@@ -1,0 +1,23 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {createServer}=require('./upload-server.js');
+test('Local maintenance refuses active uploads and blocks new mutations without exposing a public control',async t=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'atl-maintenance-'));
+ const server=createServer({root,origin:'https://test.invalid'});await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ t.after(async()=>{server.closeAllConnections();await new Promise(r=>server.close(r));fs.rmSync(root,{recursive:true,force:true})});
+ const base='http://127.0.0.1:'+server.address().port;
+ const drain=(enabled,headers={})=>fetch(base+'/internal/maintenance',{method:'POST',headers:{'Content-Type':'application/json',...headers},body:JSON.stringify({enabled})});
+ for(const headers of [{Origin:'https://test.invalid'},{'X-Forwarded-Proto':'https'},{'X-Forwarded-Host':'demo.audiotechlabs.com'}])assert.equal((await drain(true,headers)).status,403);
+ assert.equal((await drain(true)).status,200);assert.equal((await fetch(base+'/health')).status,503);
+ assert.equal((await fetch(base+'/auth/register',{method:'POST',body:'{}'})).status,503);
+ assert.equal((await drain(false)).status,200);assert.equal((await fetch(base+'/health')).status,200);
+ const headers={'Content-Type':'application/json',Origin:'https://test.invalid'};
+ const post=(route,data)=>fetch(base+route,{method:'POST',headers,body:JSON.stringify(data)});
+ assert.equal((await post('/auth/register',{username:'maintenance',email:'maintenance@example.invalid',password:'Synthetic-Maintenance-123'})).status,201);
+ const login=await post('/auth/login',{username:'maintenance',password:'Synthetic-Maintenance-123'});
+ headers.Cookie=login.headers.get('set-cookie').split(';')[0];headers['X-CSRF-Token']=(await login.json()).csrf;
+ const upload=await post('/upload/init',{name:'test.wav',size:44});assert.equal(upload.status,200);
+ const refused=await drain(true);assert.equal(refused.status,409);assert.equal((await refused.json()).uploads,1);
+ assert.equal((await fetch(base+'/health')).status,200);
+ await post('/upload/remove',{fileId:(await upload.json()).uploadId});assert.equal((await drain(true)).status,200);
+});

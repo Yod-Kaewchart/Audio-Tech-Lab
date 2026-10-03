@@ -19,8 +19,6 @@ function log(message) {
     fs.appendFileSync(logFile, new Date().toISOString() + ' ' + message + '\n');
   } catch (error) { console.error(error.message); }
 }
-process.on('uncaughtException', error => { log('Supervisor fatal: ' + (error?.stack || error)); process.exit(1); });
-process.on('unhandledRejection', error => { log('Supervisor rejection: ' + (error?.stack || error)); process.exit(1); });
 const state = { startedAt: new Date().toISOString(), supervisorPid: process.pid, services: {}, backendUrl: null, webUrl: publicOrigin, mode: pagesMode ? 'cloudflare-pages-backend' : externalTunnel ? 'external-named-tunnel' : publicOrigin ? 'named-tunnel' : quickTunnel ? 'development-tunnel' : 'local' };
 function saveState() {
   const target = path.join(runtime, 'state.json');
@@ -41,8 +39,11 @@ if (!pagesMode && publicOrigin && !externalTunnel) specs.push({ name: 'webTunnel
 else if (!pagesMode && quickTunnel) specs.push({ name: 'webTunnel', exe: tunnel, args: ['tunnel', '--url', 'http://127.0.0.1:8080', '--no-autoupdate'] });
 const children = new Map();
 let stopping = false;
+process.on('uncaughtException', error => { log('Supervisor fatal: ' + (error?.stack || error)); shutdown(1); });
+process.on('unhandledRejection', error => { log('Supervisor rejection: ' + (error?.stack || error)); shutdown(1); });
 function launch(spec) {
   if (stopping) return;
+  const started = Date.now();
   const child = spawn(spec.exe, spec.args, { cwd: root, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
   children.set(spec.name, child);
   state.services[spec.name] = { pid: child.pid || null, status: 'starting', startedAt: new Date().toISOString() };
@@ -72,15 +73,20 @@ function launch(spec) {
     if (spec.name === 'webTunnel') state.webUrl = publicOrigin;
     publishURLs();
     log(spec.name + ' stopped; code=' + code + ' signal=' + signal);
-    if (!stopping) setTimeout(() => launch(spec), 10000);
+    if (!stopping) {
+      spec.failures = Date.now() - started >= 300000 ? 0 : (spec.failures || 0) + 1;
+      const delay = Math.min(300000, 10000 * 2 ** Math.min(5, Math.max(0, spec.failures - 1)));
+      log(spec.name + ' restart in ' + delay + 'ms');
+      setTimeout(() => launch(spec), delay);
+    }
   });
 }
-function shutdown() {
+function shutdown(exitCode = 0) {
   if (stopping) return;
   stopping = true;
   log('Supervisor stopping');
   for (const child of children.values()) child.kill();
-  setTimeout(() => process.exit(0), 3000);
+  setTimeout(() => process.exit(exitCode), 3000);
 }
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
