@@ -118,8 +118,10 @@ function createServer(options = {}) {
         const nonce = new URL(req.url, 'http://localhost').searchParams.get('nonce');
         // A fresh challenge ties the response to this runtime request, even if an
         // intermediary mistakenly serves a cached health response.
+        const instanceId = process.env.ATL_INSTANCE_ID;
         return send(res, 200, { ok: true, service: 'audio-tech-labs-demo', apiVersion: 1, maxMB: 2000, chunkMB: 8, authentication: true, processingConcurrency: 1,
-          ...(nonce && /^[a-zA-Z0-9-]{1,64}$/.test(nonce) ? { nonce } : {}) }, healthHeaders);
+          ...(nonce && /^[a-zA-Z0-9-]{1,64}$/.test(nonce) ? { nonce } : {}),
+          ...(instanceId && /^[a-zA-Z0-9-]{1,64}$/.test(instanceId) ? { instanceId } : {}) }, healthHeaders);
       }
       if (await spotify.handle(req, res, route)) return;
       if (await auth.handle(req, res, route, json, send, allowedOrigins)) return;

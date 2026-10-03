@@ -3,11 +3,23 @@ const http = require('node:http'), fs = require('node:fs'), path = require('node
 const { webSecurity } = require('./web-security.cjs');
 const healthHeaders = require('./health-headers.cjs');
 const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.webp': 'image/webp', '.woff2': 'font/woff2' };
-function createWebServer({ root = path.resolve(__dirname, '..', 'dist'), backendPort = 8787, publicOrigin = process.env.ATL_DEMO_ORIGIN } = {}) {
-const secureRequest = webSecurity(publicOrigin);
+function createWebServer({ root = path.resolve(__dirname, '..', 'dist'), backendPort = 8787, publicOrigin = process.env.ATL_DEMO_ORIGIN, mainOrigin = process.env.ATL_MAIN_ORIGIN } = {}) {
+const secureRequest = webSecurity([publicOrigin, mainOrigin]);
+const demoHost = publicOrigin ? new URL(publicOrigin).host.toLowerCase() : null;
+const mainHost = mainOrigin ? new URL(mainOrigin).host.toLowerCase() : null;
 return http.createServer((req, res) => {
   if (!secureRequest(req, res)) return;
-  if (req.url === '/api' || req.url.startsWith('/api/')) {
+  const host = String(req.headers.host || '').toLowerCase();
+  const pathOnly = req.url.split('?')[0];
+  const isApi = req.url === '/api' || req.url.startsWith('/api/');
+  if (host === mainHost && isApi) { res.writeHead(404); res.end('Not found'); return; }
+  if (host === mainHost && (pathOnly === '/demo' || pathOnly.startsWith('/demo/')) && publicOrigin) { res.writeHead(302, { Location: publicOrigin + req.url }); res.end(); return; }
+  if (host === demoHost && !isApi && !pathOnly.startsWith('/demo')) {
+    if (pathOnly === '/') { res.writeHead(302, { Location: '/demo/' }); res.end(); }
+    else { res.writeHead(404); res.end('Not found'); }
+    return;
+  }
+  if (isApi) {
     const health = req.url.split('?')[0] === '/api/health';
     if (health) for (const [name, value] of Object.entries(healthHeaders)) res.setHeader(name, value);
     const headers = { ...req.headers };

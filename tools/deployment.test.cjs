@@ -1,11 +1,14 @@
 'use strict';
 const test = require('node:test'), assert = require('node:assert/strict');
 const fs = require('node:fs'), path = require('node:path'), os = require('node:os');
-const { demoOrigin, verifyDemo, deploymentMode } = require('./deployment-config.cjs');
+const { demoOrigin, mainOrigin, verifyDemo, deploymentMode } = require('./deployment-config.cjs');
 const { buildPages } = require('./build-pages.cjs');
 test('Production endpoint excludes random tunnels, credentials and wrong paths', () => {
   assert.equal(demoOrigin('https://demo.audiotechlabs.com/'), 'https://demo.audiotechlabs.com');
+  assert.equal(mainOrigin('https://www.audiotechlabs.com/'), 'https://www.audiotechlabs.com');
   assert.equal(demoOrigin(''), null);
+  assert.equal(mainOrigin(''), null);
+  assert.throws(() => mainOrigin('https://audiotechlabs.com'), /ATL_MAIN_ORIGIN/);
   for (const value of ['https://random.trycloudflare.com', 'http://demo.audiotechlabs.com', 'https://audiotechlabs.com', 'https://demo.audiotechlabs.com/demo/', 'https://user:secret@demo.audiotechlabs.com', 'https://demo.audiotechlabs.com/?next=other']) assert.throws(() => demoOrigin(value));
 });
 test('Deployment checks require the expected API and anonymous rejection', async () => {

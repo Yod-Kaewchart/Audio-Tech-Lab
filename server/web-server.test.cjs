@@ -78,3 +78,27 @@ test('Proxy forwards attachment headers and delivers chunks before upstream fini
   for (;;) { const part = await reader.read(); if (part.done) break; remainder += Buffer.from(part.value).toString(); }
   assert.equal(remainder, '5678');
 });
+
+test('Main and demo public hosts are separated on one web server', async t => {
+  let forwarded = 0;
+  const backend = http.createServer((req, res) => { forwarded++; res.writeHead(200); res.end('{}'); });
+  await new Promise(resolve => backend.listen(0, '127.0.0.1', resolve));
+  const web = createWebServer({ backendPort: backend.address().port, publicOrigin: 'https://demo.audiotechlabs.com', mainOrigin: 'https://www.audiotechlabs.com' });
+  await new Promise(resolve => web.listen(0, '127.0.0.1', resolve));
+  t.after(async () => { await new Promise(resolve => web.close(resolve)); await new Promise(resolve => backend.close(resolve)); });
+  const request = (path, host) => new Promise((resolve, reject) => {
+    const req = http.request({ hostname: '127.0.0.1', port: web.address().port, path, headers: { Host: host, 'X-Forwarded-Proto': 'https' } }, res => {
+      const chunks = []; res.on('data', chunk => chunks.push(chunk)); res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: Buffer.concat(chunks).toString() }));
+    });
+    req.on('error', reject); req.end();
+  });
+  const demoRoot = await request('/', 'demo.audiotechlabs.com');
+  assert.equal(demoRoot.status, 302); assert.equal(demoRoot.headers.location, '/demo/');
+  assert.equal((await request('/styles.css', 'demo.audiotechlabs.com')).status, 404);
+  const main = await request('/', 'www.audiotechlabs.com');
+  assert.equal(main.status, 200); assert.match(main.body, /Audio Tech Labs/);
+  const mainApi = await request('/api/health', 'www.audiotechlabs.com');
+  assert.equal(mainApi.status, 404); assert.equal(forwarded, 0);
+  const oldDemoPath = await request('/demo/?view=split', 'www.audiotechlabs.com');
+  assert.equal(oldDemoPath.status, 302); assert.equal(oldDemoPath.headers.location, 'https://demo.audiotechlabs.com/demo/?view=split');
+});

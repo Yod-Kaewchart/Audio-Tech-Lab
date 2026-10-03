@@ -7,6 +7,8 @@ $deploymentFile = Join-Path $runtime 'deployment.json'
 if (Test-Path -LiteralPath $deploymentFile) {
     $deployment = Get-Content -LiteralPath $deploymentFile -Raw | ConvertFrom-Json
     $env:ATL_DEMO_ORIGIN = $deployment.demoOrigin
+    $env:ATL_MAIN_ORIGIN = $deployment.mainOrigin
+    $env:ATL_INSTANCE_ID = $deployment.instanceId
     $env:ATL_EXTERNAL_TUNNEL = if ($deployment.tunnelMode -eq 'external') { '1' } else { '' }
     $env:ATL_TUNNEL_CONFIG = $deployment.tunnelConfig
     if ($deployment.audioPython) {
