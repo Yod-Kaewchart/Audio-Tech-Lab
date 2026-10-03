@@ -24,8 +24,15 @@ if (Test-Path -LiteralPath $deploymentFile) {
 }
 & 'C:\Program Files\nodejs\node.exe' -e "require(process.argv[1]).deploymentMode()" (Join-Path $root 'tools\deployment-config.cjs')
 if ($LASTEXITCODE -ne 0) { throw 'Invalid deployment configuration; existing services were not stopped' }
-if ($env:ATL_EXTERNAL_TUNNEL -eq '1' -and (Get-Service Cloudflared -ErrorAction Stop).Status -ne 'Running') {
-    throw 'The existing Cloudflared service must be running before starting the production demo'
+if ($env:ATL_EXTERNAL_TUNNEL -eq '1') {
+    $cloudflared = Get-Service Cloudflared -ErrorAction SilentlyContinue
+    if (-not $cloudflared -or $cloudflared.Status -ne 'Running') {
+        if ($env:ATL_PAGES_MODE -eq '1') {
+            Add-Content (Join-Path $runtime 'startup.log') "$(Get-Date -Format o) WARNING: Cloudflared is not ready yet; starting backend and waiting for the Windows service to recover"
+        } else {
+            throw 'The existing Cloudflared service must be running before starting the production demo'
+        }
+    }
 }
 function Get-DemoProcesses {
     Get-CimInstance Win32_Process | Where-Object {
