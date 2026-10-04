@@ -99,7 +99,7 @@ button{transition:background-color 180ms,color 180ms,border-color 180ms}
 }
 </style></head>
 <body><div class="shell"><aside class="side"><div class="brand">AUDIO <span>TECH LABS</span></div><div class="sub">SYSTEM CONTROL CENTER</div><nav class="nav" aria-label="Control Center"><a class="active" aria-current="page">Overview</a><a>Machines</a><a>Health</a><a>AI Agents</a><a>Activity Logs</a><a>Settings</a></nav></aside>
-<main class="main"><header class="top"><div><div class="eyebrow">CONTROL CENTER / OVERVIEW</div><h1>System Operations</h1></div><div class="top-right"><span id="account-user" class="account">ADMIN SESSION</span><div class="live"><span class="dot"></span>ALL SYSTEMS NOMINAL</div><button id="logout-button" class="btn" type="button">Sign out</button></div></header>
+<main class="main"><header class="top"><div><div class="eyebrow">CONTROL CENTER / OVERVIEW</div><h1>System Operations</h1></div><div class="top-right"><span id="account-user" class="account">ADMIN SESSION</span><div class="live"><span class="dot"></span>ALL SYSTEMS NOMINAL</div><button id="logout-button" class="btn" type="button">Sign out</button><span id="logout-message" class="account" role="status" aria-live="polite" hidden></span></div></header>
 <section class="grid">
 <div class="card machine"><div class="row"><div class="label">Primary Backend</div><div class="status"><span class="dot"></span>ONLINE</div></div><h2 class="name">EliteBook</h2><div class="meta">Windows 11 &middot; Backend :8787<br>Audio Tech Labs Production</div><div class="actions"><button class="btn primary">Health Check</button><button class="btn">Details</button></div></div>
 <div class="card machine"><div class="row"><div class="label">Remote Workstation</div><div class="status"><span class="dot"></span>ONLINE</div></div><h2 class="name">Modify</h2><div class="meta">Windows 10 LTSC &middot; Remote Ready<br>Development / Audio Workstation</div><div class="actions"><button class="btn primary">Health Check</button><button class="btn">Details</button></div></div>
@@ -114,26 +114,74 @@ button{transition:background-color 180ms,color 180ms,border-color 180ms}
 </section></main></div>
 <script>
 'use strict';
-let sessionCsrf='';
+let sessionCsrf='',sessionVersion=0,logoutPending=false;
+const logoutButton=document.querySelector('#logout-button'),logoutMessage=document.querySelector('#logout-message');
 async function sessionRequest(path,options={}){
   const response=await fetch('/api'+path,{credentials:'same-origin',cache:'no-store',...options});
   const data=response.headers.get('content-type')?.includes('application/json')?await response.json():{};
   if(!response.ok)throw Object.assign(new Error(data.error||'Request failed'),{status:response.status});
   return data;
 }
-(async()=>{
+async function verifySession(){
+  const version=++sessionVersion;
+  logoutButton.disabled=true;
   try{
     const auth=await sessionRequest('/auth/me');
+    if(version!==sessionVersion)return;
     if(auth?.user?.role!=='admin'||auth.user.mustChange){location.replace('/control-center/login/');return}
     sessionCsrf=auth.csrf||'';
     document.querySelector('#account-user').textContent=(auth.user.username||'admin').toUpperCase()+' / ADMIN';
-  }catch{location.replace('/control-center/login/')}
-})();
-document.querySelector('#logout-button').addEventListener('click',async()=>{
-  const button=document.querySelector('#logout-button');button.disabled=true;
-  try{await sessionRequest('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':sessionCsrf},body:'{}'})}catch{}
+    document.body.hidden=false;
+    logoutButton.disabled=false;
+  }catch{
+    if(version===sessionVersion)location.replace('/control-center/login/');
+  }
+}
+verifySession();
+window.addEventListener('pagehide',()=>{
+  ++sessionVersion;
   sessionCsrf='';
-  location.replace('/control-center/login/?signedout=1');
+  document.body.hidden=true;
+});
+window.addEventListener('pageshow',event=>{
+  if(!event.persisted)return;
+  logoutPending=false;
+  logoutButton.textContent='Sign out';
+  logoutMessage.hidden=true;
+  verifySession();
+});
+logoutButton.addEventListener('click',async()=>{
+  if(logoutPending||logoutButton.disabled)return;
+  logoutPending=true;
+  ++sessionVersion;
+  logoutButton.disabled=true;
+  logoutButton.textContent='Signing out...';
+  logoutMessage.hidden=true;
+  let signedOut=false;
+  try{
+    const result=await sessionRequest('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':sessionCsrf},body:'{}'});
+    signedOut=result.ok===true;
+  }catch(error){signedOut=error.status===401}
+  if(!signedOut){
+    // A lost logout response may still have revoked the session. Confirm it
+    // before leaving this origin; network/CSRF/server failures must not skip it.
+    try{
+      const auth=await sessionRequest('/auth/me');
+      sessionCsrf=auth.csrf||sessionCsrf;
+    }catch(error){signedOut=error.status===401}
+  }
+  if(!signedOut){
+    logoutPending=false;
+    logoutButton.disabled=false;
+    logoutButton.textContent='Sign out';
+    logoutMessage.textContent='Sign out could not be confirmed. Please try again.';
+    logoutMessage.hidden=false;
+    return;
+  }
+  sessionCsrf='';
+  document.querySelector('#account-user').textContent='ADMIN SESSION';
+  document.body.hidden=true;
+  location.replace('https://www.audiotechlabs.com/cdn-cgi/access/logout');
 });
 </script>
 </body></html>

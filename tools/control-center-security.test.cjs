@@ -37,7 +37,7 @@ test('Control Center source and Pages artifacts stay identical', () => {
   assert.ok(routes.include.includes('/control-center/*'));
   const dashboard = fs.readFileSync(path.join(root, 'control-center', 'frontend', 'index.html'), 'utf8');
   const login = fs.readFileSync(path.join(root, 'control-center', 'frontend', 'login', 'index.html'), 'utf8');
-  assert.ok(dashboard.includes("location.replace('/control-center/login/?signedout=1')"));
+  assert.ok(dashboard.includes("location.replace('https://www.audiotechlabs.com/cdn-cgi/access/logout')"));
   assert.ok(login.includes('function clearLoginPage()'));
   assert.ok(login.includes('event.persisted'));
 });
