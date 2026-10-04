@@ -109,10 +109,11 @@
           <p>ทดลองจัดการและตรวจวัดไฟล์เสียงผ่านเบราว์เซอร์ ตั้งแต่แยกเพลงจากไฟล์อัลบั้ม รวมหลายเพลงเป็นไฟล์เดียว ไปจนถึงตรวจค่าของสัญญาณเสียง</p>
         </div>
         <div class="demo-home-tools">
-          <article class="demo-home-tool"><span class="demo-home-tool-index">01 / SPLIT</span><h3>Split Audio</h3><p>วิเคราะห์ไฟล์อัลบั้มหรือเสียงบันทึกยาวเพื่อเสนอจุดแบ่งเพลง ดู waveform ฟังแต่ละช่วง และปรับเวลาเริ่ม–จบก่อนส่งออกเป็นไฟล์ WAV หรือ FLAC</p></article>
-          <article class="demo-home-tool"><span class="demo-home-tool-index">02 / MERGE</span><h3>Merge Audio</h3><p>รวมหลายเพลงเป็นไฟล์อัลบั้มเดียว จัดลำดับเพลงก่อนประมวลผล รองรับสูงสุด 50 Tracks และเลือกส่งออกเป็น WAV หรือ FLAC</p></article>
-          <article class="demo-home-tool"><span class="demo-home-tool-index">03 / MEASURE</span><h3>Audio QC</h3><p>ตรวจวัด Loudness, True Peak, RMS และ DC Offset จากไฟล์เสียง เพื่อช่วยประเมินระดับสัญญาณและดูค่าที่ควรตรวจสอบ โดยไม่แก้ไขไฟล์ต้นฉบับ</p></article>
+          <article class="demo-home-tool"><span class="demo-home-tool-index">01 / SPLIT</span><h3><a class="demo-home-preview" href="assets/demo/split-preview.jpg" data-preview-title="Split Audio" aria-label="ดูภาพตัวอย่าง Split Audio" aria-haspopup="dialog">Split Audio<span aria-hidden="true">↗</span></a></h3><p>วิเคราะห์ไฟล์อัลบั้มหรือเสียงบันทึกยาวเพื่อเสนอจุดแบ่งเพลง ดู waveform ฟังแต่ละช่วง และปรับเวลาเริ่ม–จบก่อนส่งออกเป็นไฟล์ WAV หรือ FLAC</p></article>
+          <article class="demo-home-tool"><span class="demo-home-tool-index">02 / MERGE</span><h3><a class="demo-home-preview" href="assets/demo/merge-preview.jpg" data-preview-title="Merge Audio" aria-label="ดูภาพตัวอย่าง Merge Audio" aria-haspopup="dialog">Merge Audio<span aria-hidden="true">↗</span></a></h3><p>รวมหลายเพลงเป็นไฟล์อัลบั้มเดียว จัดลำดับเพลงก่อนประมวลผล รองรับสูงสุด 50 Tracks และเลือกส่งออกเป็น WAV หรือ FLAC</p></article>
+          <article class="demo-home-tool"><span class="demo-home-tool-index">03 / MEASURE</span><h3><a class="demo-home-preview" href="assets/demo/qc-preview.jpg" data-preview-title="Audio QC" aria-label="ดูภาพตัวอย่าง Audio QC" aria-haspopup="dialog">Audio QC<span aria-hidden="true">↗</span></a></h3><p>ตรวจวัด Loudness, True Peak, RMS และ DC Offset จากไฟล์เสียง เพื่อช่วยประเมินระดับสัญญาณและดูค่าที่ควรตรวจสอบ โดยไม่แก้ไขไฟล์ต้นฉบับ</p></article>
         </div>
+        <p class="demo-home-preview-help">กดชื่อเครื่องมือเพื่อดูภาพตัวอย่างหน้าจอ</p>
         <div class="demo-home-details">
           <div class="demo-home-purpose">
             <h3>พื้นที่ทดลองและพัฒนาเครื่องมือเสียง</h3>
@@ -289,6 +290,12 @@
     </section>
   </main>
   <footer class="site-footer"><div class="shell footer-inner"><span>Audio Tech Labs</span><span>Built for the love of sound.</span><a href="#top">กลับด้านบน</a></div></footer>
+  <dialog id="demo-preview-dialog" aria-labelledby="demo-preview-title">
+    <div class="demo-preview-header"><h2 id="demo-preview-title">ภาพตัวอย่าง Web Demo</h2><button class="demo-preview-close" type="button" aria-label="ปิดภาพตัวอย่าง" autofocus>×</button></div>
+    <p id="demo-preview-status" role="status">กำลังโหลดภาพตัวอย่าง…</p>
+    <img id="demo-preview-image" alt="" decoding="async" hidden>
+    <a id="demo-preview-full" href="assets/demo/split-preview.jpg" target="_blank" rel="noopener noreferrer">เปิดภาพขนาดเต็ม ↗</a>
+  </dialog>
   <script src="script.js" defer></script>
 </body>
 </html>
