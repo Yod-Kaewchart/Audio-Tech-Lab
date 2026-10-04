@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audio Tech Labs - Control Center Login</title>
+<style>
+:root{--bg:#141719;--panel:#191c1f;--surface:#202427;--hover:#272c30;--line:#353b40;--text:#f0eee8;--muted:#b9bec2;--accent:#c9aa70;--danger:#e68b8b}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif;padding:24px}
+.card{width:min(440px,100%);background:linear-gradient(145deg,var(--surface),var(--panel));border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.brand{font-weight:800;letter-spacing:.08em;font-size:15px}.brand span{color:var(--accent)}.eyebrow{margin-top:30px;color:var(--accent);font-size:11px;letter-spacing:.16em;font-weight:700}.title{font-size:28px;margin:8px 0 7px}.lead{color:var(--muted);line-height:1.6;margin:0 0 24px}
+label{display:block;color:var(--muted);font-size:12px;margin:14px 0 7px}.field{width:100%;border:1px solid var(--line);background:#15181a;color:var(--text);border-radius:8px;padding:12px 13px;outline:none}.field:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(201,170,112,.12)}
+button{width:100%;margin-top:18px;border:1px solid var(--accent);background:var(--accent);color:#101214;border-radius:8px;padding:11px 14px;font-weight:800;cursor:pointer}button:disabled{opacity:.55;cursor:wait}
+.message{min-height:20px;margin-top:14px;color:var(--muted);font-size:12px}.message.error{color:var(--danger)}.note{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.6}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="card">
+<div class="brand">AUDIO TECH <span>LABS</span></div>
+<div class="eyebrow">CONTROL CENTER</div>
+<h1 class="title">Administrator Sign In</h1>
+<p class="lead">Use the existing Audio Tech Labs administrator account. Access is restricted to admin sessions only.</p>
+<form id="login-form" autocomplete="on">
+<label for="username">Username or email</label>
+<input class="field" id="username" name="username" autocomplete="username" required>
+<label for="password">Password</label>
+<input class="field" id="password" name="password" type="password" autocomplete="current-password" required>
+<button id="login-button" type="submit">Sign in</button>
+</form>
+<form id="password-form" hidden>
+<label for="current-password">Current password</label>
+<input class="field" id="current-password" type="password" autocomplete="current-password" required>
+<label for="new-password">New password</label>
+<input class="field" id="new-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required>
+<label for="confirm-password">Confirm new password</label>
+<input class="field" id="confirm-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required>
+<button id="password-button" type="submit">Change password and continue</button>
+</form>
+<div id="message" class="message" role="status" aria-live="polite"></div>
+<div class="note">Session cookie is HttpOnly and Secure. Control Center sessions expire according to the existing Audio Tech Labs authentication policy.</div>
+</main>
+<script>
+'use strict';
+const form=document.querySelector('#login-form'), passwordForm=document.querySelector('#password-form'), message=document.querySelector('#message');
+const loginButton=document.querySelector('#login-button'), passwordButton=document.querySelector('#password-button');
+let auth=null;
+function setMessage(text,error=false){message.textContent=text||'';message.classList.toggle('error',!!error)}
+async function api(path,options={}){
+  const response=await fetch('/api'+path,{credentials:'same-origin',cache:'no-store',...options});
+  const type=response.headers.get('content-type')||''; const data=type.includes('application/json')?await response.json():{};
+  if(!response.ok)throw Object.assign(new Error(data.error||'Request failed'),{status:response.status});
+  return data;
+}
+async function logout(csrf){
+  try{await api('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:'{}'})}catch{}
+}
+async function continueIfAdmin(value){
+  if(value?.user?.role!=='admin'){await logout(value?.csrf);setMessage('Administrator access required.',true);return false}
+  if(value.user.mustChange){auth=value;form.hidden=true;passwordForm.hidden=false;setMessage('Change the temporary password before entering Control Center.');return false}
+  location.replace('/control-center/'); return true;
+}
+form.addEventListener('submit',async event=>{
+  event.preventDefault(); loginButton.disabled=true; setMessage('Signing in...');
+  try{
+    const username=document.querySelector('#username').value.trim().toLowerCase();
+    const password=document.querySelector('#password').value;
+    auth=await api('/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
+    document.querySelector('#password').value='';
+    await continueIfAdmin(auth);
+  }catch(error){
+    setMessage(error.status===401?'Incorrect username/email or password.':error.status===429?'Too many attempts. Try again later.':error.status===502||error.status===504?'Control Center backend is offline.':error.message,true);
+  }finally{loginButton.disabled=false}
+});
+passwordForm.addEventListener('submit',async event=>{
+  event.preventDefault(); passwordButton.disabled=true; setMessage('Updating password...');
+  try{
+    const currentPassword=document.querySelector('#current-password').value;
+    const newPassword=document.querySelector('#new-password').value;
+    const confirm=document.querySelector('#confirm-password').value;
+    if(newPassword!==confirm)throw new Error('New passwords do not match.');
+    auth=await api('/auth/password',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':auth.csrf},body:JSON.stringify({currentPassword,newPassword})});
+    await continueIfAdmin(auth);
+  }catch(error){setMessage(error.message,true)}finally{passwordButton.disabled=false}
+});
+(async()=>{
+  try{const existing=await api('/auth/me');await continueIfAdmin(existing)}catch(error){if(error.status!==401&&error.status!==502&&error.status!==504)setMessage(error.message,true)}
+})();
+</script>
+</body>
+</html>

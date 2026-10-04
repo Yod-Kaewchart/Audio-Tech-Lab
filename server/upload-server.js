@@ -59,7 +59,7 @@ function createServer(options = {}) {
     fs.writeFileSync(migration, new Date().toISOString());
   }
   function allowedOrigins() {
-    const origins = new Set(['http://127.0.0.1:8080', 'http://localhost:8080']);
+    const origins = new Set(['http://127.0.0.1:8080', 'http://localhost:8080', 'https://www.audiotechlabs.com']);
     try { const state = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'runtime', 'state.json'), 'utf8')); if (state.webUrl) origins.add(state.webUrl); } catch {}
     if (options.origin) origins.add(options.origin);
     if (process.env.ATL_DEMO_ORIGIN) origins.add(new URL(process.env.ATL_DEMO_ORIGIN).origin);
