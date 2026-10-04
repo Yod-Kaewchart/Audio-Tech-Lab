@@ -1,0 +1,186 @@
+/* Home-only refinement. Shared styles and the audio tools keep their theme.
+   Existing token names remain aliases so every Home section uses one palette. */
+.home-page {
+  --bg-base: #141719;
+  --bg-deep: #101214;
+  --bg-section: #191c1f;
+  --surface: #202427;
+  --surface-hover: #272c30;
+  --text-primary: #f0eee8;
+  --text-secondary: #b9bec2;
+  --accent: #c9aa70;
+  --accent-hover: #d8bc89;
+  --border-subtle: #353b40;
+  --control-border: #80898f;
+  --bg: var(--bg-base);
+  --surface-2: var(--surface-hover);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --gold: var(--accent);
+  --gold-dark: #9d855a;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  --line: var(--border-subtle);
+}
+
+.home-page .site-header {
+  background: var(--bg-deep);
+  border-bottom-color: var(--border-subtle);
+  backdrop-filter: none;
+}
+/* The existing wordmark and waveform logo retain their original colors. */
+.home-page .brand { color: #f2f0eb; }
+.home-page .brand-name b { color: #d0ad73; }
+.home-page .brand-symbol span { background: #d0ad73; }
+.home-page .header-inner { flex-wrap: wrap; }
+.home-page .primary-nav { min-width: 0; flex-wrap: wrap; justify-content: flex-end; }
+.home-page .primary-nav a { color: var(--text-secondary); }
+.home-page .primary-nav a:hover,
+.home-page .primary-nav a:focus-visible { color: var(--accent-hover); }
+.home-page .primary-nav .nav-contact { color: var(--accent); border-color: var(--control-border); }
+
+.home-page .hero { background: var(--bg-deep); }
+.home-page .hero-image {
+  background-image: linear-gradient(90deg, var(--bg-deep), rgba(16, 18, 20, 0) 35%), url('hero-audio-lab.webp');
+}
+.home-page .hero-shade {
+  background:
+    linear-gradient(0deg, var(--bg-base), rgba(20, 23, 25, 0) 24%),
+    linear-gradient(90deg, var(--bg-deep) 0%, rgba(16, 18, 20, .98) 23%, rgba(16, 18, 20, .86) 53%, rgba(16, 18, 20, .24) 100%);
+}
+.home-page .hero-description,
+.home-page .hero-aside,
+.home-page .hero-bottom { color: var(--text-secondary); }
+.home-page .hero-aside { background: var(--bg-deep); padding: 8px 4px; }
+
+.home-page .section { padding-block: clamp(80px, 6vw, 104px); }
+.home-page .about-section { background: var(--bg-base); border-top: 0; }
+.home-page .about-layout { gap: 6%; }
+.home-page .about-copy .lead { line-height: 1.8; }
+.home-page .about-pillars p { font-size: 16px; line-height: 1.8; }
+.home-page .earbuds-section { background: var(--bg-base); }
+.home-page .earbuds-description { color: var(--text-secondary); }
+.home-page .earbuds-visual {
+  background: radial-gradient(ellipse at center, rgba(201, 170, 112, .04), transparent 68%);
+}
+.home-page #web-demo { background: var(--bg-section); }
+.home-page #web-demo .demo-home-tool {
+  background: var(--surface);
+  border-radius: 8px;
+}
+.home-page #web-demo .demo-home-tool p,
+.home-page #web-demo .demo-home-steps { font-size: 16px; color: var(--text-secondary); }
+.home-page #web-demo .demo-home-tool h3 { margin-top: 20px; }
+.home-page .services-section { background: var(--bg-base); }
+.home-page .service-card { background: var(--surface); min-height: 0; transition: none; }
+.home-page .service-card:hover { background: var(--surface); }
+.home-page .service-card h3 { margin-top: 32px; line-height: 1.4; }
+.home-page .service-card p { font-size: 16px; line-height: 1.8; }
+.home-page .service-mark { color: var(--accent); }
+
+/* Continue the neutral surfaces through the remaining Home sections. */
+.home-page .projects-section,
+.home-page .knowledge-section { background: var(--bg-section); }
+.home-page .deep-dive-section,
+.home-page .editorial-section,
+.home-page .contact-section { background: var(--bg-base); }
+.home-page .contact-section { border-top-color: var(--border-subtle); }
+.home-page .project-card,
+.home-page .feature-article,
+.home-page .deep-dive-feature,
+.home-page .contact-panel,
+.home-page #knowledge .tech-note-card {
+  background: var(--surface);
+  border-color: var(--border-subtle);
+  border-radius: 8px;
+}
+.home-page .project-card,
+.home-page #knowledge .tech-note-card { overflow: clip; }
+.home-page .project-visual:not(.visual-reference):not(.visual-za3) { background: var(--surface-hover); }
+.home-page .project-visual::before { box-shadow: none; }
+.home-page .visual-reference .visual-label,
+.home-page .visual-za3 .visual-label {
+  align-self: flex-start;
+  background: var(--bg-deep);
+  color: var(--text-secondary);
+  padding: 4px 8px;
+}
+.home-page #knowledge .tech-note-thumbnail:not(.tech-note-thumbnail-image) {
+  background: var(--surface-hover);
+}
+.home-page .feature-wave span { box-shadow: none; }
+.home-page .feature-article p,
+.home-page .deep-dive-copy p,
+.home-page .contact-lead,
+.home-page .sample-note,
+.home-page .footer-inner { color: var(--text-secondary); }
+.home-page .project-info p,
+.home-page .article-list p,
+.home-page #knowledge .tech-note-summary { font-size: 16px; line-height: 1.8; }
+.home-page #knowledge .tech-note-link.is-pending { color: var(--text-secondary); opacity: 1; }
+.home-page .site-footer { background: var(--bg-deep); }
+
+.home-page .button,
+.home-page .project-detail,
+.home-page .primary-nav a,
+.home-page .contact-row a,
+.home-page #knowledge a.tech-note-link,
+.home-page #web-demo .demo-home-preview,
+.home-page .menu-toggle,
+.home-page #demo-preview-dialog .demo-preview-close {
+  transition: background-color 180ms, color 180ms, border-color 180ms;
+}
+.home-page .button:hover { transform: none; }
+.home-page .button-primary { background: var(--accent); color: var(--bg-deep); }
+.home-page .button-primary:hover { background: var(--accent-hover); }
+.home-page .button-outline { background: transparent; color: var(--text-primary); border-color: var(--control-border); }
+.home-page .button-outline:hover { background: var(--surface-hover); border-color: var(--accent-hover); }
+.home-page a.project-detail { border-color: var(--control-border); }
+.home-page a.project-detail:hover { background: var(--accent); border-color: var(--accent); color: var(--bg-deep); }
+.home-page .contact-row a:hover,
+.home-page #knowledge a.tech-note-link:hover { color: var(--accent-hover); }
+.home-page :focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; }
+.home-page .button-primary:focus-visible { outline-color: var(--text-primary); }
+.home-page .skip-link { color: var(--bg-deep); }
+.home-page #demo-preview-dialog {
+  background: var(--bg-section);
+  border-color: var(--border-subtle);
+  border-radius: 8px;
+  box-shadow: none;
+}
+.home-page #demo-preview-dialog .demo-preview-close {
+  background: var(--surface);
+  border-color: var(--control-border);
+}
+.home-page #demo-preview-dialog .demo-preview-close:hover { background: var(--surface-hover); }
+
+@media (max-width: 1023px) {
+  .home-page .menu-toggle { background: var(--surface); border-color: var(--control-border); }
+  .home-page .menu-toggle span { transition: none; }
+  .home-page .primary-nav,
+  .home-page .primary-nav.is-open { background: var(--bg-deep); }
+}
+@media (max-width: 800px) {
+  .home-page .section { padding-block: 64px; }
+  .home-page .about-layout { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .home-page .about-copy { max-width: none; padding-top: 0; }
+  .home-page .hero-image {
+    background-image: linear-gradient(90deg, var(--bg-deep), rgba(16, 18, 20, 0) 35%), url('hero-audio-lab-mobile.webp');
+  }
+  .home-page .hero-shade {
+    background:
+      linear-gradient(0deg, var(--bg-base), rgba(20, 23, 25, 0) 32%),
+      linear-gradient(90deg, rgba(16, 18, 20, .96), rgba(16, 18, 20, .78));
+  }
+}
+@media (max-width: 560px) {
+  .home-page .section { padding-block: 56px; }
+  .home-page .hero-description { font-size: 16px; }
+  .home-page .service-card h3 { margin-top: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page :is(.button, .project-detail, .primary-nav a, .contact-row a, .menu-toggle),
+  .home-page #knowledge a.tech-note-link,
+  .home-page #web-demo .demo-home-preview,
+  .home-page #demo-preview-dialog .demo-preview-close { transition: none; }
+}
