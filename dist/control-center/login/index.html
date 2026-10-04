@@ -44,6 +44,11 @@ button{width:100%;margin-top:18px;border:1px solid var(--accent);background:var(
 const form=document.querySelector('#login-form'), passwordForm=document.querySelector('#password-form'), message=document.querySelector('#message');
 const loginButton=document.querySelector('#login-button'), passwordButton=document.querySelector('#password-button');
 let auth=null;
+function clearLoginPage(){
+  auth=null; form.hidden=false; passwordForm.hidden=true; form.reset(); passwordForm.reset();
+  for(const id of ['username','password','current-password','new-password','confirm-password']){const input=document.getElementById(id);if(input){input.value='';input.setAttribute('autocomplete','off')}}
+  setMessage('');
+}
 function setMessage(text,error=false){message.textContent=text||'';message.classList.toggle('error',!!error)}
 async function api(path,options={}){
   const response=await fetch('/api'+path,{credentials:'same-origin',cache:'no-store',...options});
@@ -82,8 +87,11 @@ passwordForm.addEventListener('submit',async event=>{
     await continueIfAdmin(auth);
   }catch(error){setMessage(error.message,true)}finally{passwordButton.disabled=false}
 });
+const signedOut=new URLSearchParams(location.search).get('signedout')==='1';
+if(signedOut){clearLoginPage();history.replaceState(null,'','/control-center/login/');}
+window.addEventListener('pageshow',event=>{if(signedOut||event.persisted)clearLoginPage()});
 (async()=>{
-  try{const existing=await api('/auth/me');await continueIfAdmin(existing)}catch(error){if(error.status!==401&&error.status!==502&&error.status!==504)setMessage(error.message,true)}
+  try{const existing=await api('/auth/me');await continueIfAdmin(existing)}catch(error){if(error.status!==401&&error.status!==502&&error.status!==504)setMessage(error.message,true);else if(signedOut)clearLoginPage()}
 })();
 </script>
 </body>

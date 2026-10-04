@@ -43,7 +43,8 @@ async function sessionRequest(path,options={}){
 document.querySelector('#logout-button').addEventListener('click',async()=>{
   const button=document.querySelector('#logout-button');button.disabled=true;
   try{await sessionRequest('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':sessionCsrf},body:'{}'})}catch{}
-  location.replace('/control-center/login/');
+  sessionCsrf='';
+  location.replace('/control-center/login/?signedout=1');
 });
 </script>
 </body></html>
