@@ -13,6 +13,7 @@ const { createSpotify } = require('./spotify.cjs');
 const { createOpenAICredentialStore } = require('./openai-credential-store.cjs');
 const { createOpenAIProvider } = require('./openai.cjs');
 const healthHeaders = require('./health-headers.cjs');
+const { createModifyMonitor } = require('./modify-monitor.cjs');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const SAFE_ERROR_CODES = new Set(['USER_CANCELLED', 'OPENAI_AUTH', 'OPENAI_FORBIDDEN', 'OPENAI_QUOTA', 'OPENAI_TIMEOUT', 'OPENAI_UNAVAILABLE', 'AI_INVALID_OUTPUT', 'STALE_ANALYSIS']);
 const aiFailure = (message, safeCode) => Object.assign(new Error(message), { safeCode });
@@ -25,6 +26,7 @@ function createServer(options = {}) {
   const splitter = options.splitter || process.env.ATL_SPLITTER_ROOT || String.raw`D:\Projects\Audio Album Splitter AI`;
   const python = options.python || process.env.ATL_AUDIO_PYTHON || path.join(splitter, '.venv', 'Scripts', 'python.exe');
   const security = path.join(root, 'tools', 'runtime', 'security');
+  const modifyMonitor = options.modifyMonitor || createModifyMonitor({ configFile: path.join(root, 'tools', 'runtime', 'modify-monitor.json') });
   const uploads = path.join(root, 'uploads'), exports = path.join(root, 'exports'), previews = path.join(root, 'previews');
   const activity = new ActivityStore(path.join(security, 'activity.sqlite'));
   const openaiStore = options.openaiStore || createOpenAICredentialStore({ directory: path.join(security, 'openai-credentials') });
@@ -154,6 +156,7 @@ function createServer(options = {}) {
         // intermediary mistakenly serves a cached health response.
         const instanceId = process.env.ATL_INSTANCE_ID;
         return send(res, 200, { ok: true, service: 'audio-tech-labs-demo', apiVersion: 1, maxMB: 2000, chunkMB: 8, authentication: true, processingConcurrency: 1,
+          machineHealthApiVersion: 1,
           ...(nonce && /^[a-zA-Z0-9-]{1,64}$/.test(nonce) ? { nonce } : {}),
           ...(instanceId && /^[a-zA-Z0-9-]{1,64}$/.test(instanceId) ? { instanceId } : {}) }, healthHeaders);
       }
@@ -161,6 +164,15 @@ function createServer(options = {}) {
       if (await auth.handle(req, res, route, json, send, allowedOrigins)) return;
       auth.originOK(req, allowedOrigins);
       const { user } = auth.requireUser(req);
+      if (route === '/admin/machines/modify/health') {
+        if (user.role !== 'admin') throw fail(403, 'Administrator access required');
+        if (req.method !== 'GET') throw fail(405, 'GET required');
+        const params = new URL(req.url, 'http://localhost').searchParams;
+        const nonce = params.get('nonce');
+        if (!nonce || !/^[a-zA-Z0-9-]{1,64}$/.test(nonce) || [...params.keys()].some(key => key !== 'nonce') || params.getAll('nonce').length !== 1) throw fail(400, 'Invalid monitoring request');
+        const value = await modifyMonitor.check();
+        return send(res, 200, { ...value, nonce }, healthHeaders);
+      }
       if (route === '/ai/review' && req.method === 'POST') {
         cleanup();
         const data = await json(req, 4096), file = fileFor(user, data.fileId);
@@ -398,7 +410,7 @@ function createServer(options = {}) {
       throw fail(404, 'Not found');
     } catch (error) { send(res, error.status || 500, { error: error.status ? error.message : 'Request could not be completed', ...(SAFE_ERROR_CODES.has(error.safeCode) ? { errorCode: error.safeCode } : {}) }); }
   });
-  server.on('close', () => { clearInterval(timer); queue.close(); runner.close?.(); spotify.close(); auth.close(); if (queue.running) queue.afterRunning = () => activity.close(); else activity.close(); });
+  server.on('close', () => { clearInterval(timer); modifyMonitor.close(); queue.close(); runner.close?.(); spotify.close(); auth.close(); if (queue.running) queue.afterRunning = () => activity.close(); else activity.close(); });
   return server;
 }
 if (require.main === module) {

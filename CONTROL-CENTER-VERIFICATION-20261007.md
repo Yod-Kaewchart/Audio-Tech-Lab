@@ -1,5 +1,7 @@
 # Control Center verification — 7 October 2026
 
+> Follow-up: Modify Windows host monitoring is now connected, and the OpenAI configuration badge distinguishes configured/not connected. See [MODIFY-HEALTH.md](MODIFY-HEALTH.md) for current behavior and release checks. The details below record the initial dashboard release.
+
 The dashboard now reads the existing backend health, administrator audit and saved AI provider configuration APIs. No new backend route, remote agent, credential or monitoring connection was added.
 
 ## Behavior

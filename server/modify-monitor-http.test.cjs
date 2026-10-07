@@ -1,0 +1,27 @@
+'use strict';
+const test = require('node:test'), assert = require('node:assert/strict'), fs = require('node:fs'), path = require('node:path'), os = require('node:os');
+const { createServer } = require('./upload-server.js');
+test('Modify health API is admin-only, validates the challenge, accepts no arbitrary target and never mutates the remote machine', async t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atl-modify-http-')); let probes = 0;
+  const server = createServer({ root, modifyMonitor: { check: async () => { probes++; return { service: 'audio-tech-labs-machine-health', apiVersion: 1, machine: 'modify', configured: true, status: 'offline', checkedAt: Date.now(), metrics: null, warnings: [], code: 'SSH_UNREACHABLE' }; }, close() {} } });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve)); const base = 'http://127.0.0.1:' + server.address().port;
+  t.after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); assert.ok(root.startsWith(path.resolve(os.tmpdir()) + path.sep)); fs.rmSync(root, { recursive: true, force: true }); });
+  const route = '/admin/machines/modify/health';
+  const request = (suffix, cookie, method = 'GET', csrf) => fetch(base + route + suffix, { method, headers: { ...(cookie ? { Cookie: cookie } : {}), ...(csrf ? { 'X-CSRF-Token': csrf } : {}) } });
+  assert.equal((await request('?nonce=fresh')).status, 401);
+  const post = (route, data, headers = {}) => fetch(base + route, { method: 'POST', headers: { 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(data) });
+  await post('/auth/register', { username: 'ordinary', email: 'ordinary@example.invalid', password: 'Synthetic-Modify-123' });
+  const ordinary = await post('/auth/login', { username: 'ordinary', password: 'Synthetic-Modify-123' });
+  assert.equal((await request('?nonce=fresh', ordinary.headers.get('set-cookie').split(';')[0])).status, 403);
+  const password = fs.readFileSync(path.join(root, 'tools/runtime/security/first-login.txt'), 'utf8').match(/Temporary password: ([^\r\n]+)/)[1];
+  const login = await post('/auth/login', { username: 'yod', password }); const cookie = login.headers.get('set-cookie').split(';')[0], auth = await login.json();
+  assert.equal((await request('?nonce=fresh', cookie)).status, 403, 'Forced-password-change sessions must not probe');
+  assert.equal((await post('/auth/password', { currentPassword: password, newPassword: 'Synthetic-Modify-Admin-123' }, { Cookie: cookie, 'X-CSRF-Token': auth.csrf })).status, 200);
+  for (const query of ['', '?nonce=', '?nonce=bad!', '?nonce=fresh&host=evil', '?nonce=fresh&command=bad', '?nonce=one&nonce=two']) assert.equal((await request(query, cookie)).status, 400);
+  assert.equal((await request('?nonce=fresh', cookie, 'POST', auth.csrf)).status, 405);
+  assert.equal(probes, 0);
+  const response = await request('?nonce=fresh', cookie); const value = await response.json();
+  assert.equal(response.status, 200); assert.equal(value.nonce, 'fresh'); assert.equal(value.status, 'offline'); assert.equal(probes, 1);
+  assert.match(response.headers.get('cache-control'), /no-store/); assert.equal(response.headers.get('cdn-cache-control'), 'no-store');
+  const feature = await (await fetch(base + '/health')).json(); assert.equal(feature.machineHealthApiVersion, 1);
+});

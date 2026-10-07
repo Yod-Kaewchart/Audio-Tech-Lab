@@ -1,6 +1,6 @@
 'use strict';
 const test = require('node:test'), assert = require('node:assert/strict'), fs = require('node:fs'), path = require('node:path');
-const { validHealth, validAudit, createDashboard } = require('../control-center/frontend/dashboard.js');
+const { validHealth, validAudit, validModify, createDashboard } = require('../control-center/frontend/dashboard.js');
 const html = fs.readFileSync(path.join(__dirname, '../control-center/frontend/index.html'), 'utf8');
 const admin = { user: { role: 'admin', username: 'testadmin', mustChange: false } };
 const health = nonce => ({ ok: true, service: 'audio-tech-labs-demo', apiVersion: 1, authentication: true, nonce });
@@ -36,9 +36,10 @@ function page(respond, saved = null) {
 }
 function defaults(url) {
   if (url.endsWith('/auth/me')) return Response.json(admin);
-  if (url.includes('/health?')) return Response.json(health(new URL(url, 'http://test').searchParams.get('nonce')));
+  if (url.includes('/api/health?')) return Response.json(health(new URL(url, 'http://test').searchParams.get('nonce')));
   if (url.includes('/admin/audit')) return Response.json(audit);
   if (url.endsWith('/ai/providers')) return Response.json({ providers: [{ id: 'openai', connected: true }] });
+  if (url.includes('/admin/machines/modify/health')) return Response.json({ service: 'audio-tech-labs-machine-health', apiVersion: 1, machine: 'modify', configured: false, status: 'unknown', metrics: null, nonce: 'fresh-challenge', code: 'NOT_CONFIGURED' });
   throw new Error('Unexpected endpoint: ' + url);
 }
 test('Health rejects cached challenges, wrong services and loose truthy/version values', () => {
@@ -62,14 +63,14 @@ test('Fresh data renders service scope, actual logs as text, and configured AI w
 });
 test('Wrong nonce and HTTP errors never render ONLINE even with valid administrator session', async () => {
   for (const response of [Response.json(health('stale')), Response.json({ error: 'maintenance' }, { status: 503 }), new Response('HTML')]) {
-    const p = page(url => url.includes('/health?') ? response : defaults(url)); await tick();
+    const p = page(url => url.includes('/api/health?') ? response : defaults(url)); await tick();
     assert.equal(p.ids['backend-status'].textContent, 'UNREACHABLE');
     assert.equal(p.ids['overall-status'].textContent, 'SERVICE UNREACHABLE');
   }
 });
 test('Partial API failure preserves verified health but clears old logs and provider state', async () => {
   let failed = false;
-  const p = page(url => failed && !url.includes('/health?') && !url.endsWith('/auth/me') ? Response.json({}, { status: 500 }) : defaults(url)); await tick();
+  const p = page(url => failed && !url.includes('/api/health?') && !url.endsWith('/auth/me') ? Response.json({}, { status: 500 }) : defaults(url)); await tick();
   failed = true; await p.app.refresh();
   assert.equal(p.ids['backend-status'].textContent, 'SERVICE REACHABLE');
   assert.equal(p.ids['provider-status'].textContent, 'Unknown');
@@ -91,7 +92,7 @@ test('Expired session while reading activity immediately hides old data', async 
 });
 test('Offline event invalidates an in-flight response, including one ignoring abort', async () => {
   let release;
-  const p = page(url => url.includes('/health?') ? new Promise(resolve => { release = resolve; }) : defaults(url));
+  const p = page(url => url.includes('/api/health?') ? new Promise(resolve => { release = resolve; }) : defaults(url));
   await tick(); p.navigator.onLine = false; p.events.offline(); release(Response.json(health('fresh-challenge'))); await tick();
   assert.equal(p.ids['backend-status'].textContent, 'UNKNOWN');
   assert.match(p.ids['refresh-message'].textContent, /offline/);
@@ -99,7 +100,7 @@ test('Offline event invalidates an in-flight response, including one ignoring ab
 });
 test('Immediate reconnect retries even with auto refresh off and a previous aborted check still settling', async () => {
   let release, checks = 0;
-  const p = page(url => url.includes('/health?') && checks++ === 0 ? new Promise(resolve => { release = resolve; }) : defaults(url), 'off');
+  const p = page(url => url.includes('/api/health?') && checks++ === 0 ? new Promise(resolve => { release = resolve; }) : defaults(url), 'off');
   await tick(); p.navigator.onLine = false; p.events.offline(); p.navigator.onLine = true; p.events.online();
   release(Response.json(health('fresh-challenge'))); await tick();
   assert.equal(p.ids['backend-status'].textContent, 'SERVICE REACHABLE');
@@ -107,9 +108,9 @@ test('Immediate reconnect retries even with auto refresh off and a previous abor
 });
 test('Duplicate refresh actions share one set of requests', async () => {
   let release;
-  const p = page(url => url.includes('/health?') ? new Promise(resolve => { release = resolve; }) : defaults(url));
+  const p = page(url => url.includes('/api/health?') ? new Promise(resolve => { release = resolve; }) : defaults(url));
   const second = p.app.refresh(); const third = p.app.refresh(); await tick();
-  assert.equal(p.calls.filter(call => call.url.includes('/health?')).length, 1);
+  assert.equal(p.calls.filter(call => call.url.includes('/api/health?')).length, 1);
   release(Response.json(health('fresh-challenge'))); await Promise.all([second, third]);
 });
 test('All menu destinations, diagnostics actions and Details controls have concrete behavior', async () => {
@@ -140,10 +141,32 @@ test('Pagehide invalidates old requests and cached-page restoration rechecks cur
   p.events.pageshow({ persisted: true }); await tick(); assert.equal(p.ids['backend-status'].textContent, 'SERVICE REACHABLE');
 });
 test('A response body hanging beyond the deadline is aborted and cannot report healthy', async () => {
-  const p = page((url, options) => url.includes('/health?') ? {
+  const p = page((url, options) => url.includes('/api/health?') ? {
     ok: true, headers: new Headers({ 'content-type': 'application/json' }),
     json: () => new Promise((resolve, reject) => options.signal.addEventListener('abort', () => reject(Object.assign(new Error('aborted'), { name: 'AbortError' }))))
   } : defaults(url));
   await tick(); for (const timer of [...p.timers.values()].filter(timer => timer.ms === 5000)) timer.fn(); await tick();
   assert.equal(p.ids['backend-status'].textContent, 'UNREACHABLE');
+});
+const remoteSample = () => ({ service: 'audio-tech-labs-machine-health', apiVersion: 1, machine: 'modify', configured: true, status: 'online', checkedAt: Date.now(), nonce: 'fresh-challenge', warnings: [], metrics: { os: 'Microsoft Windows 11 Pro', cpuPercent: 12, totalMemoryBytes: 8 * 1024 ** 3, freeMemoryBytes: 4 * 1024 ** 3, uptimeSeconds: 7200, disks: [{ drive: 'C:', totalBytes: 100 * 1024 ** 3, freeBytes: 50 * 1024 ** 3 }] } });
+test('Modify validation rejects stale, wrong-target, wrong-nonce and malformed memory measurements', () => {
+  const value = remoteSample(); assert.ok(validModify(value, 'fresh-challenge', Date.now()));
+  for (const change of [{ nonce: 'stale' }, { machine: 'elitebook' }, { checkedAt: Date.now() - 31000 }, { checkedAt: Date.now() + 10000 }, { status: 'offline' }, { metrics: { ...value.metrics, freeMemoryBytes: value.metrics.totalMemoryBytes + 1 } }]) assert.equal(validModify({ ...value, ...change }, 'fresh-challenge', Date.now()), false);
+});
+test('Modify real metrics, monitoring coverage and threshold warnings render without affecting backend identity checks', async () => {
+  let warning = false;
+  const p = page(url => url.includes('/admin/machines/modify/health') ? Response.json({ ...remoteSample(), ...(warning ? { status: 'warning', warnings: ['CPU_HIGH'] } : {}) }) : defaults(url)); await tick();
+  assert.equal(p.ids['modify-status'].textContent, 'ONLINE'); assert.equal(p.ids['modify-cpu'].textContent, '12%'); assert.equal(p.ids['modify-memory'].textContent, '50%');
+  assert.equal(p.ids['modify-telemetry'].hidden, false); assert.equal(p.ids['monitoring-coverage'].textContent, '2 / 2'); assert.equal(p.ids['overall-status'].textContent, 'MONITORED TARGETS REACHABLE');
+  warning = true; await p.app.refresh(); assert.equal(p.ids['modify-status'].textContent, 'WARNING'); assert.equal(p.ids['overall-status'].textContent, 'MODIFY NEEDS ATTENTION');
+});
+test('Failed Modify check clears old telemetry and does not claim the backend itself is down', async () => {
+  let failed = false;
+  const p = page(url => url.includes('/admin/machines/modify/health') ? Response.json(failed ? { ...remoteSample(), status: 'offline', metrics: null, code: 'SSH_TIMEOUT' } : remoteSample()) : defaults(url)); await tick();
+  failed = true; await p.app.refresh(); assert.equal(p.ids['modify-status'].textContent, 'UNREACHABLE'); assert.equal(p.ids['modify-telemetry'].hidden, true); assert.equal(p.ids['modify-disks'].children.length, 0);
+  assert.equal(p.ids['backend-status'].textContent, 'SERVICE REACHABLE'); assert.equal(p.ids['overall-status'].textContent, 'MODIFY UNREACHABLE');
+});
+test('OpenAI not-connected configuration is displayed explicitly instead of a PASSED connection badge', async () => {
+  const p = page(url => url.endsWith('/ai/providers') ? Response.json({ providers: [{ id: 'openai', connected: false }] }) : defaults(url)); await tick();
+  assert.match(p.ids['health-checks'].textContent, /NOT CONNECTED/);
 });

@@ -8,6 +8,19 @@
     return Array.isArray(value?.entries) && value.entries.length <= 50 && value.entries.every(entry => entry && typeof entry === 'object' && Number.isSafeInteger(entry.auditId) && entry.auditId > 0) &&
       (value.nextCursor === null || (Number.isSafeInteger(value.nextCursor) && value.nextCursor > 0 && value.nextCursor === value.entries.at(-1)?.auditId));
   }
+  function validModify(value, nonce, time) {
+    const bytes = number => Number.isSafeInteger(number) && number >= 0;
+    if (value?.service !== 'audio-tech-labs-machine-health' || value.apiVersion !== 1 || value.machine !== 'modify' || value.nonce !== nonce || typeof value.configured !== 'boolean' || !['online', 'warning', 'offline', 'unknown'].includes(value.status)) return false;
+    if (!value.configured) return value.status === 'unknown' && value.metrics === null;
+    if (!Number.isSafeInteger(value.checkedAt) || time - value.checkedAt > 30000 || value.checkedAt - time > 5000 || !Array.isArray(value.warnings) || value.warnings.some(code => !/^(CPU_HIGH|MEMORY_HIGH|DISK_LOW_[A-Z])$/.test(code))) return false;
+    if (['offline', 'unknown'].includes(value.status)) return value.metrics === null;
+    const m = value.metrics;
+    return typeof m?.os === 'string' && m.os.length > 0 && m.os.length <= 160 && bytes(m.uptimeSeconds) && bytes(m.totalMemoryBytes) && m.totalMemoryBytes > 0 && bytes(m.freeMemoryBytes) && m.freeMemoryBytes <= m.totalMemoryBytes &&
+      (m.cpuPercent === null || (typeof m.cpuPercent === 'number' && Number.isFinite(m.cpuPercent) && m.cpuPercent >= 0 && m.cpuPercent <= 100)) && Array.isArray(m.disks) && m.disks.length > 0 && m.disks.length <= 26 && m.disks.every(disk => /^[A-Z]:$/.test(disk?.drive) && bytes(disk.totalBytes) && disk.totalBytes > 0 && bytes(disk.freeBytes) && disk.freeBytes <= disk.totalBytes);
+  }
+  const gib = bytes => (bytes / 1024 ** 3).toFixed(1) + ' GiB';
+  const uptime = seconds => Math.floor(seconds / 86400) + 'd ' + Math.floor(seconds % 86400 / 3600) + 'h ' + Math.floor(seconds % 3600 / 60) + 'm';
+  const warningCopy = codes => codes.map(code => code === 'CPU_HIGH' ? 'CPU load is high' : code === 'MEMORY_HIGH' ? 'Memory use is high' : 'Low disk free space on ' + code.slice(-1) + ':').join('; ');
   function createDashboard({ document, window, fetch, location, navigator, storage, now = Date.now, nonce = () => window.crypto.randomUUID(), isSigningOut = () => false }) {
     const $ = id => document.getElementById(id);
     let epoch = 0, running = null, timer = null, stopped = false, cursor = null, logVersion = 0, loadingOlder = false, resumePending = false;
@@ -34,8 +47,30 @@
       $('backend-metric').textContent = state === 'online' ? 'Reachable' : state === 'offline' ? 'Unreachable' : 'Unknown';
       $('backend-copy').textContent = detail;
     }
+    function modify(value) {
+      const measured = value && ['online', 'warning'].includes(value.status);
+      const configured = value?.configured === true;
+      const reason = !value ? 'Modify check unavailable. Try Refresh.' : !configured ? value.code === 'NOT_CONFIGURED' ? 'Modify monitoring is not configured.' : 'Modify monitoring configuration is unavailable.' : value.status === 'offline' ? 'Modify could not be reached through the monitoring connection.' : !measured ? 'No verified Windows measurements received.' : 'Checked ' + stamp(value.checkedAt) + ' (Bangkok)' + (value.cached ? ' · recent sample' : '') + '. ' + (value.warnings.length ? warningCopy(value.warnings) : 'No configured thresholds exceeded.');
+      status('modify-status', measured && value.status === 'online' ? 'online' : value?.status === 'offline' ? 'offline' : 'unknown', measured ? value.status === 'warning' ? 'WARNING' : 'ONLINE' : value?.status === 'offline' ? 'UNREACHABLE' : value && !configured && value.code === 'NOT_CONFIGURED' ? 'NOT MONITORED' : 'UNKNOWN');
+      $('modify-summary').textContent = measured ? value.metrics.os + ' · CPU ' + (value.metrics.cpuPercent === null ? 'unknown' : value.metrics.cpuPercent.toFixed(0) + '%') + ' · RAM ' + ((1 - value.metrics.freeMemoryBytes / value.metrics.totalMemoryBytes) * 100).toFixed(0) + '%' : reason;
+      $('monitoring-coverage').textContent = configured ? '2 / 2' : '1 / 2';
+      $('monitoring-copy').textContent = configured ? 'Backend service and Modify host monitoring configured' : value ? 'Backend monitored · Modify monitoring unavailable' : 'Backend monitored · Modify verification unavailable';
+      $('modify-message').textContent = reason; $('modify-telemetry').hidden = !measured;
+      $('modify-disks').replaceChildren();
+      if (measured) {
+        const m = value.metrics;
+        $('modify-os').textContent = m.os;
+        $('modify-cpu').textContent = m.cpuPercent === null ? 'Unknown' : m.cpuPercent.toFixed(0) + '%';
+        $('modify-memory').textContent = ((1 - m.freeMemoryBytes / m.totalMemoryBytes) * 100).toFixed(0) + '%';
+        $('modify-memory-copy').textContent = gib(m.freeMemoryBytes) + ' free / ' + gib(m.totalMemoryBytes);
+        $('modify-uptime').textContent = uptime(m.uptimeSeconds);
+        for (const disk of m.disks) { const row = document.createElement('div'); row.className = 'disk-row'; row.textContent = disk.drive + ' · ' + gib(disk.freeBytes) + ' free / ' + gib(disk.totalBytes) + ' (' + (disk.freeBytes / disk.totalBytes * 100).toFixed(0) + '% free)'; $('modify-disks').append(row); }
+      } else for (const id of ['modify-os', 'modify-cpu', 'modify-memory', 'modify-memory-copy', 'modify-uptime']) $(id).textContent = '—';
+      check('Modify workstation', measured ? value.status === 'warning' ? 'warning' : 'passed' : value?.status === 'offline' ? 'failed' : 'unknown', reason);
+    }
     function reset(message) {
       backend('unknown', message);
+      modify(null);
       status('overall-status', 'unknown', 'STATUS UNKNOWN');
       $('diagnostic-summary').textContent = 'Unknown';
       $('provider-status').textContent = 'Unknown'; $('provider-copy').textContent = message;
@@ -44,9 +79,9 @@
       cursor = null; $('older-activity').hidden = true;
       checks.clear(); check('Monitoring', 'unknown', message); renderChecks();
     }
-    async function json(path) {
+    async function json(path, deadline = 5000) {
       const controller = new AbortController(); requests.add(controller);
-      const timeout = window.setTimeout(() => controller.abort(), 5000);
+      const timeout = window.setTimeout(() => controller.abort(), deadline);
       try {
         const response = await fetch('/api' + path, { credentials: 'same-origin', cache: 'no-store', signal: controller.signal });
         if (!response.ok) throw Object.assign(new Error('Request failed'), { status: response.status });
@@ -103,13 +138,17 @@
           checks.clear(); check('Administrator session', 'passed', 'Administrator access verified.');
           backend(healthy ? 'online' : 'offline', healthy ? 'Verified ' + stamp(finished) + ' (Bangkok) · ' + Math.max(0, finished - started) + ' ms including session verification' : 'Backend check failed. This does not prove the machine is powered off.');
           check('Backend via public edge', healthy ? 'passed' : 'failed', healthy ? 'Fresh backend response verified; API version 1 and authentication enabled.' : health.status === 'rejected' ? errorText(health.reason) : 'Response failed service identity, API version or freshness validation.');
-          check('Modify workstation', 'unknown', 'No authenticated monitoring connection configured.');
+          check('Modify workstation', 'unknown', 'Checking Windows measurements...');
           check('Remote repair agent', 'unknown', 'No remote agent configured.');
           status('overall-status', healthy ? 'unknown' : 'offline', healthy ? 'PARTIAL COVERAGE' : 'SERVICE UNREACHABLE');
           renderChecks();
-          const [audit, provider] = await Promise.allSettled([json('/admin/audit?limit=50'), json('/ai/providers')]);
+          const [audit, provider, remote] = await Promise.allSettled([json('/admin/audit?limit=50'), json('/ai/providers'), json('/admin/machines/modify/health?nonce=' + encodeURIComponent(challenge), 14000)]);
           if (!current()) return;
-          if ([audit, provider].some(result => result.status === 'rejected' && [401, 403].includes(result.reason?.status))) return requireLogin();
+          if ([audit, provider, remote].some(result => result.status === 'rejected' && [401, 403].includes(result.reason?.status))) return requireLogin();
+          const remoteOK = remote.status === 'fulfilled' && validModify(remote.value, challenge, now());
+          const remoteValue = remoteOK ? remote.value : null;
+          modify(remoteValue);
+          const remoteOnline = remoteOK && remoteValue.status === 'online';
           const auditOK = audit.status === 'fulfilled' && validAudit(audit.value);
           if (auditOK) {
             showLogs($('recent-activity'), audit.value.entries.slice(0, 3)); showLogs($('activity-list'), audit.value.entries);
@@ -125,11 +164,12 @@
           const providerOK = typeof item?.connected === 'boolean';
           $('provider-status').textContent = providerOK ? item.connected ? 'Configured' : 'Not connected' : 'Unknown';
           $('provider-copy').textContent = providerOK ? item.connected ? 'A saved OpenAI connection exists for this administrator. Provider availability has not been tested.' : 'No OpenAI connection is saved for this administrator.' : 'Saved integration status could not be read. Try Refresh.';
-          check('OpenAI configuration', providerOK ? 'passed' : 'failed', $('provider-copy').textContent);
+          check('OpenAI configuration', providerOK ? item.connected ? 'configured' : 'not connected' : 'unknown', $('provider-copy').textContent);
           renderChecks();
-          $('diagnostic-summary').textContent = healthy && auditOK && providerOK ? 'Checks passed' : 'Needs attention';
-          status('overall-status', healthy ? 'unknown' : 'offline', healthy ? auditOK && providerOK ? 'PARTIAL COVERAGE' : 'CHECKS INCOMPLETE' : 'SERVICE UNREACHABLE');
-          $('refresh-message').textContent = 'Last check: ' + stamp(now()) + ' (Bangkok). Modify and remote repair remain unmonitored.';
+          $('diagnostic-summary').textContent = healthy && auditOK && providerOK && remoteOnline ? 'Checks passed' : 'Needs attention';
+          const overall = !healthy ? 'SERVICE UNREACHABLE' : !auditOK || !providerOK || !remoteOK ? 'CHECKS INCOMPLETE' : remoteValue.status === 'offline' ? 'MODIFY UNREACHABLE' : remoteValue.status === 'warning' ? 'MODIFY NEEDS ATTENTION' : remoteOnline ? 'MONITORED TARGETS REACHABLE' : 'PARTIAL COVERAGE';
+          status('overall-status', !healthy || remoteValue?.status === 'offline' ? 'offline' : remoteOnline && auditOK && providerOK ? 'online' : 'unknown', overall);
+          $('refresh-message').textContent = 'Last check: ' + stamp(now()) + ' (Bangkok). Remote repair is not configured.';
         } catch {
           if (current()) { reset('Checks unavailable. Try Refresh.'); $('refresh-message').textContent = 'Checks unavailable. Try Refresh.'; }
         }
@@ -192,7 +232,7 @@
     route(); refresh();
     return { refresh, invalidate, older, route };
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = { validHealth, validAudit, createDashboard };
+  if (typeof module !== 'undefined' && module.exports) module.exports = { validHealth, validAudit, validModify, createDashboard };
   else createDashboard({ document, window, fetch: window.fetch.bind(window), location: window.location, navigator: window.navigator,
     storage: { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) },
     isSigningOut: () => logoutPending });
