@@ -69,6 +69,21 @@ button{transition:background-color 180ms,color 180ms,border-color 180ms}
 .btn.primary{background:var(--accent);color:var(--deep);border-color:var(--accent);font-weight:600}
 .btn.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
 .btn:disabled{opacity:.55;cursor:wait}
+[hidden]{display:none!important}
+a.btn{text-decoration:none}
+.status[data-state="unknown"],.live[data-state="unknown"]{color:var(--accent);border-color:var(--line)}
+.status[data-state="offline"],.live[data-state="offline"]{color:var(--danger);border-color:var(--danger)}
+.status .dot,.live .dot{background:currentColor}
+.notice{color:var(--muted);margin:0 0 20px;font-size:13px}
+.full{grid-column:span 12}
+.details{margin:16px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--muted)}
+.check-list{display:grid;gap:12px;margin-top:24px}
+.check-row{display:grid;grid-template-columns:minmax(120px,1fr) auto;gap:4px 16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.check-row p{grid-column:1/-1;margin:0;color:var(--muted)}
+.setting{display:flex;align-items:center;gap:12px;margin:24px 0}
+.setting input{width:20px;height:20px;accent-color:var(--accent)}
+.empty{color:var(--muted);padding:16px 0}
+.nav a:hover{background:var(--surface);color:var(--text)}
 @media(min-width:1024px) and (max-width:1199px){
   .shell{grid-template-columns:208px minmax(0,1fr)}
   .side{padding-inline:20px}.side .brand{font-size:13px;letter-spacing:.1em}
@@ -98,90 +113,26 @@ button{transition:background-color 180ms,color 180ms,border-color 180ms}
   .small .bar{margin-top:0}
 }
 </style></head>
-<body><div class="shell"><aside class="side"><div class="brand">AUDIO <span>TECH LABS</span></div><div class="sub">SYSTEM CONTROL CENTER</div><nav class="nav" aria-label="Control Center"><a class="active" aria-current="page">Overview</a><a>Machines</a><a>Health</a><a>AI Agents</a><a>Activity Logs</a><a>Settings</a></nav></aside>
-<main class="main"><header class="top"><div><div class="eyebrow">CONTROL CENTER / OVERVIEW</div><h1>System Operations</h1></div><div class="top-right"><span id="account-user" class="account">ADMIN SESSION</span><div class="live"><span class="dot"></span>ALL SYSTEMS NOMINAL</div><button id="logout-button" class="btn" type="button">Sign out</button><span id="logout-message" class="account" role="status" aria-live="polite" hidden></span></div></header>
-<section class="grid">
-<div class="card machine"><div class="row"><div class="label">Primary Backend</div><div class="status"><span class="dot"></span>ONLINE</div></div><h2 class="name">EliteBook</h2><div class="meta">Windows 11 &middot; Backend :8787<br>Audio Tech Labs Production</div><div class="actions"><button class="btn primary">Health Check</button><button class="btn">Details</button></div></div>
-<div class="card machine"><div class="row"><div class="label">Remote Workstation</div><div class="status"><span class="dot"></span>ONLINE</div></div><h2 class="name">Modify</h2><div class="meta">Windows 10 LTSC &middot; Remote Ready<br>Development / Audio Workstation</div><div class="actions"><button class="btn primary">Health Check</button><button class="btn">Details</button></div></div>
-<div class="card machine"><div class="row"><div class="label">Public Service</div><div class="status"><span class="dot"></span>ONLINE</div></div><h2 class="name">Web Demo</h2><div class="meta">Cloudflare Pages &middot; Public Edge<br>Backend health authoritative</div><div class="actions"><button class="btn">Open Service</button></div></div>
-<div class="card wide"><div class="row"><div><div class="label">Recent Activity</div><h2 class="name">Operations Log</h2></div><button class="btn">View All</button></div>
-<div class="event"><span class="time">23:24</span><span>Control Center skeleton initialized</span><span class="tag">SYSTEM</span></div>
-<div class="event"><span class="time">23:18</span><span>Remote health check completed</span><span class="tag">HEALTH</span></div>
-<div class="event"><span class="time">23:05</span><span>SSH configuration verified</span><span class="tag">SECURITY</span></div></div>
-<div class="card small"><div class="label">Health Score</div><div class="metric">100%</div><div class="meta">2 machines reachable<br>0 active warnings</div><div class="bar"><i style="width:100%"></i></div></div>
-<div class="card small service"><div class="label">AI Remote</div><div class="metric">Ready</div><div class="meta">Observe &rarr; Diagnose &rarr; Repair<br>Approval required for changes</div><div class="actions"><button class="btn primary">Run Diagnose</button></div></div>
-<div class="card small service"><div class="label">Backend</div><div class="metric">8787</div><div class="meta">Local service endpoint<br>Production control protected</div><div class="bar"><i style="width:72%"></i></div></div>
-</section></main></div>
-<script>
-'use strict';
-let sessionCsrf='',sessionVersion=0,logoutPending=false;
-const logoutButton=document.querySelector('#logout-button'),logoutMessage=document.querySelector('#logout-message');
-async function sessionRequest(path,options={}){
-  const response=await fetch('/api'+path,{credentials:'same-origin',cache:'no-store',...options});
-  const data=response.headers.get('content-type')?.includes('application/json')?await response.json():{};
-  if(!response.ok)throw Object.assign(new Error(data.error||'Request failed'),{status:response.status});
-  return data;
-}
-async function verifySession(){
-  const version=++sessionVersion;
-  logoutButton.disabled=true;
-  try{
-    const auth=await sessionRequest('/auth/me');
-    if(version!==sessionVersion)return;
-    if(auth?.user?.role!=='admin'||auth.user.mustChange){location.replace('/control-center/login/');return}
-    sessionCsrf=auth.csrf||'';
-    document.querySelector('#account-user').textContent=(auth.user.username||'admin').toUpperCase()+' / ADMIN';
-    document.body.hidden=false;
-    logoutButton.disabled=false;
-  }catch{
-    if(version===sessionVersion)location.replace('/control-center/login/');
-  }
-}
-verifySession();
-window.addEventListener('pagehide',()=>{
-  ++sessionVersion;
-  sessionCsrf='';
-  document.body.hidden=true;
-});
-window.addEventListener('pageshow',event=>{
-  if(!event.persisted)return;
-  logoutPending=false;
-  logoutButton.textContent='Sign out';
-  logoutMessage.hidden=true;
-  verifySession();
-});
-logoutButton.addEventListener('click',async()=>{
-  if(logoutPending||logoutButton.disabled)return;
-  logoutPending=true;
-  ++sessionVersion;
-  logoutButton.disabled=true;
-  logoutButton.textContent='Signing out...';
-  logoutMessage.hidden=true;
-  let signedOut=false;
-  try{
-    const result=await sessionRequest('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':sessionCsrf},body:'{}'});
-    signedOut=result.ok===true;
-  }catch(error){signedOut=error.status===401}
-  if(!signedOut){
-    // A lost logout response may still have revoked the session. Confirm it
-    // before leaving this origin; network/CSRF/server failures must not skip it.
-    try{
-      const auth=await sessionRequest('/auth/me');
-      sessionCsrf=auth.csrf||sessionCsrf;
-    }catch(error){signedOut=error.status===401}
-  }
-  if(!signedOut){
-    logoutPending=false;
-    logoutButton.disabled=false;
-    logoutButton.textContent='Sign out';
-    logoutMessage.textContent='Sign out could not be confirmed. Please try again.';
-    logoutMessage.hidden=false;
-    return;
-  }
-  sessionCsrf='';
-  document.querySelector('#account-user').textContent='ADMIN SESSION';
-  document.body.hidden=true;
-  location.replace('https://www.audiotechlabs.com/cdn-cgi/access/logout');
-});
-</script>
+<body><div class="shell"><aside class="side"><div class="brand">AUDIO <span>TECH LABS</span></div><div class="sub">SYSTEM CONTROL CENTER</div><nav class="nav" aria-label="Control Center"><a href="#overview" class="active" aria-current="page">Overview</a><a href="#machines">Machines</a><a href="#health">Health</a><a href="#agents">AI Agents</a><a href="#activity">Activity Logs</a><a href="#settings">Settings</a></nav></aside>
+<main class="main"><header class="top"><div><div id="page-eyebrow" class="eyebrow">CONTROL CENTER / OVERVIEW</div><h1 id="page-title" tabindex="-1">System Operations</h1></div><div class="top-right"><span id="account-user" class="account">ADMIN SESSION</span><div id="overall-status" class="live" data-state="unknown" role="status">CHECKING SERVICE</div><button class="btn" type="button" data-action="refresh">Refresh</button><button id="logout-button" class="btn" type="button">Sign out</button><span id="logout-message" class="account" role="status" aria-live="polite" hidden></span></div></header>
+<p id="refresh-message" class="notice" role="status" aria-live="polite">Waiting for a fresh system check.</p>
+<section id="machines-panel" class="grid" aria-label="Machines">
+<div class="card machine"><div class="row"><div class="label">Primary Backend</div><div id="backend-status" class="status" data-state="unknown">CHECKING</div></div><h2 class="name">EliteBook</h2><div class="meta">Audio Tech Labs Backend<br>Service reachability via this website</div><div class="actions"><button class="btn primary" type="button" data-action="health">Health Check</button><button class="btn" type="button" data-details="backend-details" aria-expanded="false" aria-controls="backend-details">Details</button></div><p id="backend-details" class="details" hidden>The check verifies the backend API through the public edge. It does not measure CPU, memory, disk health, or the operating system.</p></div>
+<div class="card machine"><div class="row"><div class="label">Remote Workstation</div><div class="status" data-state="unknown">NOT MONITORED</div></div><h2 class="name">Modify</h2><div class="meta">Development / Audio Workstation<br>No monitoring connection configured</div><div class="actions"><button class="btn" type="button" data-details="modify-details" aria-expanded="false" aria-controls="modify-details">Details</button></div><p id="modify-details" class="details" hidden>Modify has no authenticated monitoring endpoint connected to Control Center. Its reachability is unknown. A monitoring connection is required before remote health checks can run.</p></div>
+<div class="card machine"><div class="row"><div class="label">Public Service</div><div id="demo-status" class="status" data-state="unknown">CHECKING</div></div><h2 class="name">Web Demo</h2><div class="meta">Cloudflare Pages &middot; Public Edge<br>Uses the same verified backend check</div><div class="actions"><a class="btn" href="/demo/">Open Service</a></div></div>
+</section>
+<section id="overview-panel" class="grid" aria-label="Overview" style="margin-top:20px">
+<div class="card wide"><div class="row"><div><div class="label">Recent Activity</div><h2 class="name">Operations Log</h2></div><a class="btn" href="#activity">View All</a></div><div id="recent-activity"><p class="empty">Loading recorded activity...</p></div></div>
+<div class="card small"><div class="label">Monitoring Coverage</div><div class="metric">1 / 2</div><div class="meta">Backend service monitored<br>Modify connection not configured</div></div>
+<div class="card small service"><div class="label">System Diagnostics</div><div id="diagnostic-summary" class="metric">Checking</div><div class="meta">Backend, session and activity checks<br>Remote repair is not configured</div><div class="actions"><button class="btn primary" type="button" data-action="diagnose">Run Diagnose</button></div></div>
+<div class="card small service"><div class="label">Backend Reachability</div><div id="backend-metric" class="metric">Unknown</div><div id="backend-copy" class="meta">Waiting for a verified response</div></div>
+</section>
+<section id="health-panel" class="grid" aria-label="Health" hidden style="margin-top:20px"><div class="card full"><div class="row"><div><div class="label">Health</div><h2 class="name">Current Checks</h2></div><button class="btn primary" type="button" data-action="diagnose">Run Diagnose</button></div><p class="meta">Checks read current service data. Modify monitoring and remote repair are not connected.</p><div id="health-checks" class="check-list"></div></div></section>
+<section id="agents-panel" class="grid" aria-label="AI Agents" hidden style="margin-top:20px"><div class="card full"><div class="label">AI Agents</div><h2 class="name">Integrations &amp; Remote Operations</h2><div id="provider-status" class="metric">Unknown</div><p id="provider-copy" class="meta">Checking saved OpenAI connection for this administrator.</p><p class="meta">Remote observe, diagnose and repair agents are not configured. Run Diagnose performs service checks only.</p><div class="actions"><button class="btn" type="button" data-action="refresh">Refresh Status</button><a class="btn" href="/demo/">Manage Integrations in Web Demo</a></div></div></section>
+<section id="activity-panel" class="grid" aria-label="Activity Logs" hidden style="margin-top:20px"><div class="card full"><div class="row"><div><div class="label">Activity Logs</div><h2 class="name">Recorded Operations</h2></div><button class="btn" type="button" data-action="refresh">Refresh Logs</button></div><p id="activity-message" class="notice" role="status">Loading activity...</p><div id="activity-list"></div><div class="actions"><button id="older-activity" class="btn" type="button" hidden>Load Older</button></div></div></section>
+<section id="settings-panel" class="grid" aria-label="Settings" hidden style="margin-top:20px"><div class="card full"><div class="label">Settings</div><h2 class="name">Monitoring Preferences</h2><label class="setting"><input id="auto-refresh" type="checkbox" checked> Automatically refresh every 15 seconds while this page is visible</label><p class="meta">This preference is saved in this browser. Refresh checks the administrator session, backend, activity logs and saved integration status.</p><p class="meta">Modify monitoring requires an authenticated endpoint. No remote connection has been configured.</p><div class="actions"><button class="btn" type="button" data-action="refresh">Refresh Now</button></div></div></section>
+<noscript><p class="notice">JavaScript is required to check live status and use Control Center.</p></noscript>
+</main></div>
+<script src="/control-center/session.js"></script>
+<script src="/control-center/dashboard.js"></script>
 </body></html>

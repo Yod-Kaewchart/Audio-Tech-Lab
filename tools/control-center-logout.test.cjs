@@ -1,7 +1,7 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
-const source=fs.readFileSync(path.join(root,'control-center/frontend/index.html'),'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
+const source=fs.readFileSync(path.join(root,'control-center/frontend/session.js'),'utf8');
 const accessLogout='https://www.audiotechlabs.com/cdn-cgi/access/logout';
 const admin={user:{role:'admin',username:'yod',mustChange:false},csrf:'session-csrf'};
 const settle=()=>new Promise(resolve=>setImmediate(resolve));

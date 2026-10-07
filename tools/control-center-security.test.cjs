@@ -32,12 +32,17 @@ async function request(mod, url, { cookie = '', mode = 'admin' } = {}) {
 test('Control Center source and Pages artifacts stay identical', () => {
   assert.equal(fs.readFileSync(path.join(root, 'control-center', 'frontend', 'index.html'), 'utf8'), fs.readFileSync(path.join(root, 'dist', 'control-center', 'index.html'), 'utf8'));
   assert.equal(fs.readFileSync(path.join(root, 'control-center', 'frontend', 'login', 'index.html'), 'utf8'), fs.readFileSync(path.join(root, 'dist', 'control-center', 'login', 'index.html'), 'utf8'));
+  assert.equal(fs.readFileSync(path.join(root, 'control-center', 'frontend', 'dashboard.js'), 'utf8'), fs.readFileSync(path.join(root, 'dist', 'control-center', 'dashboard.js'), 'utf8'));
+  assert.equal(fs.readFileSync(path.join(root, 'control-center', 'frontend', 'session.js'), 'utf8'), fs.readFileSync(path.join(root, 'dist', 'control-center', 'session.js'), 'utf8'));
   const routes = JSON.parse(fs.readFileSync(path.join(root, 'dist', '_routes.json'), 'utf8'));
   assert.ok(routes.include.includes('/control-center'));
   assert.ok(routes.include.includes('/control-center/*'));
   const dashboard = fs.readFileSync(path.join(root, 'control-center', 'frontend', 'index.html'), 'utf8');
+  const session = fs.readFileSync(path.join(root, 'control-center', 'frontend', 'session.js'), 'utf8');
   const login = fs.readFileSync(path.join(root, 'control-center', 'frontend', 'login', 'index.html'), 'utf8');
-  assert.ok(dashboard.includes("location.replace('https://www.audiotechlabs.com/cdn-cgi/access/logout')"));
+  assert.ok(session.includes("location.replace('https://www.audiotechlabs.com/cdn-cgi/access/logout')"));
+  assert.ok(dashboard.includes('src="/control-center/session.js"'));
+  assert.ok(dashboard.includes('src="/control-center/dashboard.js"'));
   assert.ok(login.includes('function clearLoginPage()'));
   assert.ok(login.includes('event.persisted'));
 });
