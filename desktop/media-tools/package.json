@@ -10,7 +10,10 @@
     "prepare:vendor": "node scripts/prepare-vendor.cjs",
     "build:helper": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-helper.ps1",
     "test": "node --test test/*.test.cjs",
-    "package": "node scripts/package.cjs"
+    "package": "node scripts/package.cjs",
+    "installer:build": "node scripts/build-installer.cjs",
+    "installer:qa": "node scripts/build-installer.cjs --qa",
+    "installer:test": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test-installer.ps1"
   },
   "devDependencies": {"electron": "44.7.0"}
 }
