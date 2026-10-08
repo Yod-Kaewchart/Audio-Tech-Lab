@@ -40,6 +40,7 @@ async function until(check,label){for(let n=0;n<120;n++){try{if(await check())re
   await until(()=>run("document.querySelector('#new-job')&&!document.querySelector('#new-job').hidden"),'Convert loaded');
   await run("document.querySelector('#pick-file').click()");
   await until(()=>run("document.querySelector('#source-title').textContent==='ต้นฉบับ-ทดสอบ.wav'"),'file selected');
+  await run("(()=>{let n=document.querySelector('#output-name');n.value='เพลงใหม่สำหรับแปลง';n.dispatchEvent(new Event('input',{bubbles:true}));})()");
  }else{
   await run("(() => {let u=document.querySelector('#source-url');u.value='https://youtu.be/abcdefghijk';u.dispatchEvent(new Event('input',{bubbles:true}));document.querySelector('#check-link').click();})()");
   await until(()=>run("document.querySelector('#source-title').textContent==='ตรวจลิงก์ทดสอบ'"),'URL inspected');
@@ -48,14 +49,14 @@ async function until(check,label){for(let n=0;n<120;n++){try{if(await check())re
  await run("document.querySelector('#pick-folder').click()");
  await until(()=>run("document.querySelector('#folder-path').textContent.includes('chosen-output')"),'folder selected');
  await run("(()=>{document.querySelector('input[name=format][value=MP3]').click();let el=document.querySelector('#bitrate');el.value='320 kbps';el.dispatchEvent(new Event('change',{bubbles:true}));})()");
- const before=await run("({source:document.querySelector('#source-title').textContent,folder:document.querySelector('#folder-path').textContent,format:document.querySelector('input[name=format]:checked')?.value})");
- assert.equal(before.format,'MP3');assert.ok(before.folder.includes('chosen-output'));assert.notEqual(before.source,'ยังไม่ได้เลือกแหล่งเสียง');
+ const before=await run("({source:document.querySelector('#source-title').textContent,folder:document.querySelector('#folder-path').textContent,format:document.querySelector('input[name=format]:checked')?.value,customName:document.querySelector('#output-name').value})");
+ assert.equal(before.format,'MP3');assert.equal(before.customName,mode==='convert'?'เพลงใหม่สำหรับแปลง':'อัลบั้มใหม่');assert.ok(before.folder.includes('chosen-output'));assert.notEqual(before.source,'ยังไม่ได้เลือกแหล่งเสียง');
  assert.equal(liveEngine.sources.size,1);assert.equal(liveEngine.folders.size,1);
  await run("document.querySelector('#new-job').click()");
  await until(()=>run("document.querySelector('#job-badge').textContent==='พร้อมเริ่ม'&&document.querySelector('#new-job').hidden"),'reset done');
  const info=await run("(() => ({url:document.querySelector('#source-url')?.value??null,customName:document.querySelector('#output-name')?.value??null,sourceTitle:document.querySelector('#source-title').textContent,sourceMetadata:document.querySelector('#source-metadata').children.length,folder:document.querySelector('#folder-path').textContent,selectedFormats:document.querySelectorAll('input[name=format]:checked').length,bitrate:document.querySelector('#bitrate').value,sampleRate:document.querySelector('#sample-rate').value,bitDepth:document.querySelector('#bit-depth').value,startDisabled:document.querySelector('#start').disabled,startHelp:document.querySelector('#start-help').textContent,resultHidden:document.querySelector('#result').hidden,resultName:document.querySelector('#result-name').textContent,progressHidden:document.querySelector('#progress-area').hidden,progressStage:document.querySelector('#progress-stage').textContent,jobTitle:document.querySelector('#job-title').textContent,message:document.querySelector('#notice').textContent}))()");
  assert.equal(info.url,mode==='download'?'':null,mode+' URL');
- assert.equal(info.customName,mode==='download'?'':null,mode+' filename');
+ assert.equal(info.customName,'',mode+' filename');
  assert.equal(info.sourceTitle,'ยังไม่ได้เลือกแหล่งเสียง');
  assert.equal(info.sourceMetadata,0);
  assert.equal(info.folder,'ยังไม่ได้เลือกโฟลเดอร์');

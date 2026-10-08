@@ -8,16 +8,15 @@
  const duration=s=>s==null?'ไม่ทราบ':Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
  const bytes=n=>n==null?'ไม่ทราบ':(n/1048576).toLocaleString('en-US',{maximumFractionDigits:2})+' MB';
  const notice=text=>set('notice',text||'');
- const requestedName=()=>mode==='download'?$('output-name').value.trim():'';
+ const requestedName=()=>$('output-name').value.trim();
  function nameError(){
-  if(mode!=='download')return '';
   const name=requestedName().normalize('NFC');
   if(!name)return '';
   if(name.length>110||/[<>:"/\\|?*\x00-\x1f]/.test(name)||/[. ]$/.test(name)||/^(?:con|prn|aux|nul|com[1-9]|lpt[1-9]|conin\$|conout\$)(?:\.|$)/i.test(name))return 'ชื่อไฟล์ไม่ถูกต้อง: กรุณาใช้ชื่อที่ Windows อนุญาต';
   if(/\.(?:flac|mp3|wav|m4a|aac|ogg|opus|aif|aiff|wma|webm)$/i.test(name))return 'ไม่ต้องใส่นามสกุลไฟล์ โปรแกรมจะเติมให้อัตโนมัติ';
   return '';
  }
- function controls(){const locked=!!busy()||pending;const badName=nameError();if(mode==='download'){set('filename-error',badName);$('output-name').setAttribute('aria-invalid',String(!!badName));}$('source-controls').disabled=locked;$('output-controls').disabled=locked;$('start').disabled=locked||!!badName||!source||!folder||!format()||!(mode==='download'?caps?.downloadReady:caps?.convertReady);$('refresh-tools').disabled=locked;
+ function controls(){const locked=!!busy()||pending;const badName=nameError();set('filename-error',badName);$('output-name').setAttribute('aria-invalid',String(!!badName));$('source-controls').disabled=locked;$('output-controls').disabled=locked;$('start').disabled=locked||!!badName||!source||!folder||!format()||!(mode==='download'?caps?.downloadReady:caps?.convertReady);$('refresh-tools').disabled=locked;
   $('retry').disabled=$('start').disabled;$('new-job').disabled=locked||pending;set('start-help',busy()?'งานปัจจุบันใช้ร่วมกันทั้ง Download และ Convert':!caps?'กำลังตรวจ native bridge และเครื่องมือ':!(mode==='download'?caps.downloadReady:caps.convertReady)?'เครื่องมือไม่พร้อม กรุณาตรวจข้อความด้านล่าง':!format()?'กรุณาเลือกรูปแบบเสียงก่อนเริ่มงาน':!source?'เลือกไฟล์หรือตรวจสอบลิงก์ก่อนเริ่ม':!folder?'เลือกโฟลเดอร์ปลายทางก่อนเริ่ม':badName||'ทำงานภายในเครื่องครั้งละหนึ่งรายการ');
  }
  function renderSource(){set('source-title',source?.displayName||'ยังไม่ได้เลือกแหล่งเสียง');set('source-caption',source?'ข้อมูลจากการตรวจในเครื่อง':'เพิ่มแหล่งเสียงเพื่อเริ่มงาน');const m=source?.metadata;$('source-metadata').replaceChildren();if(m){for(const [label,value] of [['ระยะเวลา',duration(m.durationSeconds)],['ขนาด',bytes(m.bytes)],['Codec / container',[known(m.codec),known(m.container)].join(' / ')],['Sample rate',m.sampleRateHz?m.sampleRateHz/1000+' kHz':'ไม่ทราบ'],['Bit depth',m.bitsPerSample?m.bitsPerSample+' bit':'ไม่ทราบ'],['ช่องเสียง',known(m.channels)]]){const div=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;div.append(dt,dd);$('source-metadata').append(div);}}
@@ -45,8 +44,8 @@
   if(mode==='download'){
    $('source-url').value='';$('source-url').removeAttribute('aria-invalid');
    $('check-link').disabled=false;$('check-cancel').hidden=true;set('link-error','');
-   $('output-name').value='';$('output-name').removeAttribute('aria-invalid');set('filename-error','');
   }
+  $('output-name').value='';$('output-name').removeAttribute('aria-invalid');set('filename-error','');
   document.querySelectorAll('input[name="format"]').forEach(r=>{r.checked=false;});
   $('bitrate').value='192 kbps';$('sample-rate').value='source';$('bit-depth').value='16 bit';
   set('folder-path','ยังไม่ได้เลือกโฟลเดอร์');
@@ -54,7 +53,7 @@
  }
  const unsubscribe=adapter.subscribeJob(next=>{eventVersion++;if(next===null&&job&&['succeeded','failed','cancelled','interrupted'].includes(job.status))resetDraft();renderJob(next);});
  async function current(){const before=eventVersion;try{const next=await adapter.call('getCurrentJob');if(before===eventVersion)renderJob(next);}catch(e){notice(e.message);}}
- async function start(){if($('start').disabled||!format())return;await perform(async()=>{startId ||= uuid();const req={sourceId:source.sourceId,folderId:folder.folderId,requestId:startId,encoding:encoding()};if(mode==='download')req.outputName=requestedName();const next=await adapter.call(mode==='download'?'startDownload':'startConvert',req);renderJob(next);$('job-heading').scrollIntoView({block:'center',behavior:'instant'});});}
+ async function start(){if($('start').disabled||!format())return;await perform(async()=>{startId ||= uuid();const req={sourceId:source.sourceId,folderId:folder.folderId,requestId:startId,encoding:encoding()};req.outputName=requestedName();const next=await adapter.call(mode==='download'?'startDownload':'startConvert',req);renderJob(next);$('job-heading').scrollIntoView({block:'center',behavior:'instant'});});}
  $('start').addEventListener('click',start);$('retry').addEventListener('click',()=>{startId=null;start();});
  $('new-job').addEventListener('click',()=>perform(async()=>{await adapter.call('resetFinishedJob');resetDraft();renderJob(null);}));
  $('cancel').addEventListener('click',async()=>{try{const r=await adapter.call('cancelJob',{jobId:job.jobId});if(!r.accepted)notice('ขั้นตอนบันทึกผลเริ่มแล้ว รอให้บันทึกเสร็จก่อน');}catch(e){notice(e.message);}});
@@ -62,7 +61,7 @@
  for(const target of ['file','folder'])$('open-'+target).addEventListener('click',()=>perform(()=>adapter.call('openResult',{resultId:job.output.resultId,target})));
  document.querySelectorAll('input[name="format"]').forEach(r=>r.addEventListener('change',quality));for(const id of ['bitrate','sample-rate','bit-depth'])$(id).addEventListener('change',()=>{startId=null;});
  $('refresh-tools').addEventListener('click',refresh);
- if(mode==='download')$('output-name').addEventListener('input',()=>{startId=null;controls();});
+ $('output-name').addEventListener('input',()=>{startId=null;controls();});
  if(mode==='convert')$('pick-file').addEventListener('click',()=>perform(async()=>{const result=await adapter.call('chooseInputFile');if(result){source=result;startId=null;renderSource();}}));
  else {
   let pasting=false;

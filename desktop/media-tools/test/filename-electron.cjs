@@ -9,6 +9,7 @@ const {startRequest}=require('../src/common.cjs');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let sent=[];
 Engine.prototype.inspect=async()=>({sourceId:'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa',displayName:'Synthetic UI source',metadata:null});
+Engine.prototype.registerFile=async()=>({sourceId:'bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb',mode:'convert',displayName:'Synthetic Convert Source.wav',metadata:null});
 Engine.prototype.start=async function(mode,req){startRequest(req,mode);sent.push({mode,req});return null;};
 async function wait(fn,label,ms=14000){const start=Date.now();while(Date.now()-start<ms){if(await fn())return;await sleep(100);}throw Error('Timed out: '+label);}
 (async()=>{
@@ -53,8 +54,32 @@ async function wait(fn,label,ms=14000){const start=Date.now();while(Date.now()-s
  }
  await win.loadURL('atl-media://app/convert.html');
  await wait(()=>evalJs("!!document.querySelector('#start')").catch(()=>false),'Convert');
- assert.equal(await evalJs("document.querySelector('#output-name')===null"),true);
- await fs.writeFile(path.join(out,'results.json'),JSON.stringify({passed:true,checks:['field-order','native-bridge-custom-and-empty','invalid-live-validation','no-scroll-360-390-768-1280','convert-unchanged'],requests:sent},null,2));
+ assert.equal(await evalJs("document.querySelector('#output-name')!==null"),true,'Convert filename field visible');
+ assert.equal(await evalJs("!!(document.querySelector('#pick-folder').compareDocumentPosition(document.querySelector('#output-name')) & Node.DOCUMENT_POSITION_FOLLOWING) && !!(document.querySelector('#output-name').compareDocumentPosition(document.querySelector('#start')) & Node.DOCUMENT_POSITION_FOLLOWING)"),true,'Convert field order');
+ await evalJs("document.getElementById('pick-file').click()");
+ await wait(()=>evalJs("document.getElementById('source-title').textContent==='Synthetic Convert Source.wav'"),'file selected');
+ await evalJs("document.getElementById('pick-folder').click()");
+ await wait(()=>evalJs("document.getElementById('folder-path').textContent.includes('filename-electron-')"),'Convert folder');
+ await wait(()=>evalJs("!document.getElementById('start').disabled"),'Convert ready',25000);
+ for(const bad of ['song.wav','../path','CON','bad|name']){
+  await fill('output-name',bad);
+  assert.equal(await evalJs("document.getElementById('start').disabled"),true,bad);
+ }
+ await fill('output-name','แปลงเสียงทดสอบ');
+ assert.equal(await evalJs("document.getElementById('start').disabled"),false);
+ await evalJs("document.getElementById('start').click()");
+ await wait(()=>sent.length===3,'Convert custom name');
+ assert.equal(sent[2].mode,'convert');assert.equal(sent[2].req.outputName,'แปลงเสียงทดสอบ');assert.equal(sent[2].req.encoding.format,'flac');
+ await fill('output-name','');
+ await evalJs("document.getElementById('start').click()");
+ await wait(()=>sent.length===4,'Convert default name');
+ assert.equal(sent[3].mode,'convert');assert.equal(sent[3].req.outputName,'');
+ for(const width of [360,390,768,1280]){
+  win.setSize(width,900);await sleep(160);
+  assert.equal(await evalJs('document.documentElement.scrollWidth<=innerWidth'),true,'Convert horizontal scroll '+width);
+  if(width===1280){await evalJs("document.getElementById('output-name').scrollIntoView({block:'center'})");const image=await win.webContents.capturePage();await fs.writeFile(path.join(out,'convert-filename-field.png'),image.toPNG());}
+ }
+ await fs.writeFile(path.join(out,'results.json'),JSON.stringify({passed:true,checks:['field-order','native-bridge-custom-and-empty','invalid-live-validation','no-scroll-360-390-768-1280','convert-name-validated-and-submitted','convert-no-overflow-360-390-768-1280'],requests:sent},null,2));
  console.log('FILENAME ELECTRON PASS '+out);
  app.quit();
 })().catch(async e=>{console.error(e);try{await fs.mkdir(out,{recursive:true});await fs.writeFile(path.join(out,'results.json'),JSON.stringify({passed:false,error:e.stack},null,2));}catch{}app.exit(1);});

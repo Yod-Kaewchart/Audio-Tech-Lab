@@ -26,7 +26,6 @@ function startRequest(v,mode){
  const required=['sourceId','folderId','requestId','encoding'];
  shape(v,Object.hasOwn(v,'outputName')?[...required,'outputName']:required);
  if(![v.sourceId,v.folderId,v.requestId].every(opaque))fail('INVALID_REQUEST','รหัสคำขอไม่ถูกต้อง');
- if(mode!=='download'&&Object.hasOwn(v,'outputName'))fail('INVALID_REQUEST','เลือกชื่อปลายทางได้เฉพาะ Download Audio');
  encoding(v.encoding,mode);outputName(v.outputName);
 }
 function canonicalUrl(value){

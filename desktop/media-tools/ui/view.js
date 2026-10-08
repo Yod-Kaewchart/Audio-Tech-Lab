@@ -55,7 +55,7 @@
                 <p id="alac-note" class="quality-note" hidden>ALAC ใน container .m4a — เป็นคนละ codec กับ AAC</p>
               </div>
             </div>
-            <div class="destination"><label id="folder-label">โฟลเดอร์ปลายทาง </label><div class="input-row"><div class="folder-path" aria-labelledby="folder-label">${icon('folder')}<span id="folder-path"></span></div><button id="pick-folder" class="button" type="button">เลือกโฟลเดอร์</button></div><p class="help">สร้างไฟล์ใหม่ ไม่เขียนทับต้นฉบับหรือไฟล์ชื่อซ้ำ</p>${isDownload ? `<div class="filename-field"><label for="output-name">เปลี่ยนชื่อไฟล์ปลายทาง</label><input id="output-name" type="text" maxlength="110" placeholder="เว้นว่างเพื่อใช้ชื่ออัตโนมัติ" autocomplete="off" spellcheck="false" aria-describedby="filename-help filename-error"><p id="filename-help" class="help">กรอกเฉพาะชื่อ ไม่ต้องใส่นามสกุล โปรแกรมจะเติมตามรูปแบบเสียงที่เลือก</p><p id="filename-error" class="help filename-error" role="status"></p></div>` : ''}</div>
+            <div class="destination"><label id="folder-label">โฟลเดอร์ปลายทาง </label><div class="input-row"><div class="folder-path" aria-labelledby="folder-label">${icon('folder')}<span id="folder-path"></span></div><button id="pick-folder" class="button" type="button">เลือกโฟลเดอร์</button></div><p class="help">สร้างไฟล์ใหม่ ไม่เขียนทับต้นฉบับหรือไฟล์ชื่อซ้ำ</p><div class="filename-field"><label for="output-name">เปลี่ยนชื่อไฟล์ปลายทาง</label><input id="output-name" type="text" maxlength="110" placeholder="เว้นว่างเพื่อใช้ชื่ออัตโนมัติ" autocomplete="off" spellcheck="false" aria-describedby="filename-help filename-error"><p id="filename-help" class="help">กรอกเฉพาะชื่อ ไม่ต้องใส่นามสกุล โปรแกรมจะเติมตามรูปแบบเสียงที่เลือก</p><p id="filename-error" class="help filename-error" role="status"></p></div></div>
           </fieldset>
           <div class="start-row"><button id="start" class="button button-primary" type="button">${icon(isDownload ? 'download' : 'convert')} ${action}</button><p class="help" id="start-help">ทำงานครั้งละหนึ่งรายการร่วมกันทั้งสองหน้า</p></div>
         </section>
@@ -67,6 +67,6 @@
       </section>
       <aside class="preview-controls"><div><strong>เครื่องมือในเครื่อง</strong><p id="capability-status" role="status">กำลังตรวจสอบเครื่องมือ…</p></div><button id="refresh-tools" type="button" class="button">ตรวจสอบอีกครั้ง</button></aside>
       <aside class="local-info" aria-label="การทำงานภายในเครื่อง"><div><h3>${icon('local')} เสียงและการประมวลผลอยู่ในเครื่องคุณ</h3><p>yt-dlp, FFmpeg, FFprobe และไฟล์ทั้งหมดอยู่บนเครื่องผู้ใช้ ดาวน์โหลดจากต้นทางลงเครื่องโดยตรง และแปลงไฟล์ภายในเครื่อง ไม่ส่งไฟล์ ลิงก์ หรือประวัติงานไปประมวลผลบน Server ของ Audio Tech Labs</p></div><div><h3>เก็บไฟล์ไว้กับคุณ</h3><p>ไม่อัปโหลดผลลัพธ์เข้า Web Demo อัตโนมัติ ไม่ลบไฟล์ผลลัพธ์อัตโนมัติ และไม่เขียนทับต้นฉบับ โปรแกรม Windows นี้ใช้ native bridge ที่จำกัดคำสั่งเพื่อเรียกเครื่องมือภายในเครื่อง</p></div></aside>
-    </main><footer class="footer"><div class="footer-inner shell"><span>Audio Tech Labs · Media Tools</span><span>LOCAL FIRST / WINDOWS · 0.1.1</span></div></footer>`;
+    </main><footer class="footer"><div class="footer-inner shell"><span>Audio Tech Labs · Media Tools</span><span>LOCAL FIRST / WINDOWS · 0.1.2</span></div></footer>`;
 
 })();
