@@ -16,10 +16,12 @@ async function setup(status='succeeded'){
 test('new job reset preserves result file and survives restart for all terminal statuses',async()=>{
  for(const status of finished){
   const {dataDir,output,engine}=await setup(status);const events=[];
+  engine.sources.set('old-source',{dto:{mode:'download'}});engine.folders.set('old-folder',{displayPath:'C:\\Temp'});engine.inspections.set('old-inspection',{finished:true});
   engine.on('job',job=>events.push(job));
   assert.deepEqual(await engine.resetFinishedJob(),{cleared:true});
   assert.equal(engine.snapshot(),null,status);
   assert.deepEqual(events,[null],status);
+  assert.equal(engine.sources.size,0,'previous source tokens cleared');assert.equal(engine.folders.size,0,'previous folder tokens cleared');assert.equal(engine.inspections.size,0,'finished inspection tokens cleared');
   assert.equal(await fs.readFile(output,'utf8'),'KEEP_EXISTING_AUDIO_UNCHANGED',status);
   const saved=JSON.parse(await fs.readFile(path.join(dataDir,'current-job.json'),'utf8'));
   assert.deepEqual(saved,{job:null,staging:null},status);

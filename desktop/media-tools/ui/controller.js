@@ -18,7 +18,7 @@
   return '';
  }
  function controls(){const locked=!!busy()||pending;const badName=nameError();if(mode==='download'){set('filename-error',badName);$('output-name').setAttribute('aria-invalid',String(!!badName));}$('source-controls').disabled=locked;$('output-controls').disabled=locked;$('start').disabled=locked||!!badName||!source||!folder||!format()||!(mode==='download'?caps?.downloadReady:caps?.convertReady);$('refresh-tools').disabled=locked;
-  $('retry').disabled=$('start').disabled;$('new-job').disabled=locked||pending;set('start-help',busy()?'งานปัจจุบันใช้ร่วมกันทั้ง Download และ Convert':!caps?'กำลังตรวจ native bridge และเครื่องมือ':!(mode==='download'?caps.downloadReady:caps.convertReady)?'เครื่องมือไม่พร้อม กรุณาตรวจข้อความด้านล่าง':!format()?'กรุณาเลือกรูปแบบเสียงก่อนดาวน์โหลด':!source?'เลือกไฟล์หรือตรวจสอบลิงก์ก่อนเริ่ม':!folder?'เลือกโฟลเดอร์ปลายทางก่อนเริ่ม':badName||'ทำงานภายในเครื่องครั้งละหนึ่งรายการ');
+  $('retry').disabled=$('start').disabled;$('new-job').disabled=locked||pending;set('start-help',busy()?'งานปัจจุบันใช้ร่วมกันทั้ง Download และ Convert':!caps?'กำลังตรวจ native bridge และเครื่องมือ':!(mode==='download'?caps.downloadReady:caps.convertReady)?'เครื่องมือไม่พร้อม กรุณาตรวจข้อความด้านล่าง':!format()?'กรุณาเลือกรูปแบบเสียงก่อนเริ่มงาน':!source?'เลือกไฟล์หรือตรวจสอบลิงก์ก่อนเริ่ม':!folder?'เลือกโฟลเดอร์ปลายทางก่อนเริ่ม':badName||'ทำงานภายในเครื่องครั้งละหนึ่งรายการ');
  }
  function renderSource(){set('source-title',source?.displayName||'ยังไม่ได้เลือกแหล่งเสียง');set('source-caption',source?'ข้อมูลจากการตรวจในเครื่อง':'เพิ่มแหล่งเสียงเพื่อเริ่มงาน');const m=source?.metadata;$('source-metadata').replaceChildren();if(m){for(const [label,value] of [['ระยะเวลา',duration(m.durationSeconds)],['ขนาด',bytes(m.bytes)],['Codec / container',[known(m.codec),known(m.container)].join(' / ')],['Sample rate',m.sampleRateHz?m.sampleRateHz/1000+' kHz':'ไม่ทราบ'],['Bit depth',m.bitsPerSample?m.bitsPerSample+' bit':'ไม่ทราบ'],['ช่องเสียง',known(m.channels)]]){const div=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;div.append(dt,dd);$('source-metadata').append(div);}}
   set('source-note',mode==='download'?'คุณภาพเสียงที่ยังไม่ทราบจะแสดงหลังดาวน์โหลดและตรวจด้วย FFprobe':'อ่านข้อมูลด้วย FFprobe ในเครื่อง ไม่อัปโหลดไฟล์');controls();
@@ -33,16 +33,30 @@
   $('cancel').hidden=!['starting','running','cancelling'].includes(s);$('cancel').disabled=s==='cancelling'||job?.progress.stage==='saving';
   $('retry').hidden=!['failed','cancelled','interrupted'].includes(s);$('new-job').hidden=!['succeeded','failed','cancelled','interrupted'].includes(s);$('progress-area').hidden=!['starting','running','cancelling','succeeded'].includes(s);
   if(job){const p=job.progress;if(p.stagePercent===null){$('progress').removeAttribute('value');set('progress-value','ไม่ทราบ %');}else{$('progress').value=p.stagePercent;set('progress-value',Math.floor(p.stagePercent)+'%');}set('progress-stage',stages[p.stage]+(p.bytesDownloaded!==null?' · '+bytes(p.bytesDownloaded):'')+' · ความคืบหน้าของขั้นตอนนี้');}
-  $('result').hidden=!job?.output;if(job?.output){const o=job.output,m=o.metadata;set('result-name',o.fileName);set('result-path',o.displayPath);set('result-format',[known(m.codec),known(m.container),m.sampleRateHz?m.sampleRateHz/1000+' kHz':'ไม่ทราบ sample rate',m.bitsPerSample?m.bitsPerSample+' bit':'ไม่ทราบ bit depth',bytes(m.bytes),duration(m.durationSeconds)].join(' · '));$('open-file').disabled=$('open-folder').disabled=!o.available;}
+  $('result').hidden=!job?.output;if(job?.output){const o=job.output,m=o.metadata;set('result-name',o.fileName);set('result-path',o.displayPath);set('result-format',[known(m.codec),known(m.container),m.sampleRateHz?m.sampleRateHz/1000+' kHz':'ไม่ทราบ sample rate',m.bitsPerSample?m.bitsPerSample+' bit':'ไม่ทราบ bit depth',bytes(m.bytes),duration(m.durationSeconds)].join(' · '));$('open-file').disabled=$('open-folder').disabled=!o.available;}else{for(const id of ['result-name','result-path','result-format'])set(id,'');$('open-file').disabled=$('open-folder').disabled=true;}
+  if(!job){$('progress').value=0;for(const id of ['progress-value','progress-stage'])set(id,'');}
   controls();
  }
  async function perform(fn){if(pending)return;pending=true;controls();notice('');try{return await fn();}catch(e){notice(e.message);if(['DEPENDENCY_MISSING','DEPENDENCY_INVALID','UNAVAILABLE'].includes(e.code)){caps=null;set('capability-status',e.message);}if(e.code==='STALE_SOURCE'){source=null;renderSource();}}finally{pending=false;controls();}}
  async function refresh(){try{caps=await adapter.call('getCapabilities');const names={ytDlp:'yt-dlp',ffmpeg:'FFmpeg',ffprobe:'FFprobe',jsRuntime:'Node / EJS',processHelper:'Process helper'};set('capability-status',Object.entries(caps.tools).map(([k,v])=>names[k]+': '+(v.verified?v.version:v.reason)).join(' · '));}catch(e){caps=null;notice(e.message);set('capability-status',e.message);}controls();}
- const unsubscribe=adapter.subscribeJob(next=>{eventVersion++;renderJob(next);});
+ function resetDraft(){
+  // Reset only renderer-owned draft state. Never delete or rewrite source/output files.
+  source=null;folder=null;inspection=null;startId=null;
+  if(mode==='download'){
+   $('source-url').value='';$('source-url').removeAttribute('aria-invalid');
+   $('check-link').disabled=false;$('check-cancel').hidden=true;set('link-error','');
+   $('output-name').value='';$('output-name').removeAttribute('aria-invalid');set('filename-error','');
+  }
+  document.querySelectorAll('input[name="format"]').forEach(r=>{r.checked=false;});
+  $('bitrate').value='192 kbps';$('sample-rate').value='source';$('bit-depth').value='16 bit';
+  set('folder-path','ยังไม่ได้เลือกโฟลเดอร์');
+  renderSource();quality();
+ }
+ const unsubscribe=adapter.subscribeJob(next=>{eventVersion++;if(next===null&&job&&['succeeded','failed','cancelled','interrupted'].includes(job.status))resetDraft();renderJob(next);});
  async function current(){const before=eventVersion;try{const next=await adapter.call('getCurrentJob');if(before===eventVersion)renderJob(next);}catch(e){notice(e.message);}}
  async function start(){if($('start').disabled||!format())return;await perform(async()=>{startId ||= uuid();const req={sourceId:source.sourceId,folderId:folder.folderId,requestId:startId,encoding:encoding()};if(mode==='download')req.outputName=requestedName();const next=await adapter.call(mode==='download'?'startDownload':'startConvert',req);renderJob(next);$('job-heading').scrollIntoView({block:'center',behavior:'instant'});});}
  $('start').addEventListener('click',start);$('retry').addEventListener('click',()=>{startId=null;start();});
- $('new-job').addEventListener('click',()=>perform(async()=>{await adapter.call('resetFinishedJob');startId=null;renderJob(null);}));
+ $('new-job').addEventListener('click',()=>perform(async()=>{await adapter.call('resetFinishedJob');resetDraft();renderJob(null);}));
  $('cancel').addEventListener('click',async()=>{try{const r=await adapter.call('cancelJob',{jobId:job.jobId});if(!r.accepted)notice('ขั้นตอนบันทึกผลเริ่มแล้ว รอให้บันทึกเสร็จก่อน');}catch(e){notice(e.message);}});
  $('pick-folder').addEventListener('click',()=>perform(async()=>{const result=await adapter.call('chooseOutputDirectory');if(result){folder=result;startId=null;set('folder-path',folder.displayPath);}}));
  for(const target of ['file','folder'])$('open-'+target).addEventListener('click',()=>perform(()=>adapter.call('openResult',{resultId:job.output.resultId,target})));

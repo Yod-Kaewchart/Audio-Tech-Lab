@@ -8,7 +8,8 @@ const root=path.resolve(__dirname,'..');
  }
  const manifest=JSON.parse(await fs.readFile(path.join(root,'vendor/manifest.json'),'utf8'));
  const {Dependencies}=require('../src/dependencies.cjs');const deps=await new Dependencies(path.join(root,'vendor')).load();for(const name of Object.keys(manifest.tools))await deps.verify(name);
- const tag='Media-Tools-0.1.0-win-x64-'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15);
+ const version=JSON.parse(await fs.readFile(path.join(root,'package.json'),'utf8')).version;
+ const tag='Media-Tools-'+version+'-win-x64-'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15);
  const out=path.join(root,'release',tag);await fs.mkdir(out,{recursive:true});
  await fs.cp(path.join(root,'node_modules/electron/dist'),out,{recursive:true});await fs.rename(path.join(out,'electron.exe'),path.join(out,'Audio Tech Labs Media Tools.exe'));
  const app=path.join(out,'resources/app');await fs.mkdir(app,{recursive:true});for(const dir of ['src','ui'])await fs.cp(path.join(root,dir),path.join(app,dir),{recursive:true});

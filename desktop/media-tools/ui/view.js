@@ -67,6 +67,6 @@
       </section>
       <aside class="preview-controls"><div><strong>เครื่องมือในเครื่อง</strong><p id="capability-status" role="status">กำลังตรวจสอบเครื่องมือ…</p></div><button id="refresh-tools" type="button" class="button">ตรวจสอบอีกครั้ง</button></aside>
       <aside class="local-info" aria-label="การทำงานภายในเครื่อง"><div><h3>${icon('local')} เสียงและการประมวลผลอยู่ในเครื่องคุณ</h3><p>yt-dlp, FFmpeg, FFprobe และไฟล์ทั้งหมดอยู่บนเครื่องผู้ใช้ ดาวน์โหลดจากต้นทางลงเครื่องโดยตรง และแปลงไฟล์ภายในเครื่อง ไม่ส่งไฟล์ ลิงก์ หรือประวัติงานไปประมวลผลบน Server ของ Audio Tech Labs</p></div><div><h3>เก็บไฟล์ไว้กับคุณ</h3><p>ไม่อัปโหลดผลลัพธ์เข้า Web Demo อัตโนมัติ ไม่ลบไฟล์ผลลัพธ์อัตโนมัติ และไม่เขียนทับต้นฉบับ โปรแกรม Windows นี้ใช้ native bridge ที่จำกัดคำสั่งเพื่อเรียกเครื่องมือภายในเครื่อง</p></div></aside>
-    </main><footer class="footer"><div class="footer-inner shell"><span>Audio Tech Labs · Media Tools</span><span>LOCAL FIRST / WINDOWS · 0.1.0</span></div></footer>`;
+    </main><footer class="footer"><div class="footer-inner shell"><span>Audio Tech Labs · Media Tools</span><span>LOCAL FIRST / WINDOWS · 0.1.1</span></div></footer>`;
 
 })();

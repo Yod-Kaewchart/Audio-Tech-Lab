@@ -21,8 +21,8 @@ node scripts/build-installer.cjs
 ```
 
 This creates:
-- `release/installers/Audio-Tech-Labs-Media-Tools-Setup-0.1.0-Win64-QA.exe`: uses a **separate QA AppId**, folder and shortcuts. Only QA is installed and removed during the test.
-- `release/installers/Audio-Tech-Labs-Media-Tools-Setup-0.1.0-Win64.exe`: **internal candidate**; not installed during automated QA, not public.
+- `release/installers/Audio-Tech-Labs-Media-Tools-Setup-0.1.1-Win64-QA.exe`: uses a **separate QA AppId**, folder and shortcuts. Only QA is installed and removed during the test.
+- `release/installers/Audio-Tech-Labs-Media-Tools-Setup-0.1.1-Win64.exe`: **internal candidate**; not installed during automated QA, not public.
 - `installer-qa.json` and `installer-candidate.json` with SHA256 and unsigned/publicRelease flags.
 
 `scripts/build-installer.cjs` rejects stale source-vs-portable payload (critical engine, preload, UI), invalid release paths, missing vendor dependencies, and unknown command-line options.

@@ -113,7 +113,7 @@ class Engine extends EventEmitter {
    await fs.writeFile(stateFile+'.tmp',JSON.stringify({job:null,staging:null},null,2));
    await fs.rename(stateFile+'.tmp',stateFile);
    // Never touch the exported output path: only the persisted job record is reset.
-   this.job=null;this.control=null;this.work=null;this.staging=null;this.stagingIdentity=null;this.requests.clear();
+   this.job=null;this.control=null;this.work=null;this.staging=null;this.stagingIdentity=null;this.requests.clear();this.sources.clear();this.folders.clear();this.inspections.clear();
    this.emit('job',null);
    return {cleared:true};
   }catch(e){
