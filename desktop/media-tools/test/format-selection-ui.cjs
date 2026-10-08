@@ -1,4 +1,5 @@
 'use strict';
+const {mainWindow,waitFor}=require('./electron-ui.cjs');
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
 (async()=>{
  const root=path.resolve('test-output/format-selection-'+Date.now());await fs.mkdir(root,{recursive:true});
@@ -6,8 +7,8 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
  const app=await _electron.launch({executablePath:process.env.ATL_FORMAT_EXE||path.resolve('node_modules/electron/dist/electron.exe'),args:[...packaged?[]:[path.resolve('.')],'--user-data-dir='+path.join(root,'profile')],env:{...process.env,ELECTRON_RUN_AS_NODE:undefined}});
  const checks=[],errors=[];
  try{
-  const page=await app.firstWindow();page.on('pageerror',e=>errors.push(e.message));await page.waitForSelector('#start');
-  await page.waitForFunction(()=>document.getElementById('start-help').textContent.includes('กรุณาเลือกรูปแบบเสียง'));
+  const page=await mainWindow(app);page.on('pageerror',e=>errors.push(e.message));await page.waitForSelector('#start');
+  await waitFor(page,()=>document.getElementById('start-help').textContent.includes('กรุณาเลือกรูปแบบเสียง'));
   assert.equal(await page.locator('input[name="format"]:checked').count(),0);assert(await page.locator('#start').isDisabled());
   checks.push('Download starts with no format selected and Start disabled');
   const invalid=await page.evaluate(()=>window.localMedia.startDownload({sourceId:crypto.randomUUID(),folderId:crypto.randomUUID(),requestId:crypto.randomUUID(),encoding:null}));
@@ -20,8 +21,8 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
    Engine.prototype.start=async function(mode,request){startRequest(request,mode);global.__formatSubmissions.push(request.encoding);return null;};
   },root);
   await page.locator('#source-url').fill('https://youtu.be/abcdefghijk');await page.locator('#check-link').click();
-  await page.waitForFunction(()=>document.getElementById('link-error').textContent==='ตรวจสอบต้นทางแล้ว');
-  await page.locator('#pick-folder').click();await page.waitForFunction(()=>document.getElementById('folder-path').textContent!=='ยังไม่ได้เลือกโฟลเดอร์');
+  await waitFor(page,()=>document.getElementById('link-error').textContent==='ตรวจสอบต้นทางแล้ว');
+  await page.locator('#pick-folder').click();await waitFor(page,()=>document.getElementById('folder-path').textContent!=='ยังไม่ได้เลือกโฟลเดอร์');
   assert(await page.locator('#start').isDisabled());assert.match(await page.locator('#start-help').innerText(),/เลือกรูปแบบเสียง/);
   await page.evaluate(()=>document.getElementById('start').dispatchEvent(new MouseEvent('click')));
   assert.equal(await app.evaluate(()=>global.__formatSubmissions.length),0);
@@ -29,7 +30,7 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
   const choices=[['Original Audio','original'],['MP3','mp3'],['WAV','wav'],['FLAC','flac'],['ALAC','alac']];
   for(const [label,expected] of choices){
    await page.locator(`input[name="format"][value="${label}"]`).check();assert.equal(await page.locator('#start').isDisabled(),false);
-   await page.locator('#start').click();await page.waitForFunction(()=>!document.getElementById('start').disabled);
+   await page.locator('#start').click();await waitFor(page,()=>!document.getElementById('start').disabled);
    assert.equal(await app.evaluate(()=>global.__formatSubmissions.at(-1).format),expected);
   }
   checks.push('Each of five explicit selections enables Start and submits that format');

@@ -1,4 +1,4 @@
-# Audio Tech Labs Media Tools — Windows portable 0.2.0 · Player V1
+# Audio Tech Labs Media Tools — Windows portable 0.2.1 · Player V1
 
 รุ่นทดสอบภายใน Windows x64 · 8 ตุลาคม 2026 · ยังไม่เผยแพร่
 
@@ -13,9 +13,13 @@
 
 Player ใช้ตัวเล่นเสียงจริงของ Electron และ FFprobe/FFmpeg ที่มีอยู่ อ่าน metadata และปกเพลงในเครื่อง แสดงเฉพาะข้อมูลที่อ่านได้จริง ใช้โลโก้ wordmark/สัญลักษณ์เดิมจากหัวแอปบนแผ่น CD โดยตรง ไม่มีโลโก้สร้างใหม่ เลือกปกเพลงได้และกลับเป็นโลโก้เมื่อไม่มีปก แผ่นหมุนหนึ่งรอบต่อ 12 วินาทีตามสถานะเสียง Pause คงมุมเดิมและรองรับ reduced motion
 
-Playlist ลากจัดลำดับหรือใช้ปุ่มเลื่อนขึ้น/ลงได้ กด Enter ที่แถวเพื่อเล่นได้ ลบเพลงปัจจุบันจะหยุดและเลือกเพลงใกล้เคียง ปุ่มเริ่มงานใหม่อยู่แผง 03 ตามสองหน้าเดิม ต้องยืนยันก่อนล้างรายการ จะหยุดเสียงและคืนหน้าเริ่มต้นโดยไม่ลบไฟล์ในดิสก์ เปลี่ยนหน้าหรือ reload จะหยุดเสียง แต่ Playlist อยู่ใน memory จนปิดแอปหรือเริ่มงานใหม่ ไม่เก็บประวัติถาวร
+Playlist ลากจัดลำดับหรือใช้ปุ่มเลื่อนขึ้น/ลงได้ กด Enter ที่แถวเพื่อเล่นได้ ลบเพลงปัจจุบันจะหยุดและเลือกเพลงใกล้เคียง ปุ่มเริ่มงานใหม่อยู่แผง 03 ตามสองหน้าเดิม ต้องยืนยันก่อนล้างรายการ จะหยุดเสียงและคืนหน้าเริ่มต้นโดยไม่ลบไฟล์ในดิสก์
+
+รุ่น 0.2.1 เล่นเพลงต่อเนื่องขณะสลับไป Download Audio / Convert Audio และกลับหรือ reload หน้า Player โดยไม่เปิดเสียงใหม่ เวลา เพลง Playlist Volume/Mute Shuffle Repeat และมุม CD อยู่กับตัวเล่นชุดเดียวตลอดรอบเปิดแอป เพลงจบขณะอยู่หน้าอื่นจะเดิน Playlist ตามโหมดที่เลือก สามารถ Download หรือ Convert หนึ่งงานระหว่างฟังเพลงได้ ปุ่มเริ่มงานใหม่ของ Download/Convert ล้างเฉพาะงานประมวลผลเดิมที่ทั้งสองหน้าใช้ร่วมกัน ไม่กระทบ Player ส่วนปุ่มใน Player ล้างเฉพาะ Player ปิดแอปจะหยุดเสียงและคืนทรัพยากร Playlist อยู่ใน memory จนปิดแอปหรือเริ่มงานใหม่ใน Player ไม่เก็บประวัติถาวร
 
 Player V1 จำกัด 500 เพลงและอ่าน local drive ปกติเท่านั้น ปฏิเสธ UNC, symlink/junction และไฟล์ manifest รูปแบบที่ FFprobe อ่านได้อาจเล่นไม่ได้ใน Electron; ตรวจ `canPlayType` และ error จริงพร้อมแนะนำ Convert Audio ไม่มีการแปลงอัตโนมัติ/EQ/Crossfade/สตรีมมิง ดูรายการทดสอบและข้อจำกัดใน [PLAYER-V1-ACCEPTANCE-20261008.md](PLAYER-V1-ACCEPTANCE-20261008.md)
+
+ผลตรวจการเล่นต่อเนื่อง 0.2.1 และวิธีทดสอบซ้ำอยู่ใน [PLAYER-CONTINUITY-ACCEPTANCE-20261008.md](PLAYER-CONTINUITY-ACCEPTANCE-20261008.md)
 
 หน้า Download ไม่เลือกรูปแบบเสียงไว้ล่วงหน้า ปุ่มดาวน์โหลดเปิดได้เมื่อเลือกรูปแบบ ตรวจสอบลิงก์ เลือกโฟลเดอร์ และเครื่องมือพร้อมครบแล้ว
 
@@ -60,7 +64,7 @@ Original Audio ใช้เฉพาะ Download คง codec/container แล�
 - ยังไม่ลงนามโปรแกรม และยังไม่ทดสอบบน Windows VM/user ที่สะอาดจริง การทดสอบที่จำกัด PATH เหลือ Windows System32 แยกไว้ในรายงาน
 - ใช้ local drive ปกติ ไม่รองรับ junction/symlink/UNC หรือ manifest ที่อ้างไฟล์อื่น
 - การตรวจพื้นที่เผื่อ staging ก่อนเริ่ม และตรวจระหว่าง worker ทำงาน ไม่รับประกันกรณีอุปกรณ์หลุดหรือพื้นที่เต็มในทุก timing
-- รองรับหนึ่ง audio stream ต่อไฟล์ ไม่มี batch/queue/mixing/normalization
+- Download/Convert รองรับหนึ่ง audio stream ต่อไฟล์ ไม่มี batch/queue/mixing/normalization
 - งานตรวจที่ยังเหลือและระดับหลักฐานอยู่ใน `ACCEPTANCE-REPORT.md`
 
 ## สำหรับพัฒนา
@@ -78,6 +82,6 @@ Electron distribution มาจาก archive ที่ตรวจ publisher ch
 
 ตรวจเฉพาะส่วนที่เปลี่ยน: `npm test` (validation/security), `node test/acceptance.cjs` (real media matrix), `node test/lifecycle.cjs`, `node test/network.cjs`, `node test/ui-acceptance.cjs` (ต้องมี Playwright ใน NODE_PATH)
 
-ตรวจ Player ด้วย `node test/player-acceptance.cjs` เมื่อ Playwright อยู่ใน `NODE_PATH`; ใช้ `ATL_PLAYER_EXE` ชี้ executable เพื่อรันชุดเดียวกันกับ portable ที่ build แล้ว ทุกการทดสอบใช้ profile แยกใน `test-output/`
+ตรวจ Player ด้วย `node test/player-acceptance.cjs`, ตรวจสลับหน้า 20 รอบด้วย `node test/continuous-playback.cjs` และตรวจปิดแอประหว่างฟัง/Convert ด้วย `node test/playback-close.cjs` เมื่อ Playwright อยู่ใน `NODE_PATH`; ใช้ `ATL_PLAYER_EXE` ชี้ executable เพื่อรันกับ portable ที่ build แล้ว และ `ATL_TEST_YOUTUBE_URL` เป็นลิงก์สาธารณะที่มีสิทธิ์ดาวน์โหลดสำหรับตรวจ provider จริง ทุกการทดสอบใช้ profile แยกใน `test-output/` ดูผลจริงและคำสั่งเพิ่มเติมในรายงาน Player continuity
 
 สร้างโฟลเดอร์ portable ด้วย `node scripts/package.cjs --directory-only` ตรวจ portable แล้วสร้าง ZIP ครั้งสุดท้ายด้วย `node scripts/package.cjs --finalize` ผลล่าสุดดู `release/latest.json` ห้ามเผยแพร่ก่อนปิดรายการตรวจรับที่ค้าง

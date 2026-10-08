@@ -16,8 +16,8 @@ async function wait(check,label){for(let i=0;i<150;i++){try{if(await check())ret
  require('node:fs').mkdirSync(root,{recursive:true});require('node:fs').writeFileSync(output,'PRESERVE_RESULT_1234');
  app.setPath('userData',path.join(root,'profile'));
  require('../src/main.cjs');await app.whenReady();
- await wait(()=>BrowserWindow.getAllWindows().length>0,'window');
- const win=BrowserWindow.getAllWindows()[0];
+ await wait(()=>BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL())),'window');
+ const win=BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL()));
  const run=js=>win.webContents.executeJavaScript(js);
  await wait(()=>run("document.querySelector('#job-badge')?.textContent==='สำเร็จ'"),'finished job');
  assert.equal(await run("!document.querySelector('#new-job').hidden"),true,'Download finished button visible');

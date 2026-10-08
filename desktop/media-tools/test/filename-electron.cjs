@@ -18,8 +18,8 @@ async function wait(fn,label,ms=14000){const start=Date.now();while(Date.now()-s
  dialog.showOpenDialog=async()=>({canceled:false,filePaths:[out]});
  require('../src/main.cjs');
  await app.whenReady();
- await wait(()=>BrowserWindow.getAllWindows().length>0,'window');
- const win=BrowserWindow.getAllWindows()[0];
+ await wait(()=>BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL())),'window');
+ const win=BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL()));
  const evalJs=code=>win.webContents.executeJavaScript(code);
  await wait(()=>evalJs("!!document.querySelector('#output-name')").catch(()=>false),'Download UI');
  assert(await evalJs("!!(document.querySelector('#pick-folder').compareDocumentPosition(document.querySelector('#output-name')) & Node.DOCUMENT_POSITION_FOLLOWING) && !!(document.querySelector('#output-name').compareDocumentPosition(document.querySelector('#start')) & Node.DOCUMENT_POSITION_FOLLOWING)"));

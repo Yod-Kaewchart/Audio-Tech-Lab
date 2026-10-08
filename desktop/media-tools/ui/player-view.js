@@ -32,7 +32,7 @@
     <p class="help">ลากแถวเพื่อจัดลำดับ หรือใช้ปุ่มเลื่อนขึ้น / ลง · สูงสุด 500 เพลง</p>
    </section>
   </div>
-  <section class="panel job-panel" aria-labelledby="session-heading"><div class="panel-heading"><div class="heading-label"><span class="step-number">03</span><h2 id="session-heading">งานปัจจุบัน</h2></div></div><div class="job-content"><div class="job-copy"><h3>ฟังไฟล์ในเครื่อง</h3><p>เมื่อเปลี่ยนหน้าจะหยุดเสียง รายการเพลงคงอยู่จนเริ่มงานใหม่หรือปิดแอป</p></div><div class="job-actions"><button id="new-job" class="button" type="button">เริ่มงานใหม่</button></div></div></section>
+  <section class="panel job-panel" aria-labelledby="session-heading"><div class="panel-heading"><div class="heading-label"><span class="step-number">03</span><h2 id="session-heading">งานปัจจุบัน</h2></div></div><div class="job-content"><div class="job-copy"><h3>ฟังไฟล์ในเครื่อง</h3><p>ฟังเพลงต่อได้ระหว่างใช้ Download Audio และ Convert Audio รายการเพลงคงอยู่จนเริ่มงานใหม่ใน Player หรือปิดแอป</p></div><div class="job-actions"><button id="new-job" class="button" type="button">เริ่มงานใหม่</button></div></div></section>
  `);
  document.getElementById('disc-logo').append(logo);
 })();

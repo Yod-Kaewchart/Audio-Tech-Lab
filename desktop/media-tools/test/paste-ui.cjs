@@ -1,4 +1,5 @@
 'use strict';
+const {mainWindow}=require('./electron-ui.cjs');
 const {_electron}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path');
 
@@ -11,12 +12,12 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  try{
   // Use the existing clipboard without writing to it. No clipboard content enters logs, files or network requests.
   assert(await app.evaluate(async({clipboard})=>!!(await clipboard.readText()).trim()),'Copy text before running the paste check');
-  const page=await app.firstWindow();page.on('request',r=>requests.push(r.url()));page.on('pageerror',e=>errors.push(e.message));
+  const page=await mainWindow(app);page.on('request',r=>requests.push(r.url()));page.on('pageerror',e=>errors.push(e.message));
   await page.waitForSelector('#paste-link');await page.waitForFunction(()=>!document.querySelector('#source-url').matches(':disabled'));
   await page.locator('#source-url').focus();await page.keyboard.press('Control+V');
   await page.waitForFunction(()=>!!document.querySelector('#source-url').value);
   const matchesClipboard=()=>app.evaluate(async({clipboard,BrowserWindow})=>{
-   const value=await BrowserWindow.getAllWindows()[0].webContents.executeJavaScript("document.getElementById('source-url').value");
+   const value=await BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL())).webContents.executeJavaScript("document.getElementById('source-url').value");
    // URL inputs strip line breaks and surrounding ASCII whitespace.
    return value===(await clipboard.readText()).replace(/[\r\n]/g,'').trim();
   });
@@ -43,7 +44,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
    if(mode==='convert')assert.equal((await page.evaluate(()=>window.localMedia.pasteSourceUrl())).ok,false);
   }
   checks.push('Both pages fit 360/768/1440px; Convert rejects URL paste');
-  const preferences=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].webContents.getLastWebPreferences());
+  const preferences=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL())).webContents.getLastWebPreferences());
   assert(preferences.sandbox&&preferences.contextIsolation&&!preferences.nodeIntegration);
   assert.equal(requests.filter(url=>!url.startsWith('atl-media://app/')).length,0);assert.deepEqual(errors,[]);
   checks.push('Sandbox preserved; no remote renderer requests; no provider inspection/download attempted');

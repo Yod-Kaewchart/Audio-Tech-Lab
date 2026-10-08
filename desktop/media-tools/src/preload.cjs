@@ -6,6 +6,8 @@ contextBridge.exposeInMainWorld('localMedia',Object.freeze({
  playerDrop:files=>invoke('playerDrop',Array.from(files).map(file=>webUtils.getPathForFile(file)).filter(Boolean)),
  playerRemove:trackId=>invoke('playerRemove',trackId),playerReorder:order=>invoke('playerReorder',order),
  playerConfirmReset:()=>invoke('playerConfirmReset'),playerReset:()=>invoke('playerReset'),
+ playerGetState:()=>invoke('playerGetState'),playerCommand:command=>invoke('playerCommand',command),
+ subscribePlayer:listener=>{if(typeof listener!=='function')throw new TypeError('listener');const handler=(_event,state)=>listener(state);ipcRenderer.on('atl:player-state',handler);return ()=>ipcRenderer.removeListener('atl:player-state',handler);},
  pasteSourceUrl:()=>invoke('pasteSourceUrl'),
  chooseInputFile:()=>invoke('chooseInputFile'),chooseOutputDirectory:()=>invoke('chooseOutputDirectory'),
  inspectUrl:request=>invoke('inspectUrl',request),cancelInspection:request=>invoke('cancelInspection',request),

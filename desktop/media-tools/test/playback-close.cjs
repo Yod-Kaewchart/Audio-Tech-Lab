@@ -1,0 +1,24 @@
+'use strict';
+const {_electron}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path');
+const {wave}=require('./fixtures.cjs'),{mainWindow,waitFor}=require('./electron-ui.cjs');
+(async()=>{
+ const root=path.resolve('test-output/playback-close-'+Date.now());await fs.mkdir(root,{recursive:true});const music=path.join(root,'music.wav'),input=path.join(root,'convert.wav'),log=path.join(root,'close.json');await wave(music,60);await wave(input,8);
+ const packaged=!!process.env.ATL_PLAYER_EXE,app=await _electron.launch({executablePath:process.env.ATL_PLAYER_EXE||path.resolve('node_modules/electron/dist/electron.exe'),args:[...packaged?[]:[path.resolve('.')],'--user-data-dir='+path.join(root,'profile')],env:{...process.env,ELECTRON_RUN_AS_NODE:undefined}});let closed=false;
+ try{
+  const page=await mainWindow(app);await page.waitForSelector('#page-title');await page.locator('.tool-nav a[href="player.html"]').click();await page.waitForSelector('#file-input',{state:'attached'});await page.locator('#file-input').setInputFiles(music);await waitFor(page,()=>document.querySelectorAll('.playlist-row').length===1);await page.locator('#play-pause').click();await waitFor(page,()=>document.querySelector('#playback-status').textContent==='กำลังเล่น');
+  await app.evaluate(({app,dialog,BrowserWindow,ipcMain},{input,root,log})=>{
+   const load=process.mainModule.require.bind(process.mainModule),path=load('node:path'),fs=load('node:fs');const {Runner}=load(path.join(app.getAppPath(),'src/runner.cjs')),{Engine}=load(path.join(app.getAppPath(),'src/engine.cjs'));
+   const run=Runner.prototype.run;Runner.prototype.run=function(tool,args,opts){if(tool==='ffmpeg'){args=[...args];args.splice(args.indexOf('-i'),0,'-re');}return run.call(this,tool,args,opts);};
+   const update=Engine.prototype.update;Engine.prototype.update=function(...args){const result=update.apply(this,args);global.__closeJob=this.snapshot();return result;};
+   dialog.showOpenDialog=async(_w,options)=>({canceled:false,filePaths:[options.properties.includes('openFile')?input:root]});dialog.showMessageBox=async()=>({response:0});
+   let cleared=false;const observe=(_e,m)=>{if(m.kind==='state'&&m.state.paused&&m.state.status==='idle'&&!m.state.tracks.length){cleared=true;ipcMain.removeListener('atl:playback-host',observe);}};ipcMain.on('atl:playback-host',observe);
+   app.on('will-quit',()=>fs.writeFileSync(log,JSON.stringify({audioCleared:cleared,windows:BrowserWindow.getAllWindows().length,hostListeners:ipcMain.listenerCount('atl:playback-host'),jobStatus:global.__closeJob?.status},null,2)));
+  },{input,root,log});
+  await page.locator('.tool-nav a[href="convert.html"]').click();await page.waitForSelector('#pick-file');await page.locator('#pick-file').click();await waitFor(page,()=>document.querySelector('#source-title').textContent==='convert.wav');await page.locator('#pick-folder').click();await waitFor(page,()=>!document.querySelector('#start').disabled);await page.locator('#start').click();await waitFor(page,async()=> (await window.localMedia.getCurrentJob()).value?.progress.stage==='converting');
+  const before=(await page.evaluate(()=>window.localMedia.playerGetState())).value;const closeUI=()=>app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL())).close());
+  await closeUI();await waitFor(page,async t=>(await window.localMedia.playerGetState()).value.currentTime>t+.15,before.currentTime);assert.equal(page.isClosed(),false);assert.equal((await page.evaluate(()=>window.localMedia.playerGetState())).value.paused,false);assert.equal((await page.evaluate(()=>window.localMedia.getCurrentJob())).value.status,'running');
+  await app.evaluate(({dialog})=>{dialog.showMessageBox=async()=>({response:1});});await closeUI();await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Close did not finish')),30000);if(app.process().exitCode!==null){clearTimeout(timer);resolve();}else app.process().once('exit',()=>{clearTimeout(timer);resolve();});});closed=true;
+  const result=JSON.parse(await fs.readFile(log,'utf8'));assert.deepEqual(result,{audioCleared:true,windows:0,hostListeners:0,jobStatus:'cancelled'});assert.equal((await fs.readdir(root)).some(name=>name.startsWith('.atl-job-')),false);
+  await fs.writeFile(path.join(root,'results.json'),JSON.stringify({passed:true,packaged,checks:['dismiss close keeps audio and real Convert running','confirm close cancels worker and cleans staging','audio cleared, zero windows/listeners at quit'],result},null,2));console.log('PLAYBACK ACTIVE JOB CLOSE PASS '+root);
+ }finally{if(!closed)await app.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

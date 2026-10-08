@@ -1,0 +1,262 @@
+{
+  "version": "0.2.1",
+  "baseCommit": "a9d2ce2122133ea4627efb8b6ecb281f692c0e6c",
+  "portable": {
+    "directory": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T134449",
+    "executable": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T134449\\Audio Tech Labs Media Tools.exe",
+    "archive": null,
+    "sha256": null,
+    "createdAt": "2026-10-08T13:44:54.628Z"
+  },
+  "unitTests": {
+    "passed": 23,
+    "total": 23
+  },
+  "player": {
+    "passed": true,
+    "checks": 29,
+    "style": {
+      "font": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+      "bg": "rgb(20, 23, 25)",
+      "color": "rgb(240, 238, 232)",
+      "button": "rgb(201, 170, 112)"
+    }
+  },
+  "continuity": {
+    "passed": true,
+    "checks": [
+      "actual Download/Convert/Player fonts, background, text and accent match",
+      "20 Player → Download → Convert → Player rounds: advancing audio/CD, restored controls, same engine/audio, zero extra play/load/pause events, stable listeners/timers",
+      "Pause across pages freezes exact audio position/CD angle; Resume continues that angle",
+      "real ended away from Player advances next, then Repeat off ends final track",
+      "real Repeat one completes two cycles while on Convert",
+      "real Repeat all wraps final song to first while on Download",
+      "real Shuffle selects another playlist song at ended while away",
+      "real FFmpeg Convert succeeds and publishes FLAC while same audio keeps playing",
+      "Convert new job resets only its media job; Player/audio and output file survive",
+      "Download new job clears only media work; Player retains its complete session",
+      "real provider request/download never interrupts or replaces the playing audio",
+      "Player new job stops sole audio and clears tracks/metadata/art/position/options/resources",
+      "same local file reimports and plays after reset",
+      "strict control IPC denies private commands, paths and mutations from other pages; private preload unavailable to UI",
+      "responsive, keyboard transport/focus and reduced motion regressions pass",
+      "UI and hidden renderer have no JS errors or external requests",
+      "close while playing clears audio, destroys host, removes IPC listener and exits with no windows"
+    ],
+    "beforeNavigation": {
+      "windows": 2,
+      "hostId": 2,
+      "ipcListeners": 1,
+      "timeouts": 0,
+      "listeners": 20,
+      "audioCount": 1,
+      "sameAudio": true,
+      "events": {
+        "emptied": 1,
+        "play": 1,
+        "loadstart": 1
+      }
+    },
+    "afterNavigation": {
+      "windows": 2,
+      "hostId": 2,
+      "ipcListeners": 1,
+      "timeouts": 0,
+      "listeners": 20,
+      "audioCount": 1,
+      "sameAudio": true,
+      "events": {
+        "emptied": 1,
+        "play": 1,
+        "loadstart": 1
+      }
+    },
+    "navigation": [
+      {
+        "round": 1,
+        "time": 2.676093,
+        "discMs": 2716.10000000149
+      },
+      {
+        "round": 2,
+        "time": 5.101321,
+        "discMs": 5141.800000000745
+      },
+      {
+        "round": 3,
+        "time": 7.440728,
+        "discMs": 7481
+      },
+      {
+        "round": 4,
+        "time": 9.532358,
+        "discMs": 9573.5
+      },
+      {
+        "round": 5,
+        "time": 12.179659,
+        "discMs": 12220
+      },
+      {
+        "round": 6,
+        "time": 14.459305,
+        "discMs": 14500.39999999851
+      },
+      {
+        "round": 7,
+        "time": 17.221503,
+        "discMs": 17261.800000000745
+      },
+      {
+        "round": 8,
+        "time": 19.928629,
+        "discMs": 19969.89999999851
+      },
+      {
+        "round": 9,
+        "time": 22.360665,
+        "discMs": 22401.199999999255
+      },
+      {
+        "round": 10,
+        "time": 25.316292,
+        "discMs": 25356.89999999851
+      },
+      {
+        "round": 11,
+        "time": 27.838234,
+        "discMs": 27878.89999999851
+      },
+      {
+        "round": 12,
+        "time": 30.511015,
+        "discMs": 30551.699999999255
+      },
+      {
+        "round": 13,
+        "time": 32.861801,
+        "discMs": 32901.89999999851
+      },
+      {
+        "round": 14,
+        "time": 35.214928,
+        "discMs": 35255.39999999851
+      },
+      {
+        "round": 15,
+        "time": 37.613946,
+        "discMs": 37654.39999999851
+      },
+      {
+        "round": 16,
+        "time": 39.973978,
+        "discMs": 40014.199999999255
+      },
+      {
+        "round": 17,
+        "time": 42.328279,
+        "discMs": 42369.39999999851
+      },
+      {
+        "round": 18,
+        "time": 44.865845,
+        "discMs": 44905.800000000745
+      },
+      {
+        "round": 19,
+        "time": 47.269193,
+        "discMs": 47310.800000000745
+      },
+      {
+        "round": 20,
+        "time": 49.624805,
+        "discMs": 49665.10000000149
+      }
+    ],
+    "close": {
+      "hostDestroyed": true,
+      "audioCleared": true,
+      "hostListeners": 0,
+      "willQuit": true,
+      "windows": 0
+    },
+    "convertMetadata": {
+      "durationSeconds": 8,
+      "bytes": 118292,
+      "codec": "flac",
+      "container": "flac",
+      "sampleRateHz": 48000,
+      "bitsPerSample": 16,
+      "channels": 2
+    },
+    "providerLimitation": {
+      "code": "NETWORK_FAILED",
+      "message": "อ่านต้นทางไม่ได้: ตรวจการเชื่อมต่อและลิงก์สาธารณะ รุ่นนี้ไม่ใช้ cookies หรือการล็อกอิน",
+      "retryable": true
+    }
+  },
+  "earlierSuccessfulDownload": {
+    "sourceResult": "test-output/continuous-playback-1791466195231/results.json",
+    "portableResult": "test-output/continuous-playback-1791466822109/results.json",
+    "codec": "opus",
+    "container": "matroska,webm",
+    "durationSeconds": 5281.101,
+    "bytes": 91691492,
+    "sampleRateHz": 48000,
+    "channels": 2,
+    "bitsPerSample": null
+  },
+  "activeJobClose": {
+    "passed": true,
+    "packaged": true,
+    "checks": [
+      "dismiss close keeps audio and real Convert running",
+      "confirm close cancels worker and cleans staging",
+      "audio cleared, zero windows/listeners at quit"
+    ],
+    "result": {
+      "audioCleared": true,
+      "windows": 0,
+      "hostListeners": 0,
+      "jobStatus": "cancelled"
+    }
+  },
+  "sourcePackageHashes": {
+    "passed": true,
+    "files": 30,
+    "version": "0.2.1",
+    "executable": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T134449\\Audio Tech Labs Media Tools.exe",
+    "executableSHA256": "2529b494f4123f152bce346051f7bd855ef95006424a561953cf17c49a3d1ba8"
+  },
+  "userProfileSHA256Unchanged": true,
+  "finalPortableDownloadRetry": {
+    "passed": true,
+    "playerContinued": true,
+    "timeBefore": 0,
+    "timeAfter": 30.494272,
+    "outputMetadata": {
+      "durationSeconds": 5281.101,
+      "bytes": 91691492,
+      "codec": "opus",
+      "container": "matroska,webm",
+      "sampleRateHz": 48000,
+      "bitsPerSample": null,
+      "channels": 2
+    },
+    "result": "test-output/final-download-1791467370032/results.json"
+  },
+  "startup": {
+    "failure": {
+      "passed": true,
+      "windows": 0,
+      "ipcListeners": 0,
+      "messages": 1
+    },
+    "earlyClose": {
+      "passed": true,
+      "windows": 0,
+      "ipcListeners": 0,
+      "messages": 0
+    }
+  }
+}

@@ -31,8 +31,8 @@ async function until(check,label){for(let n=0;n<120;n++){try{if(await check())re
  fs.mkdirSync(root,{recursive:true});fs.writeFileSync(output,'PRESERVE_AUDIO_ORIGINAL');
  app.setPath('userData',profile);
  require('../src/main.cjs');await app.whenReady();
- await until(()=>BrowserWindow.getAllWindows().length,'window');
- const win=BrowserWindow.getAllWindows()[0];
+ await until(()=>BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL())),'window');
+ const win=BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL()));
  const run=js=>win.webContents.executeJavaScript(js);
  await until(()=>run("document.querySelector('#new-job')&&!document.querySelector('#new-job').hidden"),'terminal job');
  if(mode==='convert'){

@@ -3,6 +3,7 @@ class NativeAdapter {
  constructor(bridge){this.bridge=bridge;this.native=true;}
  async call(name,request){if(!this.bridge||typeof this.bridge[name]!=='function')throw Object.assign(new Error('Native bridge ไม่พร้อม กรุณาเปิดผ่านโปรแกรม Media Tools บน Windows'),{code:'UNAVAILABLE'});const reply=await this.bridge[name](request);if(!reply?.ok)throw Object.assign(new Error(reply?.error?.message||'Native bridge ตอบกลับไม่ถูกต้อง'),reply?.error);return reply.value;}
  subscribeJob(listener){return this.bridge?.subscribeJob?this.bridge.subscribeJob(listener):()=>{};}
+ subscribePlayer(listener){return this.bridge?.subscribePlayer?this.bridge.subscribePlayer(listener):()=>{};}
 }
 // Explicit preview adapter only. Production custom protocol never serves a demo entry point.
 // The original approved simulation remains in designs/media-tools; native has no simulation fallback.
