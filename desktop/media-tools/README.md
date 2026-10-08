@@ -1,4 +1,4 @@
-# Audio Tech Labs Media Tools — Windows portable 0.1.2
+# Audio Tech Labs Media Tools — Windows portable 0.2.0 · Player V1
 
 รุ่นทดสอบภายใน Windows x64 · 8 ตุลาคม 2026 · ยังไม่เผยแพร่
 
@@ -9,6 +9,13 @@
 3. รอรายการเครื่องมือในเครื่องตรวจ checksum หากมีไฟล์ขาดหรือ hash ไม่ตรง ปุ่มเริ่มงานจะปิดพร้อมเหตุผล
 4. Convert Audio: เลือกไฟล์ด้วยหน้าต่าง Windows → เลือกรูปแบบ/คุณภาพ → เลือกโฟลเดอร์ → ตั้งชื่อไฟล์ปลายทางได้ (ไม่บังคับ) → เริ่มแปลงไฟล์
 5. Download Audio: คัดลอกลิงก์ YouTube สาธารณะหนึ่งรายการที่มีสิทธิ์ดาวน์โหลด → กด **วางลิงก์** หรือคลิกช่องแล้วกด **Ctrl+V** / คลิกขวา **วาง** → ตรวจสอบลิงก์ → **เลือกรูปแบบเสียงด้วยตนเอง** และเลือกโฟลเดอร์ → เริ่มดาวน์โหลด
+6. **Player**: เปิดเมนู Player → เพิ่มไฟล์หลายเพลง / เพิ่มโฟลเดอร์ (รวมโฟลเดอร์ย่อย) / ลากไฟล์หรือโฟลเดอร์มาวาง → ดับเบิลคลิกเพลงหรือกดเล่น รองรับ Previous, Play/Pause, Next, Stop, Seek, Volume/Mute, Shuffle และ Repeat ปิด/เพลงเดียว/ทั้งหมด
+
+Player ใช้ตัวเล่นเสียงจริงของ Electron และ FFprobe/FFmpeg ที่มีอยู่ อ่าน metadata และปกเพลงในเครื่อง แสดงเฉพาะข้อมูลที่อ่านได้จริง ใช้โลโก้ wordmark/สัญลักษณ์เดิมจากหัวแอปบนแผ่น CD โดยตรง ไม่มีโลโก้สร้างใหม่ เลือกปกเพลงได้และกลับเป็นโลโก้เมื่อไม่มีปก แผ่นหมุนหนึ่งรอบต่อ 12 วินาทีตามสถานะเสียง Pause คงมุมเดิมและรองรับ reduced motion
+
+Playlist ลากจัดลำดับหรือใช้ปุ่มเลื่อนขึ้น/ลงได้ กด Enter ที่แถวเพื่อเล่นได้ ลบเพลงปัจจุบันจะหยุดและเลือกเพลงใกล้เคียง ปุ่มเริ่มงานใหม่อยู่แผง 03 ตามสองหน้าเดิม ต้องยืนยันก่อนล้างรายการ จะหยุดเสียงและคืนหน้าเริ่มต้นโดยไม่ลบไฟล์ในดิสก์ เปลี่ยนหน้าหรือ reload จะหยุดเสียง แต่ Playlist อยู่ใน memory จนปิดแอปหรือเริ่มงานใหม่ ไม่เก็บประวัติถาวร
+
+Player V1 จำกัด 500 เพลงและอ่าน local drive ปกติเท่านั้น ปฏิเสธ UNC, symlink/junction และไฟล์ manifest รูปแบบที่ FFprobe อ่านได้อาจเล่นไม่ได้ใน Electron; ตรวจ `canPlayType` และ error จริงพร้อมแนะนำ Convert Audio ไม่มีการแปลงอัตโนมัติ/EQ/Crossfade/สตรีมมิง ดูรายการทดสอบและข้อจำกัดใน [PLAYER-V1-ACCEPTANCE-20261008.md](PLAYER-V1-ACCEPTANCE-20261008.md)
 
 หน้า Download ไม่เลือกรูปแบบเสียงไว้ล่วงหน้า ปุ่มดาวน์โหลดเปิดได้เมื่อเลือกรูปแบบ ตรวจสอบลิงก์ เลือกโฟลเดอร์ และเครื่องมือพร้อมครบแล้ว
 
@@ -70,5 +77,7 @@ node scripts/prepare-ui.cjs
 Electron distribution มาจาก archive ที่ตรวจ publisher checksum แล้วใน `cache/`; แตกไป `node_modules/electron/dist` และตั้ง `node_modules/electron/path.txt` เป็น `electron.exe` ก่อน `npm start`
 
 ตรวจเฉพาะส่วนที่เปลี่ยน: `npm test` (validation/security), `node test/acceptance.cjs` (real media matrix), `node test/lifecycle.cjs`, `node test/network.cjs`, `node test/ui-acceptance.cjs` (ต้องมี Playwright ใน NODE_PATH)
+
+ตรวจ Player ด้วย `node test/player-acceptance.cjs` เมื่อ Playwright อยู่ใน `NODE_PATH`; ใช้ `ATL_PLAYER_EXE` ชี้ executable เพื่อรันชุดเดียวกันกับ portable ที่ build แล้ว ทุกการทดสอบใช้ profile แยกใน `test-output/`
 
 สร้างโฟลเดอร์ portable ด้วย `node scripts/package.cjs --directory-only` ตรวจ portable แล้วสร้าง ZIP ครั้งสุดท้ายด้วย `node scripts/package.cjs --finalize` ผลล่าสุดดู `release/latest.json` ห้ามเผยแพร่ก่อนปิดรายการตรวจรับที่ค้าง

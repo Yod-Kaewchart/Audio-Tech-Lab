@@ -1,7 +1,11 @@
-const {contextBridge,ipcRenderer}=require('electron');
+const {contextBridge,ipcRenderer,webUtils}=require('electron');
 const invoke=(method,arg)=>ipcRenderer.invoke('atl:'+method,arg);
 contextBridge.exposeInMainWorld('localMedia',Object.freeze({
  getCapabilities:()=>invoke('getCapabilities'),
+ playerList:()=>invoke('playerList'),playerPickFiles:()=>invoke('playerPickFiles'),playerPickFolder:()=>invoke('playerPickFolder'),
+ playerDrop:files=>invoke('playerDrop',Array.from(files).map(file=>webUtils.getPathForFile(file)).filter(Boolean)),
+ playerRemove:trackId=>invoke('playerRemove',trackId),playerReorder:order=>invoke('playerReorder',order),
+ playerConfirmReset:()=>invoke('playerConfirmReset'),playerReset:()=>invoke('playerReset'),
  pasteSourceUrl:()=>invoke('pasteSourceUrl'),
  chooseInputFile:()=>invoke('chooseInputFile'),chooseOutputDirectory:()=>invoke('chooseOutputDirectory'),
  inspectUrl:request=>invoke('inspectUrl',request),cancelInspection:request=>invoke('cancelInspection',request),

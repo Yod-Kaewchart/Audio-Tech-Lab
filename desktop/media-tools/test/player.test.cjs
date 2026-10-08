@@ -1,0 +1,30 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const fs=require('node:fs/promises'),path=require('node:path');
+const {PlayerQueue}=require('../ui/player-queue.js');
+const {PlayerLibrary,range,mime,tags}=require('../src/player-library.cjs');
+const {Dependencies}=require('../src/dependencies.cjs'),{Runner}=require('../src/runner.cjs'),{wave}=require('./fixtures.cjs');
+test('queue repeat boundaries and manual next/previous',()=>{const q=new PlayerQueue();q.select('a');assert.equal(q.next(['a','b'],true),'b');assert.equal(q.next(['a','b'],true),null);q.repeat='one';assert.equal(q.next(['a','b'],true),'b');q.repeat='all';assert.equal(q.next(['a','b'],true),'a');assert.equal(q.previous(['a','b']),'b');});
+test('shuffle exhausts cycle, honors repeat one/all, supports previous and removal',()=>{const q=new PlayerQueue(()=>.3);q.shuffle=true;q.select('a');const sequence=['a',q.next(['a','b','c'],true),q.next(['a','b','c'],true)];assert.equal(new Set(sequence).size,3);assert.equal(q.next(['a','b','c'],true),null);assert.equal(q.previous(['a','b','c']),sequence[1]);q.repeat='one';assert.equal(q.next(['a','b','c'],true),sequence[1]);q.repeat='all';assert.ok(q.next(['a','b','c'],true));q.sync(['a']);assert.ok(!q.current||q.current==='a');});
+test('range validates suffix, clamped end and malformed requests',()=>{assert.deepEqual(range('bytes=3-8',10),{start:3,end:8,status:206});assert.deepEqual(range('bytes=-4',10),{start:6,end:9,status:206});assert.deepEqual(range('bytes=7-100',10),{start:7,end:9,status:206});for(const h of ['bytes=10-','bytes=8-4','bytes=0-1,3-4','bytes=-','x'])assert.equal(range(h,10),null);});
+test('metadata uses real tags and container/codec, independent of extension',()=>{assert.equal(mime({container:'wav',codec:'pcm_s16le'}),'audio/wav');assert.equal(mime({container:'aiff',codec:'pcm_s16be'}),null);assert.deepEqual(tags({format:{tags:{TITLE:'Title'}},streams:[{codec_type:'audio',tags:{ARTIST:'Artist'}}]}),{title:'Title',artist:'Artist'});});
+test('reset cancels pending imports, waits for cleanup and cannot resurrect old tracks',async()=>{
+ let began,release;const started=new Promise(resolve=>{began=resolve;}),held=new Promise(resolve=>{release=resolve;});
+ const library=new PlayerLibrary({});library.candidates=async(_inputs,control)=>{began();await held;control.check();return {result:[],errors:[]};};
+ const pending=library.add(['not-read']);const rejection=assert.rejects(pending,e=>e.code==='INTERRUPTED');await started;
+ let finished=false;const reset=library.reset().then(()=>{finished=true;});await new Promise(resolve=>setImmediate(resolve));assert.equal(finished,false);release();await reset;await rejection;assert.equal(library.loading,false);assert.equal(library.done,null);assert.deepEqual(library.snapshot(),[]);
+});
+test('real library probes, streams ranges, deduplicates, reorders, revokes and detects modified sources',async()=>{
+ const root=path.resolve('test-output/player-library-'+Date.now());await fs.mkdir(root,{recursive:true});const a=path.join(root,'เสียงจริง.wav'),b=path.join(root,'other.wav');await wave(a,1);await wave(b,1);
+ const deps=await new Dependencies(path.resolve('vendor')).load(),library=new PlayerLibrary(new Runner(deps));
+ const result=await library.add([a,b]);assert.deepEqual(result.errors,[]);assert.equal(result.tracks.length,2);const [first,second]=result.tracks;
+ assert.equal(first.metadata.sampleRateHz,48000);assert.equal(first.metadata.bitsPerSample,16);assert.equal(first.metadata.channels,2);assert.equal(first.title,path.basename(a));assert.equal(first.artist,null);assert.equal(first.artworkUrl,null);
+ assert.equal((await library.add([a])).tracks.length,2);
+ library.reorder([second.trackId,first.trackId]);assert.equal(library.snapshot()[0].trackId,second.trackId);assert.throws(()=>library.reorder([first.trackId,first.trackId]));
+ const response=await library.response(new Request(first.mediaUrl,{headers:{Range:'bytes=0-43'}}),'media',first.trackId);assert.equal(response.status,206);assert.equal((await response.arrayBuffer()).byteLength,44);
+ const invalid=await library.response(new Request(first.mediaUrl,{headers:{Range:'bytes=999999-'}}),'media',first.trackId);assert.equal(invalid.status,416);
+ await fs.appendFile(a,'changed');assert.equal((await library.response(new Request(first.mediaUrl),'media',first.trackId)).status,410);
+ library.remove(first.trackId);assert.equal((await library.response(new Request(first.mediaUrl),'media',first.trackId)).status,404);
+ const inFlight=library.response(new Request(second.mediaUrl),'media',second.trackId);await library.reset();assert.equal((await inFlight).status,404);assert.deepEqual(library.snapshot(),[]);assert.equal(library.entries.size,0);
+ assert.equal((await library.add([b])).tracks.length,1);await library.reset();
+});

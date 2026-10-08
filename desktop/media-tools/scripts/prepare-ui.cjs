@@ -1,7 +1,10 @@
 // Copy design assets; extract only the static view builder, never its demo event handlers.
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),design=path.resolve(root,'../../designs/media-tools'),ui=path.join(root,'ui');fs.mkdirSync(ui,{recursive:true});
-fs.cpSync(path.join(design,'assets'),path.join(ui,'assets'),{recursive:true});fs.copyFileSync(path.join(design,'media-tools.css'),path.join(ui,'media-tools.css'));
+fs.cpSync(path.join(design,'assets'),path.join(ui,'assets'),{recursive:true});
+// Retain the native filename control styling added after the prototype snapshot.
+const sharedStyle=fs.readFileSync(path.join(design,'media-tools.css'),'utf8').replace('input[type=url],select,','input[type=url],input[type=text],select,').replace('.start-row{','.filename-field{margin-top:18px}.filename-field input{width:100%}.filename-error:not(:empty){color:var(--gold)}.start-row{');
+fs.writeFileSync(path.join(ui,'media-tools.css'),sharedStyle);
 let view=fs.readFileSync(path.join(design,'media-tools.js'),'utf8').split('  const $ = id =>')[0]+'})();\n';
 view=view.replace('/* UI simulation only. No fetch, upload, storage, executable, or media processing. */','/* Shared static view derived from the approved prototype. No demo controller. */');
 view=view.replace('href="../../dist/index.html" aria-label="Audio Tech Labs หน้า Home ในเครื่อง"','href="download.html" aria-label="Audio Tech Labs Media Tools"');
@@ -21,5 +24,11 @@ view=view.replace('สาธิตการทำงานครั้งละ�
 view=view.replace(/<aside class="preview-controls"[\s\S]*?<\/aside>/,'<aside class="preview-controls"><div><strong>เครื่องมือในเครื่อง</strong><p id="capability-status" role="status">กำลังตรวจสอบเครื่องมือ…</p></div><button id="refresh-tools" type="button" class="button">ตรวจสอบอีกครั้ง</button></aside>');
 view=view.replace('ลองใหม่ (จำลอง)','ลองใหม่').replace('ความคืบหน้าจำลอง','ความคืบหน้าของขั้นตอนปัจจุบัน').replace('<p>ผลลัพธ์ตัวอย่าง · ยังไม่มีไฟล์นี้ในเครื่อง</p>','<p>ผลลัพธ์อยู่ในเครื่อง ไม่มีวันหมดอายุและไม่ถูกลบอัตโนมัติ</p>');
 view=view.replace('เมื่อพัฒนาจริง yt-dlp','yt-dlp').replace('หน้าจอนี้เตรียมสำหรับโปรแกรม Windows หรือ Local Companion เบราว์เซอร์ไม่ได้เรียก executable โดยตรง','โปรแกรม Windows นี้ใช้ native bridge ที่จำกัดคำสั่งเพื่อเรียกเครื่องมือภายในเครื่อง').replace('LOCAL FIRST / SCREEN PROTOTYPE · 01','LOCAL FIRST / WINDOWS · 0.1.0');
+// Preserve native controls and navigation when rebuilding from the earlier prototype.
+const filenameField='<div class="filename-field"><label for="output-name">เปลี่ยนชื่อไฟล์ปลายทาง</label><input id="output-name" type="text" maxlength="110" placeholder="เว้นว่างเพื่อใช้ชื่ออัตโนมัติ" autocomplete="off" spellcheck="false" aria-describedby="filename-help filename-error"><p id="filename-help" class="help">กรอกเฉพาะชื่อ ไม่ต้องใส่นามสกุล โปรแกรมจะเติมตามรูปแบบเสียงที่เลือก</p><p id="filename-error" class="help filename-error" role="status"></p></div>';
+view=view.replace('<p class="help">สร้างไฟล์ใหม่ ไม่เขียนทับต้นฉบับหรือไฟล์ชื่อซ้ำ</p></div>','<p class="help">สร้างไฟล์ใหม่ ไม่เขียนทับต้นฉบับหรือไฟล์ชื่อซ้ำ</p>'+filenameField+'</div>');
+view=view.replace('<button id="retry" class="button" type="button" hidden>ลองใหม่</button>','<button id="retry" class="button" type="button" hidden>ลองใหม่</button><button id="new-job" class="button" type="button" hidden>เริ่มงานใหม่</button>');
+view=view.replace('      </nav>','        <a href="player.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7z"/></svg> Player</a>\n      </nav>');
+view=view.replace('LOCAL FIRST / WINDOWS · 0.1.0','LOCAL FIRST / WINDOWS · '+JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version);
 fs.writeFileSync(path.join(ui,'view.js'),view);
 for(const page of ['download','convert']){let html=fs.readFileSync(path.join(design,page+'.html'),'utf8').replace('· ต้นแบบ','· Windows').replace('<script src="media-tools.js" defer></script>','<link rel="stylesheet" href="native.css">\n  <script src="view.js" defer></script>\n  <script src="adapters.js" defer></script>\n  <script src="controller.js" defer></script>').replace('ต้นแบบนี้ใช้ JavaScript เพื่อแสดงหน้าจอและสถานะจำลอง กรุณาเปิด JavaScript ไม่มีการประมวลผลเสียงจริง','โปรดเปิดหน้านี้ผ่านโปรแกรม Media Tools บน Windows');fs.writeFileSync(path.join(ui,page+'.html'),html);}
