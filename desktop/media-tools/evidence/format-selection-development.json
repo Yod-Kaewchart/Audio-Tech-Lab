@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "packaged": false,
+  "checks": [
+    "Download starts with no format selected and Start disabled",
+    "Real native handler rejects missing encoding",
+    "Valid source and folder cannot start without format, including dispatched click",
+    "Each of five explicit selections enables Start and submits that format",
+    "Reload requires selection again; Convert retains FLAC default"
+  ],
+  "evidenceScope": "Synthetic source/submission for UI only; missing-encoding validation uses real native handler; no download or provider acceptance"
+}

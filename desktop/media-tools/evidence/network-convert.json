@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "job": {
+    "jobId": "b2f987ee-5ef9-4066-9848-ab14dd15d08a",
+    "sequence": 21,
+    "mode": "convert",
+    "status": "succeeded",
+    "progress": {
+      "stage": "complete",
+      "stagePercent": 100,
+      "bytesDownloaded": null,
+      "totalBytes": null,
+      "processedSeconds": null,
+      "durationSeconds": 8
+    },
+    "sourceName": "offline.wav",
+    "destinationDisplayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\network-1791439119867",
+    "encoding": {
+      "format": "alac",
+      "sampleRateHz": 48000,
+      "bitsPerSample": 24
+    },
+    "output": {
+      "resultId": "facdf6ea-ad24-4bc0-a620-6c11b909cf84",
+      "fileName": "offline — converted.m4a",
+      "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\network-1791439119867\\offline — converted.m4a",
+      "metadata": {
+        "durationSeconds": 8,
+        "bytes": 948333,
+        "codec": "alac",
+        "container": "mov,mp4,m4a,3gp,3g2,mj2",
+        "sampleRateHz": 48000,
+        "bitsPerSample": 24,
+        "channels": 2
+      },
+      "available": true
+    },
+    "error": null
+  },
+  "network": {
+    "samples": 299,
+    "intervalMs": 50,
+    "tableErrors": 0,
+    "pids": [
+      1972,
+      17048,
+      9104,
+      4680,
+      12648,
+      14352,
+      3176,
+      10888,
+      17068
+    ],
+    "connections": [],
+    "method": "GetExtendedTcpTable/GetExtendedUdpTable IPv4/IPv6; sampling, not full ETW capture"
+  },
+  "limit": "No full ETW capture; no authorized live provider sample supplied. Sampling cannot exclude very short-lived connections between samples."
+}

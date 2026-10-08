@@ -1,0 +1,57 @@
+{
+  "kind": "design-plan-not-runtime-manifest",
+  "surveyDate": "2026-10-08",
+  "target": "win32-x64",
+  "runtimeConnected": false,
+  "distributionReady": false,
+  "dependencies": [
+    {
+      "name": "electron",
+      "candidateVersion": "44.7.0",
+      "source": "https://github.com/electron/electron/releases/tag/v44.7.0",
+      "status": "not-installed",
+      "sha256": null
+    },
+    {
+      "name": "yt-dlp.exe",
+      "candidateVersion": "2026.08.19",
+      "source": "https://github.com/yt-dlp/yt-dlp/releases/tag/2026.08.19",
+      "status": "no-usable-executable-in-surveyed-locations",
+      "bundledEjsExpected": true,
+      "sha256": null
+    },
+    {
+      "name": "ffmpeg.exe / ffprobe.exe",
+      "candidateVersion": "9.0.2-essentials_build",
+      "source": "https://www.gyan.dev/ffmpeg/builds/",
+      "status": "dev-reference-probed-not-packaged",
+      "verifiedEncoders": ["libmp3lame", "pcm_s16le", "pcm_s24le", "flac", "alac"],
+      "sha256": null
+    },
+    {
+      "name": "node.exe-for-ejs",
+      "candidateVersion": "24.19.0",
+      "source": "https://nodejs.org/dist/v24.19.0/",
+      "status": "dev-cli-present-not-packaged",
+      "minimumVersionFromEjsDocs": "22.0.0",
+      "explicitRuntimeArgument": "node:<verified-absolute-path>",
+      "sha256": null
+    },
+    {
+      "name": "windows-process-tree-helper",
+      "candidateVersion": null,
+      "source": "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects",
+      "status": "design-required-before-cancellation-acceptance",
+      "sha256": null
+    }
+  ],
+  "verificationBeforeUse": [
+    "pin-versions-and-lockfile",
+    "match-downloaded-bytes-to-publisher-checksum",
+    "include-notices-matching-selected-builds",
+    "probe-versions-and-required-encoders",
+    "verify-ejs-runtime-and-one-authorized-provider-sample",
+    "verify-packaged-process-tree-helper",
+    "repeat-on-clean-windows-user-with-no-global-node-or-ffmpeg"
+  ]
+}

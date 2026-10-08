@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "target": "win32-x64",
+  "createdAt": "2026-10-08T05:29:01.687Z",
+  "tools": {
+    "ytDlp": {
+      "file": "yt-dlp.exe",
+      "version": "2026.08.19",
+      "sha256": "66674953fe251b89f4d08c5f0e35e0728679bd67ab3d7d05c0562af101dd3e7a",
+      "source": "https://github.com/yt-dlp/yt-dlp/releases/download/2026.08.19/yt-dlp.exe",
+      "publisherChecksum": "https://github.com/yt-dlp/yt-dlp/releases/download/2026.08.19/SHA2-256SUMS"
+    },
+    "jsRuntime": {
+      "file": "node.exe",
+      "version": "24.19.0",
+      "sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
+      "source": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-win-x64.zip"
+    },
+    "ffmpeg": {
+      "file": "ffmpeg.exe",
+      "version": "9.0.2-essentials_build",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "source": "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip"
+    },
+    "ffprobe": {
+      "file": "ffprobe.exe",
+      "version": "9.0.2-essentials_build",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "source": "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip"
+    },
+    "processHelper": {
+      "file": "ProcessHost.exe",
+      "version": "1.0.0",
+      "sha256": "4f443020189cb4364d67af792e21d238c4b068ce711b65dd649d0d21053df92a",
+      "source": "native/ProcessHost.cs",
+      "sourceSha256": "76037cb35295e4ee991484dd6a45e8081e212cdb5e5725aab09fc60487183761",
+      "build": "Windows .NET Framework 4.x csc /optimize+ /platform:x64; runtime Windows 10/11 .NET Framework 4.x"
+    }
+  },
+  "archives": [
+    {
+      "name": "node-v24.19.0-win-x64.zip",
+      "sha256": "57f71ab3652e797d84acddc79c81cc9ff1c6ddb2a1974cdb83f00fee9bff4c73",
+      "source": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-win-x64.zip",
+      "publisherChecksum": "https://nodejs.org/dist/v24.19.0/SHASUMS256.txt"
+    },
+    {
+      "name": "ffmpeg-9.0.2-essentials.zip",
+      "sha256": "60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba",
+      "source": "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip",
+      "publisherChecksum": "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip.sha256"
+    },
+    {
+      "name": "electron-v44.7.0-win32-x64.zip",
+      "version": "44.7.0",
+      "sha256": "eee30dc8fa1f5ea95490e59f44e46ea68dd24c6e93d22facf70fe5c2d4c2665c",
+      "source": "https://github.com/electron/electron/releases/download/v44.7.0/electron-v44.7.0-win32-x64.zip",
+      "publisherChecksum": "https://github.com/electron/electron/releases/download/v44.7.0/SHASUMS256.txt"
+    }
+  ]
+}

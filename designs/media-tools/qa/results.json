@@ -1,0 +1,224 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "tool": "download",
+      "width": 360,
+      "state": "ready",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 360,
+      "state": "working",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 360,
+      "state": "success",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 360,
+      "state": "failed",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 360,
+      "state": "missing",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 360,
+      "state": "cancelled",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 768,
+      "state": "ready",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 768,
+      "state": "working",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 768,
+      "state": "success",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 768,
+      "state": "failed",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 768,
+      "state": "missing",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 768,
+      "state": "cancelled",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 1440,
+      "state": "ready",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 1440,
+      "state": "working",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 1440,
+      "state": "success",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 1440,
+      "state": "failed",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 1440,
+      "state": "missing",
+      "overflow": false
+    },
+    {
+      "tool": "download",
+      "width": 1440,
+      "state": "cancelled",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 360,
+      "state": "ready",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 360,
+      "state": "working",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 360,
+      "state": "success",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 360,
+      "state": "failed",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 360,
+      "state": "missing",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 360,
+      "state": "cancelled",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 768,
+      "state": "ready",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 768,
+      "state": "working",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 768,
+      "state": "success",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 768,
+      "state": "failed",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 768,
+      "state": "missing",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 768,
+      "state": "cancelled",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 1440,
+      "state": "ready",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 1440,
+      "state": "working",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 1440,
+      "state": "success",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 1440,
+      "state": "failed",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 1440,
+      "state": "missing",
+      "overflow": false
+    },
+    {
+      "tool": "convert",
+      "width": 1440,
+      "state": "cancelled",
+      "overflow": false
+    }
+  ],
+  "consoleErrors": [],
+  "externalRequests": [],
+  "interactions": "format controls, start/cancel/retry/complete, immutable result path, URL invalidation/validation/race/cancel, local file selection/unknown metadata, long Thai filename, keyboard skip link/radio/focus"
+}

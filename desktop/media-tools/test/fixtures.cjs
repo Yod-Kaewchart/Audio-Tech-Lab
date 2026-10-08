@@ -1,0 +1,3 @@
+const fs=require('node:fs/promises');
+async function wave(file,seconds=3,rate=48000){const frames=seconds*rate,b=Buffer.alloc(44+frames*4);b.write('RIFF');b.writeUInt32LE(b.length-8,4);b.write('WAVEfmt ',8);b.writeUInt32LE(16,16);b.writeUInt16LE(1,20);b.writeUInt16LE(2,22);b.writeUInt32LE(rate,24);b.writeUInt32LE(rate*4,28);b.writeUInt16LE(4,32);b.writeUInt16LE(16,34);b.write('data',36);b.writeUInt32LE(frames*4,40);for(let i=0;i<frames;i++){const v=Math.round(10000*Math.sin(2*Math.PI*440*i/rate));b.writeInt16LE(v,44+i*4);b.writeInt16LE(v,46+i*4);}await fs.writeFile(file,b);}
+module.exports={wave};

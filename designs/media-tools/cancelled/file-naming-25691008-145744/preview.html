@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="th">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'">
+ <title>ตั้งชื่อไฟล์ก่อนดาวน์โหลด · Audio Tech Labs</title>
+ <link rel="stylesheet" href="../media-tools.css"><link rel="stylesheet" href="preview.css"><script src="preview.js" defer></script>
+</head>
+<body>
+ <header class="site-header"><div class="header-inner shell"><div class="brand"><span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span><span class="brand-name">Audio <b>Tech Labs</b></span></div><span class="header-label">MEDIA TOOLS / DESIGN</span></div></header>
+ <main class="shell">
+  <section class="intro"><p class="eyebrow">DOWNLOAD AUDIO</p><h1>ตั้งชื่อก่อนดาวน์โหลด</h1><p>แก้ชื่อไฟล์ได้ในขั้นตอนเลือกรูปแบบและปลายทาง</p></section>
+  <aside class="prototype-note"><p><strong>ต้นแบบสำหรับตรวจแบบ</strong> · ทดลองตั้งชื่อได้ ใช้ข้อมูลต้นทางและโฟลเดอร์ตัวอย่าง ไม่มีการดาวน์โหลดหรือบันทึกไฟล์</p></aside>
+  <div class="workspace">
+   <section class="panel" aria-labelledby="source-heading"><div class="panel-heading"><div class="heading-label"><span class="step-number">01</span><h2 id="source-heading">ลิงก์ต้นทาง YouTube</h2></div></div>
+    <label for="source-url">วางลิงก์ YouTube หนึ่งรายการ</label><div class="input-row"><input id="source-url" type="url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" spellcheck="false" aria-describedby="source-help link-error"><button id="check-link" class="button" type="button">ตรวจรูปแบบลิงก์</button></div>
+    <p id="source-help" class="help">วางด้วย Ctrl+V หรือคลิกขวา → วาง · ต้นแบบตรวจเฉพาะรูปแบบ URL ไม่เชื่อมต่อ YouTube</p><p id="link-error" class="help error" role="status" aria-live="polite"></p><button id="use-sample" class="text-button" type="button">ใช้ลิงก์ตัวอย่าง</button>
+    <div class="source-card"><h3 id="source-title">ยังไม่ได้ตรวจลิงก์</h3><p id="source-caption" class="help">วางลิงก์หรือลองใช้ลิงก์ตัวอย่างก่อนตั้งชื่อไฟล์</p></div>
+    <div class="design-notes"><h3>ก่อนเริ่มงาน</h3><p>เลือกเสียงที่ต้องการ แล้วแก้ชื่อในช่องด้านขวา นามสกุลจะตามรูปแบบเสียง</p><p>ชื่อซ้ำจะเติมเลขท้าย ผลลัพธ์ที่มีอยู่แล้วจะไม่ถูกเขียนทับ</p></div>
+   </section>
+   <section class="panel" aria-labelledby="output-heading"><div class="panel-heading"><div class="heading-label"><span class="step-number">02</span><h2 id="output-heading">รูปแบบและปลายทาง</h2></div></div>
+    <fieldset><legend>รูปแบบเสียง</legend><div class="format-options">
+     <label class="format-option"><input type="radio" name="format" value="original"><span>Original Audio</span></label>
+     <label class="format-option"><input type="radio" name="format" value="mp3"><span>MP3</span></label>
+     <label class="format-option"><input type="radio" name="format" value="wav"><span>WAV</span></label>
+     <label class="format-option"><input type="radio" name="format" value="flac"><span>FLAC</span></label>
+     <label class="format-option"><input type="radio" name="format" value="alac"><span>ALAC</span></label>
+    </div></fieldset>
+    <p class="help" id="format-note">กรุณาเลือกรูปแบบเสียง</p>
+    <div class="name-section"><label for="output-name">ชื่อไฟล์ผลลัพธ์</label><div class="name-row"><input id="output-name" type="text" value="" placeholder="ตรวจรูปแบบลิงก์ก่อนตั้งชื่อไฟล์" autocomplete="off" spellcheck="false" aria-describedby="name-help name-error" disabled><span id="extension" class="extension">เลือกรูปแบบเสียง</span></div><p id="name-help" class="help">พิมพ์เฉพาะชื่อ ไม่ต้องใส่นามสกุลไฟล์</p><p id="name-error" class="help error" role="status" aria-live="polite"></p><button id="reset-name" class="text-button" type="button" hidden>ใช้ชื่อต้นทาง</button></div>
+    <div class="destination"><label id="folder-label">โฟลเดอร์ปลายทาง</label><div class="input-row"><div class="folder-path" aria-labelledby="folder-label"><span id="folder-path">ยังไม่ได้เลือกโฟลเดอร์</span></div><button id="pick-folder" class="button" type="button">เลือกโฟลเดอร์ตัวอย่าง</button></div></div>
+    <div class="name-preview" aria-live="polite"><p class="help">จะบันทึกเป็น</p><strong id="planned-name">เลือกรูปแบบเสียงเพื่อดูชื่อไฟล์</strong><p id="planned-path" class="help"></p><p class="help">ชื่อซ้ำจะเติม (1), (2) … ไม่เขียนทับไฟล์เดิม</p></div>
+    <div class="start-row"><button id="start" class="button button-primary" type="button" disabled>ดาวน์โหลด</button><p id="start-help" class="help">กรุณาเลือกรูปแบบเสียงก่อนดาวน์โหลด</p></div>
+    <p id="demo-message" class="help" role="status" aria-live="polite"></p>
+   </section>
+  </div>
+ </main>
+</body>
+</html>

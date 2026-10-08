@@ -1,0 +1,57 @@
+{
+  "kind": "argv-review-examples-not-executable-code",
+  "executed": false,
+  "interpolation": "native-internal-values-only-no-shell",
+  "ytDlpCommonArguments": [
+    "--ignore-config", "--no-config-locations", "--no-plugin-dirs",
+    "--no-remote-components", "--no-js-runtimes", "--js-runtimes", "node:<verified-node-path>",
+    "--no-playlist", "--no-warnings", "--socket-timeout", "30"
+  ],
+  "inspectionAdditionalArguments": [
+    "--dump-single-json", "--skip-download", "--", "<canonical-provider-url>"
+  ],
+  "downloadAdditionalArguments": [
+    "--no-simulate", "--format", "bestaudio", "--fixup", "never",
+    "--ffmpeg-location", "<verified-ffmpeg-directory>",
+    "--paths", "<job-staging-directory>",
+    "--output", "source.%(ext)s",
+    "--newline", "--progress", "--progress-delta", "0.5",
+    "--progress-template", "download:ATL_PROGRESS {\"downloadedBytes\":%(progress.downloaded_bytes)j,\"totalBytes\":%(progress.total_bytes)j}",
+    "--print", "after_move:ATL_RESULT %(filepath)j",
+    "--", "<canonical-provider-url>"
+  ],
+  "ffprobeArguments": [
+    "-v", "error", "-protocol_whitelist", "file,pipe",
+    "-show_format", "-show_streams", "-of", "json", "<selected-local-input-or-job-output>"
+  ],
+  "ffmpegConvertPrefix": [
+    "-hide_banner", "-nostdin", "-n", "-protocol_whitelist", "file,pipe",
+    "-i", "<validated-local-input>", "-map", "0:a:0", "-vn", "-sn", "-dn",
+    "-progress", "pipe:1", "-nostats"
+  ],
+  "encoderArguments": {
+    "mp3": ["-c:a", "libmp3lame", "-b:a", "<128k|192k|256k|320k>"],
+    "wav16": ["-c:a", "pcm_s16le"],
+    "wav24": ["-c:a", "pcm_s24le"],
+    "flac16": ["-c:a", "flac", "-sample_fmt", "s16"],
+    "flac24": ["-c:a", "flac", "-sample_fmt", "s32", "-bits_per_raw_sample", "24"],
+    "alac16": ["-c:a", "alac", "-sample_fmt", "s16p"],
+    "alac24": ["-c:a", "alac", "-sample_fmt", "s32p", "-bits_per_raw_sample", "24"]
+  },
+  "sampleRate": {
+    "source": [],
+    "44100": ["-ar", "44100"],
+    "48000": ["-ar", "48000"]
+  },
+  "outputArgument": "<reserved-staging-output-with-correct-extension>",
+  "requiredValidation": [
+    "deny-playlist-live-and-unapproved-provider-before-inspection",
+    "confirm-options-with-pinned-release-before-integration",
+    "resolve-known-executable-paths-before-spawn",
+    "never-let-renderer-supply-argv-or-executable-path",
+    "reject-network-and-indirect-resource-manifests-for-local-convert",
+    "validate-result-path-within-job-staging",
+    "probe-actual-codec-container-and-bit-depth",
+    "publish-result-with-exclusive-no-clobber-commit"
+  ]
+}

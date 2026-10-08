@@ -1,0 +1,40 @@
+{
+  "job": {
+    "jobId": "c7cd58d6-792a-43e2-acce-1db8527aa2f7",
+    "sequence": 7,
+    "mode": "convert",
+    "status": "succeeded",
+    "progress": {
+      "stage": "complete",
+      "stagePercent": 100,
+      "bytesDownloaded": null,
+      "totalBytes": null,
+      "processedSeconds": null,
+      "durationSeconds": 4
+    },
+    "sourceName": "ต้นฉบับ ทดสอบ.wav",
+    "destinationDisplayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output",
+    "encoding": {
+      "format": "flac",
+      "sampleRateHz": "source",
+      "bitsPerSample": 16
+    },
+    "output": {
+      "resultId": "6f8022c9-a3b3-413a-94c6-2f8eb534ff98",
+      "fileName": "ต้นฉบับ ทดสอบ — converted.flac",
+      "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\ต้นฉบับ ทดสอบ — converted.flac",
+      "metadata": {
+        "durationSeconds": 4,
+        "bytes": 63342,
+        "codec": "flac",
+        "container": "flac",
+        "sampleRateHz": 48000,
+        "bitsPerSample": 16,
+        "channels": 2
+      },
+      "available": true
+    },
+    "error": null
+  },
+  "staging": null
+}

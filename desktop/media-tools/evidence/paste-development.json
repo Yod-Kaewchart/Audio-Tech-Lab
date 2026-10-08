@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "packaged": false,
+  "checks": [
+    "Ctrl+V native clipboard paste",
+    "Paste button replaces existing URL using native clipboard",
+    "Native paste rejects wrong focus and disabled source controls",
+    "Right-click context handler and generated paste role",
+    "Both pages fit 360/768/1440px; Convert rejects URL paste",
+    "Sandbox preserved; no remote renderer requests; no provider inspection/download attempted"
+  ]
+}

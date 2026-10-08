@@ -1,0 +1,16 @@
+{
+  "name": "atl-media-tools",
+  "productName": "Audio Tech Labs Media Tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local Windows audio tools — internal portable build",
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "prepare:vendor": "node scripts/prepare-vendor.cjs",
+    "build:helper": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-helper.ps1",
+    "test": "node --test test/*.test.cjs",
+    "package": "node scripts/package.cjs"
+  },
+  "devDependencies": {"electron": "44.7.0"}
+}

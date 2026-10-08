@@ -1,0 +1,6 @@
+.notice{position:sticky;top:0;z-index:4;background:var(--deep);border:1px solid var(--gold);padding:14px 18px;max-height:35vh;overflow:auto}
+.notice:empty{display:none}.local-info svg{vertical-align:middle}.result-details .job-actions{margin-top:16px}
+.header-label{letter-spacing:.06em}.job-panel{scroll-margin-top:24px}.job-actions:empty{display:none}
+input:disabled,select:disabled{opacity:.55;cursor:not-allowed}progress:not([value]){height:8px}
+.progress-row strong{flex-shrink:0;white-space:nowrap}
+@media(max-width:560px){.header-label{font-size:9px}.job-panel .panel-heading{align-items:flex-start;flex-wrap:wrap}.status-badge{font-size:12px}}

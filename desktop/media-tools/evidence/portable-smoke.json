@@ -1,0 +1,141 @@
+{
+  "passed": true,
+  "at": "2026-10-08T06:11:46.658Z",
+  "executable": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.1.0-win-x64-20261008T060356\\Audio Tech Labs Media Tools.exe",
+  "runtime": {
+    "isPackaged": true,
+    "appPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.1.0-win-x64-20261008T060356\\resources\\app",
+    "userData": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\portable-1791439881465\\profile",
+    "path": "C:\\WINDOWS\\System32"
+  },
+  "caps": {
+    "ok": true,
+    "value": {
+      "contractVersion": 1,
+      "execution": "user-computer",
+      "tools": {
+        "ytDlp": {
+          "installed": true,
+          "verified": true,
+          "version": "2026.08.19",
+          "reason": null
+        },
+        "ffmpeg": {
+          "installed": true,
+          "verified": true,
+          "version": "9.0.2-essentials_build",
+          "reason": null
+        },
+        "ffprobe": {
+          "installed": true,
+          "verified": true,
+          "version": "9.0.2-essentials_build",
+          "reason": null
+        },
+        "jsRuntime": {
+          "installed": true,
+          "verified": true,
+          "version": "24.19.0",
+          "reason": null
+        },
+        "processHelper": {
+          "installed": true,
+          "verified": true,
+          "version": "1.0.0",
+          "reason": null
+        }
+      },
+      "convertReady": true,
+      "downloadReady": true,
+      "downloadProviders": [
+        "YouTube (internal testing; live acceptance pending)"
+      ]
+    }
+  },
+  "toolVersions": {
+    "node": "v24.19.0",
+    "ytDlp": "2026.08.19"
+  },
+  "job": {
+    "jobId": "85045f63-fcd3-4dde-aba1-37da586c0802",
+    "sequence": 7,
+    "mode": "convert",
+    "status": "succeeded",
+    "progress": {
+      "stage": "complete",
+      "stagePercent": 100,
+      "bytesDownloaded": null,
+      "totalBytes": null,
+      "processedSeconds": null,
+      "durationSeconds": 3
+    },
+    "sourceName": "เสียงทดสอบ portable.wav",
+    "destinationDisplayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\portable-1791439881465",
+    "encoding": {
+      "format": "alac",
+      "sampleRateHz": "source",
+      "bitsPerSample": 16
+    },
+    "output": {
+      "resultId": "2a2dc857-3936-4a7e-b939-2ee3ac1de8da",
+      "fileName": "เสียงทดสอบ portable — converted.m4a",
+      "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\portable-1791439881465\\เสียงทดสอบ portable — converted.m4a",
+      "metadata": {
+        "durationSeconds": 3,
+        "bytes": 68408,
+        "codec": "alac",
+        "container": "mov,mp4,m4a,3gp,3g2,mj2",
+        "sampleRateHz": 48000,
+        "bitsPerSample": 16,
+        "channels": 2
+      },
+      "available": true
+    },
+    "error": null
+  },
+  "sourceSha256": "9aaea4d2f960e73e752ba1b53fdd0a25c06d22e2e9fb4f46382421412401e3f3",
+  "geometry": [
+    {
+      "mode": "download",
+      "width": 360,
+      "actualWidth": 360,
+      "overflow": false
+    },
+    {
+      "mode": "download",
+      "width": 768,
+      "actualWidth": 768,
+      "overflow": false
+    },
+    {
+      "mode": "download",
+      "width": 1440,
+      "actualWidth": 1440,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "width": 360,
+      "actualWidth": 360,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "width": 768,
+      "actualWidth": 768,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "width": 1440,
+      "actualWidth": 1440,
+      "overflow": false
+    }
+  ],
+  "limitations": [
+    "Developer Windows with restricted PATH, not a clean VM",
+    "Picker responses substituted for this test; real native dialogs have separate evidence",
+    "No live provider download tested",
+    "Renderer and worker network evidence recorded by separate acceptance tests"
+  ]
+}

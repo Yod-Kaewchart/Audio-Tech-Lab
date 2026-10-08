@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "width": 360,
+      "passed": true
+    },
+    {
+      "width": 768,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "evidenceScope": "Design mock only; no native bridge, provider or real media processing"
+}
