@@ -1,0 +1,10 @@
+{
+  "rcedit": {
+    "version": "2.0.0",
+    "file": "rcedit-x64-2.0.0.exe",
+    "url": "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe",
+    "sha256": "3e7801db1a5edbec91b49a24a094aad776cb4515488ea5a4ca2289c400eade2a",
+    "license": "MIT",
+    "checksumProvenance": "SHA256 measured after download from the official Electron GitHub release over HTTPS; publisher does not provide an asset digest. Build-only tool, excluded from distribution."
+  }
+}

@@ -21,8 +21,8 @@ test('QA has different AppId, folder, and shortcut names; both have uninstall an
 });
 test('installer only includes verified portable, code, bundled dependencies and local icon',()=>{
  const build=read('scripts/build-installer.cjs');
- assert.match(build,/Portable is not synced to checked-out source/);
- for(const name of ['ffmpeg.exe','ffprobe.exe','yt-dlp.exe','ProcessHost.exe','manifest.json'])assert.ok(build.includes(name));
+ assert.ok(build.indexOf('const verified=verifyPayload(root,dir)')<build.indexOf('cp.spawnSync(compiler'),'payload validation precedes the installer compiler');
+ assert.match(read('scripts/verify-payload.cjs'),/Vendor checksum mismatch/);
  assert.match(build,/publicRelease:false/);
  assert.match(iss,/Source: "\{#SourceRoot\}\\\*"/);
  assert.match(read('.gitignore'),/^release\/$/m);

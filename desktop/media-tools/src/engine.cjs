@@ -8,7 +8,11 @@ const ACTIVE=['starting','running','cancelling','cleanup-required'];
 class Engine extends EventEmitter {
  constructor({deps,dataDir,audit,io={}}){super();this.deps=deps;this.dataDir=dataDir;this.runner=new Runner(deps,audit);this.io={...files,...io};this.sources=new Map();this.folders=new Map();this.requests=new Map();this.inspections=new Map();this.job=null;this.control=null;this.persistChain=Promise.resolve();this.staging=null;this.stagingIdentity=null;this.work=null;this.setupBusy=false;}
  async init(){await fs.mkdir(this.dataDir,{recursive:true});try{const saved=JSON.parse(await fs.readFile(path.join(this.dataDir,'current-job.json'),'utf8'));if(saved.job){this.job=saved.job;this.staging=saved.staging;
-   if(ACTIVE.includes(this.job.status)){let remains=false;try{await fs.lstat(this.staging);remains=true;}catch{}this.job.status=remains?'cleanup-required':'interrupted';this.job.sequence++;this.job.error={code:remains?'CLEANUP_REQUIRED':'INTERRUPTED',message:remains?'งานก่อนหน้าถูกขัดจังหวะ กรุณาตรวจและนำ staging ที่เหลือออกด้วยตนเอง แล้วเปิดแอปใหม่: '+this.staging:'งานก่อนหน้าถูกขัดจังหวะ ไม่มีการเริ่มใหม่อัตโนมัติ',retryable:!remains};}}
+   if(this.job.recovery?.kind==='folder-selection'){
+    // No staging directory exists during folder selection. Its absence proves nothing
+    // about a failed guard release; only an operator can verify this recovery record.
+    this.job.status='cleanup-required';this.job.sequence++;
+   }else if(ACTIVE.includes(this.job.status)){let remains=false;try{await fs.lstat(this.staging);remains=true;}catch{}this.job.status=remains?'cleanup-required':'interrupted';this.job.sequence++;this.job.error={code:remains?'CLEANUP_REQUIRED':'INTERRUPTED',message:remains?'งานก่อนหน้าถูกขัดจังหวะ กรุณาตรวจและนำ staging ที่เหลือออกด้วยตนเอง แล้วเปิดแอปใหม่: '+this.staging:'งานก่อนหน้าถูกขัดจังหวะ ไม่มีการเริ่มใหม่อัตโนมัติ',retryable:!remains};}}
   }catch{}return this;}
  busy(){return !!this.job&&ACTIVE.includes(this.job.status);}
  assertIdle(){if(this.busy()||this.setupBusy)fail('BUSY','มีงานปัจจุบันอยู่แล้ว กรุณารอให้เสร็จหรือหยุดครบก่อน');}
@@ -27,7 +31,26 @@ class Engine extends EventEmitter {
   }catch(e){if(e.code==='CLEANUP_REQUIRED')this.inspectionCleanup(e,'convert','การตรวจไฟล์');throw e;}
   finally{try{if(guard)await guard.release();}catch(e){this.inspectionCleanup(e,'convert','การตรวจไฟล์');throw e;}finally{this.setupBusy=false;}}
  }
- async registerFolder(dir){this.assertIdle();this.setupBusy=true;let guard;try{const selected=await this.io.safePath(dir,'directory');guard=await this.runner.guard([dir]);const pinned=await this.io.safePath(dir,'directory');if(!this.io.same(selected.identity,pinned.identity,true))fail('ACCESS_DENIED','โฟลเดอร์เปลี่ยนระหว่างเลือก');await this.io.writable(dir);const dto={folderId:id(),displayPath:dir,writable:true,freeBytes:await this.io.freeBytes(dir)};this.folders.set(dto.folderId,{dto,identity:pinned.identity});return dto;}finally{if(guard)await guard.release();this.setupBusy=false;}}
+ async registerFolder(dir){
+  this.assertIdle();this.setupBusy=true;let guard,pinned,dto;
+  try{
+   const selected=await this.io.safePath(dir,'directory');guard=await this.runner.guard([dir]);
+   pinned=await this.io.safePath(dir,'directory');if(!this.io.same(selected.identity,pinned.identity,true))fail('ACCESS_DENIED','โฟลเดอร์เปลี่ยนระหว่างเลือก');
+   await this.io.writable(dir);dto={folderId:id(),displayPath:dir,writable:true,freeBytes:await this.io.freeBytes(dir)};
+  }finally{
+   try{if(guard)await guard.release();}
+   catch(e){
+    const recovery=new MediaError('CLEANUP_REQUIRED','การเลือกโฟลเดอร์ต้องกู้คืน: ยืนยันการปลด file guard ไม่ได้ หยุดรับงานใหม่ กรุณาปิดแอป ตรวจว่า ProcessHost และ process ของงานหยุดครบ ตรวจไฟล์ .atl-write-check-* ในโฟลเดอร์ที่เลือก และทำตามคู่มือกู้คืนก่อนล้างสถานะ: '+dir);
+    this.inspectionCleanup(recovery,'convert','การเลือกโฟลเดอร์',{kind:'folder-selection',folderPath:dir,manualVerificationRequired:true,releaseError:String(e.message)});
+    try{await this.persist();}catch{
+     this.job.error.message+=' (บันทึก recovery ไม่สำเร็จ ต้องตรวจด้วยตนเองก่อนเปิดแอปใหม่)';this.emit('job',this.snapshot());
+    }
+    throw new MediaError('CLEANUP_REQUIRED',this.job.error.message);
+   }finally{this.setupBusy=false;}
+  }
+  // A destination token is usable only after the guard has closed successfully.
+  this.folders.set(dto.folderId,{dto,identity:pinned.identity});return dto;
+ }
  async inspect(request){
   shape(request,['requestId','url']);if(!opaque(request.requestId))fail('INVALID_REQUEST','รหัสคำขอไม่ถูกต้อง');this.assertIdle();const url=canonicalUrl(request.url);
   for(const [key] of this.inspections)await this.cancelInspection({requestId:key});
@@ -36,7 +59,7 @@ class Engine extends EventEmitter {
   entry.done=(async()=>{const node=await this.deps.verify('jsRuntime');const {stdout}=await this.runner.run('ytDlp',[...media.ytArgs(node),'--format','bestaudio','--dump-single-json','--skip-download','--',url],{control,timeout:120000});control.check();let info;try{info=JSON.parse(stdout);}catch{fail('PROBE_FAILED','ข้อมูลต้นทางไม่ถูกต้อง');}media.validateVideo(info,url);const dto={sourceId:id(),mode:'download',displayName:info.title||info.id,metadata:media.videoMetadata(info),validUntil:new Date(Date.now()+5*60e3).toISOString()};entry.sourceId=dto.sourceId;this.sources.set(dto.sourceId,{dto,url});return dto;})();
   try{return await entry.done;}catch(e){if(e.code==='CLEANUP_REQUIRED')this.inspectionCleanup(e);throw e;}finally{entry.finished=true;}
  }
- inspectionCleanup(e,mode='download',sourceName='การตรวจลิงก์'){this.job={jobId:id(),sequence:1,mode,status:'cleanup-required',sourceName,destinationDisplayPath:'',encoding:mode==='download'?{format:'original'}:{format:'mp3',bitrateKbps:192},output:null,error:errorDto(e),progress:{stage:'stopping',stagePercent:null,bytesDownloaded:null,totalBytes:null,processedSeconds:null,durationSeconds:null}};this.emit('job',this.snapshot());this.persist().catch(()=>{});}
+ inspectionCleanup(e,mode='download',sourceName='การตรวจลิงก์',recovery){this.job={jobId:id(),sequence:1,mode,status:'cleanup-required',sourceName,destinationDisplayPath:'',encoding:mode==='download'?{format:'original'}:{format:'mp3',bitrateKbps:192},output:null,error:errorDto(e),progress:{stage:'stopping',stagePercent:null,bytesDownloaded:null,totalBytes:null,processedSeconds:null,durationSeconds:null},...(recovery?{recovery}:{})};this.emit('job',this.snapshot());this.persist().catch(()=>{});}
  async cancelInspection(request){shape(request,['requestId']);if(!opaque(request.requestId))fail('INVALID_REQUEST','รหัสคำขอไม่ถูกต้อง');const entry=this.inspections.get(request.requestId);if(!entry)return {stopped:true};entry.control.cancel();if(entry.sourceId)this.sources.delete(entry.sourceId);try{await entry.done;}catch(e){if(e.code==='CLEANUP_REQUIRED'){this.inspectionCleanup(e);throw e;}}this.inspections.delete(request.requestId);return {stopped:true};}
  async start(mode,request){
   startRequest(request,mode);const previous=this.requests.get(request.requestId);if(previous){if(previous.signature!==JSON.stringify({mode,...request}))fail('INVALID_REQUEST','requestId นี้ถูกใช้กับข้อมูลอื่นแล้ว');return structuredClone(previous.snapshot);}

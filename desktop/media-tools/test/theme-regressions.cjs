@@ -1,7 +1,7 @@
 'use strict';
 // Run existing acceptance tests unchanged and preserve their previous evidence files.
 const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'evidence/home-theme'),packaged=!!process.env.ATL_PLAYER_EXE;
+const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.ATL_REGRESSION_OUTPUT||path.join(root,'evidence/home-theme')),packaged=!!process.env.ATL_PLAYER_EXE;
 fs.mkdirSync(out,{recursive:true});const record=path.join(out,(packaged?'portable':'development')+'-regressions.json');
 const results=process.argv.includes('--resume')&&fs.existsSync(record)?JSON.parse(fs.readFileSync(record,'utf8')).results.filter(r=>r.passed):[];
 const run=(name,exe,args,env={},preserve=[])=>{

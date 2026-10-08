@@ -1,0 +1,28 @@
+{
+  "head": "eac4e97001aab5b532ccea0685a047e7dbd32b11",
+  "branch": "codex/public-beta-prep-20261009",
+  "rollbackBranch": "codex/media-tools-before-beta-20261009",
+  "recordedAt": "2026-10-08T17:31:47.6877508Z",
+  "artifacts": [
+    {
+      "path": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838.zip",
+      "bytes": 294892077,
+      "sha256": "27b83f685c2d46e9a6d365bfac108ba7bce7ccf393615641f5cc11639a616934"
+    },
+    {
+      "path": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838\\Audio Tech Labs Media Tools.exe",
+      "bytes": 246302208,
+      "sha256": "2529b494f4123f152bce346051f7bd855ef95006424a561953cf17c49a3d1ba8"
+    },
+    {
+      "path": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\installers\\Audio-Tech-Labs-Media-Tools-Setup-0.2.1-Win64.exe",
+      "bytes": 215102242,
+      "sha256": "bc66cc369fa891e16527f08a20d7c019719d75b9806c11b6a26680b77b1a937e"
+    },
+    {
+      "path": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\installers\\Audio-Tech-Labs-Media-Tools-Setup-0.2.1-Win64-QA.exe",
+      "bytes": 211026755,
+      "sha256": "fea90e11a7ae8e6bde5ef1c8a9ec59e69163493f3a6d1306a0b5d1c124d81493"
+    }
+  ]
+}

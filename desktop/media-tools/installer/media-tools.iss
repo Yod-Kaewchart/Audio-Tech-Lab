@@ -14,6 +14,9 @@
   #error MyAppVersion must be passed from build-installer.cjs
 #endif
 #define MyExeName "Audio Tech Labs Media Tools.exe"
+#ifndef WindowsVersion
+  #error WindowsVersion must be passed from build-installer.cjs
+#endif
 #ifdef TestBuild
   #define MyAppName "Audio Tech Labs Media Tools (Installer QA)"
   #define MyAppId "AudioTechLabs.MediaTools.InternalQA"
@@ -54,9 +57,11 @@ ChangesAssociations=no
 Uninstallable=yes
 UsePreviousAppDir=yes
 MinVersion=10.0
-VersionInfoDescription=Audio Tech Labs Media Tools internal Windows installer
+VersionInfoDescription=Audio Tech Labs Media Tools
 VersionInfoCompany=Audio Tech Labs
-VersionInfoVersion={#MyAppVersion}
+VersionInfoVersion={#WindowsVersion}
+VersionInfoProductName=Audio Tech Labs Media Tools
+VersionInfoProductVersion={#MyAppVersion}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -69,8 +74,8 @@ Source: "{#SourceRoot}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "{#IconFile}"; DestDir: "{app}"; DestName: "app-icon.ico"; Flags: ignoreversion
 
 [Icons]
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"; Tasks: desktopicon
+Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"; AppUserModelID: "AudioTechLabs.MediaTools"
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"; AppUserModelID: "AudioTechLabs.MediaTools"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\{#MyExeName}"; Description: "Launch {#MyAppName}"; Flags: nowait postinstall skipifsilent

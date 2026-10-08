@@ -1,9 +1,9 @@
 {
   "name": "atl-media-tools",
   "productName": "Audio Tech Labs Media Tools",
-  "version": "0.2.1",
+  "version": "0.2.2-beta.1",
   "private": true,
-  "description": "Local Windows audio tools — internal portable build",
+  "description": "Audio Tech Labs Media Tools public beta candidate",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",

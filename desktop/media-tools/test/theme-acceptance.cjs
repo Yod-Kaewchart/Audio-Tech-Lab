@@ -5,9 +5,9 @@ const {mainWindow,waitFor}=require('./electron-ui.cjs'),{wave}=require('./fixtur
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 (async()=>{
  const packaged=!!process.env.ATL_THEME_EXE,kind=process.env.ATL_THEME_KIND||(packaged?'portable':'development');
- const out=path.resolve('evidence/home-theme'),run=path.resolve('test-output/home-theme-'+kind+'-'+Date.now());await fs.mkdir(out,{recursive:true});await fs.mkdir(run,{recursive:true});
+ const referenceRoot=path.resolve('evidence/home-theme'),out=path.resolve(process.env.ATL_THEME_OUTPUT||referenceRoot),run=path.resolve('test-output/home-theme-'+kind+'-'+Date.now());await fs.mkdir(out,{recursive:true});await fs.mkdir(run,{recursive:true});
  const input=path.join(run,'เพลงภาษาไทย ทดสอบสระและวรรณยุกต์.wav');await wave(input,20);
- const reference=JSON.parse(await fs.readFile(path.join(out,'reference.json'),'utf8')).publicDesktop;
+ const reference=JSON.parse(await fs.readFile(path.join(referenceRoot,'reference.json'),'utf8')).publicDesktop;
  const restrictedPath=path.join(process.env.SystemRoot,'System32');
  const app=await _electron.launch({executablePath:process.env.ATL_THEME_EXE||path.resolve('node_modules/electron/dist/electron.exe'),args:[...packaged?[]:[path.resolve('.')],'--user-data-dir='+path.join(run,'profile')],env:{...process.env,PATH:restrictedPath,Path:restrictedPath,NODE_PATH:'',NODE_OPTIONS:'',ELECTRON_RUN_AS_NODE:undefined}});
  const rows=[],errors=[],requests=[];let page;
@@ -74,7 +74,7 @@ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
    rows.push({mode,size,window,details,renderedFonts});console.log('PASS '+kind+' '+mode+' '+size+' native '+window.bounds.width+'x'+window.bounds.height+' content '+details.innerWidth+'x'+details.innerHeight);
   }
   assert.deepEqual(errors,[]);assert.deepEqual(requests.filter(u=>!u.startsWith('atl-media:')),[]);
-  const fonts={},manifest=JSON.parse(await fs.readFile(path.join(out,'font-manifest.json'),'utf8'));for(const name of [...manifest.fonts.map(f=>f.file),'DM-Sans-OFL.txt','Noto-Sans-Thai-OFL.txt']){const source=await fs.readFile(path.resolve('ui/assets',name)),payload=await fs.readFile(path.join(runtime.appPath,'ui/assets',name));assert.equal(sha(source),sha(payload));const publicFont=manifest.fonts.find(f=>f.file===name);if(publicFont)assert.equal(sha(source),publicFont.sha256);fonts[name]={sourceSha256:sha(source),payloadSha256:sha(payload)};}
+  const fonts={},manifest=JSON.parse(await fs.readFile(path.join(referenceRoot,'font-manifest.json'),'utf8'));for(const name of [...manifest.fonts.map(f=>f.file),'DM-Sans-OFL.txt','Noto-Sans-Thai-OFL.txt']){const source=await fs.readFile(path.resolve('ui/assets',name)),payload=await fs.readFile(path.join(runtime.appPath,'ui/assets',name));assert.equal(sha(source),sha(payload));const publicFont=manifest.fonts.find(f=>f.file===name);if(publicFont)assert.equal(sha(source),publicFont.sha256);fonts[name]={sourceSha256:sha(source),payloadSha256:sha(payload)};}
   await fs.writeFile(path.join(out,kind+'.json'),JSON.stringify({passed:true,at:new Date().toISOString(),executable:process.env.ATL_THEME_EXE||path.resolve('node_modules/electron/dist/electron.exe'),runtime,fonts,rows,errors,requests,limits:['Developer Windows, not a clean VM','HTTP(S) dead proxy + production CSP/self-only request policy; OS internet remains enabled','Native media import uses Playwright file input; no native picker claimed','Download live provider not exercised by visual test']},null,2));
  }catch(e){await fs.writeFile(path.join(out,kind+'-failure.json'),JSON.stringify({passed:false,error:e.stack,rows,errors},null,2));if(page)await page.screenshot({path:path.join(out,kind+'-failure.png'),fullPage:true}).catch(()=>{});throw e;}finally{await app.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

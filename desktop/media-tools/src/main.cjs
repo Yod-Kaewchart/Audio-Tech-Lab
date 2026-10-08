@@ -6,6 +6,7 @@ const {PlayerLibrary}=require('./player-library.cjs');
 const {Playback,validateCommand}=require('./playback.cjs');
 protocol.registerSchemesAsPrivileged([{scheme:'atl-media',privileges:{standard:true,secure:true,supportFetchAPI:true,stream:true}}]);
 app.setName('Audio Tech Labs Media Tools');
+if(process.platform==='win32')app.setAppUserModelId('AudioTechLabs.MediaTools');
 // One main process/one global job, including attempts to launch another app window.
 if(!app.requestSingleInstanceLock()){app.quit();}else{
  let win,engine,player,playback,closing=false,picker=false,playerImporting=false,shutdownPromise;const ui=path.join(__dirname,'../ui');
@@ -28,7 +29,7 @@ if(!app.requestSingleInstanceLock()){app.quit();}else{
   });
   session.defaultSession.setPermissionRequestHandler((_wc,_permission,callback)=>callback(false));session.defaultSession.setPermissionCheckHandler(()=>false);
   session.defaultSession.webRequest.onBeforeRequest((details,callback)=>callback({cancel:!details.url.startsWith('atl-media://app/')}));
-  win=new BrowserWindow({width:1280,height:940,minWidth:360,minHeight:600,backgroundColor:'#141719',title:'Audio Tech Labs · Media Tools',autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,sandbox:true,nodeIntegration:false,webSecurity:true,devTools:!app.isPackaged}});
+  win=new BrowserWindow({width:1280,height:940,minWidth:360,minHeight:600,backgroundColor:'#141719',title:'Audio Tech Labs · Media Tools',icon:path.join(ui,'assets/media-tools.ico'),autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,sandbox:true,nodeIntegration:false,webSecurity:true,devTools:!app.isPackaged}});
   win.removeMenu();win.webContents.setWindowOpenHandler(()=>({action:'deny'}));win.webContents.on('will-navigate',(event,url)=>{if(!approvedDocument(url))event.preventDefault();});win.webContents.on('will-attach-webview',event=>event.preventDefault());
   win.on('closed',()=>{shutdown().finally(()=>app.quit());});
   playback=new Playback({BrowserWindow,ipcMain,onState:state=>{if(!win.isDestroyed()&&approvedDocument(win.webContents.getURL())&&new URL(win.webContents.getURL()).pathname==='/player.html')win.webContents.send('atl:player-state',state);}});
