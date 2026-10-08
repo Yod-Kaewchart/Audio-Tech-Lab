@@ -32,7 +32,8 @@ function main(){
  if(!fs.existsSync(output))fail('Compiled installer missing at '+output);
  const stat=fs.statSync(output);
  if(stat.size<10*1024*1024)fail('Installer unexpectedly small');
- const manifest={kind:test?'internal-qa':'internal-candidate',version:pkg.version,commit:verified.commit,compilerVersion:'Inno Setup 6.7.3',sourcePortable:dir,portableSha256:record.sha256,payloadInventorySha256:verified.inventorySha256,file:output,bytes:stat.size,sha256:sha256(output),signed:false,publicRelease:false,producedAt:new Date().toISOString()};
+ const installerSourceCommit=cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,windowsHide:true,encoding:'utf8'}).trim();
+ const manifest={kind:test?'internal-qa':'internal-candidate',version:pkg.version,commit:verified.commit,installerSourceCommit,compilerVersion:'Inno Setup 6.7.3',sourcePortable:dir,portableSha256:record.sha256,payloadInventorySha256:verified.inventorySha256,file:output,bytes:stat.size,sha256:sha256(output),signed:false,publicRelease:false,producedAt:new Date().toISOString()};
  const outManifest=path.join(destination,test?'installer-qa.json':'installer-candidate.json');
  fs.writeFileSync(outManifest,JSON.stringify(manifest,null,2)+'\n');
  console.log(JSON.stringify(manifest,null,2));

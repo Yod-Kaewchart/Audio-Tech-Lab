@@ -61,7 +61,8 @@ VersionInfoDescription=Audio Tech Labs Media Tools
 VersionInfoCompany=Audio Tech Labs
 VersionInfoVersion={#WindowsVersion}
 VersionInfoProductName=Audio Tech Labs Media Tools
-VersionInfoProductVersion={#MyAppVersion}
+VersionInfoProductVersion={#WindowsVersion}
+VersionInfoProductTextVersion={#MyAppVersion}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
