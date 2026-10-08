@@ -44,7 +44,7 @@ function Install([string]$file,[string]$stage){
 }
 function Verify([string]$stage){
  $entry=Get-ItemProperty -LiteralPath $registry
- if($entry.DisplayName -ne $name -or $entry.DisplayVersion -ne $candidate.version -or $entry.DisplayIcon -ne (Join-Path $target 'app-icon.ico')){throw 'Uninstall name/version/icon mismatch'}
+ if($entry.DisplayName -ne ($name+' '+$candidate.version) -or $entry.DisplayVersion -ne $candidate.version -or $entry.DisplayIcon -ne (Join-Path $target 'app-icon.ico')){throw 'Uninstall AppVerName/version/icon mismatch'}
  foreach($p in $shortcuts){
   $shell=New-Object -ComObject WScript.Shell;$s=$shell.CreateShortcut($p)
   if($s.TargetPath -ne (Join-Path $target ($name+'.exe')) -or $s.IconLocation -ne ((Join-Path $target 'app-icon.ico')+',0')){throw "Shortcut target/icon mismatch: $p"}
@@ -54,7 +54,7 @@ function Verify([string]$stage){
  $sums=Get-Content -LiteralPath (Join-Path $portable.directory 'SHA256SUMS.json') -Raw|ConvertFrom-Json
  foreach($row in $sums){$installed=Join-Path $target $row.file;if(-not(Test-Path -LiteralPath $installed) -or (Get-FileHash -LiteralPath $installed -Algorithm SHA256).Hash.ToLowerInvariant() -ne $row.sha256){throw "Installed payload mismatch: $($row.file)"}}
  $v=(Get-Item -LiteralPath (Join-Path $target ($name+'.exe'))).VersionInfo
- if($v.ProductName -ne $name -or $v.FileVersion -ne '0.2.2.1' -or $v.ProductVersion -ne $candidate.version){throw 'Installed EXE branding mismatch'}
+ if($v.ProductName -ne $name -or $v.FileVersion -ne $portable.branding.versionInfo.FileVersion -or $v.ProductVersion -ne $candidate.version){throw 'Installed EXE branding mismatch'}
  $checks.Add([ordered]@{stage=$stage;passed=$true;payloadFiles=$sums.Count;appId='AudioTechLabs.MediaTools';productName=$v.ProductName;fileVersion=$v.FileVersion;shortcutIcons=$true;shortcutAppUserModelId=$true;uninstallIcon=$entry.DisplayIcon})
  Preserve $stage
 }
@@ -79,13 +79,13 @@ try{
   Preserve 'installed-app-isolated-profile'
  }
  Uninstall 'uninstall-after-reinstall'
- $result=[ordered]@{status='PASS';scope='existing-machine QA ONLY';cleanMachineStatus='BLOCKED';installerSha256=$candidate.sha256;portableSha256=$portable.sha256;version=$candidate.version;appId='AudioTechLabs.MediaTools';checks=@($checks);signed=$false;publicRelease=$false;loggedAt=(Get-Date).ToUniversalTime().ToString('o')}
+ $result=[ordered]@{status='PASS';scope='existing-machine QA ONLY';cleanMachineStatus='BLOCKED';installerSha256=$candidate.sha256;portableSha256=$portable.sha256;version=$candidate.version;appId='AudioTechLabs.MediaTools';checks=$checks.ToArray();signed=$false;publicRelease=$false;loggedAt=(Get-Date).ToUniversalTime().ToString('o')}
  $result|ConvertTo-Json -Depth 8|Set-Content -LiteralPath (Join-Path $testHome 'result.json') -Encoding UTF8
  Copy-Item -LiteralPath (Join-Path $testHome 'result.json') -Destination (Join-Path $root 'evidence\public-beta\normal-installer.json')
  foreach($log in Get-ChildItem -LiteralPath $testHome -Filter '*.log'){Copy-Item -LiteralPath $log.FullName -Destination (Join-Path $root ('evidence\public-beta\normal-'+$log.Name))}
  $result|ConvertTo-Json -Depth 8
 }catch{
- [ordered]@{status='FAIL';scope='existing-machine QA ONLY';installerSha256=$candidate.sha256;error=$_.Exception.Message;checks=@($checks);target=$target;logs=$testHome}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath (Join-Path $testHome 'failure.json') -Encoding UTF8
+ [ordered]@{status='FAIL';scope='existing-machine QA ONLY';installerSha256=$candidate.sha256;error=$_.Exception.Message;checks=$checks.ToArray();target=$target;logs=$testHome}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath (Join-Path $testHome 'failure.json') -Encoding UTF8
  # Leave diagnostic state on failure. Never blindly uninstall a path after a
  # failure or delete user data to make a test pass.
  throw

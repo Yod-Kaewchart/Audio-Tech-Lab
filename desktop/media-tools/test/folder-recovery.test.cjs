@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
-const {Engine}=require('../src/engine.cjs'),{id}=require('../src/common.cjs');
+const {Engine}=require('../src/engine.cjs'),{id,MediaError}=require('../src/common.cjs');
 async function fixture(t,release,writable=async()=>{}){
  const dataDir=await fs.mkdtemp(path.join(os.tmpdir(),'atl-folder-recovery-'));t.after(()=>fs.rm(dataDir,{recursive:true,force:true}));
  const engine=await new Engine({deps:{},dataDir,io:{safePath:async()=>({identity:{dev:1,ino:2}}),same:()=>true,writable,freeBytes:async()=>1e9}}).init();
@@ -26,4 +26,11 @@ test('normal selection publishes token only after release, ordinary failure rema
  const dto=await engine.registerFolder('C:\\Destination');assert.equal(released,true);assert.ok(engine.folders.has(dto.folderId));assert.equal(engine.setupBusy,false);
  const f=await fixture(t,async()=>{},async()=>{throw Error('write denied');});await assert.rejects(f.engine.registerFolder('C:\\Denied'),/write denied/);
  assert.equal(f.engine.setupBusy,false);assert.equal(f.engine.busy(),false);assert.equal(f.engine.folders.size,0);
+});
+test('a previous inspection cleanup cannot replace folder recovery or unlock it on restart',async t=>{
+ const {engine,dataDir}=await fixture(t,async()=>{throw Error('release failed');});
+ await assert.rejects(engine.registerFolder('C:\\Destination'),{code:'CLEANUP_REQUIRED'});const jobId=engine.job.jobId;
+ engine.inspectionCleanup(new MediaError('CLEANUP_REQUIRED','inspection cleanup failed'));
+ await engine.persistChain;assert.equal(engine.job.jobId,jobId);assert.equal(engine.job.recovery.kind,'folder-selection');assert.match(engine.job.error.message,/inspection cleanup failed/);
+ const reopened=await new Engine({deps:{},dataDir}).init();assert.equal(reopened.job.status,'cleanup-required');assert.throws(()=>reopened.assertIdle(),{code:'BUSY'});
 });

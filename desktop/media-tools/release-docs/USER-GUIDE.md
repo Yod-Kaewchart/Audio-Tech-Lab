@@ -1,4 +1,4 @@
-# Audio Tech Labs Media Tools — 0.2.2-beta.1 candidate
+# Audio Tech Labs Media Tools — 0.2.2-beta.2 candidate
 
 ชุดนี้จัดไว้เพื่อส่งตรวจภายใน ยังไม่อนุมัติให้เผยแพร่ Public Beta และยังไม่มี code signature
 

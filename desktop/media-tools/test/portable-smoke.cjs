@@ -8,7 +8,7 @@ const {wave}=require('./fixtures.cjs');
  const input=path.join(root,'เสียงทดสอบ portable.wav');await wave(input,3);
  const before=crypto.createHash('sha256').update(await fs.readFile(input)).digest('hex');
  const restrictedPath=path.join(process.env.SystemRoot,'System32');
- const app=await electron.launch({executablePath:release.executable,args:['--user-data-dir='+path.join(root,'profile')],env:{...process.env,PATH:restrictedPath,Path:restrictedPath,NODE_PATH:'',NODE_OPTIONS:'',ELECTRON_RUN_AS_NODE:undefined}});
+ const app=await electron.launch({executablePath:process.env.ATL_PLAYER_EXE||release.executable,args:['--user-data-dir='+path.join(root,'profile')],env:{...process.env,PATH:restrictedPath,Path:restrictedPath,NODE_PATH:'',NODE_OPTIONS:'',ELECTRON_RUN_AS_NODE:undefined}});
  try{
   // Wait for the initial document before navigating; the hidden host can open first.
   const initial=await mainWindow(app);await initial.waitForSelector('#page-title');await initial.waitForLoadState('load');
