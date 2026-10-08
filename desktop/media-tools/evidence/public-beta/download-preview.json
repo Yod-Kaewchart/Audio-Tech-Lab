@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "version": "0.2.2-beta.2",
+  "scope": "local file preview; disabled buttons; no public endpoints",
+  "rows": [
+    {
+      "width": 360,
+      "overflow": false,
+      "disabled": true,
+      "font": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+      "fonts": [
+        "DM Sans",
+        "Noto Sans Thai"
+      ]
+    },
+    {
+      "width": 1280,
+      "overflow": false,
+      "disabled": true,
+      "font": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+      "fonts": [
+        "DM Sans",
+        "Noto Sans Thai"
+      ]
+    }
+  ]
+}

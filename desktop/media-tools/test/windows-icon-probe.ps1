@@ -19,18 +19,25 @@ function Pixels([System.Drawing.Bitmap]$b){
  return ([BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($bytes))).Replace('-','').ToLowerInvariant()
 }
 $h=[IntPtr]([Int64]::Parse($Handle));$rows=@()
+$icoBytes=[IO.File]::ReadAllBytes($icon)
 foreach($size in @(16,32)){
  $type=if($size -eq 32){1}else{0}
  $native=[ATLIconRead]::SendMessage($h,0x007F,[IntPtr]$type,[IntPtr]::Zero)
  if($native -eq [IntPtr]::Zero){throw "Window does not expose WM_GETICON $size"}
- $actual=[Drawing.Icon]::FromHandle($native).ToBitmap()
- $expected=[Drawing.Icon]::new($icon,[Drawing.Size]::new($size,$size)).ToBitmap()
+ $actualIcon=[Drawing.Icon]::FromHandle($native);$actual=$actualIcon.ToBitmap()
+ # Read the source's exact PNG entry. Keep its stream alive until comparison;
+ # a temporary System.Drawing.Icon can be finalized while PowerShell uses it.
+ $png=$null
+ for($i=0;$i -lt [BitConverter]::ToUInt16($icoBytes,4);$i++){$entry=6+$i*16;if($icoBytes[$entry] -eq $size){$len=[BitConverter]::ToInt32($icoBytes,$entry+8);$at=[BitConverter]::ToInt32($icoBytes,$entry+12);$png=[byte[]]$icoBytes[$at..($at+$len-1)];break}}
+ if(-not $png -or $png[0] -ne 137){throw 'Expected a matching PNG icon entry'}
+ $stream=[IO.MemoryStream]::new($png,$false);$expected=[Drawing.Bitmap]::new($stream)
  $actual.Save((Join-Path $Output "window-icon-$size.png"),[Drawing.Imaging.ImageFormat]::Png)
  $expected.Save((Join-Path $Output "expected-icon-$size.png"),[Drawing.Imaging.ImageFormat]::Png)
  $a=Pixels $actual;$e=Pixels $expected
  $rows+=[ordered]@{requested=$size;actualWidth=$actual.Width;actualHeight=$actual.Height;actualPixelSha256=$a;expectedPixelSha256=$e;matches=$a -eq $e}
  if($a -ne $e){throw "Window icon pixels differ at $size"}
- $actual.Dispose();$expected.Dispose()
+ $actual.Dispose();$actualIcon.Dispose();$expected.Dispose();$stream.Dispose()
 }
-$shell=[Drawing.Icon]::ExtractAssociatedIcon($Exe).ToBitmap();$shell.Save((Join-Path $Output 'shell-exe-icon.png'),[Drawing.Imaging.ImageFormat]::Png);$shell.Dispose()
-[ordered]@{status='PASS';exe=$Exe;exeSha256=(Get-FileHash -LiteralPath $Exe -Algorithm SHA256).Hash.ToLowerInvariant();windowIcons=$rows;scope='Actual window WM_GETICON pixels and Windows shell EXE icon; taskbar visual separate'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath (Join-Path $Output 'windows-icon.json') -Encoding UTF8
+$shellIcon=[Drawing.Icon]::ExtractAssociatedIcon($Exe);$shell=$shellIcon.ToBitmap();$shell.Save((Join-Path $Output 'shell-exe-icon.png'),[Drawing.Imaging.ImageFormat]::Png);$shell.Dispose();$shellIcon.Dispose()
+$exeStream=[IO.File]::OpenRead($Exe);try{$exeHash=([BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($exeStream))).Replace('-','').ToLowerInvariant()}finally{$exeStream.Dispose()}
+[ordered]@{status='PASS';exe=$Exe;exeSha256=$exeHash;windowIcons=$rows;scope='Actual window WM_GETICON pixels and Windows shell EXE icon; taskbar visual separate'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath (Join-Path $Output 'windows-icon.json') -Encoding UTF8

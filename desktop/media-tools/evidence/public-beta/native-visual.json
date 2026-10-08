@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "version": "0.2.2-beta.2",
+  "scope": "Native foreground window frame/icon visually inspected; screenshot retained. Actual taskbar visual is BLOCKED: supported window inventory does not expose taskbar.",
+  "window": {
+    "app": "process:D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+    "id": 133316,
+    "title": "Download Audio — Audio Tech Labs · Windows"
+  }
+}

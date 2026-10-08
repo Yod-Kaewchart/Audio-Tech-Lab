@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "scope": "Offline tool startup/dependency diagnostic only; live EJS/Download BLOCKED",
+  "args": [
+    "--ignore-config",
+    "--no-config-locations",
+    "--no-plugin-dirs",
+    "--no-remote-components",
+    "--no-js-runtimes",
+    "--js-runtimes",
+    "node:D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\vendor\\node.exe",
+    "--no-update",
+    "--no-cache-dir",
+    "--no-playlist",
+    "--no-warnings",
+    "--socket-timeout",
+    "30",
+    "--retries",
+    "2",
+    "--fragment-retries",
+    "2",
+    "--proxy",
+    "",
+    "--use-extractors",
+    "youtube",
+    "--no-write-subs",
+    "--no-write-auto-subs",
+    "--no-write-thumbnail",
+    "--no-write-info-json"
+  ],
+  "extractorCount": 1752,
+  "stderr": "ATL_HELPER {\"pid\":18060,\"assignedBeforeResume\":true}\r\n[debug] Command-line config: ['--ignore-config', '--no-config-locations', '--no-plugin-dirs', '--no-remote-components', '--no-js-runtimes', '--js-runtimes', 'node:D:\\\\Sites\\\\Audio Tech Labs\\\\desktop\\\\media-tools\\\\vendor\\\\node.exe', '--no-update', '--no-cache-dir', '--no-playlist', '--no-warnings', '--socket-timeout', '30', '--retries', '2', '--fragment-retries', '2', '--proxy', '', '--use-extractors', 'youtube', '--no-write-subs', '--no-write-auto-subs', '--no-write-thumbnail', '--no-write-info-json', '--verbose', '--list-extractors']\nATL_HELPER {\"treeEmpty\":true,\"cancelled\":false,\"exitCode\":0}\r\n"
+}

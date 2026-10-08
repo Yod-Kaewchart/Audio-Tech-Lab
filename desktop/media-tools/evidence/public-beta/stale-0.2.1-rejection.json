@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "oldPayload": "release/Media-Tools-0.2.1-win-x64-20261008T155838",
+  "rejectedBeforeCompiler": true,
+  "message": "Portable package metadata/version differs from source"
+}

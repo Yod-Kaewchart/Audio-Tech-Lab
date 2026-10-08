@@ -1,0 +1,9 @@
+{
+  "status": "NotSigned",
+  "signed": false,
+  "installerSha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+  "signingGate": "BLOCKED",
+  "SmartScreenGate": "BLOCKED",
+  "appExeSignatureStatus": "NotSigned",
+  "appExeSha256": "94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d"
+}

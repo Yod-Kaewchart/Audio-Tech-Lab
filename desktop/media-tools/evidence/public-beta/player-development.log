@@ -1,0 +1,30 @@
+PASS shared fonts/background/text/accent + original existing brand
+PASS native multiselect + real WAV/MP3/FLAC probing
+PASS real Play/Pause/Resume; frozen disc angle resumes continuously
+PASS Seek/Volume/Mute
+PASS Next/Previous/Stop and seek zero
+PASS real embedded title/artist/album/artwork; unknown bit depth omitted
+PASS logo fallback without artwork
+PASS buffering event freezes disc and has separate loading label (synthetic signal)
+PASS drag reorder preserves identity
+PASS remove current track selects neighbor, stops sound and keeps state correct
+PASS accessible button reorders playlist
+PASS recursive native folder import ignores non-audio files
+PASS disk-backed File via sandboxed preload (same path as drop)
+PASS native file Drag & Drop through Chromium into sandbox bridge
+PASS real ended + repeat one
+PASS real ended + repeat off freezes disc
+PASS real ended + repeat all advances from last to first
+PASS shuffle next changes song; previous uses playback history
+PASS corrupt/unsupported audio show readable errors and stop disc
+PASS reset cancellation preserves playlist
+PASS confirmed new job clears playlist/metadata/artwork/seek/file input/disc angle
+PASS same file can be selected and played again after reset
+PASS new job during real playback stops and releases audio
+PASS reset during real native import cancels workers/cleanup and prevents stale tracks
+PASS navigation preserves the sole engine, real playing position and playlist; other pages cannot reset Player
+PASS responsive 360/390/768/1280/1440 without horizontal overflow
+PASS keyboard skip link/focus outline/Enter play
+PASS prefers-reduced-motion
+PASS no renderer JS errors or external network requests
+PLAYER ACCEPTANCE PASS D:\Sites\Audio Tech Labs\desktop\media-tools\test-output\player-acceptance-1791483614603

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "packaged": true,
+  "results": [
+    {
+      "name": "player-portable",
+      "at": "2026-10-08T18:22:44.653Z",
+      "ms": 103825,
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "name": "continuity-portable",
+      "at": "2026-10-08T18:24:28.482Z",
+      "ms": 157722,
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "name": "format-portable",
+      "at": "2026-10-08T18:27:06.206Z",
+      "ms": 9119,
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "name": "smoke-portable",
+      "at": "2026-10-08T18:27:15.336Z",
+      "ms": 41889,
+      "exitCode": 0,
+      "passed": true
+    }
+  ]
+}

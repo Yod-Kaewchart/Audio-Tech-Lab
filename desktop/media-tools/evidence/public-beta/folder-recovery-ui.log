@@ -1,0 +1,7 @@
+
+PASS recovery download minimum
+PASS recovery convert minimum
+PASS recovery download normal
+PASS recovery convert normal
+FOLDER RECOVERY NATIVE UI PASS
+[9404:1009/012314.811:ERROR:mojo\public\cpp\bindings\lib\interface_endpoint_client.cc:748] Message 2 rejected by interface blink.mojom.Widget

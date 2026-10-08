@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "portableSha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+  "version": "0.2.2-beta.2",
+  "commit": "df183f4970366597d539323760108dbaf234e049",
+  "files": 129,
+  "inventorySha256": "7751028de3baecfe7724326b52fb3d836075fe4738ac3b9f157d6f2b793e6073",
+  "branding": {
+    "versionInfo": {
+      "ProductName": "Audio Tech Labs Media Tools",
+      "FileDescription": "Audio Tech Labs Media Tools",
+      "FileVersion": "0.2.2.2",
+      "ProductVersion": "0.2.2-beta.2",
+      "OriginalFilename": "Audio Tech Labs Media Tools.exe",
+      "fixedFileVersion": "0.2.2.2"
+    },
+    "iconSha256": "bf68eb7b2904eb285388789f779df7964827d351c83261c14348e2b8fe8fa9c7",
+    "iconImages": [
+      "633f6c9d3ac2f7ee8102571459023a0bdb1488e37c1314a51cd503443c77c1c0",
+      "a16fbf0b963f616e8178b534a58ad8b029d0a94bd5deaab91f897c8d4b4a4f13",
+      "bf9a5921c72fbace9e8890c69d5f387d4e4c1e55bdf7d2db3d3ac21b07eacb4e",
+      "c7ccbcedef3ea67f3b3bb667abe5d710b0b9830077fc6dbf4adb9c0a84168a3d"
+    ]
+  }
+}

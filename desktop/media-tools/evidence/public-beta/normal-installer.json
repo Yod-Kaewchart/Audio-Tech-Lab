@@ -1,0 +1,95 @@
+﻿{
+    "status":  "PASS",
+    "scope":  "existing-machine QA ONLY",
+    "cleanMachineStatus":  "BLOCKED",
+    "installerSha256":  "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+    "portableSha256":  "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+    "version":  "0.2.2-beta.2",
+    "appId":  "AudioTechLabs.MediaTools",
+    "checks":  [
+                   {
+                       "stage":  "fresh-existing-machine",
+                       "passed":  true,
+                       "payloadFiles":  129,
+                       "appId":  "AudioTechLabs.MediaTools",
+                       "productName":  "Audio Tech Labs Media Tools",
+                       "fileVersion":  "0.2.2.2",
+                       "shortcutIcons":  true,
+                       "shortcutAppUserModelId":  true,
+                       "uninstallIcon":  "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\app-icon.ico"
+                   },
+                   {
+                       "stage":  "fresh-existing-machine",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   },
+                   {
+                       "stage":  "uninstall-after-fresh",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   },
+                   {
+                       "stage":  "install-0.2.1-baseline",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   },
+                   {
+                       "stage":  "upgrade-0.2.1-to-beta",
+                       "passed":  true,
+                       "payloadFiles":  129,
+                       "appId":  "AudioTechLabs.MediaTools",
+                       "productName":  "Audio Tech Labs Media Tools",
+                       "fileVersion":  "0.2.2.2",
+                       "shortcutIcons":  true,
+                       "shortcutAppUserModelId":  true,
+                       "uninstallIcon":  "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\app-icon.ico"
+                   },
+                   {
+                       "stage":  "upgrade-0.2.1-to-beta",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   },
+                   {
+                       "stage":  "uninstall-after-upgrade",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   },
+                   {
+                       "stage":  "reinstall-beta",
+                       "passed":  true,
+                       "payloadFiles":  129,
+                       "appId":  "AudioTechLabs.MediaTools",
+                       "productName":  "Audio Tech Labs Media Tools",
+                       "fileVersion":  "0.2.2.2",
+                       "shortcutIcons":  true,
+                       "shortcutAppUserModelId":  true,
+                       "uninstallIcon":  "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\app-icon.ico"
+                   },
+                   {
+                       "stage":  "reinstall-beta",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   },
+                   {
+                       "stage":  "installed-app-isolated-profile",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   },
+                   {
+                       "stage":  "uninstall-after-reinstall",
+                       "profileFiles":  73,
+                       "profileUnchanged":  true,
+                       "externalAudioSha256":  "195F76DB94818E5985F7CDD5E430F4A544ADB3A7C3E4EE9EA30F446B82184A56"
+                   }
+               ],
+    "signed":  false,
+    "publicRelease":  false,
+    "loggedAt":  "2026-10-08T18:36:42.6522542Z"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "version": "0.2.2-beta.2",
+  "portableSha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+  "inventorySha256": "7751028de3baecfe7724326b52fb3d836075fe4738ac3b9f157d6f2b793e6073",
+  "files": 130,
+  "textFiles": 45,
+  "hits": [],
+  "scope": "Strict payload allowlist plus textual scan for this workstation username/workspace/test paths; not a comprehensive binary secret audit"
+}

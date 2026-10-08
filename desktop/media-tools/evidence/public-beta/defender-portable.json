@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "target": "setup",
+      "sha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+      "exitCode": 0,
+      "log": "evidence\\public-beta\\defender-setup.log"
+    },
+    {
+      "target": "portable",
+      "sha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+      "exitCode": 0,
+      "log": "evidence\\public-beta\\defender-portable.log"
+    },
+    {
+      "target": "payload",
+      "sha256": "7751028de3baecfe7724326b52fb3d836075fe4738ac3b9f157d6f2b793e6073",
+      "exitCode": 0,
+      "log": "evidence\\public-beta\\defender-payload.log"
+    }
+  ],
+  "mode": "Custom scan with DisableRemediation; no submission command",
+  "engine": {
+    "AMServiceEnabled": true,
+    "AntivirusEnabled": true,
+    "RealTimeProtectionEnabled": true,
+    "AntivirusSignatureVersion": "1.459.601.0",
+    "AntivirusSignatureLastUpdated": "2026-10-07T15:47:31+07:00"
+  }
+}

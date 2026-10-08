@@ -1,0 +1,24 @@
+﻿{
+    "status":  "PASS",
+    "exe":  "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+    "exeSha256":  "94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d",
+    "windowIcons":  [
+                        {
+                            "requested":  16,
+                            "actualWidth":  16,
+                            "actualHeight":  16,
+                            "actualPixelSha256":  "d96b1ea4152f35a5e551539472ba53cbf49c05003512b68b025ff996eb3518e5",
+                            "expectedPixelSha256":  "d96b1ea4152f35a5e551539472ba53cbf49c05003512b68b025ff996eb3518e5",
+                            "matches":  true
+                        },
+                        {
+                            "requested":  32,
+                            "actualWidth":  32,
+                            "actualHeight":  32,
+                            "actualPixelSha256":  "197c40340861b8a9b88481572b79da61817530f693542aa46a4f48f2bd2c69cf",
+                            "expectedPixelSha256":  "197c40340861b8a9b88481572b79da61817530f693542aa46a4f48f2bd2c69cf",
+                            "matches":  true
+                        }
+                    ],
+    "scope":  "Actual window WM_GETICON pixels and Windows shell EXE icon; taskbar visual separate"
+}

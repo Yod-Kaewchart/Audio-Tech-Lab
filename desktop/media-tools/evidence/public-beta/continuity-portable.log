@@ -1,0 +1,16 @@
+PASS actual Download/Convert/Player fonts, background, text and accent match
+PASS 20 Player → Download → Convert → Player rounds: advancing audio/CD, restored controls, same engine/audio, zero extra play/load/pause events, stable listeners/timers
+PASS Pause across pages freezes exact audio position/CD angle; Resume continues that angle
+PASS real ended away from Player advances next, then Repeat off ends final track
+PASS real Repeat one completes two cycles while on Convert
+PASS real Repeat all wraps final song to first while on Download
+PASS real Shuffle selects another playlist song at ended while away
+PASS real FFmpeg Convert succeeds and publishes FLAC while same audio keeps playing
+PASS Convert new job resets only its media job; Player/audio and output file survive
+PASS Player new job stops sole audio and clears tracks/metadata/art/position/options/resources
+PASS same local file reimports and plays after reset
+PASS strict control IPC denies private commands, paths and mutations from other pages; private preload unavailable to UI
+PASS responsive, keyboard transport/focus and reduced motion regressions pass
+PASS UI and hidden renderer have no JS errors or external requests
+PASS close while playing clears audio, destroys host, removes IPC listener and exits with no windows
+CONTINUOUS PLAYBACK PASS D:\Sites\Audio Tech Labs\desktop\media-tools\test-output\continuous-playback-1791483869342

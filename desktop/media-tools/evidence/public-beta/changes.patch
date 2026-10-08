@@ -1,0 +1,1001 @@
+diff --git a/desktop/media-tools/build-tools.lock.json b/desktop/media-tools/build-tools.lock.json
+new file mode 100644
+index 0000000..cd40f0d
+--- /dev/null
++++ b/desktop/media-tools/build-tools.lock.json
+@@ -0,0 +1,10 @@
++{
++  "rcedit": {
++    "version": "2.0.0",
++    "file": "rcedit-x64-2.0.0.exe",
++    "url": "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe",
++    "sha256": "3e7801db1a5edbec91b49a24a094aad776cb4515488ea5a4ca2289c400eade2a",
++    "license": "MIT",
++    "checksumProvenance": "SHA256 measured after download from the official Electron GitHub release over HTTPS; publisher does not provide an asset digest. Build-only tool, excluded from distribution."
++  }
++}
+diff --git a/desktop/media-tools/installer/media-tools.iss b/desktop/media-tools/installer/media-tools.iss
+index a4b6ad4..94f8b25 100644
+--- a/desktop/media-tools/installer/media-tools.iss
++++ b/desktop/media-tools/installer/media-tools.iss
+@@ -14,6 +14,9 @@
+   #error MyAppVersion must be passed from build-installer.cjs
+ #endif
+ #define MyExeName "Audio Tech Labs Media Tools.exe"
++#ifndef WindowsVersion
++  #error WindowsVersion must be passed from build-installer.cjs
++#endif
+ #ifdef TestBuild
+   #define MyAppName "Audio Tech Labs Media Tools (Installer QA)"
+   #define MyAppId "AudioTechLabs.MediaTools.InternalQA"
+@@ -54,9 +57,12 @@ ChangesAssociations=no
+ Uninstallable=yes
+ UsePreviousAppDir=yes
+ MinVersion=10.0
+-VersionInfoDescription=Audio Tech Labs Media Tools internal Windows installer
++VersionInfoDescription=Audio Tech Labs Media Tools
+ VersionInfoCompany=Audio Tech Labs
+-VersionInfoVersion={#MyAppVersion}
++VersionInfoVersion={#WindowsVersion}
++VersionInfoProductName=Audio Tech Labs Media Tools
++VersionInfoProductVersion={#WindowsVersion}
++VersionInfoProductTextVersion={#MyAppVersion}
+ 
+ [Languages]
+ Name: "english"; MessagesFile: "compiler:Default.isl"
+@@ -69,8 +75,8 @@ Source: "{#SourceRoot}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+ Source: "{#IconFile}"; DestDir: "{app}"; DestName: "app-icon.ico"; Flags: ignoreversion
+ 
+ [Icons]
+-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"
+-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"; Tasks: desktopicon
++Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"; AppUserModelID: "AudioTechLabs.MediaTools"
++Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app-icon.ico"; AppUserModelID: "AudioTechLabs.MediaTools"; Tasks: desktopicon
+ 
+ [Run]
+ Filename: "{app}\{#MyExeName}"; Description: "Launch {#MyAppName}"; Flags: nowait postinstall skipifsilent
+diff --git a/desktop/media-tools/package-lock.json b/desktop/media-tools/package-lock.json
+index f5007aa..61de10f 100644
+--- a/desktop/media-tools/package-lock.json
++++ b/desktop/media-tools/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "atl-media-tools",
+-  "version": "0.2.1",
++  "version": "0.2.2-beta.2",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "atl-media-tools",
+-      "version": "0.2.1",
++      "version": "0.2.2-beta.2",
+       "devDependencies": {
+         "electron": "44.7.0"
+       }
+diff --git a/desktop/media-tools/package.json b/desktop/media-tools/package.json
+index 78c14d9..8fcbd13 100644
+--- a/desktop/media-tools/package.json
++++ b/desktop/media-tools/package.json
+@@ -1,9 +1,9 @@
+ {
+   "name": "atl-media-tools",
+   "productName": "Audio Tech Labs Media Tools",
+-  "version": "0.2.1",
++  "version": "0.2.2-beta.2",
+   "private": true,
+-  "description": "Local Windows audio tools — internal portable build",
++  "description": "Audio Tech Labs Media Tools public beta candidate",
+   "main": "src/main.cjs",
+   "scripts": {
+     "start": "electron .",
+diff --git a/desktop/media-tools/release-docs/RECOVERY.md b/desktop/media-tools/release-docs/RECOVERY.md
+new file mode 100644
+index 0000000..a270932
+--- /dev/null
++++ b/desktop/media-tools/release-docs/RECOVERY.md
+@@ -0,0 +1,13 @@
++# กู้คืนการเลือกโฟลเดอร์ (สำหรับผู้ดูแล)
++
++เมื่อ guard.release() ยืนยันการปลด guard ไม่สำเร็จ แอปแสดงการเลือกโฟลเดอร์ต้องกู้คืน และ cleanup-required ไม่เริ่ม Download/Convert หรือการตรวจต้นทางใหม่ ไม่ใช้การเปิดแอปใหม่หรือการไม่มี staging เป็นหลักฐานว่าปลอดภัย
++
++ไม่มีกลไกล้างสถานะอัตโนมัติในรุ่นนี้ ต้องยืนยันรายการต่อไปนี้ก่อนคืนการใช้งาน:
++
++1. ปิดทุก instance ของ Audio Tech Labs Media Tools ตรวจ Task Manager/Process Explorer ว่า app, ProcessHost และ process ต้นไม้ของงานจาก vendor (ffmpeg, ffprobe, yt-dlp, node) ของ instance นั้นหยุดครบแล้ว อย่าหยุด process ของโปรแกรมอื่นเพียงเพราะชื่อเหมือนกัน เก็บ PID, executable path และเวลาสิ้นสุดไว้เป็นหลักฐาน ถ้ายังยืนยันไม่ได้ ให้คงสถานะบล็อก
++2. สำรอง `%APPDATA%\Audio Tech Labs Media Tools\local-media\current-job.json` อ่าน recovery.folderPath และตรวจโฟลเดอร์นั้นด้วย identity/permissions เดิม ตรวจเฉพาะ `.atl-write-check-*` ที่การเลือกโฟลเดอร์นี้สร้างไว้ หากไม่แน่ใจเจ้าของไฟล์ ห้ามลบ ตรวจการปิด handle และล้างเฉพาะไฟล์ check ที่พิสูจน์ว่าเป็นของการทดสอบนี้ เก็บหลักฐาน ไม่แตะไฟล์เสียง/ไฟล์อื่น
++3. ยืนยันว่า process หยุดครบ โฟลเดอร์เข้าถึงได้ ปลด handle ครบ และไม่มี check ที่ค้างจากงานนี้ เมื่อครบแล้วและแอปปิดอยู่ จึงย้ายเฉพาะ current-job.json ไปยังสำเนากู้คืนที่เก็บไว้ (ห้ามลบทั้ง profile) เปิดแอปใหม่และเลือกโฟลเดอร์อีกครั้ง หากเกิดซ้ำให้หยุดและเก็บหลักฐานใหม่
++
++หากการเขียน recovery ลงดิสก์ล้มเหลว จะมีข้อความบันทึก recovery ไม่สำเร็จ ในกรณีนี้ต้องตรวจ process/โฟลเดอร์ด้วยตนเองตามรายการข้างต้นก่อนเปิดแอปใหม่ แม้ไม่มี record บนดิสก์
++
++คู่มือนี้ไม่อนุญาตให้ข้ามการตรวจ process/cleanup หรือใช้การลบ state เป็นขั้นตอนแรก
+diff --git a/desktop/media-tools/release-docs/RELEASE-NOTES.md b/desktop/media-tools/release-docs/RELEASE-NOTES.md
+new file mode 100644
+index 0000000..78443dc
+--- /dev/null
++++ b/desktop/media-tools/release-docs/RELEASE-NOTES.md
+@@ -0,0 +1,11 @@
++# 0.2.2-beta.2 — review candidate
++
++- แก้การเลือกโฟลเดอร์เมื่อ file guard release ล้มเหลว: แสดง cleanup-required, ไม่ออก destination token, ไม่ปล่อย setupBusy ค้าง และคงการบล็อกข้ามการเปิดแอปใหม่จนผู้ดูแลยืนยัน process/cleanup ตามคู่มือ
++- การสร้าง Setup ตรวจทุกไฟล์ src/ui/assets รวมฟอนต์ และ package version กับ source ตรวจ vendor กับ dependencies.lock.json ตรวจ runtime/ไอคอน/notices และ SHA256SUMS ปฏิเสธไฟล์ขาด เปลี่ยน เก่า และไฟล์เกินก่อน compile
++- ProductName/FileDescription ของ EXE ใช้ Audio Tech Labs Media Tools; ProductVersion 0.2.2-beta.2; Windows FileVersion 0.2.2.2 (เลขท้าย 2 คือ beta iteration)
++- EXE, window, installer, shortcuts และ uninstall ใช้ media-tools.ico เดียวกัน; app/shortcuts ใช้ AudioTechLabs.MediaTools AppUserModelID
++- Portable/Setup รวมเฉพาะ runtime, app, fonts, dependency notices, helper source และคู่มือ ไม่รวม developer evidence, test profile หรือ log
++
++ฟอนต์ พื้นหลัง layout โลโก้ ข้อความและฟังก์ชัน Download/Convert/Player เดิมยังใช้มาตรฐาน shared theme ของ 0.2.1 ไม่มีฟีเจอร์ใหม่ ไม่มี migration ข้อมูลผู้ใช้
++
++ยังไม่เผยแพร่: live Download/EJS, clean-machine installer QA, signing/SmartScreen และ complete corresponding source ยังต้องผ่าน review gate รายงานผลทดสอบอยู่ในชุดส่งตรวจซึ่งแยกจาก payload รุ่นติดตั้ง/Portable
+diff --git a/desktop/media-tools/release-docs/THIRD-PARTY-NOTICES.md b/desktop/media-tools/release-docs/THIRD-PARTY-NOTICES.md
+new file mode 100644
+index 0000000..a41c792
+--- /dev/null
++++ b/desktop/media-tools/release-docs/THIRD-PARTY-NOTICES.md
+@@ -0,0 +1,27 @@
++# Dependency notices — distribution review incomplete
++
++Audio Tech Labs Media Tools เรียกเครื่องมือเหล่านี้เป็น executable แยกผ่าน ProcessHost ข้อมูลรุ่น/ไฟล์/SHA256 อยู่ใน dependencies.lock.json
++
++| Component | Version | Notice / source requirement |
++| --- | --- | --- |
++| Electron / Chromium / Node in Electron | Electron 44.7.0 | LICENSE และ LICENSES.chromium.html ที่โฟลเดอร์โปรแกรม; upstream https://github.com/electron/electron |
++| Node JS runtime | 24.19.0 | resources/vendor/notices/Node-LICENSE.txt; https://nodejs.org/download/release/v24.19.0/ |
++| FFmpeg + FFprobe (Gyan static essentials) | 9.0.2 | GPLv3, not an LGPL-only build; FFmpeg-GPLv3.txt และ FFmpeg-README.txt มี configure/build information; https://www.gyan.dev/ffmpeg/builds/ |
++| yt-dlp Windows standalone | 2026.08.19 | main source Unlicense, combined PyInstaller executable GPLv3+; yt-dlp-LICENSE.txt และ yt-dlp-THIRD_PARTY_LICENSES.txt; https://github.com/yt-dlp/yt-dlp/tree/2026.08.19 |
++| DM Sans / Noto Sans Thai | bundled WOFF2 and TTF | SIL OFL 1.1; ui/assets/DM-Sans-OFL.txt และ Noto-Sans-Thai-OFL.txt |
++| ProcessHost | 1.0.0 | source in notices/ProcessHost-source; exact source SHA in dependency lock; built with Windows .NET Framework compiler |
++
++## Corresponding source gate: BLOCKED
++
++ชุด source review ที่เตรียมแยกจาก Portable/Setup มี source ของ FFmpeg ตาม commit ที่ผู้สร้าง binary ระบุ และ yt-dlp release source พร้อม notices/build config ที่มีอยู่ เป็นชุดตรวจที่ยังไม่ครบ ห้ามถือว่าเป็น complete corresponding source
++
++FFmpeg static binary รวม external libraries ต้องได้ exact matching source, patch และ build scripts ของทุกส่วนที่มีข้อกำหนด corresponding source จากผู้สร้าง binary ไม่ใช่เพียง FFmpeg tarball สำหรับ yt-dlp.exe ต้องครอบคลุม bundled GPL components/PyInstaller และ scripts/dependency versions ที่ใช้ประกอบ binary ด้วย
++
++ยังไม่มีหลักฐานยืนยัน completeness หรือ rebuild จาก source kit ให้ตรง binary ที่ bundle การเผยแพร่ต้องรอ gate นี้ ห้ามอ้างว่าลิงก์ source upstream อย่างเดียวทำให้ผ่าน ตรวจข้อกำหนดจาก upstream โดยตรง:
++
++- https://ffmpeg.org/legal.html
++- https://www.gnu.org/licenses/gpl-3.0.html (Corresponding Source และ conveying object code)
++- https://github.com/yt-dlp/yt-dlp/blob/2026.08.19/README.md#licensing
++- https://www.gyan.dev/ffmpeg/builds/
++
++ไม่มี public upload หรือ written source offer ที่อนุมัติไว้ในรอบนี้
+diff --git a/desktop/media-tools/release-docs/USER-GUIDE.md b/desktop/media-tools/release-docs/USER-GUIDE.md
+new file mode 100644
+index 0000000..a3f24b4
+--- /dev/null
++++ b/desktop/media-tools/release-docs/USER-GUIDE.md
+@@ -0,0 +1,27 @@
++# Audio Tech Labs Media Tools — 0.2.2-beta.2 candidate
++
++ชุดนี้จัดไว้เพื่อส่งตรวจภายใน ยังไม่อนุมัติให้เผยแพร่ Public Beta และยังไม่มี code signature
++
++รองรับ Windows 10/11 x64 ใช้งานด้วยสิทธิ์ผู้ใช้ปกติ หน้าต่างขั้นต่ำ 360 × 600 และขนาดเริ่มต้น 1280 × 940
++
++## ติดตั้งและอัปเดต
++
++ตรวจชื่อรุ่นและ SHA256 ของ Setup/Portable กับ release manifest ก่อนใช้ Setup ติดตั้งต่อผู้ใช้ใน `%LOCALAPPDATA%\Programs\Audio Tech Labs Media Tools` อัปเดตโดยปิดแอปและติดตั้ง Setup รุ่นใหม่ในตำแหน่งเดิม ห้ามเปิดสองรุ่นพร้อมกัน สำรอง `%APPDATA%\Audio Tech Labs Media Tools` และไฟล์เสียงที่ต้องเก็บก่อนอัปเดต
++
++Portable: แตก ZIP ทั้งโฟลเดอร์ในตำแหน่งใหม่ แล้วเปิด `Audio Tech Labs Media Tools.exe` ต้องเก็บ resources/vendor และ resources/app ทั้งหมดคู่กับ EXE Portable ใช้ profile ของผู้ใช้เหมือนรุ่นติดตั้ง ไม่ได้แยกข้อมูลตามโฟลเดอร์ Portable ฟอนต์ DM Sans และ Noto Sans Thai bundle ในแอป ใช้งาน UI และ Convert/Player ได้โดยไม่ต้องดาวน์โหลดฟอนต์
++
++ถอนการติดตั้งผ่าน Windows Installed apps/Apps & features หรือ unins000.exe ตัวถอนติดตั้งลบไฟล์โปรแกรมและ shortcuts ข้อมูลใน profile และไฟล์เสียงที่ส่งออกอยู่นอกโฟลเดอร์ติดตั้ง หากนำเสียงไปเก็บในโฟลเดอร์ติดตั้งเอง ให้ย้ายและสำรองก่อนถอนติดตั้ง
++
++## ใช้งาน
++
++Download Audio: ใช้เฉพาะ URL YouTube ที่คุณมีสิทธิ์ดาวน์โหลด ตรวจลิงก์ เลือกโฟลเดอร์และรูปแบบ แล้วเริ่มงาน Original เก็บรูปแบบเสียงที่ผู้ให้บริการส่งมา MP3 แปลงเป็นไฟล์บีบอัด WAV/FLAC/ALAC ไม่ทำให้เสียงต้นทางที่บีบอัดกลับมามีรายละเอียดเพิ่ม รุ่นนี้ยังไม่มี live YouTube acceptance ที่ได้รับอนุญาต จึงยังไม่รับรองความสำเร็จของ Download หรือ EJS กับผู้ให้บริการจริง
++
++Convert Audio: เลือกไฟล์เสียงในเครื่อง เลือกปลายทาง ตั้งชื่อไฟล์โดยไม่ใส่นามสกุล แล้วเลือกรูปแบบ/คุณภาพ เริ่มงานใหม่ใช้ได้เมื่องานจบหรือยกเลิกและ cleanup ครบแล้ว แอปไม่เขียนทับไฟล์ปลายทางที่มีชื่อซ้ำ
++
++Player: เพิ่มไฟล์ลง Playlist แล้วใช้ Play/Pause/Seek และเลือกรายการเพลง การเล่นใช้ playback host เดิมเมื่อเปลี่ยนหน้า Download/Convert/Player
++
++หากสถานะขึ้น cleanup-required หรือการเลือกโฟลเดอร์ต้องกู้คืน แอปจะบล็อกงานใหม่ ให้ทำตาม RECOVERY.md อย่าลบ profile หรือไฟล์เสียงเพื่อแก้ปัญหา
++
++## ข้อจำกัดการส่งตรวจ
++
++Live Download, normal installer บน Windows สะอาด, code signing และ SmartScreen reputation ยัง BLOCKED ต้องตรวจใบอนุญาตและ complete corresponding source ของ bundled GPL binaries ให้ครบก่อนเผยแพร่ ดู THIRD-PARTY-NOTICES.md และรายงานส่งตรวจภายนอกแพ็กเกจ ห้ามปิด Defender/SmartScreen เพื่อข้ามคำเตือน
+diff --git a/desktop/media-tools/release-docs/download-preview/index.html b/desktop/media-tools/release-docs/download-preview/index.html
+new file mode 100644
+index 0000000..ae29cc4
+--- /dev/null
++++ b/desktop/media-tools/release-docs/download-preview/index.html
+@@ -0,0 +1,10 @@
++<!doctype html>
++<html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Audio Tech Labs Media Tools — Beta review preview</title>
++<link rel="stylesheet" href="../../ui/theme.css"><style>
++*{box-sizing:border-box}body{margin:0;background:var(--bg,#141719);color:#f0eee8;font-family:'DM Sans','Noto Sans Thai',sans-serif;line-height:1.7}main{max-width:980px;margin:auto;padding:48px 24px}header{border-bottom:1px solid #353b40;padding-bottom:24px}.eyebrow{color:#c9aa70;letter-spacing:.12em;font-size:13px}h1{font-size:clamp(28px,5vw,44px);line-height:1.25;max-width:760px}h2{font-size:22px}.sub{color:#b9bec2}.notice{padding:18px 22px;border:1px solid #c9aa70;background:#202427;border-radius:12px;margin:28px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}article{padding:24px;background:#202427;border:1px solid #353b40;border-radius:14px}button{font:inherit;background:#353b40;color:#b9bec2;border:1px solid #80898f;border-radius:8px;padding:10px 18px;width:100%;cursor:not-allowed}a{color:#d8bc89}code{word-break:break-all}table{border-collapse:collapse;width:100%;font-size:14px}td,th{text-align:left;padding:10px;border-bottom:1px solid #353b40;vertical-align:top}footer{padding-top:24px;color:#b9bec2;font-size:14px}@media(max-width:600px){main{padding:24px 16px}.grid{grid-template-columns:1fr}table{font-size:12px}td,th{padding:6px}}
++</style><main><header><div class="eyebrow">AUDIO TECH LABS · MEDIA TOOLS</div><h1>เครื่องมือเสียงในเครื่องคุณ</h1><p class="sub">Download Audio · Convert Audio · Player สำหรับ Windows 10/11 x64</p></header>
++<aside class="notice"><strong>Preview สำหรับส่งตรวจ — ยังไม่เปิดให้ดาวน์โหลด</strong><p>Candidate 0.2.2-beta.2 ยังเป็น unsigned และยังมี release gate ที่ BLOCKED ปุ่มด้านล่างไม่เชื่อมไฟล์หรือส่งข้อมูล ไม่มีการเผยแพร่ในรอบนี้</p></aside>
++<div class="grid"><article><h2>Windows Setup</h2><p>ติดตั้งต่อผู้ใช้ สร้าง Start Menu shortcut อัปเดตในตำแหน่งเดิม และถอนติดตั้งผ่าน Windows</p><button type="button" disabled>Setup · รอผลตรวจและอนุมัติ</button></article><article><h2>Portable ZIP</h2><p>แตกทั้งโฟลเดอร์แล้วเปิด EXE ฟอนต์และเครื่องมือ bundle ในแอป ใช้ profile เดียวกับรุ่นติดตั้ง</p><button type="button" disabled>Portable · รอผลตรวจและอนุมัติ</button></article></div>
++<section><h2>ก่อนเปิด Public Beta</h2><table><thead><tr><th>รายการ</th><th>สถานะ</th><th>สิ่งที่ยังขาด</th></tr></thead><tbody><tr><td>Download / EJS จาก YouTube จริง</td><td>BLOCKED</td><td>ลิงก์พร้อมสิทธิ์ทดสอบที่เจ้าของอนุญาต</td></tr><tr><td>Normal installer บน Windows สะอาด</td><td>BLOCKED</td><td>เครื่อง/VM สะอาดที่ยืนยันช่องทางเข้าถึง</td></tr><tr><td>Signing / SmartScreen</td><td>BLOCKED</td><td>certificate/บริการที่อนุญาตและผลทดสอบหลัง signing</td></tr><tr><td>GPL corresponding source</td><td>BLOCKED</td><td>exact source ของส่วนประกอบและ build scripts ครบตาม binary</td></tr></tbody></table></section>
++<section><h2>อัปเดตและเก็บข้อมูล</h2><p>ปิดแอปและสำรอง profile กับไฟล์เสียงก่อนอัปเดต ตรวจ SHA256 กับ release manifest ที่อนุมัติ รุ่นติดตั้งและ Portable ใช้ profile ร่วมกัน ฟอนต์รองรับภาษาไทยโดยไม่ต้องใช้อินเทอร์เน็ต แต่ Download ต้องเชื่อมต่อผู้ให้บริการและใช้เฉพาะลิงก์ที่คุณมีสิทธิ์ดาวน์โหลด</p><p>ดู <a href="../USER-GUIDE.md">คู่มือ</a> · <a href="../RELEASE-NOTES.md">Release notes</a> · <a href="../THIRD-PARTY-NOTICES.md">Third-party notices และ source gate</a> · <a href="../RECOVERY.md">วิธีกู้คืน</a></p></section>
++<footer>ชุดตรวจ hash อยู่ใน release manifest ภายนอก payload ไม่มี public URL และไม่มี download endpoint ใน preview นี้</footer></main></html>
+diff --git a/desktop/media-tools/scripts/build-installer.cjs b/desktop/media-tools/scripts/build-installer.cjs
+index 6b06251..9a1978e 100644
+--- a/desktop/media-tools/scripts/build-installer.cjs
++++ b/desktop/media-tools/scripts/build-installer.cjs
+@@ -2,6 +2,7 @@
+ // Internal Windows installer build. Does NOT publish or install the resulting executable.
+ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),cp=require('node:child_process');
+ const root=path.resolve(__dirname,'..'),release=path.join(root,'release');
++const {verifyPayload}=require('./verify-payload.cjs'),{windowsVersion}=require('./windows-brand.cjs');
+ const sha256=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+ function fail(message){throw Error(message);}
+ function main(){
+@@ -12,30 +13,27 @@ function main(){
+  const dir=path.resolve(record.directory), exe=path.join(dir,'Audio Tech Labs Media Tools.exe');
+  if(!dir.startsWith(release+path.sep)||!fs.statSync(dir).isDirectory()||record.executable!==exe||!fs.existsSync(exe))fail('Invalid or missing latest portable release');
+  const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
+- for(const name of ['src/main.cjs','src/engine.cjs','src/common.cjs','src/preload.cjs','ui/controller.js','ui/view.js','ui/media-tools.css']){
+-  const live=path.join(root,name),packed=path.join(dir,'resources','app',name);
+-  if(!fs.existsSync(packed)||sha256(live)!==sha256(packed))fail('Portable is not synced to checked-out source: '+name);
+- }
+- for(const name of ['ffmpeg.exe','ffprobe.exe','yt-dlp.exe','node.exe','ProcessHost.exe','manifest.json']){
+-  if(!fs.existsSync(path.join(dir,'resources','vendor',name)))fail('Portable dependency missing: '+name);
+- }
++ // Fail closed before ISCC: all src/ui/fonts, version, vendor hashes, runtime,
++ // icons, notices, full inventory and distribution allowlist.
++ const verified=verifyPayload(root,dir);
+  const icon=path.join(root,'installer','assets','media-tools.ico');
+  if(!fs.existsSync(icon))fail('Missing installer icon. Run create-installer-icon.ps1');
+  const compiler=process.env.INNO_ISCC||path.join(process.env.LOCALAPPDATA,'Programs','Inno Setup 6','ISCC.exe');
+  if(!fs.existsSync(compiler))fail('Missing Inno Setup compiler: '+compiler);
+  const destination=path.join(release,'installers');
+  fs.mkdirSync(destination,{recursive:true});
+- const args=['/Qp','/DSourceRoot='+dir,'/DOutputDir='+destination,'/DIconFile='+icon,'/DMyAppVersion='+pkg.version];
++ const filename='Audio-Tech-Labs-Media-Tools-Setup-'+pkg.version+'-Win64'+(test?'-QA':'')+'.exe';
++ const output=path.join(destination,filename);if(fs.existsSync(output))fail('Refusing to overwrite an existing installer candidate');
++ const args=['/Qp','/DSourceRoot='+dir,'/DOutputDir='+destination,'/DIconFile='+icon,'/DMyAppVersion='+pkg.version,'/DWindowsVersion='+windowsVersion(pkg.version)];
+  if(test)args.push('/DTestBuild=1');
+  args.push(path.join(root,'installer','media-tools.iss'));
+  const result=cp.spawnSync(compiler,args,{cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:4*1024*1024,timeout:10*60*1000});
+  if(result.status!==0)fail('ISCC failed '+result.status+':\n'+(result.stdout||'')+'\n'+(result.stderr||'')+'\n'+(result.error?.message||''));
+- const filename='Audio-Tech-Labs-Media-Tools-Setup-'+pkg.version+'-Win64'+(test?'-QA':'')+'.exe';
+- const output=path.join(destination,filename);
+  if(!fs.existsSync(output))fail('Compiled installer missing at '+output);
+  const stat=fs.statSync(output);
+  if(stat.size<10*1024*1024)fail('Installer unexpectedly small');
+- const manifest={kind:test?'internal-qa':'internal-candidate',version:pkg.version,compilerVersion:'Inno Setup 6.7.3',sourcePortable:dir,file:output,bytes:stat.size,sha256:sha256(output),signed:false,publicRelease:false,producedAt:new Date().toISOString()};
++ const installerSourceCommit=cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,windowsHide:true,encoding:'utf8'}).trim();
++ const manifest={kind:test?'internal-qa':'internal-candidate',version:pkg.version,commit:verified.commit,installerSourceCommit,compilerVersion:'Inno Setup 6.7.3',sourcePortable:dir,portableSha256:record.sha256,payloadInventorySha256:verified.inventorySha256,file:output,bytes:stat.size,sha256:sha256(output),signed:false,publicRelease:false,producedAt:new Date().toISOString()};
+  const outManifest=path.join(destination,test?'installer-qa.json':'installer-candidate.json');
+  fs.writeFileSync(outManifest,JSON.stringify(manifest,null,2)+'\n');
+  console.log(JSON.stringify(manifest,null,2));
+diff --git a/desktop/media-tools/scripts/package.cjs b/desktop/media-tools/scripts/package.cjs
+index 39c14cc..5784548 100644
+--- a/desktop/media-tools/scripts/package.cjs
++++ b/desktop/media-tools/scripts/package.cjs
+@@ -1,33 +1,33 @@
+-const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto');
+-const {execFileSync}=require('node:child_process');
++'use strict';
++const fs=require('node:fs/promises'),path=require('node:path'),cp=require('node:child_process');
++const {inventory,sha256,packagedJson,verifyPayload}=require('./verify-payload.cjs'),{brand,windowsVersion}=require('./windows-brand.cjs');
+ const root=path.resolve(__dirname,'..');
+ (async()=>{
+- if(process.argv.includes('--finalize')){
+-  const record=JSON.parse(await fs.readFile(path.join(root,'release/latest.json'),'utf8'));
+-  await finalize(record);return;
+- }
+- const manifest=JSON.parse(await fs.readFile(path.join(root,'vendor/manifest.json'),'utf8'));
+- const {Dependencies}=require('../src/dependencies.cjs');const deps=await new Dependencies(path.join(root,'vendor')).load();for(const name of Object.keys(manifest.tools))await deps.verify(name);
+- const version=JSON.parse(await fs.readFile(path.join(root,'package.json'),'utf8')).version;
+- const tag='Media-Tools-'+version+'-win-x64-'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15);
+- const out=path.join(root,'release',tag);await fs.mkdir(out,{recursive:true});
+- await fs.cp(path.join(root,'node_modules/electron/dist'),out,{recursive:true});await fs.rename(path.join(out,'electron.exe'),path.join(out,'Audio Tech Labs Media Tools.exe'));
++ if(process.argv.slice(2).some(a=>!['--directory-only','--finalize'].includes(a)))throw Error('Unknown package option');
++ if(process.argv.includes('--finalize'))return finalize(JSON.parse(await fs.readFile(path.join(root,'release/latest.json'),'utf8')));
++ const pkg=JSON.parse(await fs.readFile(path.join(root,'package.json'),'utf8')),deps=JSON.parse(await fs.readFile(path.join(root,'dependencies.lock.json'),'utf8'));
++ const dirty=cp.execFileSync('git',['status','--porcelain','--','src','ui','package.json','package-lock.json','native','dependencies.lock.json','scripts','installer','release-docs','build-tools.lock.json'],{cwd:root,encoding:'utf8',windowsHide:true}).trim();
++ if(dirty)throw Error('Commit distribution source first; refusing to label a dirty payload with HEAD');
++ const manifest=JSON.parse(await fs.readFile(path.join(root,'vendor/manifest.json'),'utf8'));require('node:assert/strict').deepEqual(manifest,deps);
++ for(const tool of Object.values(deps.tools))if(sha256(path.join(root,'vendor',tool.file))!==tool.sha256)throw Error('Vendor checksum mismatch: '+tool.file);
++ const commit=cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8',windowsHide:true}).trim();
++ const tag='Media-Tools-'+pkg.version+'-win-x64-'+new Date().toISOString().replace(/[-:]/g,'').replace('.','').slice(0,18),out=path.join(root,'release',tag);
++ await fs.mkdir(out,{recursive:false});await fs.cp(path.join(root,'node_modules/electron/dist'),out,{recursive:true,filter:p=>p!==path.join(root,'node_modules/electron/dist/resources/default_app.asar')});
++ const exe=path.join(out,'Audio Tech Labs Media Tools.exe');await fs.rename(path.join(out,'electron.exe'),exe);const branding=brand(root,exe,pkg);
+  const app=path.join(out,'resources/app');await fs.mkdir(app,{recursive:true});for(const dir of ['src','ui'])await fs.cp(path.join(root,dir),path.join(app,dir),{recursive:true});
+- const pkg=JSON.parse(await fs.readFile(path.join(root,'package.json'),'utf8'));delete pkg.devDependencies;delete pkg.scripts;await fs.writeFile(path.join(app,'package.json'),JSON.stringify(pkg,null,2));
+- await fs.cp(path.join(root,'vendor'),path.join(out,'resources/vendor'),{recursive:true});
+- // Preserve all publisher notices, helper source, exact dependency manifest and user's local fonts.
++ await fs.writeFile(path.join(app,'package.json'),JSON.stringify(packagedJson(pkg),null,2));await fs.cp(path.join(root,'vendor'),path.join(out,'resources/vendor'),{recursive:true});
+  await fs.cp(path.join(root,'native'),path.join(out,'notices/ProcessHost-source'),{recursive:true});
+- for(const file of ['README.md','DEPENDENCIES.md','ACCEPTANCE-REPORT.md','PLAYER-V1-ACCEPTANCE-20261008.md','PLAYER-CONTINUITY-ACCEPTANCE-20261008.md','HOME-THEME-ACCEPTANCE-20261008.md']){try{await fs.copyFile(path.join(root,file),path.join(out,file));}catch{}}
+- const record={directory:out,executable:path.join(out,'Audio Tech Labs Media Tools.exe'),archive:null,sha256:null,createdAt:new Date().toISOString()};await fs.writeFile(path.join(root,'release/latest.json'),JSON.stringify(record,null,2));
++ await fs.copyFile(path.join(root,'installer/assets/media-tools.ico'),path.join(out,'app-icon.ico'));await fs.copyFile(path.join(root,'dependencies.lock.json'),path.join(out,'dependencies.lock.json'));
++ for(const file of ['USER-GUIDE.md','RELEASE-NOTES.md','THIRD-PARTY-NOTICES.md','RECOVERY.md'])await fs.copyFile(path.join(root,'release-docs',file),path.join(out,file));
++ await fs.writeFile(path.join(out,'build-info.json'),JSON.stringify({version:pkg.version,windowsVersion:windowsVersion(pkg.version),commit,dependencies:deps,signed:false,publicRelease:false},null,2));
++ await fs.writeFile(path.join(out,'SHA256SUMS.json'),JSON.stringify(inventory(out),null,2));
++ const verified=verifyPayload(root,out),record={version:pkg.version,commit,directory:out,executable:exe,executableSha256:sha256(exe),archive:null,sha256:null,branding,verified,createdAt:new Date().toISOString()};
++ await fs.writeFile(path.join(root,'release/latest.json'),JSON.stringify(record,null,2));
+  if(!process.argv.includes('--directory-only'))await finalize(record);else console.log(JSON.stringify(record,null,2));
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+ async function finalize(record){
+- const out=record.directory;if(!out.startsWith(path.join(root,'release')+path.sep))throw Error('Invalid package path');
+- for(const file of ['README.md','DEPENDENCIES.md','ACCEPTANCE-REPORT.md','PLAYER-V1-ACCEPTANCE-20261008.md','PLAYER-CONTINUITY-ACCEPTANCE-20261008.md','HOME-THEME-ACCEPTANCE-20261008.md'])await fs.copyFile(path.join(root,file),path.join(out,file));
+- await fs.copyFile(path.join(root,'dependencies.lock.json'),path.join(out,'dependencies.lock.json'));
+- // Keep the final archive checksum receipt external so it cannot refer to itself.
+- await fs.cp(path.join(root,'evidence'),path.join(out,'evidence'),{recursive:true,filter:source=>source!==path.join(root,'evidence','home-theme','artifacts.json')});
+- const hashes=[];async function inventory(dir){for(const e of await fs.readdir(dir,{withFileTypes:true})){const file=path.join(dir,e.name);if(e.isDirectory())await inventory(file);else if(e.name!=='SHA256SUMS.json')hashes.push({file:path.relative(out,file).replaceAll('\\','/'),sha256:crypto.createHash('sha256').update(await fs.readFile(file)).digest('hex')});}}await inventory(out);await fs.writeFile(path.join(out,'SHA256SUMS.json'),JSON.stringify(hashes,null,2));
+- const zip=out+'.zip';execFileSync('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',path.join(__dirname,'zip.ps1'),out,zip],{windowsHide:true,stdio:'inherit'});
+- Object.assign(record,{archive:zip,sha256:crypto.createHash('sha256').update(await fs.readFile(zip)).digest('hex')});await fs.writeFile(path.join(root,'release/latest.json'),JSON.stringify(record,null,2));console.log(JSON.stringify(record,null,2));
++ const verified=verifyPayload(root,record.directory),zip=record.directory+'.zip';
++ try{await fs.access(zip);throw Error('Archive already exists; build a new candidate instead');}catch(e){if(e.code!=='ENOENT')throw e;}
++ cp.execFileSync('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',path.join(__dirname,'zip.ps1'),record.directory,zip],{windowsHide:true,stdio:'inherit'});
++ Object.assign(record,{archive:zip,bytes:(await fs.stat(zip)).size,sha256:sha256(zip),verified});await fs.writeFile(path.join(root,'release/latest.json'),JSON.stringify(record,null,2));console.log(JSON.stringify(record,null,2));
+ }
+diff --git a/desktop/media-tools/scripts/prepare-review-kit.cjs b/desktop/media-tools/scripts/prepare-review-kit.cjs
+new file mode 100644
+index 0000000..279b1a7
+--- /dev/null
++++ b/desktop/media-tools/scripts/prepare-review-kit.cjs
+@@ -0,0 +1,47 @@
++'use strict';
++// Assemble a private review folder. No hosting, network writes or publication.
++const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
++const {sha256}=require('./verify-payload.cjs');
++const root=path.resolve(__dirname,'..'),evidence=path.join(root,'evidence/public-beta'),read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
++const portable=read(path.join(root,'release/latest.json')),setup=read(path.join(root,'release/installers/installer-candidate.json')),pkg=read(path.join(root,'package.json'));
++const normal=read(path.join(evidence,'normal-installer.json')),theme=read(path.join(evidence,'portable.json')),installed=read(path.join(evidence,'normal-installed.json'));
++assert.equal(portable.version,pkg.version);assert.equal(setup.version,pkg.version);assert.equal(setup.commit,portable.commit);assert.equal(setup.portableSha256,portable.sha256);
++assert.equal(normal.status,'PASS');assert.equal(normal.installerSha256,setup.sha256);assert.equal(normal.portableSha256,portable.sha256);assert.equal(theme.passed,true);assert.equal(installed.passed,true);assert.equal(theme.runtime.appVersion,pkg.version);assert.equal(installed.runtime.appVersion,pkg.version);
++assert.equal(read(path.join(evidence,'development-regressions.json')).passed,true);assert.equal(read(path.join(evidence,'portable-regressions.json')).passed,true);assert.equal(read(path.join(evidence,'installer-rejection.json')).installerSha256,setup.sha256);
++const source=read(path.join(evidence,'source-artifact.json'));
++const artifacts=[{role:'Setup',from:setup.file,sha256:setup.sha256},{role:'Portable',from:portable.archive,sha256:portable.sha256},{role:'Source review INCOMPLETE',from:source.file,sha256:source.sha256}].map(r=>{assert.equal(sha256(r.from),r.sha256);return {...r,file:path.basename(r.from),bytes:fs.statSync(r.from).size};});
++const lock=read(path.join(root,'dependencies.lock.json'));
++const checks=[
++ {item:'Checkpoint + original hashes',status:'PASS',evidence:'checkpoint.json'},
++ {item:'Folder recovery / concurrent inspection / restart / no new work',status:'PASS',evidence:'unit.log, folder-recovery-ui.json'},
++ {item:'Installer payload validation + real missing/corrupt font and FFmpeg rejection',status:'PASS',evidence:'payload-validation.json, installer-rejection.json, stale-0.2.1-rejection.json'},
++ {item:'EXE/setup name/version/icon, window pixels, shortcuts/uninstall icon and AppUserModelID',status:'PASS',evidence:'setup-branding.json, windows-icon.json, native-window.png, normal-installer.json'},
++ {item:'Actual taskbar visual',status:'BLOCKED',reason:'Supported native window inventory did not expose taskbar; AppUserModelID and shortcut association verified separately.'},
++ {item:'YouTube inspect/Original/MP3/lossless/cancel/network loss/retry/live EJS',status:'BLOCKED',reason:'User confirmed there is no owner-authorized test URL. No mock/Convert substitute accepted.'},
++ {item:'Dependency notices / fonts bundled offline',status:'PASS',evidence:'payload-validation.json, portable.json, normal-installed.json'},
++ {item:'Complete FFmpeg/yt-dlp corresponding source',status:'BLOCKED',reason:'Upstream sources/notices collected; exact external dependency sources/patches/build scripts and bundled GPL components not fully verified.',evidence:'source-review.json'},
++ {item:'Normal installer fresh/0.2.1 upgrade/uninstall/reinstall on this existing Windows',status:'PASS',evidence:'normal-installer.json'},
++ {item:'Normal installer on a clean Windows machine',status:'BLOCKED',reason:'User confirmed no clean machine/VM access.'},
++ {item:'User profile, external audio fixture, original desktop shortcut preserved',status:'PASS',evidence:'normal-installer.json, desktop-shortcut-preservation.json'},
++ {item:'Code signing / SmartScreen',status:'BLOCKED',reason:'User confirmed no authorized certificate/signing service; candidate unsigned. Reputation/download-origin SmartScreen not tested.'},
++ {item:'Local Defender scan',status:'PASS',evidence:'defender-setup.json, defender-portable.json and raw scan logs; no threats for these hashes with installed signatures.'},
++ {item:'Source and extracted portable Convert/Player/continuous playback + min/normal Thai UI',status:'PASS',evidence:'development-regressions.json, portable-regressions.json, portable.json, normal-installed.json'},
++ {item:'Runtime payload contains no developer evidence/logs/profiles',status:'PASS',evidence:'payload-validation.json, package-content-scan.json; 129 inventory entries plus SHA256SUMS.json itself (130 files)'},
++ {item:'Local-only download preview / guides / review artifacts',status:'PASS',evidence:'download-preview.json'}
++];
++const manifest={schema:1,version:pkg.version,windowsVersion:portable.branding.versionInfo.FileVersion,appSourceCommit:portable.commit,installerSourceCommit:setup.installerSourceCommit,target:'win32-x64',signed:false,publicRelease:false,releaseReadiness:'BLOCKED',artifacts:artifacts.map(({from,...r})=>r),payloadInventorySha256:portable.verified.inventorySha256,appExeSha256:portable.executableSha256,dependencies:{electron:pkg.devDependencies.electron,embeddedRuntime:theme.runtime.versions,vendor:lock.tools,lockSha256:sha256(path.join(root,'dependencies.lock.json'))},checks};
++fs.writeFileSync(path.join(evidence,'release-manifest.json'),JSON.stringify(manifest,null,2));
++const kit=path.join(root,'release','review-'+pkg.version+'-'+setup.sha256.slice(0,12));fs.mkdirSync(kit,{recursive:false});
++for(const r of artifacts)fs.copyFileSync(r.from,path.join(kit,r.file));
++fs.cpSync(path.join(root,'release-docs'),path.join(kit,'docs'),{recursive:true});
++fs.mkdirSync(path.join(kit,'ui/assets'),{recursive:true});fs.copyFileSync(path.join(root,'ui/theme.css'),path.join(kit,'ui/theme.css'));
++for(const name of fs.readdirSync(path.join(root,'ui/assets')))if(/\.(?:woff2|ttf)$|OFL\.txt$/.test(name))fs.copyFileSync(path.join(root,'ui/assets',name),path.join(kit,'ui/assets',name));
++fs.copyFileSync(path.join(evidence,'release-manifest.json'),path.join(kit,'release-manifest.json'));
++// QA contains local paths/logs. Keep it in the explicitly private review kit,
++// never in Setup/Portable. Do not copy the user's profile snapshot or contents.
++fs.cpSync(evidence,path.join(kit,'evidence/public-beta'),{recursive:true,filter:p=>path.basename(p)!=='review-kit.json'});
++fs.copyFileSync(path.join(root,'PUBLIC-BETA-REVIEW-20261009.md'),path.join(kit,'REVIEW-REPORT.md'));
++fs.writeFileSync(path.join(kit,'README.txt'),'PRIVATE REVIEW ONLY — NOT APPROVED FOR PUBLIC DISTRIBUTION\r\nCandidate is unsigned. See release-manifest.json and REVIEW-REPORT.md for BLOCKED gates.\r\nSource review archive is INCOMPLETE and is not complete corresponding source.\r\nNo upload/deployment/publication has been performed.\r\n');
++for(const r of artifacts)assert.equal(sha256(path.join(kit,r.file)),r.sha256);
++fs.writeFileSync(path.join(evidence,'review-kit.json'),JSON.stringify({directory:kit,manifestSha256:sha256(path.join(kit,'release-manifest.json')),version:pkg.version,signed:false,publicRelease:false,artifacts:manifest.artifacts},null,2));
++console.log(JSON.stringify({directory:kit,artifacts:manifest.artifacts,releaseReadiness:'BLOCKED'},null,2));
+diff --git a/desktop/media-tools/scripts/test-normal-installer.ps1 b/desktop/media-tools/scripts/test-normal-installer.ps1
+new file mode 100644
+index 0000000..98abe1f
+--- /dev/null
++++ b/desktop/media-tools/scripts/test-normal-installer.ps1
+@@ -0,0 +1,92 @@
++param([switch]$Theme)
++$ErrorActionPreference='Stop'
++$root=Split-Path -Parent $PSScriptRoot
++$candidate=Get-Content -LiteralPath (Join-Path $root 'release\installers\installer-candidate.json') -Raw|ConvertFrom-Json
++$portable=Get-Content -LiteralPath (Join-Path $root 'release\latest.json') -Raw|ConvertFrom-Json
++$Installer=$candidate.file
++if($candidate.kind -ne 'internal-candidate' -or $candidate.signed -or $candidate.publicRelease){throw 'Expected unsigned normal candidate'}
++if((Get-FileHash -LiteralPath $Installer -Algorithm SHA256).Hash.ToLowerInvariant() -ne $candidate.sha256){throw 'Candidate hash mismatch'}
++if($candidate.portableSha256 -ne $portable.sha256){throw 'Portable/candidate receipt mismatch'}
++$target=Join-Path $env:LOCALAPPDATA 'Programs\Audio Tech Labs Media Tools'
++$registry='HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\AudioTechLabs.MediaTools_is1'
++$registryMachine='HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\AudioTechLabs.MediaTools_is1'
++$name='Audio Tech Labs Media Tools'
++$shortcuts=@((Join-Path ([Environment]::GetFolderPath('DesktopDirectory')) ($name+'.lnk')),(Join-Path ([Environment]::GetFolderPath('Programs')) ($name+'.lnk')))
++$uninstaller=Join-Path $target 'unins000.exe'
++# Never replace an installation or shortcuts owned by the user. This harness uses
++# the normal AppId, but it is deliberately labelled existing-machine QA.
++foreach($p in @($target,$registry,$registryMachine)+$shortcuts){if(Test-Path -LiteralPath $p){throw "Existing normal installation/shortcut found; refusing overwrite: $p"}}
++if(Get-Process -Name 'Audio Tech Labs Media Tools' -ErrorAction SilentlyContinue){throw 'App is running; refusing installer QA'}
++$testHome=Join-Path $root ('test-output\normal-installer-'+(Get-Date -Format 'yyyyMMdd-HHmmss'))
++New-Item -ItemType Directory -Path $testHome | Out-Null
++$profile=Join-Path $env:APPDATA 'Audio Tech Labs Media Tools'
++function Snapshot {
++ if(-not(Test-Path -LiteralPath $profile)){return @()}
++ return @(Get-ChildItem -LiteralPath $profile -File -Recurse -Force|ForEach-Object{[pscustomobject]@{file=$_.FullName.Substring($profile.Length);sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash}}|Sort-Object file)
++}
++$before=@(Snapshot);$before|ConvertTo-Json -Depth 5|Set-Content -LiteralPath (Join-Path $testHome 'profile-before.json') -Encoding UTF8
++# Only our own fixture is created, outside the install/profile folders.
++$audio=Join-Path $testHome 'preserved-existing-audio.wav'
++node -e "require('./test/fixtures.cjs').wave(process.argv[1],2)" $audio
++if($LASTEXITCODE -ne 0){throw 'Audio fixture failed'}
++$audioHash=(Get-FileHash -LiteralPath $audio -Algorithm SHA256).Hash
++$checks=New-Object System.Collections.Generic.List[object]
++function Preserve([string]$stage){
++ $after=@(Snapshot)
++ if(($before|ConvertTo-Json -Depth 5 -Compress) -ne ($after|ConvertTo-Json -Depth 5 -Compress)){throw "Actual user profile changed: $stage"}
++ if((Get-FileHash -LiteralPath $audio -Algorithm SHA256).Hash -ne $audioHash){throw "External audio changed: $stage"}
++ $checks.Add([ordered]@{stage=$stage;profileFiles=$before.Count;profileUnchanged=$true;externalAudioSha256=$audioHash})
++}
++function Install([string]$file,[string]$stage){
++ $p=Start-Process -FilePath $file -ArgumentList @('/CURRENTUSER','/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/TASKS=desktopicon',('/LOG="'+(Join-Path $testHome ($stage+'.log'))+'"')) -WindowStyle Hidden -PassThru -Wait
++ if($p.ExitCode -ne 0){throw "Install failed: $stage exit=$($p.ExitCode)"}
++ if(-not(Test-Path -LiteralPath $uninstaller) -or -not(Test-Path -LiteralPath $registry)){throw "Missing uninstall registration: $stage"}
++}
++function Verify([string]$stage){
++ $entry=Get-ItemProperty -LiteralPath $registry
++ if($entry.DisplayName -ne ($name+' '+$candidate.version) -or $entry.DisplayVersion -ne $candidate.version -or $entry.DisplayIcon -ne (Join-Path $target 'app-icon.ico')){throw 'Uninstall AppVerName/version/icon mismatch'}
++ foreach($p in $shortcuts){
++  $shell=New-Object -ComObject WScript.Shell;$s=$shell.CreateShortcut($p)
++  if($s.TargetPath -ne (Join-Path $target ($name+'.exe')) -or $s.IconLocation -ne ((Join-Path $target 'app-icon.ico')+',0')){throw "Shortcut target/icon mismatch: $p"}
++  $sh=New-Object -ComObject Shell.Application;$folder=$sh.Namespace([IO.Path]::GetDirectoryName($p));$item=$folder.ParseName([IO.Path]::GetFileName($p))
++  if($item.ExtendedProperty('System.AppUserModel.ID') -ne 'AudioTechLabs.MediaTools'){throw "Shortcut AppUserModelID mismatch: $p"}
++ }
++ $sums=Get-Content -LiteralPath (Join-Path $portable.directory 'SHA256SUMS.json') -Raw|ConvertFrom-Json
++ foreach($row in $sums){$installed=Join-Path $target $row.file;if(-not(Test-Path -LiteralPath $installed) -or (Get-FileHash -LiteralPath $installed -Algorithm SHA256).Hash.ToLowerInvariant() -ne $row.sha256){throw "Installed payload mismatch: $($row.file)"}}
++ $v=(Get-Item -LiteralPath (Join-Path $target ($name+'.exe'))).VersionInfo
++ if($v.ProductName -ne $name -or $v.FileVersion -ne $portable.branding.versionInfo.FileVersion -or $v.ProductVersion -ne $candidate.version){throw 'Installed EXE branding mismatch'}
++ $checks.Add([ordered]@{stage=$stage;passed=$true;payloadFiles=$sums.Count;appId='AudioTechLabs.MediaTools';productName=$v.ProductName;fileVersion=$v.FileVersion;shortcutIcons=$true;shortcutAppUserModelId=$true;uninstallIcon=$entry.DisplayIcon})
++ Preserve $stage
++}
++function Uninstall([string]$stage){
++ $p=Start-Process -FilePath $uninstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',('/LOG="'+(Join-Path $testHome ($stage+'.log'))+'"')) -WindowStyle Hidden -PassThru -Wait
++ if($p.ExitCode -ne 0){throw "Uninstall failed: $stage"}
++ foreach($p in @($target,$registry)+$shortcuts){if(Test-Path -LiteralPath $p){throw "Uninstall residue: $p"}}
++ Preserve $stage
++}
++try{
++ Install $Installer 'fresh-existing-machine';Verify 'fresh-existing-machine';Uninstall 'uninstall-after-fresh'
++ $checkpoint=Get-Content -LiteralPath (Join-Path $root 'evidence\public-beta\checkpoint.json') -Raw|ConvertFrom-Json
++ $old=@($checkpoint.artifacts|Where-Object {$_.path -like '*Setup-0.2.1-Win64.exe'})[0]
++ if(-not $old -or (Get-FileHash -LiteralPath $old.path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $old.sha256){throw 'Old installer checkpoint hash mismatch'}
++ Install $old.path 'install-0.2.1-baseline';Preserve 'install-0.2.1-baseline'
++ Install $Installer 'upgrade-0.2.1-to-beta';Verify 'upgrade-0.2.1-to-beta';Uninstall 'uninstall-after-upgrade'
++ Install $Installer 'reinstall-beta';Verify 'reinstall-beta'
++ if($Theme){
++  $saved=@{ATL_THEME_EXE=$env:ATL_THEME_EXE;ATL_THEME_KIND=$env:ATL_THEME_KIND;ATL_THEME_OUTPUT=$env:ATL_THEME_OUTPUT}
++  try{$env:ATL_THEME_EXE=Join-Path $target ($name+'.exe');$env:ATL_THEME_KIND='normal-installed';$env:ATL_THEME_OUTPUT=Join-Path $root 'evidence\public-beta';node test/theme-acceptance.cjs;if($LASTEXITCODE -ne 0){throw 'Installed native/offline theme acceptance failed'}}
++  finally{$env:ATL_THEME_EXE=$saved.ATL_THEME_EXE;$env:ATL_THEME_KIND=$saved.ATL_THEME_KIND;$env:ATL_THEME_OUTPUT=$saved.ATL_THEME_OUTPUT}
++  Preserve 'installed-app-isolated-profile'
++ }
++ Uninstall 'uninstall-after-reinstall'
++ $result=[ordered]@{status='PASS';scope='existing-machine QA ONLY';cleanMachineStatus='BLOCKED';installerSha256=$candidate.sha256;portableSha256=$portable.sha256;version=$candidate.version;appId='AudioTechLabs.MediaTools';checks=$checks.ToArray();signed=$false;publicRelease=$false;loggedAt=(Get-Date).ToUniversalTime().ToString('o')}
++ $result|ConvertTo-Json -Depth 8|Set-Content -LiteralPath (Join-Path $testHome 'result.json') -Encoding UTF8
++ Copy-Item -LiteralPath (Join-Path $testHome 'result.json') -Destination (Join-Path $root 'evidence\public-beta\normal-installer.json')
++ foreach($log in Get-ChildItem -LiteralPath $testHome -Filter '*.log'){Copy-Item -LiteralPath $log.FullName -Destination (Join-Path $root ('evidence\public-beta\normal-'+$log.Name))}
++ $result|ConvertTo-Json -Depth 8
++}catch{
++ [ordered]@{status='FAIL';scope='existing-machine QA ONLY';installerSha256=$candidate.sha256;error=$_.Exception.Message;checks=$checks.ToArray();target=$target;logs=$testHome}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath (Join-Path $testHome 'failure.json') -Encoding UTF8
++ # Leave diagnostic state on failure. Never blindly uninstall a path after a
++ # failure or delete user data to make a test pass.
++ throw
++}
+diff --git a/desktop/media-tools/scripts/verify-payload.cjs b/desktop/media-tools/scripts/verify-payload.cjs
+new file mode 100644
+index 0000000..6fa2a12
+--- /dev/null
++++ b/desktop/media-tools/scripts/verify-payload.cjs
+@@ -0,0 +1,41 @@
++'use strict';
++const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
++const {verifyBrand,windowsVersion}=require('./windows-brand.cjs');
++const sha256=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
++function inventory(dir){
++ const rows=[];function visit(at){for(const e of fs.readdirSync(at,{withFileTypes:true})){const file=path.join(at,e.name),s=fs.lstatSync(file);if(s.isSymbolicLink()||(!s.isDirectory()&&!s.isFile()))throw Error('Indirect or unsupported payload file: '+file);if(s.isDirectory())visit(file);else rows.push({file:path.relative(dir,file).replaceAll('\\','/'),bytes:s.size,sha256:sha256(file)});}}visit(dir);return rows.sort((a,b)=>a.file.localeCompare(b.file,'en'));
++}
++function sameTree(source,packed,label){
++ const live=inventory(source),built=inventory(packed);assert.deepEqual(built,live,'Portable is not synced to checked-out source: '+label+' (missing, extra, or checksum mismatch)');return live;
++}
++function packagedJson(pkg){const copy={...pkg};delete copy.scripts;delete copy.devDependencies;return copy;}
++function verifyVendor(root,dir){
++ const lock=JSON.parse(fs.readFileSync(path.join(root,'dependencies.lock.json'),'utf8'));
++ for(const vendor of [path.join(root,'vendor'),path.join(dir,'resources/vendor')]){
++  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(vendor,'manifest.json'),'utf8')),lock,'Vendor manifest differs from trusted dependency lock');
++  for(const tool of Object.values(lock.tools)){assert.equal(path.basename(tool.file),tool.file);assert.equal(sha256(path.join(vendor,tool.file)),tool.sha256,'Vendor checksum mismatch: '+tool.file);}
++ }
++ sameTree(path.join(root,'vendor'),path.join(dir,'resources/vendor'),'vendor including notices');return lock;
++}
++function verifyPayload(root,dir,{brandVerifier=verifyBrand}={}){
++ const release=path.resolve(root,'release');dir=path.resolve(dir);if(!dir.startsWith(release+path.sep)||fs.lstatSync(dir).isSymbolicLink())throw Error('Invalid portable directory');
++ const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')),app=path.join(dir,'resources/app');
++ assert.deepEqual(JSON.parse(fs.readFileSync(path.join(app,'package.json'),'utf8')),packagedJson(pkg),'Portable package metadata/version differs from source');
++ for(const name of ['src','ui'])sameTree(path.join(root,name),path.join(app,name),name);
++ const expectedApp=['package.json',...['src','ui'].flatMap(name=>inventory(path.join(root,name)).map(r=>name+'/'+r.file))].sort();
++ assert.deepEqual(inventory(app).map(r=>r.file).sort(),expectedApp,'Unexpected app payload');
++ const deps=verifyVendor(root,dir);
++ sameTree(path.join(root,'native'),path.join(dir,'notices/ProcessHost-source'),'helper source');
++ for(const file of ['dependencies.lock.json','app-icon.ico'])assert.equal(sha256(path.join(dir,file)),sha256(path.join(root,file==='app-icon.ico'?'installer/assets/media-tools.ico':file)),file+' mismatch');
++ assert.equal(sha256(path.join(app,'ui/assets/media-tools.ico')),sha256(path.join(root,'installer/assets/media-tools.ico')),'Window icon differs from EXE/installer');
++ const runtime=inventory(path.join(root,'node_modules/electron/dist')).filter(r=>!['electron.exe','resources/default_app.asar'].includes(r.file));
++ for(const e of runtime)assert.equal(sha256(path.join(dir,e.file)),e.sha256,'Electron runtime mismatch: '+e.file);
++ const info=JSON.parse(fs.readFileSync(path.join(dir,'build-info.json'),'utf8'));assert.equal(info.version,pkg.version);assert.equal(info.windowsVersion,windowsVersion(pkg.version));assert.match(info.commit,/^[a-f0-9]{40}$/);assert.deepEqual(info.dependencies,deps);assert.equal(info.publicRelease,false);
++ for(const name of ['USER-GUIDE.md','RELEASE-NOTES.md','THIRD-PARTY-NOTICES.md','RECOVERY.md'])assert.equal(sha256(path.join(dir,name)),sha256(path.join(root,'release-docs',name)),name+' mismatch');
++ const hashes=inventory(dir).filter(r=>r.file!=='SHA256SUMS.json');assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir,'SHA256SUMS.json'),'utf8')),hashes,'Portable inventory checksum mismatch');
++ const expected=new Set(['build-info.json','SHA256SUMS.json','app-icon.ico','dependencies.lock.json','USER-GUIDE.md','RELEASE-NOTES.md','THIRD-PARTY-NOTICES.md','RECOVERY.md','Audio Tech Labs Media Tools.exe',...runtime.map(r=>r.file),...inventory(app).map(r=>'resources/app/'+r.file),...inventory(path.join(root,'vendor')).map(r=>'resources/vendor/'+r.file),...inventory(path.join(root,'native')).map(r=>'notices/ProcessHost-source/'+r.file)]);
++ assert.deepEqual(inventory(dir).map(r=>r.file).sort(),[...expected].sort(),'Unapproved files in distribution (developer evidence, profile, logs or other data)');
++ return {version:pkg.version,commit:info.commit,files:hashes.length,inventorySha256:sha256(path.join(dir,'SHA256SUMS.json')),branding:brandVerifier(path.join(dir,'Audio Tech Labs Media Tools.exe'),path.join(root,'installer/assets/media-tools.ico'),pkg)};
++}
++module.exports={inventory,sha256,packagedJson,verifyPayload,verifyVendor};
++if(require.main===module){try{const root=path.resolve(__dirname,'..'),record=JSON.parse(fs.readFileSync(path.join(root,'release/latest.json'),'utf8'));console.log(JSON.stringify(verifyPayload(root,record.directory),null,2));}catch(e){console.error(e.stack);process.exitCode=1;}}
+diff --git a/desktop/media-tools/scripts/windows-brand.cjs b/desktop/media-tools/scripts/windows-brand.cjs
+new file mode 100644
+index 0000000..ff2aa9d
+--- /dev/null
++++ b/desktop/media-tools/scripts/windows-brand.cjs
+@@ -0,0 +1,29 @@
++'use strict';
++const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),cp=require('node:child_process'),assert=require('node:assert/strict');
++const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
++function windowsVersion(version){
++ const m=/^(\d+)\.(\d+)\.(\d+)(?:-beta\.(\d+))?$/.exec(version);if(!m||m.slice(1).some(n=>Number(n||0)>65535))throw Error('Unsupported Windows app version: '+version);
++ return m.slice(1).map(n=>n||'0').join('.');
++}
++function brand(root,exe,pkg){
++ const tool=JSON.parse(fs.readFileSync(path.join(root,'build-tools.lock.json'),'utf8')).rcedit,file=path.join(root,'cache',tool.file);
++ if(!fs.existsSync(file)||sha(fs.readFileSync(file))!==tool.sha256)throw Error('Pinned rcedit is missing or checksum mismatched: '+tool.url);
++ cp.execFileSync(file,[exe,'--set-version-string','ProductName',pkg.productName,'--set-version-string','FileDescription',pkg.productName,'--set-version-string','CompanyName','Audio Tech Labs','--set-version-string','OriginalFilename',path.basename(exe),'--set-file-version',windowsVersion(pkg.version),'--set-product-version',windowsVersion(pkg.version),'--set-version-string','ProductVersion',pkg.version,'--set-icon',path.join(root,'installer/assets/media-tools.ico')],{windowsHide:true});
++ return verifyBrand(exe,path.join(root,'installer/assets/media-tools.ico'),pkg);
++}
++function versionInfo(exe){
++ return JSON.parse(cp.execFileSync('powershell.exe',['-NoProfile','-NonInteractive','-Command',"$v=(Get-Item -LiteralPath $env:ATL_BRAND_EXE).VersionInfo; [ordered]@{ProductName=$v.ProductName;FileDescription=$v.FileDescription;FileVersion=$v.FileVersion;ProductVersion=$v.ProductVersion;OriginalFilename=$v.OriginalFilename;fixedFileVersion=($v.FileMajorPart.ToString()+'.'+$v.FileMinorPart+'.'+$v.FileBuildPart+'.'+$v.FilePrivatePart)}|ConvertTo-Json -Compress"],{env:{...process.env,ATL_BRAND_EXE:exe},windowsHide:true,encoding:'utf8'}).trim());
++}
++// Read the PE resource table and compare every icon referenced by its first
++// RT_GROUP_ICON against the exact image payloads in our ICO (including PNG sizes).
++function peIconHashes(exe){
++ const b=fs.readFileSync(exe),pe=b.readUInt32LE(0x3c),count=b.readUInt16LE(pe+6),optional=pe+24,size=b.readUInt16LE(pe+20),dirs=optional+(b.readUInt16LE(optional)===0x20b?112:96),rva=b.readUInt32LE(dirs+16),sections=[];
++ for(let i=0;i<count;i++){const o=optional+size+i*40;sections.push({rva:b.readUInt32LE(o+12),size:Math.max(b.readUInt32LE(o+8),b.readUInt32LE(o+16)),raw:b.readUInt32LE(o+20)});}
++ const offset=r=>{const s=sections.find(s=>r>=s.rva&&r<s.rva+s.size);if(!s)throw Error('Invalid PE RVA');return s.raw+r-s.rva;},base=offset(rva),resources=[];
++ function visit(at,keys=[]){const o=base+at,n=b.readUInt16LE(o+12)+b.readUInt16LE(o+14);for(let i=0;i<n;i++){const e=o+16+i*8,id=b.readUInt32LE(e),v=b.readUInt32LE(e+4),k=[...keys,id];if(v&0x80000000)visit(v&0x7fffffff,k);else{const d=base+v;resources.push({keys:k,data:b.subarray(offset(b.readUInt32LE(d)),offset(b.readUInt32LE(d))+b.readUInt32LE(d+4))});}}}
++ visit(0);const group=resources.find(r=>r.keys[0]===14);if(!group)throw Error('EXE has no icon group');const hashes=[];
++ for(let i=0;i<group.data.readUInt16LE(4);i++){const id=group.data.readUInt16LE(6+i*14+12),icon=resources.find(r=>r.keys[0]===3&&r.keys[1]===id);if(!icon)throw Error('Missing EXE icon');hashes.push(sha(icon.data));}return hashes.sort();
++}
++function icoHashes(file){const b=fs.readFileSync(file),hashes=[];for(let i=0;i<b.readUInt16LE(4);i++){const o=6+i*16,len=b.readUInt32LE(o+8),at=b.readUInt32LE(o+12);hashes.push(sha(b.subarray(at,at+len)));}return hashes.sort();}
++function verifyBrand(exe,icon,pkg){const info=versionInfo(exe);assert.equal(info.ProductName,pkg.productName);assert.equal(info.FileDescription,pkg.productName);assert.equal(info.FileVersion,windowsVersion(pkg.version));assert.equal(info.fixedFileVersion,windowsVersion(pkg.version));assert.equal(info.ProductVersion,pkg.version);assert.equal(info.OriginalFilename,path.basename(exe));const iconImages=peIconHashes(exe);assert.deepEqual(iconImages,icoHashes(icon));return {versionInfo:info,iconSha256:sha(fs.readFileSync(icon)),iconImages};}
++module.exports={brand,verifyBrand,windowsVersion,peIconHashes,icoHashes};
+diff --git a/desktop/media-tools/src/engine.cjs b/desktop/media-tools/src/engine.cjs
+index 6c8a0fd..0598569 100644
+--- a/desktop/media-tools/src/engine.cjs
++++ b/desktop/media-tools/src/engine.cjs
+@@ -8,7 +8,11 @@ const ACTIVE=['starting','running','cancelling','cleanup-required'];
+ class Engine extends EventEmitter {
+  constructor({deps,dataDir,audit,io={}}){super();this.deps=deps;this.dataDir=dataDir;this.runner=new Runner(deps,audit);this.io={...files,...io};this.sources=new Map();this.folders=new Map();this.requests=new Map();this.inspections=new Map();this.job=null;this.control=null;this.persistChain=Promise.resolve();this.staging=null;this.stagingIdentity=null;this.work=null;this.setupBusy=false;}
+  async init(){await fs.mkdir(this.dataDir,{recursive:true});try{const saved=JSON.parse(await fs.readFile(path.join(this.dataDir,'current-job.json'),'utf8'));if(saved.job){this.job=saved.job;this.staging=saved.staging;
+-   if(ACTIVE.includes(this.job.status)){let remains=false;try{await fs.lstat(this.staging);remains=true;}catch{}this.job.status=remains?'cleanup-required':'interrupted';this.job.sequence++;this.job.error={code:remains?'CLEANUP_REQUIRED':'INTERRUPTED',message:remains?'งานก่อนหน้าถูกขัดจังหวะ กรุณาตรวจและนำ staging ที่เหลือออกด้วยตนเอง แล้วเปิดแอปใหม่: '+this.staging:'งานก่อนหน้าถูกขัดจังหวะ ไม่มีการเริ่มใหม่อัตโนมัติ',retryable:!remains};}}
++   if(this.job.recovery?.kind==='folder-selection'){
++    // No staging directory exists during folder selection. Its absence proves nothing
++    // about a failed guard release; only an operator can verify this recovery record.
++    this.job.status='cleanup-required';this.job.sequence++;
++   }else if(ACTIVE.includes(this.job.status)){let remains=false;try{await fs.lstat(this.staging);remains=true;}catch{}this.job.status=remains?'cleanup-required':'interrupted';this.job.sequence++;this.job.error={code:remains?'CLEANUP_REQUIRED':'INTERRUPTED',message:remains?'งานก่อนหน้าถูกขัดจังหวะ กรุณาตรวจและนำ staging ที่เหลือออกด้วยตนเอง แล้วเปิดแอปใหม่: '+this.staging:'งานก่อนหน้าถูกขัดจังหวะ ไม่มีการเริ่มใหม่อัตโนมัติ',retryable:!remains};}}
+   }catch{}return this;}
+  busy(){return !!this.job&&ACTIVE.includes(this.job.status);}
+  assertIdle(){if(this.busy()||this.setupBusy)fail('BUSY','มีงานปัจจุบันอยู่แล้ว กรุณารอให้เสร็จหรือหยุดครบก่อน');}
+@@ -27,7 +31,26 @@ class Engine extends EventEmitter {
+   }catch(e){if(e.code==='CLEANUP_REQUIRED')this.inspectionCleanup(e,'convert','การตรวจไฟล์');throw e;}
+   finally{try{if(guard)await guard.release();}catch(e){this.inspectionCleanup(e,'convert','การตรวจไฟล์');throw e;}finally{this.setupBusy=false;}}
+  }
+- async registerFolder(dir){this.assertIdle();this.setupBusy=true;let guard;try{const selected=await this.io.safePath(dir,'directory');guard=await this.runner.guard([dir]);const pinned=await this.io.safePath(dir,'directory');if(!this.io.same(selected.identity,pinned.identity,true))fail('ACCESS_DENIED','โฟลเดอร์เปลี่ยนระหว่างเลือก');await this.io.writable(dir);const dto={folderId:id(),displayPath:dir,writable:true,freeBytes:await this.io.freeBytes(dir)};this.folders.set(dto.folderId,{dto,identity:pinned.identity});return dto;}finally{if(guard)await guard.release();this.setupBusy=false;}}
++ async registerFolder(dir){
++  this.assertIdle();this.setupBusy=true;let guard,pinned,dto;
++  try{
++   const selected=await this.io.safePath(dir,'directory');guard=await this.runner.guard([dir]);
++   pinned=await this.io.safePath(dir,'directory');if(!this.io.same(selected.identity,pinned.identity,true))fail('ACCESS_DENIED','โฟลเดอร์เปลี่ยนระหว่างเลือก');
++   await this.io.writable(dir);dto={folderId:id(),displayPath:dir,writable:true,freeBytes:await this.io.freeBytes(dir)};
++  }finally{
++   try{if(guard)await guard.release();}
++   catch(e){
++    const recovery=new MediaError('CLEANUP_REQUIRED','การเลือกโฟลเดอร์ต้องกู้คืน: ยืนยันการปลด file guard ไม่ได้ หยุดรับงานใหม่ กรุณาปิดแอป ตรวจว่า ProcessHost และ process ของงานหยุดครบ ตรวจไฟล์ .atl-write-check-* ในโฟลเดอร์ที่เลือก และทำตามคู่มือกู้คืนก่อนล้างสถานะ: '+dir);
++    this.inspectionCleanup(recovery,'convert','การเลือกโฟลเดอร์',{kind:'folder-selection',folderPath:dir,manualVerificationRequired:true,releaseError:String(e.message)});
++    try{await this.persist();}catch{
++     this.job.error.message+=' (บันทึก recovery ไม่สำเร็จ ต้องตรวจด้วยตนเองก่อนเปิดแอปใหม่)';this.emit('job',this.snapshot());
++    }
++    throw new MediaError('CLEANUP_REQUIRED',this.job.error.message);
++   }finally{this.setupBusy=false;}
++  }
++  // A destination token is usable only after the guard has closed successfully.
++  this.folders.set(dto.folderId,{dto,identity:pinned.identity});return dto;
++ }
+  async inspect(request){
+   shape(request,['requestId','url']);if(!opaque(request.requestId))fail('INVALID_REQUEST','รหัสคำขอไม่ถูกต้อง');this.assertIdle();const url=canonicalUrl(request.url);
+   for(const [key] of this.inspections)await this.cancelInspection({requestId:key});
+@@ -36,7 +59,12 @@ class Engine extends EventEmitter {
+   entry.done=(async()=>{const node=await this.deps.verify('jsRuntime');const {stdout}=await this.runner.run('ytDlp',[...media.ytArgs(node),'--format','bestaudio','--dump-single-json','--skip-download','--',url],{control,timeout:120000});control.check();let info;try{info=JSON.parse(stdout);}catch{fail('PROBE_FAILED','ข้อมูลต้นทางไม่ถูกต้อง');}media.validateVideo(info,url);const dto={sourceId:id(),mode:'download',displayName:info.title||info.id,metadata:media.videoMetadata(info),validUntil:new Date(Date.now()+5*60e3).toISOString()};entry.sourceId=dto.sourceId;this.sources.set(dto.sourceId,{dto,url});return dto;})();
+   try{return await entry.done;}catch(e){if(e.code==='CLEANUP_REQUIRED')this.inspectionCleanup(e);throw e;}finally{entry.finished=true;}
+  }
+- inspectionCleanup(e,mode='download',sourceName='การตรวจลิงก์'){this.job={jobId:id(),sequence:1,mode,status:'cleanup-required',sourceName,destinationDisplayPath:'',encoding:mode==='download'?{format:'original'}:{format:'mp3',bitrateKbps:192},output:null,error:errorDto(e),progress:{stage:'stopping',stagePercent:null,bytesDownloaded:null,totalBytes:null,processedSeconds:null,durationSeconds:null}};this.emit('job',this.snapshot());this.persist().catch(()=>{});}
++ inspectionCleanup(e,mode='download',sourceName='การตรวจลิงก์',recovery){
++  // An inspection can already be running when folder selection begins. Its
++  // later cleanup error must not replace a durable folder recovery marker.
++  if(this.job?.recovery?.kind==='folder-selection'&&!recovery){this.update({error:{...this.job.error,message:this.job.error.message+'; '+errorDto(e).message}});return;}
++  this.job={jobId:id(),sequence:1,mode,status:'cleanup-required',sourceName,destinationDisplayPath:'',encoding:mode==='download'?{format:'original'}:{format:'mp3',bitrateKbps:192},output:null,error:errorDto(e),progress:{stage:'stopping',stagePercent:null,bytesDownloaded:null,totalBytes:null,processedSeconds:null,durationSeconds:null},...(recovery?{recovery}:{})};this.emit('job',this.snapshot());this.persist().catch(()=>{});
++ }
+  async cancelInspection(request){shape(request,['requestId']);if(!opaque(request.requestId))fail('INVALID_REQUEST','รหัสคำขอไม่ถูกต้อง');const entry=this.inspections.get(request.requestId);if(!entry)return {stopped:true};entry.control.cancel();if(entry.sourceId)this.sources.delete(entry.sourceId);try{await entry.done;}catch(e){if(e.code==='CLEANUP_REQUIRED'){this.inspectionCleanup(e);throw e;}}this.inspections.delete(request.requestId);return {stopped:true};}
+  async start(mode,request){
+   startRequest(request,mode);const previous=this.requests.get(request.requestId);if(previous){if(previous.signature!==JSON.stringify({mode,...request}))fail('INVALID_REQUEST','requestId นี้ถูกใช้กับข้อมูลอื่นแล้ว');return structuredClone(previous.snapshot);}
+diff --git a/desktop/media-tools/src/main.cjs b/desktop/media-tools/src/main.cjs
+index 1781fce..3b11ad5 100644
+--- a/desktop/media-tools/src/main.cjs
++++ b/desktop/media-tools/src/main.cjs
+@@ -6,6 +6,7 @@ const {PlayerLibrary}=require('./player-library.cjs');
+ const {Playback,validateCommand}=require('./playback.cjs');
+ protocol.registerSchemesAsPrivileged([{scheme:'atl-media',privileges:{standard:true,secure:true,supportFetchAPI:true,stream:true}}]);
+ app.setName('Audio Tech Labs Media Tools');
++if(process.platform==='win32')app.setAppUserModelId('AudioTechLabs.MediaTools');
+ // One main process/one global job, including attempts to launch another app window.
+ if(!app.requestSingleInstanceLock()){app.quit();}else{
+  let win,engine,player,playback,closing=false,picker=false,playerImporting=false,shutdownPromise;const ui=path.join(__dirname,'../ui');
+@@ -28,7 +29,7 @@ if(!app.requestSingleInstanceLock()){app.quit();}else{
+   });
+   session.defaultSession.setPermissionRequestHandler((_wc,_permission,callback)=>callback(false));session.defaultSession.setPermissionCheckHandler(()=>false);
+   session.defaultSession.webRequest.onBeforeRequest((details,callback)=>callback({cancel:!details.url.startsWith('atl-media://app/')}));
+-  win=new BrowserWindow({width:1280,height:940,minWidth:360,minHeight:600,backgroundColor:'#141719',title:'Audio Tech Labs · Media Tools',autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,sandbox:true,nodeIntegration:false,webSecurity:true,devTools:!app.isPackaged}});
++  win=new BrowserWindow({width:1280,height:940,minWidth:360,minHeight:600,backgroundColor:'#141719',title:'Audio Tech Labs · Media Tools',icon:path.join(ui,'assets/media-tools.ico'),autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,sandbox:true,nodeIntegration:false,webSecurity:true,devTools:!app.isPackaged}});
+   win.removeMenu();win.webContents.setWindowOpenHandler(()=>({action:'deny'}));win.webContents.on('will-navigate',(event,url)=>{if(!approvedDocument(url))event.preventDefault();});win.webContents.on('will-attach-webview',event=>event.preventDefault());
+   win.on('closed',()=>{shutdown().finally(()=>app.quit());});
+   playback=new Playback({BrowserWindow,ipcMain,onState:state=>{if(!win.isDestroyed()&&approvedDocument(win.webContents.getURL())&&new URL(win.webContents.getURL()).pathname==='/player.html')win.webContents.send('atl:player-state',state);}});
+diff --git a/desktop/media-tools/test/folder-recovery-electron.cjs b/desktop/media-tools/test/folder-recovery-electron.cjs
+new file mode 100644
+index 0000000..6c2fdb3
+--- /dev/null
++++ b/desktop/media-tools/test/folder-recovery-electron.cjs
+@@ -0,0 +1,28 @@
++'use strict';
++// Fault injection AFTER a real Windows guard has closed. This is a folder
++// recovery regression only, never evidence of live YouTube acceptance.
++const {app,BrowserWindow,dialog}=require('electron'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path');
++const {Engine}=require('../src/engine.cjs'),{MediaError}=require('../src/common.cjs');
++const run=path.resolve('test-output/folder-recovery-ui-'+Date.now()),out=path.resolve('evidence/public-beta');let engine;
++const init=Engine.prototype.init;
++Engine.prototype.init=async function(){await init.call(this);engine=this;const guard=this.runner.guard.bind(this.runner);this.runner.guard=async(paths)=>{const real=await guard(paths);return {...real,release:async()=>{await real.release();throw new MediaError('CLEANUP_REQUIRED','injected missing release acknowledgement after real guard close');}};};return this;};
++const sleep=ms=>new Promise(r=>setTimeout(r,ms));
++async function until(fn){for(let i=0;i<160;i++){if(await fn())return;await sleep(75);}throw Error('Recovery UI timeout');}
++(async()=>{
++ require('node:fs').mkdirSync(run,{recursive:true});require('node:fs').mkdirSync(out,{recursive:true});app.setPath('userData',path.join(run,'profile'));dialog.showOpenDialog=async()=>({canceled:false,filePaths:[run]});
++ require('../src/main.cjs');await app.whenReady();let win;
++ await until(()=>{win=BrowserWindow.getAllWindows().find(w=>/atl-media:\/\/app\/download.html/.test(w.webContents.getURL()));return !!win;});
++ const js=code=>win.webContents.executeJavaScript(code);await until(()=>js("!!document.querySelector('#pick-folder')"));
++ await js("document.querySelector('#pick-folder').click()");await until(()=>engine?.job?.status==='cleanup-required');await engine.persistChain;
++ const rows=[];for(const [size,width,height] of [['minimum',360,600],['normal',1280,940]])for(const mode of ['download','convert']){
++  win.setSize(width,height);await win.loadURL('atl-media://app/'+mode+'.html');await until(()=>js("document.querySelector('#job-badge')?.textContent==='ต้องตรวจ cleanup'"));
++  await js("document.fonts.ready.then(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))))");await sleep(200);
++  const dto=await js("({badge:document.querySelector('#job-badge').textContent,message:document.querySelector('#job-description').textContent,startDisabled:document.querySelector('#start').disabled,resetHidden:document.querySelector('#new-job').hidden,overflow:document.documentElement.scrollWidth>innerWidth})");
++  assert.match(dto.message,/การเลือกโฟลเดอร์ต้องกู้คืน/);assert.equal(dto.startDisabled,true);assert.equal(dto.resetHidden,true);assert.equal(dto.overflow,false);
++  assert.equal((await js('window.localMedia.chooseOutputDirectory()')).error.code,'BUSY');assert.equal((await js('window.localMedia.resetFinishedJob()')).error.code,'BUSY');
++  console.log('PASS recovery '+mode+' '+size);await fs.writeFile(path.join(out,'recovery-'+mode+'-'+size+'.png'),(await win.webContents.capturePage()).toPNG());rows.push({mode,size,...dto});
++ }
++ assert.equal(engine.setupBusy,false);assert.equal(engine.folders.size,0);const saved=JSON.parse(await fs.readFile(path.join(run,'profile/local-media/current-job.json'),'utf8'));assert.equal(saved.job.recovery.kind,'folder-selection');
++ await fs.writeFile(path.join(out,'folder-recovery-ui.json'),JSON.stringify({status:'PASS',scope:'folder recovery fault injection after actual Windows guard release; native picker substituted; no live Download',rows,setupBusy:engine.setupBusy,folderTokens:engine.folders.size,persistedRecovery:saved.job.recovery},null,2));
++ console.log('FOLDER RECOVERY NATIVE UI PASS');await win.close();
++})().catch(e=>{console.error(e);app.exit(1);});
+diff --git a/desktop/media-tools/test/folder-recovery.test.cjs b/desktop/media-tools/test/folder-recovery.test.cjs
+new file mode 100644
+index 0000000..194e543
+--- /dev/null
++++ b/desktop/media-tools/test/folder-recovery.test.cjs
+@@ -0,0 +1,36 @@
++'use strict';
++const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
++const {Engine}=require('../src/engine.cjs'),{id,MediaError}=require('../src/common.cjs');
++async function fixture(t,release,writable=async()=>{}){
++ const dataDir=await fs.mkdtemp(path.join(os.tmpdir(),'atl-folder-recovery-'));t.after(()=>fs.rm(dataDir,{recursive:true,force:true}));
++ const engine=await new Engine({deps:{},dataDir,io:{safePath:async()=>({identity:{dev:1,ino:2}}),same:()=>true,writable,freeBytes:async()=>1e9}}).init();
++ engine.runner.guard=async()=>({release});return {engine,dataDir};
++}
++test('failed guard release shows durable recovery, clears setupBusy, withholds destination token and blocks all new work',async t=>{
++ const {engine,dataDir}=await fixture(t,async()=>{throw Error('release failed');});const events=[];engine.on('job',j=>events.push(j));
++ await assert.rejects(engine.registerFolder('C:\\Destination'),{code:'CLEANUP_REQUIRED'});
++ assert.equal(engine.setupBusy,false);assert.equal(engine.folders.size,0);assert.equal(engine.job.status,'cleanup-required');
++ assert.match(events[0].error.message,/การเลือกโฟลเดอร์ต้องกู้คืน/);assert.equal(engine.job.recovery.manualVerificationRequired,true);
++ await assert.rejects(engine.registerFolder('C:\\Other'),{code:'BUSY'});await assert.rejects(engine.registerFile('C:\\input.wav'),{code:'BUSY'});
++ await assert.rejects(engine.inspect({requestId:id(),url:'https://www.youtube.com/watch?v=abcdefghijk'}),{code:'BUSY'});
++ for(const mode of ['download','convert'])await assert.rejects(engine.start(mode,{requestId:id(),sourceId:id(),folderId:id(),encoding:{format:'mp3',bitrateKbps:192}}),{code:'BUSY'});
++ await assert.rejects(engine.resetFinishedJob(),{code:'BUSY'});
++ const reopened=await new Engine({deps:{},dataDir}).init();assert.equal(reopened.job.status,'cleanup-required');assert.throws(()=>reopened.assertIdle(),{code:'BUSY'});
++});
++test('release failure after writable failure keeps explicit recovery rather than the earlier error',async t=>{
++ const {engine}=await fixture(t,async()=>{throw Error('release');},async()=>{throw Error('write check failed');});
++ await assert.rejects(engine.registerFolder('C:\\Destination'),{code:'CLEANUP_REQUIRED'});assert.equal(engine.setupBusy,false);assert.equal(engine.folders.size,0);
++});
++test('normal selection publishes token only after release, ordinary failure remains retryable',async t=>{
++ let released=false;const {engine}=await fixture(t,async()=>{assert.equal(engine.folders.size,0);released=true;});
++ const dto=await engine.registerFolder('C:\\Destination');assert.equal(released,true);assert.ok(engine.folders.has(dto.folderId));assert.equal(engine.setupBusy,false);
++ const f=await fixture(t,async()=>{},async()=>{throw Error('write denied');});await assert.rejects(f.engine.registerFolder('C:\\Denied'),/write denied/);
++ assert.equal(f.engine.setupBusy,false);assert.equal(f.engine.busy(),false);assert.equal(f.engine.folders.size,0);
++});
++test('a previous inspection cleanup cannot replace folder recovery or unlock it on restart',async t=>{
++ const {engine,dataDir}=await fixture(t,async()=>{throw Error('release failed');});
++ await assert.rejects(engine.registerFolder('C:\\Destination'),{code:'CLEANUP_REQUIRED'});const jobId=engine.job.jobId;
++ engine.inspectionCleanup(new MediaError('CLEANUP_REQUIRED','inspection cleanup failed'));
++ await engine.persistChain;assert.equal(engine.job.jobId,jobId);assert.equal(engine.job.recovery.kind,'folder-selection');assert.match(engine.job.error.message,/inspection cleanup failed/);
++ const reopened=await new Engine({deps:{},dataDir}).init();assert.equal(reopened.job.status,'cleanup-required');assert.throws(()=>reopened.assertIdle(),{code:'BUSY'});
++});
+diff --git a/desktop/media-tools/test/installer-rejection.cjs b/desktop/media-tools/test/installer-rejection.cjs
+new file mode 100644
+index 0000000..85e0bcc
+--- /dev/null
++++ b/desktop/media-tools/test/installer-rejection.cjs
+@@ -0,0 +1,21 @@
++'use strict';
++// Invoke the real installer entry point with isolated invalid payloads. Source,
++// candidate bytes and receipts are preserved; no Download is performed.
++const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict');
++const root=path.resolve(__dirname,'..'),latest=path.join(root,'release/latest.json'),before=fs.readFileSync(latest),record=JSON.parse(before),out=path.join(root,'release/validation-probe-'+Date.now());
++const exe=path.join(out,'Audio Tech Labs Media Tools.exe'),app=path.join(out,'resources/app'),rows=[];
++fs.mkdirSync(app,{recursive:true});fs.copyFileSync(record.executable,exe);fs.cpSync(path.join(record.directory,'resources/app'),app,{recursive:true});
++const candidateFile=JSON.parse(fs.readFileSync(path.join(root,'release/installers/installer-candidate.json'),'utf8')).file,{sha256}=require('../scripts/verify-payload.cjs'),candidateHash=sha256(candidateFile);
++function reject(name,expected){
++ fs.writeFileSync(latest,JSON.stringify({...record,directory:out,executable:exe}));
++ // The nonexistent compiler is a sentinel: reaching its check would produce
++ // "Missing Inno Setup compiler" rather than the expected payload error.
++ const result=cp.spawnSync(process.execPath,['scripts/build-installer.cjs'],{cwd:root,env:{...process.env,INNO_ISCC:path.join(out,'COMPILER-MUST-NOT-BE-REACHED.exe')},encoding:'utf8',windowsHide:true,timeout:60000});
++ assert.notEqual(result.status,0);assert.match(result.stderr,expected);assert.doesNotMatch(result.stderr,/Missing Inno Setup compiler|ISCC failed/);rows.push({name,exitCode:result.status,rejectedBeforeCompiler:true,error:result.stderr.split('\n')[0]});
++}
++try{
++ const font=path.join(app,'ui/assets/noto-sans-thai-thai.woff2'),bytes=fs.readFileSync(font);fs.unlinkSync(font);reject('missing actual Thai WOFF2',/not synced to checked-out source: ui/);fs.writeFileSync(font,Buffer.concat([bytes,Buffer.from('CORRUPT')]));reject('corrupt actual Thai WOFF2',/not synced to checked-out source: ui/);fs.writeFileSync(font,bytes);
++ fs.cpSync(path.join(record.directory,'resources/vendor'),path.join(out,'resources/vendor'),{recursive:true});fs.appendFileSync(path.join(out,'resources/vendor/ffmpeg.exe'),'CORRUPT');reject('corrupt actual FFmpeg payload',/Vendor checksum mismatch: ffmpeg.exe/);
++}finally{fs.writeFileSync(latest,before);}
++assert.equal(sha256(candidateFile),candidateHash);assert.deepEqual(fs.readFileSync(latest),before);
++fs.writeFileSync(path.join(root,'evidence/public-beta/installer-rejection.json'),JSON.stringify({status:'PASS',installerSha256:candidateHash,portableSha256:record.sha256,candidateUnchanged:true,latestReceiptRestored:true,rows},null,2));console.log('REAL INSTALLER ENTRY POINT REJECTED INVALID PAYLOADS BEFORE COMPILER');
+diff --git a/desktop/media-tools/test/installer-source.test.cjs b/desktop/media-tools/test/installer-source.test.cjs
+index b0bdba8..bd58881 100644
+--- a/desktop/media-tools/test/installer-source.test.cjs
++++ b/desktop/media-tools/test/installer-source.test.cjs
+@@ -21,8 +21,8 @@ test('QA has different AppId, folder, and shortcut names; both have uninstall an
+ });
+ test('installer only includes verified portable, code, bundled dependencies and local icon',()=>{
+  const build=read('scripts/build-installer.cjs');
+- assert.match(build,/Portable is not synced to checked-out source/);
+- for(const name of ['ffmpeg.exe','ffprobe.exe','yt-dlp.exe','ProcessHost.exe','manifest.json'])assert.ok(build.includes(name));
++ assert.ok(build.indexOf('const verified=verifyPayload(root,dir)')<build.indexOf('cp.spawnSync(compiler'),'payload validation precedes the installer compiler');
++ assert.match(read('scripts/verify-payload.cjs'),/Vendor checksum mismatch/);
+  assert.match(build,/publicRelease:false/);
+  assert.match(iss,/Source: "\{#SourceRoot\}\\\*"/);
+  assert.match(read('.gitignore'),/^release\/$/m);
+diff --git a/desktop/media-tools/test/payload-validation.test.cjs b/desktop/media-tools/test/payload-validation.test.cjs
+new file mode 100644
+index 0000000..683da40
+--- /dev/null
++++ b/desktop/media-tools/test/payload-validation.test.cjs
+@@ -0,0 +1,37 @@
++'use strict';
++const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
++const {inventory,sha256,packagedJson,verifyPayload}=require('../scripts/verify-payload.cjs');const {windowsVersion}=require('../scripts/windows-brand.cjs');
++function fixture(t){
++ const root=fs.mkdtempSync(path.join(os.tmpdir(),'atl-payload-')),dir=path.join(root,'release/candidate');t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
++ const put=(p,data)=>{fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,data);},write=(name,data)=>put(path.join(root,name),data);
++ const pkg={name:'atl-media-tools',productName:'Audio Tech Labs Media Tools',version:'0.2.2-beta.1',main:'src/main.cjs',scripts:{test:'node --test'},devDependencies:{electron:'44.7.0'}};write('package.json',JSON.stringify(pkg));
++ for(const name of ['src/main.cjs','src/runner.cjs','ui/controller.js','ui/player.css','ui/theme.css','ui/assets/thai.woff2','ui/assets/english.ttf','ui/assets/OFL.txt','ui/assets/media-tools.ico','native/ProcessHost.cs','installer/assets/media-tools.ico'])write(name,name.endsWith('media-tools.ico')?'ICON':name);
++ for(const doc of ['USER-GUIDE.md','RELEASE-NOTES.md','THIRD-PARTY-NOTICES.md','RECOVERY.md'])write('release-docs/'+doc,doc);
++ write('node_modules/electron/dist/LICENSE','Electron license');write('node_modules/electron/dist/chrome_100_percent.pak','RUNTIME');
++ const tools={};for(const file of ['ffmpeg.exe','ffprobe.exe','yt-dlp.exe','node.exe','ProcessHost.exe']){write('vendor/'+file,'binary '+file);tools[file]={file,sha256:sha256(path.join(root,'vendor',file))};}
++ const lock={schema:1,tools};write('dependencies.lock.json',JSON.stringify(lock));write('vendor/manifest.json',JSON.stringify(lock));write('vendor/notices/license.txt','NOTICE');
++ fs.mkdirSync(dir,{recursive:true});for(const name of ['src','ui'])fs.cpSync(path.join(root,name),path.join(dir,'resources/app',name),{recursive:true});
++ put(path.join(dir,'resources/app/package.json'),JSON.stringify(packagedJson(pkg)));fs.cpSync(path.join(root,'vendor'),path.join(dir,'resources/vendor'),{recursive:true});fs.cpSync(path.join(root,'native'),path.join(dir,'notices/ProcessHost-source'),{recursive:true});
++ fs.cpSync(path.join(root,'node_modules/electron/dist'),dir,{recursive:true});for(const name of ['dependencies.lock.json','app-icon.ico'])fs.copyFileSync(path.join(root,name==='app-icon.ico'?'installer/assets/media-tools.ico':name),path.join(dir,name));
++ for(const doc of ['USER-GUIDE.md','RELEASE-NOTES.md','THIRD-PARTY-NOTICES.md','RECOVERY.md'])fs.copyFileSync(path.join(root,'release-docs',doc),path.join(dir,doc));
++ put(path.join(dir,'Audio Tech Labs Media Tools.exe'),'BRANDED EXE');put(path.join(dir,'build-info.json'),JSON.stringify({version:pkg.version,windowsVersion:windowsVersion(pkg.version),commit:'a'.repeat(40),dependencies:lock,publicRelease:false}));
++ const sums=()=>put(path.join(dir,'SHA256SUMS.json'),JSON.stringify(inventory(dir).filter(r=>r.file!=='SHA256SUMS.json')));sums();return {root,dir,put,sums,verify:()=>verifyPayload(root,dir,{brandVerifier:()=>({fixture:true})})};
++}
++test('complete payload passes; every source/UI/font file missing or stale is rejected even with refreshed inventory',t=>{
++ const f=fixture(t);assert.ok(f.verify().files>10);
++ for(const prefix of ['src','ui'])for(const row of inventory(path.join(f.root,prefix))){const file=path.join(f.dir,'resources/app',prefix,row.file),before=fs.readFileSync(file);
++  fs.unlinkSync(file);f.sums();assert.throws(f.verify,/not synced/,prefix+'/'+row.file+' missing');f.put(file,Buffer.concat([before,Buffer.from('STALE')]));f.sums();assert.throws(f.verify,/not synced/,prefix+'/'+row.file+' stale');f.put(file,before);f.sums();}
++ assert.ok(f.verify());
++});
++test('old package version, all corrupt vendor executables and forged vendor manifest are rejected',t=>{
++ const f=fixture(t),p=path.join(f.dir,'resources/app/package.json'),original=fs.readFileSync(p);const old=JSON.parse(original);old.version='0.2.1';f.put(p,JSON.stringify(old));f.sums();assert.throws(f.verify,/metadata\/version/);f.put(p,original);
++ for(const file of ['ffmpeg.exe','ffprobe.exe','yt-dlp.exe','node.exe','ProcessHost.exe']){const at=path.join(f.dir,'resources/vendor',file),bytes=fs.readFileSync(at);f.put(at,'CORRUPT');f.sums();assert.throws(f.verify,/Vendor checksum mismatch/);f.put(at,bytes);}
++ const at=path.join(f.dir,'resources/vendor/manifest.json'),bytes=fs.readFileSync(at),lock=JSON.parse(bytes);lock.tools['ffmpeg.exe'].sha256='0'.repeat(64);f.put(at,JSON.stringify(lock));f.sums();assert.throws(f.verify,/trusted dependency lock/);f.put(at,bytes);f.sums();assert.ok(f.verify());
++});
++test('unapproved internal data, runtime tampering and inventory tampering are rejected',t=>{
++ const f=fixture(t),extra=path.join(f.dir,'evidence/internal-log.txt');f.put(extra,'private evidence');f.sums();assert.throws(f.verify,/Unapproved files/);fs.rmSync(path.dirname(extra),{recursive:true});f.sums();
++ f.put(path.join(f.dir,'chrome_100_percent.pak'),'CORRUPT');f.sums();assert.throws(f.verify,/Electron runtime mismatch/);
++});
++test('Windows numeric version is derived from the app, including beta iteration, and malformed versions fail closed',()=>{
++ assert.equal(windowsVersion('0.2.2-beta.1'),'0.2.2.1');assert.equal(windowsVersion('0.2.1'),'0.2.1.0');for(const v of ['44.7','0.2.2-rc.1','0.2.2-beta.999999'])assert.throws(()=>windowsVersion(v));
++});
+diff --git a/desktop/media-tools/test/portable-smoke.cjs b/desktop/media-tools/test/portable-smoke.cjs
+index 806d6df..9524e56 100644
+--- a/desktop/media-tools/test/portable-smoke.cjs
++++ b/desktop/media-tools/test/portable-smoke.cjs
+@@ -8,7 +8,7 @@ const {wave}=require('./fixtures.cjs');
+  const input=path.join(root,'เสียงทดสอบ portable.wav');await wave(input,3);
+  const before=crypto.createHash('sha256').update(await fs.readFile(input)).digest('hex');
+  const restrictedPath=path.join(process.env.SystemRoot,'System32');
+- const app=await electron.launch({executablePath:release.executable,args:['--user-data-dir='+path.join(root,'profile')],env:{...process.env,PATH:restrictedPath,Path:restrictedPath,NODE_PATH:'',NODE_OPTIONS:'',ELECTRON_RUN_AS_NODE:undefined}});
++ const app=await electron.launch({executablePath:process.env.ATL_PLAYER_EXE||release.executable,args:['--user-data-dir='+path.join(root,'profile')],env:{...process.env,PATH:restrictedPath,Path:restrictedPath,NODE_PATH:'',NODE_OPTIONS:'',ELECTRON_RUN_AS_NODE:undefined}});
+  try{
+   // Wait for the initial document before navigating; the hidden host can open first.
+   const initial=await mainWindow(app);await initial.waitForSelector('#page-title');await initial.waitForLoadState('load');
+diff --git a/desktop/media-tools/test/theme-acceptance.cjs b/desktop/media-tools/test/theme-acceptance.cjs
+index 70e1922..deaa282 100644
+--- a/desktop/media-tools/test/theme-acceptance.cjs
++++ b/desktop/media-tools/test/theme-acceptance.cjs
+@@ -5,9 +5,9 @@ const {mainWindow,waitFor}=require('./electron-ui.cjs'),{wave}=require('./fixtur
+ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+ (async()=>{
+  const packaged=!!process.env.ATL_THEME_EXE,kind=process.env.ATL_THEME_KIND||(packaged?'portable':'development');
+- const out=path.resolve('evidence/home-theme'),run=path.resolve('test-output/home-theme-'+kind+'-'+Date.now());await fs.mkdir(out,{recursive:true});await fs.mkdir(run,{recursive:true});
++ const referenceRoot=path.resolve('evidence/home-theme'),out=path.resolve(process.env.ATL_THEME_OUTPUT||referenceRoot),run=path.resolve('test-output/home-theme-'+kind+'-'+Date.now());await fs.mkdir(out,{recursive:true});await fs.mkdir(run,{recursive:true});
+  const input=path.join(run,'เพลงภาษาไทย ทดสอบสระและวรรณยุกต์.wav');await wave(input,20);
+- const reference=JSON.parse(await fs.readFile(path.join(out,'reference.json'),'utf8')).publicDesktop;
++ const reference=JSON.parse(await fs.readFile(path.join(referenceRoot,'reference.json'),'utf8')).publicDesktop;
+  const restrictedPath=path.join(process.env.SystemRoot,'System32');
+  const app=await _electron.launch({executablePath:process.env.ATL_THEME_EXE||path.resolve('node_modules/electron/dist/electron.exe'),args:[...packaged?[]:[path.resolve('.')],'--user-data-dir='+path.join(run,'profile')],env:{...process.env,PATH:restrictedPath,Path:restrictedPath,NODE_PATH:'',NODE_OPTIONS:'',ELECTRON_RUN_AS_NODE:undefined}});
+  const rows=[],errors=[],requests=[];let page;
+@@ -17,7 +17,7 @@ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+   const runtime=await app.evaluate(async({app,session})=>{
+    // Dead HTTP(S) proxy plus production CSP/self-only protocol: no internet for UI fonts.
+    await session.defaultSession.setProxy({mode:'fixed_servers',proxyRules:'http=127.0.0.1:9;https=127.0.0.1:9',proxyBypassRules:'<-loopback>'});
+-   return {isPackaged:app.isPackaged,appPath:app.getAppPath(),path:process.env.PATH};
++   return {isPackaged:app.isPackaged,appVersion:app.getVersion(),appPath:app.getAppPath(),path:process.env.PATH,versions:process.versions};
+   });assert.equal(runtime.isPackaged,packaged);assert.equal(runtime.path,restrictedPath);
+   for(const [size,width,height] of [['minimum',360,600],['normal',1280,940]])for(const mode of ['download','convert','player']){
+    const window=await app.evaluate(async({BrowserWindow},{width,height,mode})=>{
+@@ -74,7 +74,7 @@ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+    rows.push({mode,size,window,details,renderedFonts});console.log('PASS '+kind+' '+mode+' '+size+' native '+window.bounds.width+'x'+window.bounds.height+' content '+details.innerWidth+'x'+details.innerHeight);
+   }
+   assert.deepEqual(errors,[]);assert.deepEqual(requests.filter(u=>!u.startsWith('atl-media:')),[]);
+-  const fonts={},manifest=JSON.parse(await fs.readFile(path.join(out,'font-manifest.json'),'utf8'));for(const name of [...manifest.fonts.map(f=>f.file),'DM-Sans-OFL.txt','Noto-Sans-Thai-OFL.txt']){const source=await fs.readFile(path.resolve('ui/assets',name)),payload=await fs.readFile(path.join(runtime.appPath,'ui/assets',name));assert.equal(sha(source),sha(payload));const publicFont=manifest.fonts.find(f=>f.file===name);if(publicFont)assert.equal(sha(source),publicFont.sha256);fonts[name]={sourceSha256:sha(source),payloadSha256:sha(payload)};}
++  const fonts={},manifest=JSON.parse(await fs.readFile(path.join(referenceRoot,'font-manifest.json'),'utf8'));for(const name of [...manifest.fonts.map(f=>f.file),'DM-Sans-OFL.txt','Noto-Sans-Thai-OFL.txt']){const source=await fs.readFile(path.resolve('ui/assets',name)),payload=await fs.readFile(path.join(runtime.appPath,'ui/assets',name));assert.equal(sha(source),sha(payload));const publicFont=manifest.fonts.find(f=>f.file===name);if(publicFont)assert.equal(sha(source),publicFont.sha256);fonts[name]={sourceSha256:sha(source),payloadSha256:sha(payload)};}
+   await fs.writeFile(path.join(out,kind+'.json'),JSON.stringify({passed:true,at:new Date().toISOString(),executable:process.env.ATL_THEME_EXE||path.resolve('node_modules/electron/dist/electron.exe'),runtime,fonts,rows,errors,requests,limits:['Developer Windows, not a clean VM','HTTP(S) dead proxy + production CSP/self-only request policy; OS internet remains enabled','Native media import uses Playwright file input; no native picker claimed','Download live provider not exercised by visual test']},null,2));
+  }catch(e){await fs.writeFile(path.join(out,kind+'-failure.json'),JSON.stringify({passed:false,error:e.stack,rows,errors},null,2));if(page)await page.screenshot({path:path.join(out,kind+'-failure.png'),fullPage:true}).catch(()=>{});throw e;}finally{await app.close();}
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/desktop/media-tools/test/theme-regressions.cjs b/desktop/media-tools/test/theme-regressions.cjs
+index cb591c7..dff2144 100644
+--- a/desktop/media-tools/test/theme-regressions.cjs
++++ b/desktop/media-tools/test/theme-regressions.cjs
+@@ -1,7 +1,7 @@
+ 'use strict';
+ // Run existing acceptance tests unchanged and preserve their previous evidence files.
+ const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict');
+-const root=path.resolve(__dirname,'..'),out=path.join(root,'evidence/home-theme'),packaged=!!process.env.ATL_PLAYER_EXE;
++const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.ATL_REGRESSION_OUTPUT||path.join(root,'evidence/home-theme')),packaged=!!process.env.ATL_PLAYER_EXE;
+ fs.mkdirSync(out,{recursive:true});const record=path.join(out,(packaged?'portable':'development')+'-regressions.json');
+ const results=process.argv.includes('--resume')&&fs.existsSync(record)?JSON.parse(fs.readFileSync(record,'utf8')).results.filter(r=>r.passed):[];
+ const run=(name,exe,args,env={},preserve=[])=>{
+diff --git a/desktop/media-tools/test/windows-icon-probe.ps1 b/desktop/media-tools/test/windows-icon-probe.ps1
+new file mode 100644
+index 0000000..c80f37f
+--- /dev/null
++++ b/desktop/media-tools/test/windows-icon-probe.ps1
+@@ -0,0 +1,43 @@
++param([Parameter(Mandatory=$true)][string]$Handle,[Parameter(Mandatory=$true)][string]$Exe,[Parameter(Mandatory=$true)][string]$Output)
++$ErrorActionPreference='Stop'
++Add-Type -AssemblyName System.Drawing
++# Read-only WM_GETICON / resource inspection. No input, UI Automation, settings
++# changes or synthetic taskbar. The taskbar's actual visual is a separate check.
++Add-Type @'
++using System;
++using System.Runtime.InteropServices;
++public static class ATLIconRead {
++ [DllImport("user32.dll")] public static extern IntPtr SendMessage(IntPtr h, uint m, IntPtr w, IntPtr l);
++}
++'@
++$root=Split-Path -Parent $PSScriptRoot
++$icon=Join-Path $root 'installer\assets\media-tools.ico'
++New-Item -ItemType Directory -Force -Path $Output | Out-Null
++function Pixels([System.Drawing.Bitmap]$b){
++ $bytes=New-Object byte[] ($b.Width*$b.Height*4);$at=0
++ for($y=0;$y -lt $b.Height;$y++){for($x=0;$x -lt $b.Width;$x++){$p=$b.GetPixel($x,$y);$bytes[$at++]=$p.A;$bytes[$at++]=$p.R;$bytes[$at++]=$p.G;$bytes[$at++]=$p.B}}
++ return ([BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($bytes))).Replace('-','').ToLowerInvariant()
++}
++$h=[IntPtr]([Int64]::Parse($Handle));$rows=@()
++$icoBytes=[IO.File]::ReadAllBytes($icon)
++foreach($size in @(16,32)){
++ $type=if($size -eq 32){1}else{0}
++ $native=[ATLIconRead]::SendMessage($h,0x007F,[IntPtr]$type,[IntPtr]::Zero)
++ if($native -eq [IntPtr]::Zero){throw "Window does not expose WM_GETICON $size"}
++ $actualIcon=[Drawing.Icon]::FromHandle($native);$actual=$actualIcon.ToBitmap()
++ # Read the source's exact PNG entry. Keep its stream alive until comparison;
++ # a temporary System.Drawing.Icon can be finalized while PowerShell uses it.
++ $png=$null
++ for($i=0;$i -lt [BitConverter]::ToUInt16($icoBytes,4);$i++){$entry=6+$i*16;if($icoBytes[$entry] -eq $size){$len=[BitConverter]::ToInt32($icoBytes,$entry+8);$at=[BitConverter]::ToInt32($icoBytes,$entry+12);$png=[byte[]]$icoBytes[$at..($at+$len-1)];break}}
++ if(-not $png -or $png[0] -ne 137){throw 'Expected a matching PNG icon entry'}
++ $stream=[IO.MemoryStream]::new($png,$false);$expected=[Drawing.Bitmap]::new($stream)
++ $actual.Save((Join-Path $Output "window-icon-$size.png"),[Drawing.Imaging.ImageFormat]::Png)
++ $expected.Save((Join-Path $Output "expected-icon-$size.png"),[Drawing.Imaging.ImageFormat]::Png)
++ $a=Pixels $actual;$e=Pixels $expected
++ $rows+=[ordered]@{requested=$size;actualWidth=$actual.Width;actualHeight=$actual.Height;actualPixelSha256=$a;expectedPixelSha256=$e;matches=$a -eq $e}
++ if($a -ne $e){throw "Window icon pixels differ at $size"}
++ $actual.Dispose();$actualIcon.Dispose();$expected.Dispose();$stream.Dispose()
++}
++$shellIcon=[Drawing.Icon]::ExtractAssociatedIcon($Exe);$shell=$shellIcon.ToBitmap();$shell.Save((Join-Path $Output 'shell-exe-icon.png'),[Drawing.Imaging.ImageFormat]::Png);$shell.Dispose();$shellIcon.Dispose()
++$exeStream=[IO.File]::OpenRead($Exe);try{$exeHash=([BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($exeStream))).Replace('-','').ToLowerInvariant()}finally{$exeStream.Dispose()}
++[ordered]@{status='PASS';exe=$Exe;exeSha256=$exeHash;windowIcons=$rows;scope='Actual window WM_GETICON pixels and Windows shell EXE icon; taskbar visual separate'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath (Join-Path $Output 'windows-icon.json') -Encoding UTF8
+diff --git a/desktop/media-tools/ui/assets/media-tools.ico b/desktop/media-tools/ui/assets/media-tools.ico
+new file mode 100644
+index 0000000000000000000000000000000000000000..27e5ec19d861076cb2687f5ff7c248db04932c9d
+GIT binary patch
+literal 4503
+zcmds3XHZk!*4_yTEdl|NA_0O3SRyS7i5Lii24AWuMNtR@1Oe$HQX~eIB2}eV3yLoa
+z1XQ~8h=_o`D!m9u5dtE;<~#a+cjn%iZ|=-@f8I0aoITH8Ywfewv!1=?0009BfJOso
+z#DYCA0FDCyu-L!xID|c*M^*K290v!$f(vqhu3!EoC;&#007ROZPz3mQ@<Y=CCk*t>
+zp%GdUpn18Wx9mK}9vWc2=9HtLpbaw#0fe)zu`U42IMjwc6c6~k49@rhAlUHhfxYp}
+zbA%?VPw4BOCYaLDqKPY}d>6>#*d0PXT#dPp)EYa~Ot{Et%LkfQJaeAhlB3*%slhBc
+zg`Ub=*}_h7zi|3v#p{Pu*s-vAr*BT2^~zLgUYHaxKX+%Cn<a2no6~6&%@Z`T&~ijo
+zK%`e~{|<Lm17q7Nyfr2thJBWMf18+Hhs@$&!-pT74+>{Ei58-qbV)Y{O(4!Kxvf~z
+z5nX}d-F^^=qH=1tEi!B4<y!!ndsWsd4ch{O1BL_uu$*w{GEs4KgAxHJj+y8e9Hlb;
+z51z1)8T*?j-@w2H2>ic!f(8HL$(r(;C!P2d*m?Ruz$e&4L5a(?9e(uUs9}zDi8)8B
+z_dBgQA?mFUSud-dGnIau1F=&VFTdmNH1OU#$)O}WUYGXrJ`YQYE4U?URLmu!cj;?V
+zn9CmzuRHR%r==lYNsOV*{BrW;katIc5Jj&j7oT2Vrz^ydj1TMh?4;klU0QuN5jd(f
+z!!*VYQ?>U9Ggi*-Z1FmzN~sswD;J(a0FMH6gG8<6HMXgXcE3^B>p^9vfc<4%qiNJ4
+zi9PA{82HC9_t=_rK7XEt(}?;*U+b~5^`9W#8BOFha`2g}XS`m}efV1SRKw+Ij;2(7
+zn89{scSrya#BP`twsO(XQc0@$>LjyI^aZ(eE}uOnJn>QXx`O-yDV|KCsQBY9Sk6lL
+zF|G((yqb)jfVL5ni%bN>Yq}rk1>CZb6<g)0%iZN;2G@_Zb5OOwfcy;dH$(+S&S(b@
+zT|_!>1ABUc+Hl$%DEu$M0GJs?MD;k`hlKlY%M2YLp!&PaR`AvE|D??D-M`B0qQ_1q
+z8FJ~OZ_SJ2^iMJj^iMYmiSAH~KroJxk1^12-IKgxx*hfPN8NERgqa=tZi+FiU1(0u
+zPEOz2iC4LNjV`puSGM+xbPem4Xr=c$dtULs^L>)NT#<UueL^FHe(7ItM+e+Uzuk1e
+zxA#sDRRljFRaXa>X|v;t&4xm`G1o4gMi#B5965=@Nviea@n>}M8^b%F*c^}6aD|6(
+zg~eQIKx$7}$eTzVy6$@MbM{K-$bAl{^;4d3eq<W3Oczv9NAr=5SgsFt6(wXZD@FU#
+zr}eTE5*@1)_rXoAoM`XNqy~7~!ZBPv-4|yabq1Sliwn;m7PC%~5;}LuD7r`OBvBc!
+z-sd-wz<dzlhokfSwfjrwg-w5>v>rM6H=p+rYqGanHlk~%SlTQx7oM|CrIn<ScQx5=
+zoTd8$Arhv1bop#9kM>srL_NB5yy~=A32XP$XQ1lYP_N+K2jkq42BW<P5k;DI9{X6e
+zmedEjJc)w>kX2J-(0}()PYS#)vFYs>c-oJih~yo9AHEi1wkKI5!6nqb{YAsOZ)(bo
+zG>BA!cJng%qVY+58zWlCa2mdmbo~3HXNz-Q)W+j-{xDn1AGcBJ>Kgn^6g}tJEqA4n
+z2k{X=Wj}ed*s)PxK^SrX?`1b4d57*iEPh~ddFM@i1aQK#WeJgdjW@R!#r)I#UY1|Z
+zU1$RK>{t8zH(dv6=}`avEyr^{c^Cc@Iid`H$uYo|-OtQdaF(pK=O9rh?_ouRcc^iP
+zMM><&;cRZ`Ctz=o&35VEK4!o#jAC{ll@dlhH+PYXxT#_3Z)s_{MYI|aa4ug?Cyuwa
+zY7J%(mqVhSoSA8>u3T=NZB3ocOpOa(pk<fAT-OZNdC1amaFY*+Dgv_<K(_xc0kxzb
+zL*K-?L%C1!*6vsv9?!11`g6cdle7A6B%QN4QtiC8)?4an8@lpwXzHs3tW2F5###2%
+zsV*5Q-P)Kc^~hRZ@C~a$9e|bXinG1yT~s1FUw2p2Q+w;JslY2(DPL`3#Fd3m&ZJV9
+z^ya-QgBwd!Ew6NNE^>MBDxs^ceRX{{l+Y#ErwFXDg5SnpugeCr^X(+ug#-~p{8fvY
+zo`U|<PlucD_sd|Q{YB`l`oGEAXNl-x*IftGeWkCra_dY;6rAK)fguT4SGmr{_w}&M
+zK;;Hqj6Bd<+Hlsvccmt;d>gUi>Ai&oT4Gurm3Wo8cAYJkqD#E+qEmC_)tQU!5mP)p
+zvoHv%HFeH3N;2<tT@ymnGh1+*F{}M5uQgX>pjc67cCR#HzqZMXK^_D({EPLP6b+Y>
+z1g2Z9UT>7w#a4>Z>RuqI&R@>{!(ec3K6J)IN0P<3$X6Ttta?F{WvvQP5{s)I3l*f*
+zL0M~kpiO#4GpQci>6sDR{n%|ix0zHy1eM1j<aPgvAa$`;D9>8YYfJrgCOvn5nTG0z
+z(>Pg%p|ohEFBXU|t+08*r2SAV1|Qr@H?=n;JV1=P?tDrTrN~>0te*R>$*nbp@ownI
+z)f7+@GeXl*E$8NCt+uf=l5B}CxD;rKJJtQm_K!62+U_{0!11}WeP5UG9Q9-&Db#VG
+zjICVg)LvY+ldaNPN!uHZln3JR<zqS~YcI3=@nQNbhTC>}j8pO!ORyK8&-XXn9EwTi
+z(fW#+o4enCq0ivaX2sKJWTzsKvVpQ~{m9;lDli5b3loXrJX%8-reBxGJXUeNr!c$4
+z+Uq>L=>E&3E!L5M)thyLsejKT5PAn@0(=`IU;C$*Hoa}iHN4GYOo`BA9Fw*jKIfcY
+zlPX!@ZTKC0y|vOeB{0GRmr{<Pa-~Y+>(yQ@XpU*eASnk&s*X3RaA#iI8ljk)K6qtE
+zi3RS|$vlq;@zBcZQ%TnfNioPbu`)WQ>-bx|4vns^qC{hG_}#!v(2Pj`%Q)m4t&nx!
+z7-7a`Ub3_7k*mHxhBIB?cCWh0plp32U!X^M$&~Ki5EY`@mFKj&xzy0fgETb536b+q
+zX|`G;;J(QY!%+6p<Fgg==Y4Pl-%+1*bgMkbd=~PagXtuQWvu2MJkI-Am~K*R80x)e
+z(8KpnHz`yb>!+w30ouldH{_OD_fSDerbL~Y@dq!9kId7ZTO%=Xv6R?(C<duQa%SE@
+z_bC8rN864k1*_Te^92=-i}p{a|9ESD^oJbG`pgot`b*i=%V?yt@}0AKi)h~37Ka1X
+zAqmEpXVN(31@_Rc3LK3s^sr!mOV;}~NdMjI)?Q13CrGDJ*TFNF@0j(Jr=1(^36cff
+z4v_PUPd15Y_nq_xg{)<ZF|Su|#%D+nP3=j<vpp?x2=;8nlLHS+P5_yj&7p~JnZYZ&
+zrWOtDDt3Jc!V!Xk7S@#qjD{n8*bnP1J3-@kb1Qy2-`Wk5i0vB&zVJ4olzGs-Q*nS`
+z+AnZ8-v$(0U9tE$FOCVn$6ikVv(wsZjQeS6T#|$B{dzZCEO(%^oIi>@migq)%jB)I
+zK^Rn9l?E#|Y2S^UPGYJDETTQ0t;4wQTe@!BFu-CYw<+B?bt-C^gdoMjD-c-U2&)ru
+zxixA*J5g=HyHnRVm+kb5mS%VP@sXDtQuaAqezaLLWp7HWOa1z&T<2W~N;j_4Fd5*=
+zOKlF3Ao=4+)3&}4CEB}i=M&3R<RWtaS{h9HtN`Y2dxQqeMD^Z$$?+sP4P5QqiHe=9
+z_wPORT=;>TP~At6^-%%Hm9*LD#@UVS4U#~$^)0!*Zy0pjR`+RM*7q`sTvdw?4_fZ-
+zYcF;yTd?*D?z>p3MTv_u>=b3#<{#^aqt&OXmn|@oi+ff@4eh4gq9LIMRQCVwn*(V}
+zG7M&S_)9+la)ghQ@||+i;miedt<Yu!aXmr7_kcm+m6|UDN70lHw`&WMf02NkpbqW8
+zVH5o(zcYuto3s0`e~CX6)(%O=^5*aaZOVnkIW-;NJ^EowxfJawI=9(*cr~y^5k{3&
+zf9Ew<?_R2DF$UXfQ<!vG9yGa=#4w>s^TI{rH_ds;M4LFI^W&qmfT#U3(BXAZzjDB~
+zIJkTvLf)}WOEm_FzW5A@P4THs1|r`C@b|dl2=m_Zz8@1N5ji=nMq3%op;p35#%zNR
+z+^hrYwyB2k$pr+}Y#{p5Z}`%8NDq>HbHcg(G9kR=lc~~vEj_^(*rCtI<$bb%=x3-n
+z^Ua04luFW?F#SPbEYewKbq7U}y);1q{5FAMvAmQF1NTyKb$dSVpGEzOo4jQE)XQr$
+z=sOB5YYq2OiXGg{I*vKC63}steVXJE`1T^)tnVXph>5za-X2C+WHPQHa>@=t+P#8F
+zJ4|h?fKaRRlK;6YlOOa6{wCL7|C+G=!A`fhFvcI)|1)hKLAPKr@THrF{f{PWA?Q$b
+ztAd=fxU0jZ9$PAaM}mVRjdo*C^}H88Y#ni@00ZOMrV7r-$a-{x0lU4yA3=YTG}CC<
+z;N3BjU}vNRjwDK=Z2w%AuOXO%fPHwes!x`28^Z+HP--i-{akXusJI@y7N5!-DnIhm
+zO%_3SR;ShZ8kawp*yIE4jx5G_$~s+mO&H8r9~L`8nROn(X96$E1zf<NOX?2F6i_CQ
+z7dz5aE)`XL05%j0r6S5EA<A$tDs|HO2T^AAr4GE7T*#!xZS=^(s5#IP&9HN+5l>bC
+z(Px8j0n^I$=dysREBm*H5{&w(hgJtgnZj%HAlgVj-D(i@hhKK0mYNGUML_IX8m>#e
+zX2}>3Tw{KRXu^i_4zU=r)jx-+mDAzC%lrb4AhY_}BQ8W3n6yMAgGM{I_<)iV>(^o&
+z1ifU~>~(*6`&@J36c%K>9HrGx3EAy*58o69ZBd`;L~)+-srE%QP>ft(F^(i-)}%Jd
+zW#F}rbJ%u?>5Es^!payOZK3B8^zPx7*D151oXl|3rc19$-<A*mcl-)2g=+cjatJ`j
+K#Q*az`~Lv!9BWYk
+
+literal 0
+HcmV?d00001
+
+diff --git a/desktop/media-tools/ui/view.js b/desktop/media-tools/ui/view.js
+index d4d1ce7..aef2355 100644
+--- a/desktop/media-tools/ui/view.js
++++ b/desktop/media-tools/ui/view.js
+@@ -68,6 +68,6 @@
+       </section>
+       <aside class="preview-controls"><div><strong>เครื่องมือในเครื่อง</strong><p id="capability-status" role="status">กำลังตรวจสอบเครื่องมือ…</p></div><button id="refresh-tools" type="button" class="button">ตรวจสอบอีกครั้ง</button></aside>
+       <aside class="local-info" aria-label="การทำงานภายในเครื่อง"><div><h3>${icon('local')} เสียงและการประมวลผลอยู่ในเครื่องคุณ</h3><p>yt-dlp, FFmpeg, FFprobe และไฟล์ทั้งหมดอยู่บนเครื่องผู้ใช้ ดาวน์โหลดจากต้นทางลงเครื่องโดยตรง และแปลงไฟล์ภายในเครื่อง ไม่ส่งไฟล์ ลิงก์ หรือประวัติงานไปประมวลผลบน Server ของ Audio Tech Labs</p></div><div><h3>เก็บไฟล์ไว้กับคุณ</h3><p>ไม่อัปโหลดผลลัพธ์เข้า Web Demo อัตโนมัติ ไม่ลบไฟล์ผลลัพธ์อัตโนมัติ และไม่เขียนทับต้นฉบับ โปรแกรม Windows นี้ใช้ native bridge ที่จำกัดคำสั่งเพื่อเรียกเครื่องมือภายในเครื่อง</p></div></aside>
+-    </main><footer class="footer"><div class="footer-inner shell"><span>Audio Tech Labs · Media Tools</span><span>LOCAL FIRST / WINDOWS · 0.2.1</span></div></footer>`;
++    </main><footer class="footer"><div class="footer-inner shell"><span>Audio Tech Labs · Media Tools</span><span>LOCAL FIRST / WINDOWS · 0.2.2-beta.2</span></div></footer>`;
+ 
+ })();

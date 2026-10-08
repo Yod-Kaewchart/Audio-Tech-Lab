@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "scope": "folder recovery fault injection after actual Windows guard release; native picker substituted; no live Download",
+  "rows": [
+    {
+      "mode": "download",
+      "size": "minimum",
+      "badge": "ต้องตรวจ cleanup",
+      "message": "การเลือกโฟลเดอร์ต้องกู้คืน: ยืนยันการปลด file guard ไม่ได้ หยุดรับงานใหม่ กรุณาปิดแอป ตรวจว่า ProcessHost และ process ของงานหยุดครบ ตรวจไฟล์ .atl-write-check-* ในโฟลเดอร์ที่เลือก และทำตามคู่มือกู้คืนก่อนล้างสถานะ: D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\folder-recovery-ui-1791483789292",
+      "startDisabled": true,
+      "resetHidden": true,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "size": "minimum",
+      "badge": "ต้องตรวจ cleanup",
+      "message": "การเลือกโฟลเดอร์ต้องกู้คืน: ยืนยันการปลด file guard ไม่ได้ หยุดรับงานใหม่ กรุณาปิดแอป ตรวจว่า ProcessHost และ process ของงานหยุดครบ ตรวจไฟล์ .atl-write-check-* ในโฟลเดอร์ที่เลือก และทำตามคู่มือกู้คืนก่อนล้างสถานะ: D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\folder-recovery-ui-1791483789292",
+      "startDisabled": true,
+      "resetHidden": true,
+      "overflow": false
+    },
+    {
+      "mode": "download",
+      "size": "normal",
+      "badge": "ต้องตรวจ cleanup",
+      "message": "การเลือกโฟลเดอร์ต้องกู้คืน: ยืนยันการปลด file guard ไม่ได้ หยุดรับงานใหม่ กรุณาปิดแอป ตรวจว่า ProcessHost และ process ของงานหยุดครบ ตรวจไฟล์ .atl-write-check-* ในโฟลเดอร์ที่เลือก และทำตามคู่มือกู้คืนก่อนล้างสถานะ: D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\folder-recovery-ui-1791483789292",
+      "startDisabled": true,
+      "resetHidden": true,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "size": "normal",
+      "badge": "ต้องตรวจ cleanup",
+      "message": "การเลือกโฟลเดอร์ต้องกู้คืน: ยืนยันการปลด file guard ไม่ได้ หยุดรับงานใหม่ กรุณาปิดแอป ตรวจว่า ProcessHost และ process ของงานหยุดครบ ตรวจไฟล์ .atl-write-check-* ในโฟลเดอร์ที่เลือก และทำตามคู่มือกู้คืนก่อนล้างสถานะ: D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\folder-recovery-ui-1791483789292",
+      "startDisabled": true,
+      "resetHidden": true,
+      "overflow": false
+    }
+  ],
+  "setupBusy": false,
+  "folderTokens": 0,
+  "persistedRecovery": {
+    "kind": "folder-selection",
+    "folderPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\folder-recovery-ui-1791483789292",
+    "manualVerificationRequired": true,
+    "releaseError": "injected missing release acknowledgement after real guard close"
+  }
+}

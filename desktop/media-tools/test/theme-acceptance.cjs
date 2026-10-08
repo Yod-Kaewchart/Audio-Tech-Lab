@@ -17,7 +17,7 @@ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
   const runtime=await app.evaluate(async({app,session})=>{
    // Dead HTTP(S) proxy plus production CSP/self-only protocol: no internet for UI fonts.
    await session.defaultSession.setProxy({mode:'fixed_servers',proxyRules:'http=127.0.0.1:9;https=127.0.0.1:9',proxyBypassRules:'<-loopback>'});
-   return {isPackaged:app.isPackaged,appPath:app.getAppPath(),path:process.env.PATH};
+   return {isPackaged:app.isPackaged,appVersion:app.getVersion(),appPath:app.getAppPath(),path:process.env.PATH,versions:process.versions};
   });assert.equal(runtime.isPackaged,packaged);assert.equal(runtime.path,restrictedPath);
   for(const [size,width,height] of [['minimum',360,600],['normal',1280,940]])for(const mode of ['download','convert','player']){
    const window=await app.evaluate(async({BrowserWindow},{width,height,mode})=>{

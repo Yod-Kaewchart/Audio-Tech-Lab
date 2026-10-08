@@ -1,0 +1,16 @@
+{
+  "kind": "internal-candidate",
+  "version": "0.2.2-beta.2",
+  "commit": "df183f4970366597d539323760108dbaf234e049",
+  "installerSourceCommit": "df183f4970366597d539323760108dbaf234e049",
+  "compilerVersion": "Inno Setup 6.7.3",
+  "sourcePortable": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577",
+  "portableSha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+  "payloadInventorySha256": "7751028de3baecfe7724326b52fb3d836075fe4738ac3b9f157d6f2b793e6073",
+  "file": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\installers\\Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe",
+  "bytes": 210937650,
+  "sha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+  "signed": false,
+  "publicRelease": false,
+  "producedAt": "2026-10-08T18:29:11.464Z"
+}

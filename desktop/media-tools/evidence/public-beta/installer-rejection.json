@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "installerSha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+  "portableSha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+  "candidateUnchanged": true,
+  "latestReceiptRestored": true,
+  "rows": [
+    {
+      "name": "missing actual Thai WOFF2",
+      "exitCode": 1,
+      "rejectedBeforeCompiler": true,
+      "error": "AssertionError [ERR_ASSERTION]: Portable is not synced to checked-out source: ui (missing, extra, or checksum mismatch)"
+    },
+    {
+      "name": "corrupt actual Thai WOFF2",
+      "exitCode": 1,
+      "rejectedBeforeCompiler": true,
+      "error": "AssertionError [ERR_ASSERTION]: Portable is not synced to checked-out source: ui (missing, extra, or checksum mismatch)"
+    },
+    {
+      "name": "corrupt actual FFmpeg payload",
+      "exitCode": 1,
+      "rejectedBeforeCompiler": true,
+      "error": "AssertionError [ERR_ASSERTION]: Vendor checksum mismatch: ffmpeg.exe"
+    }
+  ]
+}

@@ -1,0 +1,3607 @@
+{
+  "passed": true,
+  "root": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230",
+  "results": [
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "mp3",
+        "bitrateKbps": 128
+      },
+      "output": {
+        "resultId": "7689ac36-29dd-45bc-a988-a060a6f231b8",
+        "fileName": "ต้นฉบับ ทดสอบ — converted.mp3",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted.mp3",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 64940,
+          "codec": "mp3",
+          "container": "mp3",
+          "sampleRateHz": 48000,
+          "bitsPerSample": null,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "mp3",
+        "bitrateKbps": 192
+      },
+      "output": {
+        "resultId": "51d3e517-d2ea-4fe3-a7eb-4b1c228311c4",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (1).mp3",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (1).mp3",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 97388,
+          "codec": "mp3",
+          "container": "mp3",
+          "sampleRateHz": 48000,
+          "bitsPerSample": null,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "mp3",
+        "bitrateKbps": 256
+      },
+      "output": {
+        "resultId": "17444826-0b4b-44bc-b6da-8129b4fe72ce",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (2).mp3",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (2).mp3",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 129836,
+          "codec": "mp3",
+          "container": "mp3",
+          "sampleRateHz": 48000,
+          "bitsPerSample": null,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "mp3",
+        "bitrateKbps": 320
+      },
+      "output": {
+        "resultId": "4e41b814-abe8-46d6-bb9a-40bc35afab3a",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (3).mp3",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (3).mp3",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 162284,
+          "codec": "mp3",
+          "container": "mp3",
+          "sampleRateHz": 48000,
+          "bitsPerSample": null,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "wav",
+        "bitsPerSample": 16,
+        "sampleRateHz": "source"
+      },
+      "output": {
+        "resultId": "8bf114b5-fcfa-416b-b994-1650549cd04e",
+        "fileName": "ต้นฉบับ ทดสอบ — converted.wav",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted.wav",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 768078,
+          "codec": "pcm_s16le",
+          "container": "wav",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "wav",
+        "bitsPerSample": 16,
+        "sampleRateHz": 44100
+      },
+      "output": {
+        "resultId": "2d73230a-3a22-40b1-8d6b-407d112cde3a",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (1).wav",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (1).wav",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 705678,
+          "codec": "pcm_s16le",
+          "container": "wav",
+          "sampleRateHz": 44100,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "wav",
+        "bitsPerSample": 16,
+        "sampleRateHz": 48000
+      },
+      "output": {
+        "resultId": "41066764-3de5-4e38-b385-bc36c2a7a2bf",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (2).wav",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (2).wav",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 768078,
+          "codec": "pcm_s16le",
+          "container": "wav",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "wav",
+        "bitsPerSample": 24,
+        "sampleRateHz": "source"
+      },
+      "output": {
+        "resultId": "1552a317-cc4f-45b8-a83e-7df68814283e",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (3).wav",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (3).wav",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 1152102,
+          "codec": "pcm_s24le",
+          "container": "wav",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "wav",
+        "bitsPerSample": 24,
+        "sampleRateHz": 44100
+      },
+      "output": {
+        "resultId": "67c83565-6314-41d3-92cf-84328ddffce0",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (4).wav",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (4).wav",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 1058502,
+          "codec": "pcm_s24le",
+          "container": "wav",
+          "sampleRateHz": 44100,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "wav",
+        "bitsPerSample": 24,
+        "sampleRateHz": 48000
+      },
+      "output": {
+        "resultId": "a08d42af-0aca-4e24-b284-b9605df6303f",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (5).wav",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (5).wav",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 1152102,
+          "codec": "pcm_s24le",
+          "container": "wav",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "flac",
+        "bitsPerSample": 16,
+        "sampleRateHz": "source"
+      },
+      "output": {
+        "resultId": "4a822cd1-1ec3-4bb3-b40b-abd6f3fef8a7",
+        "fileName": "ต้นฉบับ ทดสอบ — converted.flac",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted.flac",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 63342,
+          "codec": "flac",
+          "container": "flac",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "flac",
+        "bitsPerSample": 16,
+        "sampleRateHz": 44100
+      },
+      "output": {
+        "resultId": "02f61ac0-04e2-4bad-a917-56fd642bd4ee",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (1).flac",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (1).flac",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 134234,
+          "codec": "flac",
+          "container": "flac",
+          "sampleRateHz": 44100,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "flac",
+        "bitsPerSample": 16,
+        "sampleRateHz": 48000
+      },
+      "output": {
+        "resultId": "ea1166c9-3ee2-4cb0-8f20-8b297e43094e",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (2).flac",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (2).flac",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 63342,
+          "codec": "flac",
+          "container": "flac",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "flac",
+        "bitsPerSample": 24,
+        "sampleRateHz": "source"
+      },
+      "output": {
+        "resultId": "48d3adec-626a-4866-950a-32c078d1523f",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (3).flac",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (3).flac",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 63436,
+          "codec": "flac",
+          "container": "flac",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "flac",
+        "bitsPerSample": 24,
+        "sampleRateHz": 44100
+      },
+      "output": {
+        "resultId": "15a80089-f88a-4e16-8e4f-bb74cace5cc4",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (4).flac",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (4).flac",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 307406,
+          "codec": "flac",
+          "container": "flac",
+          "sampleRateHz": 44100,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "flac",
+        "bitsPerSample": 24,
+        "sampleRateHz": 48000
+      },
+      "output": {
+        "resultId": "77231852-f95d-4519-87a4-15aaee16f71e",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (5).flac",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (5).flac",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 63436,
+          "codec": "flac",
+          "container": "flac",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "alac",
+        "bitsPerSample": 16,
+        "sampleRateHz": "source"
+      },
+      "output": {
+        "resultId": "f7b60cc6-0575-43a5-b7a1-f02b48202e3a",
+        "fileName": "ต้นฉบับ ทดสอบ — converted.m4a",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted.m4a",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 90661,
+          "codec": "alac",
+          "container": "mov,mp4,m4a,3gp,3g2,mj2",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "alac",
+        "bitsPerSample": 16,
+        "sampleRateHz": 44100
+      },
+      "output": {
+        "resultId": "2b674abe-fde5-4200-90be-73d2a6c3750f",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (1).m4a",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (1).m4a",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 91256,
+          "codec": "alac",
+          "container": "mov,mp4,m4a,3gp,3g2,mj2",
+          "sampleRateHz": 44100,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "alac",
+        "bitsPerSample": 16,
+        "sampleRateHz": 48000
+      },
+      "output": {
+        "resultId": "29642af9-8dbd-435b-bd08-9efdfe3a72b4",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (2).m4a",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (2).m4a",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 90661,
+          "codec": "alac",
+          "container": "mov,mp4,m4a,3gp,3g2,mj2",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 16,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "alac",
+        "bitsPerSample": 24,
+        "sampleRateHz": "source"
+      },
+      "output": {
+        "resultId": "15cfdf38-3f98-4371-ab01-57b69779d491",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (3).m4a",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (3).m4a",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 474661,
+          "codec": "alac",
+          "container": "mov,mp4,m4a,3gp,3g2,mj2",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "alac",
+        "bitsPerSample": 24,
+        "sampleRateHz": 44100
+      },
+      "output": {
+        "resultId": "8f7bd758-ae34-42a5-87d3-1d9d973633de",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (4).m4a",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (4).m4a",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 442199,
+          "codec": "alac",
+          "container": "mov,mp4,m4a,3gp,3g2,mj2",
+          "sampleRateHz": 44100,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "real-conversion",
+      "encoding": {
+        "format": "alac",
+        "bitsPerSample": 24,
+        "sampleRateHz": 48000
+      },
+      "output": {
+        "resultId": "250d3632-5126-4396-a85e-92c16da5aa89",
+        "fileName": "ต้นฉบับ ทดสอบ — converted (5).m4a",
+        "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\ต้นฉบับ ทดสอบ — converted (5).m4a",
+        "metadata": {
+          "durationSeconds": 4,
+          "bytes": 474661,
+          "codec": "alac",
+          "container": "mov,mp4,m4a,3gp,3g2,mj2",
+          "sampleRateHz": 48000,
+          "bitsPerSample": 24,
+          "channels": 2
+        },
+        "available": true
+      }
+    },
+    {
+      "test": "duplicate-and-cross-mode-global-lock",
+      "passed": true
+    },
+    {
+      "test": "lossless-pcm-hashes-no-resample",
+      "passed": true,
+      "inputPCM": "SHA256=4d2c8459ba348da202ee6170d92ed8950c6c1965fc02877bd5fbb5bf7dd15a22"
+    },
+    {
+      "test": "all-four-input-formats",
+      "passed": true
+    },
+    {
+      "test": "atomic-no-clobber-racing-writer",
+      "passed": true,
+      "collisionPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\แข่งขัน — converted.flac",
+      "result": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\แข่งขัน — converted (1).flac"
+    },
+    {
+      "test": "invalid-media-and-indirect-resource",
+      "passed": true
+    },
+    {
+      "test": "source-identity-change",
+      "passed": true
+    },
+    {
+      "test": "no-space-fault-injection",
+      "passed": true
+    },
+    {
+      "test": "cleanup-failure-retains-lock-and-output",
+      "passed": true,
+      "staging": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\acceptance-1791483419230\\.atl-job-419167e4-fb69-4b47-89df-f68409f45990"
+    },
+    {
+      "test": "real-ffmpeg-cancellation-tree-empty",
+      "passed": true
+    },
+    {
+      "test": "real-descendant-tree-cancellation",
+      "passed": true,
+      "pids": [
+        3896,
+        18308
+      ]
+    },
+    {
+      "test": "provider-policy",
+      "passed": true
+    },
+    {
+      "test": "source-sha256-unchanged",
+      "passed": true,
+      "sha256": "f13627b66a768d36119f208fe4ece628a188732b504407a57d82cb2cab4d1c9d"
+    }
+  ],
+  "audit": [
+    {
+      "event": "spawn-helper",
+      "pid": 17760,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:16:59.661Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17044,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:16:59.726Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:16:59.807Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:16:59.813Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 11648,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:01.495Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 1304,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:01.560Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:01.642Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:01.646Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 16596,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:01.974Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 16852,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:02.040Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:02.173Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:02.179Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8456,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:02.521Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 9224,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:02.595Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:02.651Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:02.656Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17932,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:03.079Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 18320,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:03.143Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:03.195Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:03.199Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 16268,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:04.661Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 15596,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:04.724Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:04.805Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:04.811Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 13832,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:05.133Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 4128,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:05.195Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:05.332Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:05.337Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 3772,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:05.668Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17784,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:05.730Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:05.783Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:05.787Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 18108,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:06.261Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 7120,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:06.328Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:06.386Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:06.391Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 3272,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:07.821Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16584,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:07.883Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:07.965Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:07.969Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 18172,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:08.307Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 15136,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:08.377Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:08.516Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:08.521Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17432,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:08.868Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 1204,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:08.941Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:09.000Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:09.004Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 2908,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:09.593Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 704,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:09.666Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:09.732Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:09.738Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5336,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:11.893Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 11320,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:11.980Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:12.105Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:12.113Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5104,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:12.669Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 4344,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:12.802Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:13.467Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:13.479Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 6556,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:14.220Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16616,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:14.387Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:14.508Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:14.521Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8500,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:15.695Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 14432,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:15.790Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:15.876Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:15.882Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 13612,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:17.669Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17184,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:17.743Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:17.833Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:17.838Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 11276,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:18.213Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 17092,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:18.296Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:18.416Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:18.422Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 10632,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:18.796Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 18172,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:18.862Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:18.949Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:18.955Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 1204,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:19.403Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17296,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:19.479Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:19.574Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:19.579Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 15524,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:21.137Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16400,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:21.204Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:21.302Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:21.309Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17800,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:21.679Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 8528,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:21.748Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:21.849Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:21.854Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 7336,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:22.215Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 3560,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:22.314Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:22.437Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:22.445Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 6556,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:23.067Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 4312,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:23.151Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:23.272Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:23.280Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 12600,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:24.970Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16632,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:25.042Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:25.134Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:25.139Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17492,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:25.513Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 5496,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:25.583Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:25.688Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:25.694Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17048,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:26.044Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 2704,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:26.112Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:26.200Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:26.205Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 2152,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:26.808Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 15496,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:26.874Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:26.965Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:26.971Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17264,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:28.527Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 4388,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:28.598Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:28.695Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:28.699Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 13980,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:29.052Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 17572,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:29.119Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:29.224Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:29.228Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17404,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:29.600Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 15596,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:29.671Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:29.731Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:29.735Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 12828,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:30.378Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 13268,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:30.455Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:30.530Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:30.535Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 4688,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:32.080Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 18108,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:32.165Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:32.259Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:32.263Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17612,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:32.647Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 13612,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:32.715Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:32.817Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:32.824Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17680,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:33.174Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17092,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:33.242Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:33.300Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:33.305Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5172,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:34.037Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 10212,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:34.107Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:34.165Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:34.170Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 2908,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:35.720Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16476,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:35.787Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:35.880Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:35.885Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 16920,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:36.232Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 16872,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:36.312Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:36.420Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:36.427Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 16300,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:36.788Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 7720,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:36.858Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:36.914Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:36.918Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17216,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:37.760Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16464,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:37.828Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:37.884Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:37.890Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17396,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:39.451Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16708,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:39.527Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:39.617Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:39.622Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 14640,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:39.974Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 10788,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:40.045Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:40.153Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:40.161Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 6424,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:40.545Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17672,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:40.613Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:40.668Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:40.674Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 9804,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:41.114Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 7740,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:41.189Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:41.248Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:41.253Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17236,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:42.815Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 4388,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:42.883Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:42.974Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:42.978Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 2236,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:43.333Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 16304,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:43.409Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:43.516Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:43.522Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5608,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:43.877Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 13008,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:43.945Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:44.000Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:44.006Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 12820,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:44.552Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17796,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:44.625Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:44.682Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:44.688Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17724,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:46.211Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 3008,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:46.283Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:46.383Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:46.389Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 7480,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:46.760Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 18240,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:46.829Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:46.935Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:46.941Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 18008,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:47.294Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 4224,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:47.368Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:47.431Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:47.436Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8744,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:48.097Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 6864,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:48.187Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:48.264Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:48.270Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 6940,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:49.897Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 10340,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:49.964Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:50.051Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:50.057Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 18376,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:50.436Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 704,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:50.509Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:50.615Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:50.621Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 10104,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:50.968Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17332,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:51.039Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:51.094Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:51.098Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8384,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:51.776Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16704,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:51.843Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:51.898Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:51.903Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 16420,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:53.530Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 10648,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:53.599Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:53.693Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:53.697Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 3464,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:54.045Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 16740,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:54.116Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:54.254Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:54.263Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 15532,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:54.692Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 13196,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:54.777Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:54.842Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:54.846Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5672,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:55.630Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16440,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:55.703Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:55.762Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:55.766Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 3640,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:57.362Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 18048,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:57.444Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:57.543Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:57.547Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 9808,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:17:57.904Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 18316,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:57.975Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:58.083Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:58.090Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 10084,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:58.452Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17508,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:58.526Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:58.583Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:58.589Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17988,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:17:59.534Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 3744,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:17:59.624Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:59.695Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:17:59.701Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8668,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:01.724Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 11936,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:01.839Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:01.978Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:01.986Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17936,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:02.477Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 5428,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:02.574Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:02.710Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:02.717Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17424,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:03.139Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 2908,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:03.221Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:03.325Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:03.333Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17788,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:03.873Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17080,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:03.952Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:04.021Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:04.026Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17748,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:06.020Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 12460,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:06.103Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:06.208Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:06.215Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 18100,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:06.736Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 3120,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:06.855Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:07.001Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:07.006Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 10648,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:07.508Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 5496,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:07.603Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:07.676Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:07.683Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 9076,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:08.363Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 15532,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:08.475Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:08.574Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:08.584Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8336,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:10.601Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 1824,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:10.694Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:10.808Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:10.814Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 18396,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:11.228Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 16672,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:11.343Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:11.538Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:11.546Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 15640,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:12.037Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 18416,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:12.142Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:12.227Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:12.234Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 7264,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:13.108Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 5968,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:13.225Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:13.314Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:13.323Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 4128,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:15.954Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16148,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:16.056Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:16.189Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:16.197Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 4920,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:16.852Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 18088,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:16.968Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:17.165Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:17.171Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 14544,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:17.704Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 3744,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:17.813Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:17.897Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:17.903Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5192,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:18.914Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 8744,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:19.007Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:19.086Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:19.092Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17292,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:21.380Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 5056,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:21.477Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:21.598Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:21.603Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17468,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:22.101Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 12396,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:22.201Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:22.393Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:22.402Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 13936,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:22.923Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17212,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:23.031Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:23.121Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:23.127Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17800,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:24.223Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 12432,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:24.335Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:24.420Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:24.427Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8252,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:26.535Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 2520,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:26.636Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:26.762Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:26.768Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 15708,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:27.301Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 3132,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:27.413Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:27.590Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:27.603Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17112,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:28.105Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16680,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:28.221Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:28.347Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:28.355Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17784,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:29.658Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 7316,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:29.754Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:29.834Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:29.839Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 15496,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:30.301Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 4704,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:30.392Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:30.514Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:30.519Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17168,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:30.973Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 17764,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:31.067Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:31.214Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:31.221Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17680,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:31.749Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 16948,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:31.872Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:32.010Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:32.021Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17244,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:32.566Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 13484,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:32.657Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:32.748Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:32.753Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17288,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:33.207Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 12276,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:33.305Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:33.406Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:33.413Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5552,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:33.905Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 18204,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:33.988Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:34.073Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:34.081Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 17656,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:34.598Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 2700,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:34.685Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:34.764Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:34.770Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 5956,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:35.250Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16784,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:35.332Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:35.406Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:35.414Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 6536,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:35.904Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 2092,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:35.987Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:36.093Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:36.101Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 7600,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:36.633Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 18208,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:36.715Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:36.785Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:36.790Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 11516,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:37.261Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 7308,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:37.348Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:37.415Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:37.420Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 12600,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:37.932Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 3132,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:38.007Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:38.115Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:38.119Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 18228,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:40.034Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 16236,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:40.118Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:40.224Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:40.230Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 6676,
+      "tool": "ffmpeg",
+      "time": "2026-10-08T18:18:40.695Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 5048,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:40.786Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:40.923Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:40.931Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 12036,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:41.400Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 15532,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:41.509Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:41.592Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:41.600Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 16528,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:42.392Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 144,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:42.486Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 1,
+      "time": "2026-10-08T18:18:42.557Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 1,
+      "time": "2026-10-08T18:18:42.563Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 16496,
+      "tool": "ffprobe",
+      "time": "2026-10-08T18:18:43.206Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 13584,
+      "assignedBeforeResume": true,
+      "time": "2026-10-08T18:18:43.293Z"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:43.409Z"
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0,
+      "time": "2026-10-08T18:18:43.416Z"
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 3984,
+      "tool": "ffprobe"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 1788,
+      "assignedBeforeResume": true
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 15788,
+      "tool": "ffprobe"
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "pid": 17928,
+      "assignedBeforeResume": true
+    },
+    {
+      "event": "worker",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "cancelled": false,
+      "exitCode": 0
+    },
+    {
+      "event": "closed",
+      "tool": "ffprobe",
+      "treeEmpty": true,
+      "exitCode": 0
+    },
+    {
+      "event": "spawn-helper",
+      "pid": 8460,
+      "tool": "ffmpeg"
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "pid": 16624,
+      "assignedBeforeResume": true
+    },
+    {
+      "event": "worker",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "cancelled": true,
+      "exitCode": 1223
+    },
+    {
+      "event": "closed",
+      "tool": "ffmpeg",
+      "treeEmpty": true,
+      "exitCode": 1223
+    }
+  ]
+}

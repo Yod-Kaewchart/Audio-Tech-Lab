@@ -1,0 +1,2441 @@
+{
+  "passed": true,
+  "at": "2026-10-08T18:36:36.831Z",
+  "executable": "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\Audio Tech Labs Media Tools.exe",
+  "runtime": {
+    "isPackaged": true,
+    "appVersion": "0.2.2-beta.2",
+    "appPath": "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\resources\\app",
+    "path": "C:\\WINDOWS\\System32",
+    "versions": {
+      "node": "24.21.0",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.8",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.2",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "149",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "0.0.0",
+      "simdjson": "4.6.7",
+      "simdutf": "7.7.0",
+      "sqlite": "3.53.4",
+      "tz": "2026d",
+      "undici": "7.29.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "15.2.124.28-electron.0",
+      "zlib": "1.3.2.1-motley",
+      "zstd": "1.6.0",
+      "electron": "44.7.0",
+      "chrome": "152.0.7977.130"
+    }
+  },
+  "fonts": {
+    "dm-sans-latin-ext.woff2": {
+      "sourceSha256": "a5d38fe99f930275684999b462c7123faa063d9e44e73b4b241723d884aa0f49",
+      "payloadSha256": "a5d38fe99f930275684999b462c7123faa063d9e44e73b4b241723d884aa0f49"
+    },
+    "dm-sans-latin.woff2": {
+      "sourceSha256": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543",
+      "payloadSha256": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543"
+    },
+    "noto-sans-thai-thai.woff2": {
+      "sourceSha256": "1f5a173641bbcb3ca4fb0a986858b6b07f8cd5dd2ed61236b40548c7a3c7292f",
+      "payloadSha256": "1f5a173641bbcb3ca4fb0a986858b6b07f8cd5dd2ed61236b40548c7a3c7292f"
+    },
+    "noto-sans-thai-latin-ext.woff2": {
+      "sourceSha256": "49929deb3afa3fea37b19fdd148889ef19b3e44a8452b13568af089a7d5db934",
+      "payloadSha256": "49929deb3afa3fea37b19fdd148889ef19b3e44a8452b13568af089a7d5db934"
+    },
+    "noto-sans-thai-latin.woff2": {
+      "sourceSha256": "1a66f268c8d76575807979309cbbac3aff7b61919f59ea19fdc821d92fb407f3",
+      "payloadSha256": "1a66f268c8d76575807979309cbbac3aff7b61919f59ea19fdc821d92fb407f3"
+    },
+    "DM-Sans-OFL.txt": {
+      "sourceSha256": "be5f632588774077cbb19a8d3fd788fbc7861af041f4e7165eae5822b11392b3",
+      "payloadSha256": "be5f632588774077cbb19a8d3fd788fbc7861af041f4e7165eae5822b11392b3"
+    },
+    "Noto-Sans-Thai-OFL.txt": {
+      "sourceSha256": "4ede860884bc2798f6b209bd43e5108be6d5724b228bdd9d33c43fb6ea94c2e8",
+      "payloadSha256": "4ede860884bc2798f6b209bd43e5108be6d5724b228bdd9d33c43fb6ea94c2e8"
+    }
+  },
+  "rows": [
+    {
+      "mode": "download",
+      "size": "minimum",
+      "window": {
+        "bounds": {
+          "x": 43,
+          "y": 0,
+          "width": 360,
+          "height": 600
+        },
+        "contentBounds": {
+          "x": 51,
+          "y": 31,
+          "width": 344,
+          "height": 561
+        },
+        "minimum": [
+          360,
+          600
+        ],
+        "preferences": {}
+      },
+      "details": {
+        "innerWidth": 344,
+        "innerHeight": 561,
+        "documentWidth": 329,
+        "body": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(20, 23, 25)",
+          "backgroundImage": "none"
+        },
+        "header": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "navigation": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "panel": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(32, 36, 39)",
+          "backgroundImage": "none"
+        },
+        "note": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "23.4px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "title": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "47.6px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "heading": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "600",
+          "lineHeight": "26.6px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "button": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "25.2px",
+          "color": "rgb(16, 18, 20)",
+          "backgroundColor": "rgb(201, 170, 112)",
+          "backgroundImage": "none"
+        },
+        "input": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "dropdown": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "playlist": null,
+        "format": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "500",
+          "lineHeight": "20.8px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "controlFonts": [
+          "\"DM Sans\", \"Noto Sans Thai\", sans-serif"
+        ],
+        "overflow": [],
+        "clippedThai": [],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          }
+        ],
+        "metrics": [
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 14,
+            "width": 186.71875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 16,
+            "width": 213.40625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 21,
+            "width": 280.078125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 50,
+            "width": 666.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 14,
+            "width": 189.578125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 16,
+            "width": 216.65625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 21,
+            "width": 284.359375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 50,
+            "width": 677.03125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 14,
+            "width": 193.140625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 16,
+            "width": 220.734375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 21,
+            "width": 289.703125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 50,
+            "width": 689.765625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 14,
+            "width": 195.875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 16,
+            "width": 223.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 21,
+            "width": 293.8125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 50,
+            "width": 699.546875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 14,
+            "width": 232.09375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 16,
+            "width": 265.25
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 21,
+            "width": 348.140625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 50,
+            "width": 828.90625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 14,
+            "width": 235.75
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 16,
+            "width": 269.421875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 21,
+            "width": 353.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 50,
+            "width": 841.921875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 14,
+            "width": 239.734375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 16,
+            "width": 273.984375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 21,
+            "width": 359.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 50,
+            "width": 856.203125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 14,
+            "width": 244.578125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 16,
+            "width": 279.515625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 21,
+            "width": 366.859375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 50,
+            "width": 873.453125
+          }
+        ]
+      },
+      "renderedFonts": {
+        "#page-title": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 14,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ],
+        "h2": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 11,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-SemiBold"
+          },
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 7,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-SemiBold"
+          }
+        ],
+        ".button-primary": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 14,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          }
+        ],
+        ".intro-row p": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 1,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt"
+          },
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 38,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "convert",
+      "size": "minimum",
+      "window": {
+        "bounds": {
+          "x": 43,
+          "y": 0,
+          "width": 360,
+          "height": 600
+        },
+        "contentBounds": {
+          "x": 51,
+          "y": 31,
+          "width": 344,
+          "height": 561
+        },
+        "minimum": [
+          360,
+          600
+        ],
+        "preferences": {}
+      },
+      "details": {
+        "innerWidth": 344,
+        "innerHeight": 561,
+        "documentWidth": 329,
+        "body": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(20, 23, 25)",
+          "backgroundImage": "none"
+        },
+        "header": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "navigation": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "panel": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(32, 36, 39)",
+          "backgroundImage": "none"
+        },
+        "note": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "23.4px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "title": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "47.6px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "heading": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "600",
+          "lineHeight": "26.6px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "button": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "25.2px",
+          "color": "rgb(16, 18, 20)",
+          "backgroundColor": "rgb(201, 170, 112)",
+          "backgroundImage": "none"
+        },
+        "input": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "dropdown": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "playlist": null,
+        "format": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "500",
+          "lineHeight": "20.8px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "controlFonts": [
+          "\"DM Sans\", \"Noto Sans Thai\", sans-serif"
+        ],
+        "overflow": [],
+        "clippedThai": [],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          }
+        ],
+        "metrics": [
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 14,
+            "width": 186.71875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 16,
+            "width": 213.40625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 21,
+            "width": 280.078125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 50,
+            "width": 666.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 14,
+            "width": 189.578125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 16,
+            "width": 216.65625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 21,
+            "width": 284.359375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 50,
+            "width": 677.03125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 14,
+            "width": 193.140625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 16,
+            "width": 220.734375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 21,
+            "width": 289.703125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 50,
+            "width": 689.765625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 14,
+            "width": 195.875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 16,
+            "width": 223.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 21,
+            "width": 293.8125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 50,
+            "width": 699.546875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 14,
+            "width": 232.09375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 16,
+            "width": 265.25
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 21,
+            "width": 348.140625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 50,
+            "width": 828.90625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 14,
+            "width": 235.75
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 16,
+            "width": 269.421875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 21,
+            "width": 353.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 50,
+            "width": 841.921875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 14,
+            "width": 239.734375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 16,
+            "width": 273.984375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 21,
+            "width": 359.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 50,
+            "width": 856.203125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 14,
+            "width": 244.578125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 16,
+            "width": 279.515625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 21,
+            "width": 366.859375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 50,
+            "width": 873.453125
+          }
+        ]
+      },
+      "renderedFonts": {
+        "#page-title": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 13,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ],
+        "h2": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 11,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-SemiBold"
+          }
+        ],
+        ".button-primary": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 13,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          }
+        ],
+        ".intro-row p": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 1,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt"
+          },
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 40,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "player",
+      "size": "minimum",
+      "window": {
+        "bounds": {
+          "x": 43,
+          "y": 0,
+          "width": 360,
+          "height": 600
+        },
+        "contentBounds": {
+          "x": 51,
+          "y": 31,
+          "width": 344,
+          "height": 561
+        },
+        "minimum": [
+          360,
+          600
+        ],
+        "preferences": {}
+      },
+      "details": {
+        "innerWidth": 344,
+        "innerHeight": 561,
+        "documentWidth": 329,
+        "body": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(20, 23, 25)",
+          "backgroundImage": "none"
+        },
+        "header": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "navigation": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "panel": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(32, 36, 39)",
+          "backgroundImage": "none"
+        },
+        "note": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "23.4px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "title": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "47.6px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "heading": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "600",
+          "lineHeight": "26.6px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "button": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "25.2px",
+          "color": "rgb(16, 18, 20)",
+          "backgroundColor": "rgb(201, 170, 112)",
+          "backgroundImage": "none"
+        },
+        "input": null,
+        "dropdown": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "playlist": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "format": null,
+        "controlFonts": [
+          "\"DM Sans\", \"Noto Sans Thai\", sans-serif"
+        ],
+        "overflow": [],
+        "clippedThai": [],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          }
+        ],
+        "metrics": [
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 14,
+            "width": 186.71875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 16,
+            "width": 213.40625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 21,
+            "width": 280.078125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 50,
+            "width": 666.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 14,
+            "width": 189.578125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 16,
+            "width": 216.65625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 21,
+            "width": 284.359375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 50,
+            "width": 677.03125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 14,
+            "width": 193.140625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 16,
+            "width": 220.734375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 21,
+            "width": 289.703125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 50,
+            "width": 689.765625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 14,
+            "width": 195.875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 16,
+            "width": 223.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 21,
+            "width": 293.8125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 50,
+            "width": 699.546875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 14,
+            "width": 232.09375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 16,
+            "width": 265.25
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 21,
+            "width": 348.140625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 50,
+            "width": 828.90625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 14,
+            "width": 235.75
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 16,
+            "width": 269.421875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 21,
+            "width": 353.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 50,
+            "width": 841.921875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 14,
+            "width": 239.734375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 16,
+            "width": 273.984375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 21,
+            "width": 359.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 50,
+            "width": 856.203125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 14,
+            "width": 244.578125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 16,
+            "width": 279.515625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 21,
+            "width": 366.859375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 50,
+            "width": 873.453125
+          }
+        ]
+      },
+      "renderedFonts": {
+        "#page-title": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 6,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ],
+        "h2": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 9,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-SemiBold"
+          }
+        ],
+        ".button-primary": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 4,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          }
+        ],
+        ".playlist-title strong": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 31,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          },
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 5,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "download",
+      "size": "normal",
+      "window": {
+        "bounds": {
+          "x": 43,
+          "y": 0,
+          "width": 1280,
+          "height": 940
+        },
+        "contentBounds": {
+          "x": 51,
+          "y": 31,
+          "width": 1264,
+          "height": 901
+        },
+        "minimum": [
+          360,
+          600
+        ],
+        "preferences": {}
+      },
+      "details": {
+        "innerWidth": 1264,
+        "innerHeight": 901,
+        "documentWidth": 1249,
+        "body": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(20, 23, 25)",
+          "backgroundImage": "none"
+        },
+        "header": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "navigation": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "panel": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(32, 36, 39)",
+          "backgroundImage": "none"
+        },
+        "note": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "25.2px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "title": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "70px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "heading": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "600",
+          "lineHeight": "29.4px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "button": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "25.2px",
+          "color": "rgb(16, 18, 20)",
+          "backgroundColor": "rgb(201, 170, 112)",
+          "backgroundImage": "none"
+        },
+        "input": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "dropdown": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "playlist": null,
+        "format": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "500",
+          "lineHeight": "22.4px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "controlFonts": [
+          "\"DM Sans\", \"Noto Sans Thai\", sans-serif"
+        ],
+        "overflow": [],
+        "clippedThai": [],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          }
+        ],
+        "metrics": [
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 14,
+            "width": 186.71875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 16,
+            "width": 213.40625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 21,
+            "width": 280.078125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 50,
+            "width": 666.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 14,
+            "width": 189.578125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 16,
+            "width": 216.65625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 21,
+            "width": 284.359375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 50,
+            "width": 677.03125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 14,
+            "width": 193.140625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 16,
+            "width": 220.734375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 21,
+            "width": 289.703125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 50,
+            "width": 689.765625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 14,
+            "width": 195.875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 16,
+            "width": 223.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 21,
+            "width": 293.8125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 50,
+            "width": 699.546875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 14,
+            "width": 232.09375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 16,
+            "width": 265.25
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 21,
+            "width": 348.140625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 50,
+            "width": 828.90625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 14,
+            "width": 235.75
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 16,
+            "width": 269.421875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 21,
+            "width": 353.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 50,
+            "width": 841.921875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 14,
+            "width": 239.734375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 16,
+            "width": 273.984375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 21,
+            "width": 359.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 50,
+            "width": 856.203125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 14,
+            "width": 244.578125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 16,
+            "width": 279.515625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 21,
+            "width": 366.859375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 50,
+            "width": 873.453125
+          }
+        ]
+      },
+      "renderedFonts": {
+        "#page-title": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 14,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ],
+        "h2": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 11,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-SemiBold"
+          },
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 8,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-SemiBold"
+          }
+        ],
+        ".button-primary": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 14,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          }
+        ],
+        ".intro-row p": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 1,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt"
+          },
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 38,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "convert",
+      "size": "normal",
+      "window": {
+        "bounds": {
+          "x": 43,
+          "y": 0,
+          "width": 1280,
+          "height": 940
+        },
+        "contentBounds": {
+          "x": 51,
+          "y": 31,
+          "width": 1264,
+          "height": 901
+        },
+        "minimum": [
+          360,
+          600
+        ],
+        "preferences": {}
+      },
+      "details": {
+        "innerWidth": 1264,
+        "innerHeight": 901,
+        "documentWidth": 1249,
+        "body": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(20, 23, 25)",
+          "backgroundImage": "none"
+        },
+        "header": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "navigation": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "panel": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(32, 36, 39)",
+          "backgroundImage": "none"
+        },
+        "note": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "25.2px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "title": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "70px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "heading": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "600",
+          "lineHeight": "29.4px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "button": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "25.2px",
+          "color": "rgb(16, 18, 20)",
+          "backgroundColor": "rgb(201, 170, 112)",
+          "backgroundImage": "none"
+        },
+        "input": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "dropdown": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "playlist": null,
+        "format": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "500",
+          "lineHeight": "22.4px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "controlFonts": [
+          "\"DM Sans\", \"Noto Sans Thai\", sans-serif"
+        ],
+        "overflow": [],
+        "clippedThai": [],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          }
+        ],
+        "metrics": [
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 14,
+            "width": 186.71875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 16,
+            "width": 213.40625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 21,
+            "width": 280.078125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 50,
+            "width": 666.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 14,
+            "width": 189.578125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 16,
+            "width": 216.65625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 21,
+            "width": 284.359375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 50,
+            "width": 677.03125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 14,
+            "width": 193.140625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 16,
+            "width": 220.734375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 21,
+            "width": 289.703125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 50,
+            "width": 689.765625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 14,
+            "width": 195.875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 16,
+            "width": 223.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 21,
+            "width": 293.8125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 50,
+            "width": 699.546875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 14,
+            "width": 232.09375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 16,
+            "width": 265.25
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 21,
+            "width": 348.140625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 50,
+            "width": 828.90625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 14,
+            "width": 235.75
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 16,
+            "width": 269.421875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 21,
+            "width": 353.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 50,
+            "width": 841.921875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 14,
+            "width": 239.734375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 16,
+            "width": 273.984375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 21,
+            "width": 359.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 50,
+            "width": 856.203125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 14,
+            "width": 244.578125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 16,
+            "width": 279.515625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 21,
+            "width": 366.859375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 50,
+            "width": 873.453125
+          }
+        ]
+      },
+      "renderedFonts": {
+        "#page-title": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 13,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ],
+        "h2": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 11,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-SemiBold"
+          }
+        ],
+        ".button-primary": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 13,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          }
+        ],
+        ".intro-row p": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 1,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt"
+          },
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 40,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "player",
+      "size": "normal",
+      "window": {
+        "bounds": {
+          "x": 43,
+          "y": 0,
+          "width": 1280,
+          "height": 940
+        },
+        "contentBounds": {
+          "x": 51,
+          "y": 31,
+          "width": 1264,
+          "height": 901
+        },
+        "minimum": [
+          360,
+          600
+        ],
+        "preferences": {}
+      },
+      "details": {
+        "innerWidth": 1264,
+        "innerHeight": 901,
+        "documentWidth": 1249,
+        "body": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(20, 23, 25)",
+          "backgroundImage": "none"
+        },
+        "header": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "navigation": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "panel": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(32, 36, 39)",
+          "backgroundImage": "none"
+        },
+        "note": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "25.2px",
+          "color": "rgb(185, 190, 194)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "title": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "70px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "heading": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "600",
+          "lineHeight": "29.4px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none"
+        },
+        "button": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "700",
+          "lineHeight": "25.2px",
+          "color": "rgb(16, 18, 20)",
+          "backgroundColor": "rgb(201, 170, 112)",
+          "backgroundImage": "none"
+        },
+        "input": null,
+        "dropdown": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(16, 18, 20)",
+          "backgroundImage": "none"
+        },
+        "playlist": {
+          "fontFamily": "\"DM Sans\", \"Noto Sans Thai\", sans-serif",
+          "fontWeight": "400",
+          "lineHeight": "28.8px",
+          "color": "rgb(240, 238, 232)",
+          "backgroundColor": "rgb(25, 28, 31)",
+          "backgroundImage": "none"
+        },
+        "format": null,
+        "controlFonts": [
+          "\"DM Sans\", \"Noto Sans Thai\", sans-serif"
+        ],
+        "overflow": [],
+        "clippedThai": [],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "loaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          },
+          {
+            "family": "Noto Sans Thai",
+            "weight": "400 700",
+            "status": "unloaded"
+          }
+        ],
+        "metrics": [
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 14,
+            "width": 186.71875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 16,
+            "width": 213.40625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 21,
+            "width": 280.078125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 400,
+            "size": 50,
+            "width": 666.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 14,
+            "width": 189.578125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 16,
+            "width": 216.65625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 21,
+            "width": 284.359375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 500,
+            "size": 50,
+            "width": 677.03125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 14,
+            "width": 193.140625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 16,
+            "width": 220.734375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 21,
+            "width": 289.703125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 600,
+            "size": 50,
+            "width": 689.765625
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 14,
+            "width": 195.875
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 16,
+            "width": 223.859375
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 21,
+            "width": 293.8125
+          },
+          {
+            "text": "Audio Tech Labs Media Tools",
+            "weight": 700,
+            "size": 50,
+            "width": 699.546875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 14,
+            "width": 232.09375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 16,
+            "width": 265.25
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 21,
+            "width": 348.140625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 400,
+            "size": 50,
+            "width": 828.90625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 14,
+            "width": 235.75
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 16,
+            "width": 269.421875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 21,
+            "width": 353.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 500,
+            "size": 50,
+            "width": 841.921875
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 14,
+            "width": 239.734375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 16,
+            "width": 273.984375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 21,
+            "width": 359.609375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 600,
+            "size": 50,
+            "width": 856.203125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 14,
+            "width": 244.578125
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 16,
+            "width": 279.515625
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 21,
+            "width": 366.859375
+          },
+          {
+            "text": "กำลังฟัง เพลงภาษาไทย สระและวรรณยุกต์",
+            "weight": 700,
+            "size": 50,
+            "width": 873.453125
+          }
+        ]
+      },
+      "renderedFonts": {
+        "#page-title": [
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 6,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ],
+        "h2": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 9,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-SemiBold"
+          }
+        ],
+        ".button-primary": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 4,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          }
+        ],
+        ".playlist-title strong": [
+          {
+            "familyName": "Noto Sans Thai",
+            "glyphCount": 31,
+            "isCustomFont": true,
+            "postScriptName": "Noto-Sans-Thai-Bold"
+          },
+          {
+            "familyName": "DM Sans 9pt",
+            "glyphCount": 5,
+            "isCustomFont": true,
+            "postScriptName": "DM-Sans-9pt-14pt-Bold"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [
+    "atl-media://app/assets/dm-sans-latin.woff2",
+    "atl-media://app/assets/noto-sans-thai-thai.woff2",
+    "atl-media://app/download.html",
+    "atl-media://app/media-tools.css",
+    "atl-media://app/native.css",
+    "atl-media://app/view.js",
+    "atl-media://app/adapters.js",
+    "atl-media://app/controller.js",
+    "atl-media://app/theme.css",
+    "atl-media://app/assets/dm-sans-latin.woff2",
+    "atl-media://app/assets/noto-sans-thai-thai.woff2",
+    "atl-media://app/convert.html",
+    "atl-media://app/media-tools.css",
+    "atl-media://app/native.css",
+    "atl-media://app/view.js",
+    "atl-media://app/adapters.js",
+    "atl-media://app/controller.js",
+    "atl-media://app/theme.css",
+    "atl-media://app/assets/dm-sans-latin.woff2",
+    "atl-media://app/assets/noto-sans-thai-thai.woff2",
+    "atl-media://app/player.html",
+    "atl-media://app/media-tools.css",
+    "atl-media://app/native.css",
+    "atl-media://app/player.css",
+    "atl-media://app/view.js",
+    "atl-media://app/player-view.js",
+    "atl-media://app/adapters.js",
+    "atl-media://app/player.js",
+    "atl-media://app/theme.css",
+    "atl-media://app/assets/dm-sans-latin.woff2",
+    "atl-media://app/assets/noto-sans-thai-thai.woff2",
+    "atl-media://app/download.html",
+    "atl-media://app/media-tools.css",
+    "atl-media://app/native.css",
+    "atl-media://app/view.js",
+    "atl-media://app/adapters.js",
+    "atl-media://app/controller.js",
+    "atl-media://app/theme.css",
+    "atl-media://app/assets/dm-sans-latin.woff2",
+    "atl-media://app/assets/noto-sans-thai-thai.woff2",
+    "atl-media://app/convert.html",
+    "atl-media://app/media-tools.css",
+    "atl-media://app/native.css",
+    "atl-media://app/view.js",
+    "atl-media://app/adapters.js",
+    "atl-media://app/controller.js",
+    "atl-media://app/theme.css",
+    "atl-media://app/assets/dm-sans-latin.woff2",
+    "atl-media://app/assets/noto-sans-thai-thai.woff2",
+    "atl-media://app/player.html",
+    "atl-media://app/media-tools.css",
+    "atl-media://app/native.css",
+    "atl-media://app/player.css",
+    "atl-media://app/view.js",
+    "atl-media://app/player-view.js",
+    "atl-media://app/adapters.js",
+    "atl-media://app/player.js",
+    "atl-media://app/theme.css",
+    "atl-media://app/assets/dm-sans-latin.woff2",
+    "atl-media://app/assets/noto-sans-thai-thai.woff2"
+  ],
+  "limits": [
+    "Developer Windows, not a clean VM",
+    "HTTP(S) dead proxy + production CSP/self-only request policy; OS internet remains enabled",
+    "Native media import uses Playwright file input; no native picker claimed",
+    "Download live provider not exercised by visual test"
+  ]
+}
