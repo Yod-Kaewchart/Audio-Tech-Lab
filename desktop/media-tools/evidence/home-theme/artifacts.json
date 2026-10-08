@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "at": "2026-10-08T16:15:54.995728+00:00",
+  "portable": {
+    "directory": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838",
+    "executable": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838\\Audio Tech Labs Media Tools.exe",
+    "archive": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838.zip",
+    "sha256": "27b83f685c2d46e9a6d365bfac108ba7bce7ccf393615641f5cc11639a616934",
+    "createdAt": "2026-10-08T15:58:43.716Z"
+  },
+  "archiveBytes": 294892077,
+  "archiveVerification": {
+    "sha256": "27b83f685c2d46e9a6d365bfac108ba7bce7ccf393615641f5cc11639a616934",
+    "allInventoryEntriesVerified": 232,
+    "fullReadsVerifyCRC": true,
+    "exactPublicFontsAndLicenses": true,
+    "reportMatchesSource": true
+  },
+  "installerQA": {
+    "kind": "internal-qa",
+    "version": "0.2.1",
+    "compilerVersion": "Inno Setup 6.7.3",
+    "sourcePortable": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838",
+    "file": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\installers\\Audio-Tech-Labs-Media-Tools-Setup-0.2.1-Win64-QA.exe",
+    "bytes": 211026755,
+    "sha256": "fea90e11a7ae8e6bde5ef1c8a9ec59e69163493f3a6d1306a0b5d1c124d81493",
+    "signed": false,
+    "publicRelease": false,
+    "producedAt": "2026-10-08T16:05:47.212Z"
+  },
+  "limits": [
+    "QA installer tested with separate AppId; no new normal installer candidate built",
+    "No clean VM or live-provider Download acceptance"
+  ]
+}

@@ -9,9 +9,11 @@ Candidate versions จากแผน connection ถูกตรวจจาก�
 | FFmpeg / FFprobe | 9.0.2-essentials_build | archive SHA256 ของ gyan.dev, hash executable แยก; FFmpeg GPLv3 และ build README |
 | Node CLI for EJS | 24.19.0 win-x64 | SHASUMS256 ของ nodejs.org; LICENSE รวม third-party notices; ใช้ `node.exe` แยก ไม่ใช้ electron.exe แทน |
 | ProcessHost | 1.0.0 x64 | สร้างจาก `native/ProcessHost.cs`; hash source/binary ใน manifest; ใช้ .NET Framework 4.x และ Windows Job Object APIs |
-| DM Sans / Noto Sans Thai | local assets จาก Home เดิม | OFL licenses ใน `ui/assets/` |
+| DM Sans / Noto Sans Thai | Google Fonts v17 / v29 ตาม CSS ของ Public Home ที่ตรวจ 8 ตุลาคม 2026 | WOFF2 ทั้ง 5 subsets พร้อม OFL licenses ใน `ui/assets/`; URL และ SHA256 ใน `evidence/home-theme/font-manifest.json` |
 
 `dependencies.lock.json` และ `resources/vendor/manifest.json` บันทึก SHA256 ของ executable จริงทั้งหมด พร้อม source URL และ publisher archive hashes Runtime ตรวจ hash ก่อน spawn และไม่ค้นหา global PATH สำหรับเครื่องมือเสียง
+
+ฟอนต์ใช้ไฟล์ WOFF2 เดียวกับที่ Public Home ส่งจริง โดยเก็บไฟล์ไม่แก้ข้อมูลภายในและเก็บ copyright/license เดิม DM Sans และ Noto Sans Thai ใช้ SIL Open Font License 1.1 ซึ่งอนุญาต bundle/redistribute กับซอฟต์แวร์เมื่อแนบ notices ไม่ขายฟอนต์แยก ตรวจเทียบกับ [DM Sans OFL](https://raw.githubusercontent.com/google/fonts/main/ofl/dmsans/OFL.txt) และ [Noto Sans Thai OFL](https://raw.githubusercontent.com/google/fonts/main/ofl/notosansthai/OFL.txt) แล้ว `prepare-ui.cjs` และ package ไม่โหลดฟอนต์จากเครือข่าย การ refresh จาก Public ต้องเรียก `prepare-home-fonts.cjs` โดยตั้งใจหลังเก็บหลักฐาน reference ใหม่เท่านั้น
 
 แหล่งอ้างอิง:
 

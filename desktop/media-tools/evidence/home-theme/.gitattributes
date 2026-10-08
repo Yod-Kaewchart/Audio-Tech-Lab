@@ -1,0 +1,2 @@
+# Preserve raw installer diagnostics, including spaces in captured command lines.
+installer-*.log -text whitespace=-blank-at-eol

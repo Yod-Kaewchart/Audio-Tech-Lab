@@ -1,0 +1,142 @@
+{
+  "passed": true,
+  "at": "2026-10-08T16:04:35.150Z",
+  "executable": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838\\Audio Tech Labs Media Tools.exe",
+  "runtime": {
+    "isPackaged": true,
+    "appPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.2.1-win-x64-20261008T155838\\resources\\app",
+    "userData": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\portable-1791475449697\\profile",
+    "path": "C:\\WINDOWS\\System32"
+  },
+  "caps": {
+    "ok": true,
+    "value": {
+      "contractVersion": 1,
+      "execution": "user-computer",
+      "tools": {
+        "ytDlp": {
+          "installed": true,
+          "verified": true,
+          "version": "2026.08.19",
+          "reason": null
+        },
+        "ffmpeg": {
+          "installed": true,
+          "verified": true,
+          "version": "9.0.2-essentials_build",
+          "reason": null
+        },
+        "ffprobe": {
+          "installed": true,
+          "verified": true,
+          "version": "9.0.2-essentials_build",
+          "reason": null
+        },
+        "jsRuntime": {
+          "installed": true,
+          "verified": true,
+          "version": "24.19.0",
+          "reason": null
+        },
+        "processHelper": {
+          "installed": true,
+          "verified": true,
+          "version": "1.0.0",
+          "reason": null
+        }
+      },
+      "convertReady": true,
+      "downloadReady": true,
+      "downloadProviders": [
+        "YouTube (internal testing; live acceptance pending)"
+      ]
+    }
+  },
+  "toolVersions": {
+    "node": "v24.19.0",
+    "ytDlp": "2026.08.19"
+  },
+  "job": {
+    "jobId": "d62b7ad9-1da0-49db-9238-e444e0b5796f",
+    "sequence": 7,
+    "mode": "convert",
+    "status": "succeeded",
+    "progress": {
+      "stage": "complete",
+      "stagePercent": 100,
+      "bytesDownloaded": null,
+      "totalBytes": null,
+      "processedSeconds": null,
+      "durationSeconds": 3
+    },
+    "sourceName": "เสียงทดสอบ portable.wav",
+    "destinationDisplayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\portable-1791475449697",
+    "outputBaseName": null,
+    "encoding": {
+      "format": "alac",
+      "sampleRateHz": "source",
+      "bitsPerSample": 16
+    },
+    "output": {
+      "resultId": "e7a6191f-a0bc-4927-97c7-27aa6234d61b",
+      "fileName": "เสียงทดสอบ portable — converted.m4a",
+      "displayPath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\portable-1791475449697\\เสียงทดสอบ portable — converted.m4a",
+      "metadata": {
+        "durationSeconds": 3,
+        "bytes": 68408,
+        "codec": "alac",
+        "container": "mov,mp4,m4a,3gp,3g2,mj2",
+        "sampleRateHz": 48000,
+        "bitsPerSample": 16,
+        "channels": 2
+      },
+      "available": true
+    },
+    "error": null
+  },
+  "sourceSha256": "9aaea4d2f960e73e752ba1b53fdd0a25c06d22e2e9fb4f46382421412401e3f3",
+  "geometry": [
+    {
+      "mode": "download",
+      "width": 360,
+      "actualWidth": 360,
+      "overflow": false
+    },
+    {
+      "mode": "download",
+      "width": 768,
+      "actualWidth": 768,
+      "overflow": false
+    },
+    {
+      "mode": "download",
+      "width": 1440,
+      "actualWidth": 1440,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "width": 360,
+      "actualWidth": 360,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "width": 768,
+      "actualWidth": 768,
+      "overflow": false
+    },
+    {
+      "mode": "convert",
+      "width": 1440,
+      "actualWidth": 1440,
+      "overflow": false
+    }
+  ],
+  "limitations": [
+    "Developer Windows with restricted PATH, not a clean VM",
+    "Picker responses substituted for this test; real native dialogs have separate evidence",
+    "No live provider download tested",
+    "Renderer and worker network evidence recorded by separate acceptance tests"
+  ]
+}

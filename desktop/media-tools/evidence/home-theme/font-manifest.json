@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-08T15:57:53.282Z",
+  "fonts": [
+    {
+      "file": "dm-sans-latin-ext.woff2",
+      "family": "DM Sans",
+      "subset": "latin-ext",
+      "source": "https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2",
+      "bytes": 18228,
+      "sha256": "a5d38fe99f930275684999b462c7123faa063d9e44e73b4b241723d884aa0f49",
+      "license": "DM-Sans-OFL.txt"
+    },
+    {
+      "file": "dm-sans-latin.woff2",
+      "family": "DM Sans",
+      "subset": "latin",
+      "source": "https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2",
+      "bytes": 36932,
+      "sha256": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543",
+      "license": "DM-Sans-OFL.txt"
+    },
+    {
+      "file": "noto-sans-thai-thai.woff2",
+      "family": "Noto Sans Thai",
+      "subset": "thai",
+      "source": "https://fonts.gstatic.com/s/notosansthai/v29/iJWQBXeUZi_OHPqn4wq6hQ2_hbJ1xyN9wd43SofNWcdfKI2hX2g.woff2",
+      "bytes": 26924,
+      "sha256": "1f5a173641bbcb3ca4fb0a986858b6b07f8cd5dd2ed61236b40548c7a3c7292f",
+      "license": "Noto-Sans-Thai-OFL.txt"
+    },
+    {
+      "file": "noto-sans-thai-latin-ext.woff2",
+      "family": "Noto Sans Thai",
+      "subset": "latin-ext",
+      "source": "https://fonts.gstatic.com/s/notosansthai/v29/iJWQBXeUZi_OHPqn4wq6hQ2_hbJ1xyN9wd43SofNWcdfMo2hX2g.woff2",
+      "bytes": 15944,
+      "sha256": "49929deb3afa3fea37b19fdd148889ef19b3e44a8452b13568af089a7d5db934",
+      "license": "Noto-Sans-Thai-OFL.txt"
+    },
+    {
+      "file": "noto-sans-thai-latin.woff2",
+      "family": "Noto Sans Thai",
+      "subset": "latin",
+      "source": "https://fonts.gstatic.com/s/notosansthai/v29/iJWQBXeUZi_OHPqn4wq6hQ2_hbJ1xyN9wd43SofNWcdfPI2h.woff2",
+      "bytes": 30748,
+      "sha256": "1a66f268c8d76575807979309cbbac3aff7b61919f59ea19fdc821d92fb407f3",
+      "license": "Noto-Sans-Thai-OFL.txt"
+    }
+  ]
+}

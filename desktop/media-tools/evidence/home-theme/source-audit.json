@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "file": "ui/media-tools.css",
+      "fontFamilyDeclarations": 0,
+      "hexColors": [
+        "#f2f0eb",
+        "#d0ad73"
+      ]
+    },
+    {
+      "file": "ui/native.css",
+      "fontFamilyDeclarations": 0,
+      "hexColors": []
+    },
+    {
+      "file": "ui/player.css",
+      "fontFamilyDeclarations": 0,
+      "hexColors": []
+    }
+  ],
+  "fontHash": "8e261cef5c90509742e36033a0793b1b67e06788b4d848394aacb68066da46e4",
+  "sourceMatchesPayload": true
+}

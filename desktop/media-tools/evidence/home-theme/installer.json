@@ -1,0 +1,14 @@
+﻿{
+    "passed":  true,
+    "installer":  "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\installers\\Audio-Tech-Labs-Media-Tools-Setup-0.2.1-Win64-QA.exe",
+    "qaAppId":  "AudioTechLabs.MediaTools.InternalQA",
+    "checks":  [
+                   "Per-user install, uninstall registration, Start Menu and Desktop shortcuts",
+                   "Installed EXE, engine, UI, and native media helpers match portable SHA256",
+                   "Installed app: all three pages at native minimum/normal sizes, exact Public font metrics and local fonts with dead HTTP(S) proxy",
+                   "Uninstall removed QA application, registry and both shortcuts",
+                   "Actual Audio Tech Labs Media Tools profile remained byte-for-byte unchanged"
+               ],
+    "profileFiles":  1,
+    "loggedAt":  "2026-10-08T23:09:25.9675665+07:00"
+}

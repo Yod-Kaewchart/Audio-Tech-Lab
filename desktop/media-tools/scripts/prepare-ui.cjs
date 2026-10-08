@@ -3,7 +3,10 @@ const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),design=path.resolve(root,'../../designs/media-tools'),ui=path.join(root,'ui');fs.mkdirSync(ui,{recursive:true});
 fs.cpSync(path.join(design,'assets'),path.join(ui,'assets'),{recursive:true});
 // Retain the native filename control styling added after the prototype snapshot.
-const sharedStyle=fs.readFileSync(path.join(design,'media-tools.css'),'utf8').replace('input[type=url],select,','input[type=url],input[type=text],select,').replace('.start-row{','.filename-field{margin-top:18px}.filename-field input{width:100%}.filename-error:not(:empty){color:var(--gold)}.start-row{');
+const sharedStyle=fs.readFileSync(path.join(design,'media-tools.css'),'utf8')
+ .replace(/^[\s\S]*?(?=\*\{box-sizing)/,'@import url("theme.css");\n/* Component geometry; Home typography and palette live in the shared theme. */\n')
+ .replace(/"DM Sans","Noto Sans Thai",sans-serif|"DM Sans",sans-serif/g,'var(--font-ui)')
+ .replace('input[type=url],select,','input[type=url],input[type=text],select,').replace('.start-row{','.filename-field{margin-top:18px}.filename-field input{width:100%}.filename-error:not(:empty){color:var(--gold)}.start-row{');
 fs.writeFileSync(path.join(ui,'media-tools.css'),sharedStyle);
 let view=fs.readFileSync(path.join(design,'media-tools.js'),'utf8').split('  const $ = id =>')[0]+'})();\n';
 view=view.replace('/* UI simulation only. No fetch, upload, storage, executable, or media processing. */','/* Shared static view derived from the approved prototype. No demo controller. */');

@@ -1,4 +1,4 @@
-param([string]$Installer)
+param([string]$Installer,[switch]$Theme)
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
 $manifestPath=Join-Path $root 'release\installers\installer-qa.json'
@@ -27,7 +27,7 @@ $before=@(Snapshot)
 $checks=New-Object System.Collections.Generic.List[string]
 $installRan=$false
 try {
- $p=Start-Process -FilePath $Installer -ArgumentList @('/CURRENTUSER','/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/TASKS=desktopicon',('/LOG="'+(Join-Path $testHome 'install.log')+'"')) -PassThru -Wait
+ $p=Start-Process -FilePath $Installer -ArgumentList @('/CURRENTUSER','/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/TASKS=desktopicon',('/LOG="'+(Join-Path $testHome 'install.log')+'"')) -WindowStyle Hidden -PassThru -Wait
  if($p.ExitCode -ne 0){throw "Installer exit code $($p.ExitCode)"}
  $installRan=$true
  if(-not(Test-Path -LiteralPath $uninstaller)){throw 'Uninstaller absent'}
@@ -45,9 +45,18 @@ try {
   if((Get-FileHash -LiteralPath $a -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $b -Algorithm SHA256).Hash){throw "Payload hash mismatch: $rel"}
  }
  $checks.Add('Installed EXE, engine, UI, and native media helpers match portable SHA256')
+ if($Theme){
+  $themeEnvironment=@{ATL_THEME_EXE=$env:ATL_THEME_EXE;ATL_THEME_KIND=$env:ATL_THEME_KIND}
+  try {
+   $env:ATL_THEME_EXE=Join-Path $target 'Audio Tech Labs Media Tools.exe';$env:ATL_THEME_KIND='installed'
+   Push-Location $root
+   try { node test/theme-acceptance.cjs; if($LASTEXITCODE -ne 0){throw 'Installed offline theme acceptance failed'} } finally { Pop-Location }
+   $checks.Add('Installed app: all three pages at native minimum/normal sizes, exact Public font metrics and local fonts with dead HTTP(S) proxy')
+  } finally { $env:ATL_THEME_EXE=$themeEnvironment.ATL_THEME_EXE;$env:ATL_THEME_KIND=$themeEnvironment.ATL_THEME_KIND }
+ }
 } finally {
  if(Test-Path -LiteralPath $uninstaller){
-   $u=Start-Process -FilePath $uninstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',('/LOG="'+(Join-Path $testHome 'uninstall.log')+'"')) -PassThru -Wait
+   $u=Start-Process -FilePath $uninstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',('/LOG="'+(Join-Path $testHome 'uninstall.log')+'"')) -WindowStyle Hidden -PassThru -Wait
    if($u.ExitCode -ne 0){throw "Uninstall failed: $($u.ExitCode)"}
  }
 }

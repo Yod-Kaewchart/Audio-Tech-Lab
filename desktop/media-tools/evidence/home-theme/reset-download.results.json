@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "mode": "download",
+  "checks": [
+    "section 01 cleared",
+    "section 02 cleared",
+    "section 03 cleared",
+    "saved output preserved",
+    "native selections invalidated",
+    "disk state cleared",
+    "cross page ready"
+  ],
+  "data": {
+    "url": "",
+    "customName": "",
+    "sourceTitle": "ยังไม่ได้เลือกแหล่งเสียง",
+    "sourceMetadata": 0,
+    "folder": "ยังไม่ได้เลือกโฟลเดอร์",
+    "selectedFormats": 0,
+    "bitrate": "192 kbps",
+    "sampleRate": "source",
+    "bitDepth": "16 bit",
+    "startDisabled": true,
+    "startHelp": "กำลังตรวจ native bridge และเครื่องมือ",
+    "resultHidden": true,
+    "resultName": "",
+    "progressHidden": true,
+    "progressStage": "",
+    "jobTitle": "ยังไม่มีงานปัจจุบัน",
+    "message": ""
+  }
+}

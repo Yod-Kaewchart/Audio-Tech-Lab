@@ -1,0 +1,23 @@
+PASS {"format":"mp3","bitrateKbps":128}
+PASS {"format":"mp3","bitrateKbps":192}
+PASS {"format":"mp3","bitrateKbps":256}
+PASS {"format":"mp3","bitrateKbps":320}
+PASS {"format":"wav","bitsPerSample":16,"sampleRateHz":"source"}
+PASS {"format":"wav","bitsPerSample":16,"sampleRateHz":44100}
+PASS {"format":"wav","bitsPerSample":16,"sampleRateHz":48000}
+PASS {"format":"wav","bitsPerSample":24,"sampleRateHz":"source"}
+PASS {"format":"wav","bitsPerSample":24,"sampleRateHz":44100}
+PASS {"format":"wav","bitsPerSample":24,"sampleRateHz":48000}
+PASS {"format":"flac","bitsPerSample":16,"sampleRateHz":"source"}
+PASS {"format":"flac","bitsPerSample":16,"sampleRateHz":44100}
+PASS {"format":"flac","bitsPerSample":16,"sampleRateHz":48000}
+PASS {"format":"flac","bitsPerSample":24,"sampleRateHz":"source"}
+PASS {"format":"flac","bitsPerSample":24,"sampleRateHz":44100}
+PASS {"format":"flac","bitsPerSample":24,"sampleRateHz":48000}
+PASS {"format":"alac","bitsPerSample":16,"sampleRateHz":"source"}
+PASS {"format":"alac","bitsPerSample":16,"sampleRateHz":44100}
+PASS {"format":"alac","bitsPerSample":16,"sampleRateHz":48000}
+PASS {"format":"alac","bitsPerSample":24,"sampleRateHz":"source"}
+PASS {"format":"alac","bitsPerSample":24,"sampleRateHz":44100}
+PASS {"format":"alac","bitsPerSample":24,"sampleRateHz":48000}
+ACCEPTANCE PASS D:\Sites\Audio Tech Labs\desktop\media-tools\test-output\acceptance-1791474731111

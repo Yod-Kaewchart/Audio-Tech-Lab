@@ -1,4 +1,5 @@
 const {_electron:electron}=require('playwright');
+const {mainWindow}=require('./electron-ui.cjs');
 const fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const {wave}=require('./fixtures.cjs');
 (async()=>{
@@ -9,6 +10,8 @@ const {wave}=require('./fixtures.cjs');
  const restrictedPath=path.join(process.env.SystemRoot,'System32');
  const app=await electron.launch({executablePath:release.executable,args:['--user-data-dir='+path.join(root,'profile')],env:{...process.env,PATH:restrictedPath,Path:restrictedPath,NODE_PATH:'',NODE_OPTIONS:'',ELECTRON_RUN_AS_NODE:undefined}});
  try{
+  // Wait for the initial document before navigating; the hidden host can open first.
+  const initial=await mainWindow(app);await initial.waitForSelector('#page-title');await initial.waitForLoadState('load');
   const runtime=await app.evaluate(({app})=>({isPackaged:app.isPackaged,appPath:app.getAppPath(),userData:app.getPath('userData'),path:process.env.PATH}));assert.equal(runtime.isPackaged,true);assert.equal(runtime.path,restrictedPath);
   // Packaged windows disable DevTools. Evaluate via the main-process WebContents without enabling it.
   const js=code=>app.evaluate(({BrowserWindow},code)=>BrowserWindow.getAllWindows().find(w=>/^atl-media:\/\/app\/(download|convert|player)\.html(?:#.*)?$/.test(w.webContents.getURL())).webContents.executeJavaScript(code),code);
