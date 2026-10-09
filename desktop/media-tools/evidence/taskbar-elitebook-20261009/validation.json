@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-10-09T04:27:26.2886905Z",
+  "status": "PASS - docs/evidence validation only",
+  "jsonParsed": 11,
+  "localMarkdownLinksChecked": 11,
+  "acceptedArtifacts": [
+    {
+      "role": "Setup",
+      "path": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\review-0.2.2-beta.2-r2-11549c34e61f\\candidate\\Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe",
+      "sha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+      "bytes": 210937650,
+      "manifestMatch": true
+    },
+    {
+      "role": "Portable",
+      "path": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\review-0.2.2-beta.2-r2-11549c34e61f\\candidate\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577.zip",
+      "sha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+      "bytes": 288706248,
+      "manifestMatch": true
+    },
+    {
+      "role": "Source review INCOMPLETE",
+      "path": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\review-0.2.2-beta.2-r2-11549c34e61f\\source-review\\Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip",
+      "sha256": "3445fc139ac50b75bd6aeb156e9ad19ea49b4192aa0a827e1840ec44bf5ba08a",
+      "bytes": 74366790,
+      "manifestMatch": true
+    }
+  ],
+  "dependencyLockSha256": "db7152bdfe328dee09931d3fd5c5f3ca6ddc40985bb9d9695285ae784dc91903",
+  "dependencyLockMatchesReleaseManifest": true,
+  "portableIdentityMatchesReleaseManifest": true,
+  "originalAndEvidenceScreenshotSha256": "015863ed53e9afd25fcf7bec11f79e685e616645bf2c6c158ba49163bb1d36cc",
+  "screenshotDimensions": "1366x768",
+  "profileFilesUnchanged": 73,
+  "shortcutFilesUnchanged": 4,
+  "gitScope": "Only two changed reports and new taskbar-elitebook-20261009 evidence",
+  "gitDiffCheck": "PASS",
+  "runtimeDependencyVendorChanges": false,
+  "rebuild": false,
+  "reinstall": false,
+  "audioRegressionRerun": false,
+  "audioRegressionReason": "Documentation/evidence only; existing runtime unchanged",
+  "gates": {
+    "installedTaskbarVisual": "BLOCKED",
+    "portableIconActive": "PASS - one real full-desktop Player image",
+    "portableHoverRepeatClose": "BLOCKED",
+    "overallTaskbarVisual": "BLOCKED",
+    "source": "BLOCKED / INCOMPLETE",
+    "sourceRequests": "SENT — user-reported / AWAITING RESPONSE",
+    "downloadLiveEjs": "BLOCKED",
+    "cleanMachineQa": "BLOCKED",
+    "signingSmartScreen": "BLOCKED"
+  },
+  "manifestAndArchivedKitNotUpdated": true,
+  "gitStagedDiffCheck": "PASS"
+}

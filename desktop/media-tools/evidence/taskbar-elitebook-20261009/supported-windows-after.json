@@ -1,0 +1,35 @@
+{
+  "checkedUtc": "2026-10-09T04:23:35.151Z",
+  "windows": [
+    {
+      "app": "OpenAI.Codex_2p2nqsd0c76g0!App",
+      "id": 1705326,
+      "title": "ChatGPT"
+    },
+    {
+      "app": "Chrome",
+      "id": 263396,
+      "title": "วางแผนเผยแพร่โปรแกรม - Google Chrome"
+    },
+    {
+      "app": "process:C:\\Program Files (x86)\\ManyCam\\ManyCam.exe",
+      "id": 1771368,
+      "title": "ManyCam"
+    },
+    {
+      "app": "Microsoft.ScreenSketch_8wekyb3d8bbwe!App",
+      "id": 3541112,
+      "title": "เครื่องมือสนิป"
+    },
+    {
+      "app": "process:D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+      "id": 264400,
+      "title": "Player — Audio Tech Labs · Windows"
+    }
+  ],
+  "playerTitle": "Player — Audio Tech Labs · Windows",
+  "taskbarSurfaceExposed": false,
+  "playerObservation": "get_window_state reported minimized; app remains running on Player",
+  "snipObservation": "Snipping Tool minimized after capture; no overwrite accepted; original autosaved PNG preserved",
+  "manualHoverNeeded": true
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "C:\\Users\\EliteBook\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\File Explorer.lnk",
+    "sha256": "cf116b33831de9f80847abdb2a0d92ab3d3f956a8e209ec95d35d986eea8c7b5",
+    "target": "",
+    "arguments": "",
+    "icon": "%windir%\\explorer.exe,0"
+  },
+  {
+    "file": "C:\\Users\\EliteBook\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Google Chrome.lnk",
+    "sha256": "409b48a7d30d602581b82df4ac272ee078bef53428e9c2b3b520b197588b4310",
+    "target": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "arguments": "",
+    "icon": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe,0"
+  },
+  {
+    "file": "C:\\Users\\EliteBook\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Windows PowerShell.lnk",
+    "sha256": "9069458b5eab16062b4c80f8772aa1153807d0e35f71c3d0940abd636e8015bf",
+    "target": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "arguments": "",
+    "icon": ",0"
+  },
+  {
+    "file": "C:\\Users\\EliteBook\\Desktop\\Audio Tech Labs Media Tools.lnk",
+    "sha256": "1e96b0a8023f7bafd9e909444a5bd33ad4b861b350c41497d4aa2c3a1a33d155",
+    "target": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Media-Tools-0.1.0-win-x64-20261008T072228\\Audio Tech Labs Media Tools.exe",
+    "arguments": "",
+    "icon": "D:/Sites/Audio Tech Labs/desktop/media-tools/release/Media-Tools-0.1.0-win-x64-20261008T072228/Audio Tech Labs Media Tools.exe,0"
+  }
+]

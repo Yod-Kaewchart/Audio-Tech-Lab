@@ -1,0 +1,21 @@
+{
+  "capturedUtc": "2026-10-09T04:10:51.182Z",
+  "windows": [
+    {
+      "app": "OpenAI.Codex_2p2nqsd0c76g0!App",
+      "id": 1705326,
+      "title": "ChatGPT"
+    },
+    {
+      "app": "Chrome",
+      "id": 263396,
+      "title": "วางแผนเผยแพร่โปรแกรม - Google Chrome"
+    },
+    {
+      "app": "process:C:\\Program Files (x86)\\ManyCam\\ManyCam.exe",
+      "id": 1771368,
+      "title": "ManyCam"
+    }
+  ],
+  "fullDesktopApiExposed": false
+}

@@ -4,6 +4,22 @@
 
 งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่ได้ push, merge main, เปิด GitHub Release, upload public หรือ deploy หน้าโหลด และไม่ได้แก้ Home/backend/tunnel/Cloudflare
 
+## Taskbar visual บน EliteBook — หลักฐานเพิ่มเติม 9 ตุลาคม 2026
+
+เริ่มจาก branch `codex/source-taskbar-review-20261009`, HEAD `9fe2cf2a8c692882ca9a8110ed0e310e63ed1f84` และ working tree สะอาด ไม่พบ AGENTS.md ใน scope ที่ใช้บังคับ ตรวจ Setup/Portable เดิมใน private r2 kit ว่า SHA256 ตรง release manifest ก่อนเปิด ไม่มี reinstall, rebuild หรือเปลี่ยน binaries/dependencies รุ่นยังเป็น `0.2.2-beta.2` / `0.2.2.2` / unsigned; source/build commit ยังคง `df183f4970366597d539323760108dbaf234e049` งานรอบนี้เป็น review documentation/evidence เท่านั้น
+
+| รายการ | ผล | หลักฐาน / ขอบเขต |
+| --- | --- | --- |
+| Installed taskbar visual | BLOCKED | ไม่พบ EXE ที่ `%LOCALAPPDATA%\Programs\Audio Tech Labs Media Tools\Audio Tech Labs Media Tools.exe`; ไม่พบ uninstall entry ที่ตรง และ `normal-cleanup.json` รอบก่อนระบุถอน test installation แล้ว ผู้ใช้ยืนยันไม่ reinstall และไม่ใช้รุ่นอื่นแทน |
+| Portable identity | PASS | extracted EXE เดิม, ProductVersion `0.2.2-beta.2`, FileVersion `0.2.2.2`, SHA256 `94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d`; path/command line ใน execution-and-preservation.json |
+| Portable taskbar icon และ active ของ Player | PASS เฉพาะภาพนี้ | PNG เต็ม desktop จริงจาก Windows Snipping Tool เวลา 11:13:01 วันที่ 9 ตุลาคม 2026 (ไทย), 1366×768; ไอคอน wave ตรง native app icon ไม่มี generic Electron มี Media Tools entry ที่มองเห็นหนึ่งรายการและแถบ active สีน้ำเงิน |
+| Portable ชื่อใน taskbar hover/thumbnail, grouping หลังเปิดซ้ำ และหลังปิด | BLOCKED | ภาพเห็น window title `Player — Audio Tech Labs · Windows` แต่ไม่มี hover/second-launch/close taskbar sequence; API ไม่มี taskbar target หรือ hover จึงไม่ใช้ single-instance PASS เดิมยกระดับ visual PASS รวม |
+| Profile/shortcut เดิม | PASS ในขอบเขตรอบนี้ | profile เดิม 73 ไฟล์ SHA/ขนาดตรงก่อน–หลัง; shortcut 4 ไฟล์ hash/target/arguments/icon เดิม ไม่แก้ pin/unpin; taskbar .lnk inventory ไม่มี Media Tools และ Desktop shortcut เดิมชี้ Portable 0.1.0 จึงไม่ได้ใช้เปิด |
+
+ดู [รายงานและขั้นตอนเก็บภาพที่เหลือ](evidence/taskbar-elitebook-20261009/README-พี่ยอด.md), [ภาพเต็ม desktop ต้นฉบับ](evidence/taskbar-elitebook-20261009/portable-player-full-desktop.png) และ [validation](evidence/taskbar-elitebook-20261009/validation.json) ภาพ SHA256 `015863ed53e9afd25fcf7bec11f79e685e616645bf2c6c158ba49163bb1d36cc` เก็บเป็น **private review evidence** แยกจากแพ็กเกจผู้ใช้ ไม่แก้ archived r2 kit/accepted artifacts/release manifest
+
+Portable เปิด EXE เดิมผ่าน Playwright Electron launcher โดยมี debug arguments ของ harness และ profile ทดสอบแยก ไม่ใช่การเปิดจาก shortcut ปกติ ไม่มีงานเสียง/playlist เดิมถูกเปิด Player ยังทำงานและหน้าต่างถูกย่อไว้สำหรับพี่ยอดตรวจ hover ต่อ ไม่มีการ kill process หรือเปิด Installed ทับกัน **Taskbar visual gate รวมยัง BLOCKED** ส่วน corresponding source **BLOCKED / INCOMPLETE**, source requests **SENT — user-reported / AWAITING RESPONSE**, Download live/EJS, clean-machine QA และ signing/SmartScreen คงสถานะเดิม ตาราง r2/รอบก่อนด้านล่างเป็นหลักฐานย้อนหลัง ไม่ใช่ผลภาพล่าสุด
+
 ## ติดตามคำขอ corresponding source — ผู้ใช้แจ้งส่งแล้ว
 
 **SENT — user-reported / AWAITING RESPONSE** พี่ยอดแจ้งในแชตว่าส่งอีเมลถึงผู้เผยแพร่ทั้งสองรายแล้ววันที่ **9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok, UTC+07:00)** ไม่ได้ระบุเวลาส่ง จึงไม่สร้าง timestamp ของการส่ง

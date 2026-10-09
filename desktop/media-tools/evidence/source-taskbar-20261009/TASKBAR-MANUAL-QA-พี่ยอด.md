@@ -1,6 +1,8 @@
 # ตรวจ taskbar จริง — สำหรับพี่ยอด
 
-สถานะ **BLOCKED**: API Windows ที่รองรับเปิดให้จับเฉพาะหน้าต่างแอป ไม่มี taskbar ใน inventory ที่คืนมา ภาพ `*-app-window-NOT-TASKBAR.png` เป็นหน้าต่างจริงแต่ใช้แทนภาพ taskbar ไม่ได้ PE icon hash, WM_GETICON, shortcut icon และ AppUserModelID ไม่ใช่หลักฐาน visual ในรายการนี้
+สถานะล่าสุด **BLOCKED รวม / Portable มีหลักฐานบางส่วน**: รอบ EliteBook 9 ตุลาคม 2026 จับภาพเต็ม desktop/taskbar จริงผ่าน Windows Snipping Tool ได้แล้ว Portable icon/active ของ Player ผ่านเฉพาะภาพนี้ แต่ยังขาด hover/ชื่อ/group หลังเปิดซ้ำและหลังปิด ส่วน Installed ไม่พบ EXE เดิมและรอบก่อนถอน test installation แล้ว **รอบนี้ห้าม reinstall หรือใช้รุ่นอื่นแทน** ดู [รายงานล่าสุด](../taskbar-elitebook-20261009/README-พี่ยอด.md) และ [ภาพจริง](../taskbar-elitebook-20261009/portable-player-full-desktop.png)
+
+ข้อจำกัดของรอบ r2 เดิม: API Windows จับเฉพาะหน้าต่างแอป ไม่มี taskbar target ใน inventory ภาพ `*-app-window-NOT-TASKBAR.png` ใช้แทนภาพ taskbar ไม่ได้ PE icon hash, WM_GETICON, shortcut icon และ AppUserModelID ไม่ใช่หลักฐาน visual การใช้ Snipping Tool รอบใหม่ไม่เพิ่ม taskbar target/hover ให้ API
 
 ## ชุดเดียวกันที่ต้องใช้
 
@@ -20,6 +22,8 @@ ProductName `Audio Tech Labs Media Tools`; ProductVersion `0.2.2-beta.2`; FileVe
 
 ## Normal installed app
 
+ขั้นตอนติดตั้ง/ถอนด้านล่างเป็น worksheet สำหรับรอบที่ได้รับอนุญาตให้ทำ installer QA เท่านั้น **ไม่ดำเนินการในรอบ EliteBook นี้** Installed คง BLOCKED จนมี candidate รุ่น/hash ตรงที่ติดตั้งอยู่และผู้ใช้ระบุ path ให้ตรวจ
+
 1. ติดตั้ง Setup ที่ hash ตรงด้วย normal AppId `AudioTechLabs.MediaTools` บันทึก install path และ target/icon/arguments ของ Start Menu shortcut จริง Default EXE อยู่ใน `%LOCALAPPDATA%\Programs\Audio Tech Labs Media Tools\Audio Tech Labs Media Tools.exe` ระวัง Desktop shortcut เดิมของเครื่องนี้ชี้ Portable 0.1.0 จึงห้ามใช้ shortcut นั้นอ้างเป็น installed beta.2
 2. เปิดจาก Start Menu shortcut จริง (หรือระบุชัดว่าเปิดจาก EXE/shortcut ทดสอบแยก profile) เก็บภาพ desktop เต็มที่เห็นหน้าต่างแอปและ **taskbar จริงในภาพเดียวกัน** ใช้ Snipping Tool เลือก full screen ด้วยมือหรือ Print Screen แล้วบันทึก PNG ห้ามใช้ภาพหน้าต่างแอปอย่างเดียว
 3. เก็บภาพ taskbar hover thumbnail/ชื่อของปุ่มแอปและ group ถ้า combine taskbar เป็น icon-only ให้เปิด thumbnail เพื่อเห็นชื่อ หน้าต่าง Download มี title `Download Audio — Audio Tech Labs · Windows`; ชื่อ product/shortcut ต้องเป็น `Audio Tech Labs Media Tools` ไอคอนควรเป็น wave ในกรอบเข้มแบบเดียวกับหน้าต่างและ app-icon.ico
@@ -29,6 +33,8 @@ ProductName `Audio Tech Labs Media Tools`; ProductVersion `0.2.2-beta.2`; FileVe
 
 ## Portable (ตรวจแยกหลังปิด installed app)
 
+รอบ EliteBook ใช้โฟลเดอร์ที่แตกไว้เดิมและตรวจ EXE hash/version ไม่แตก ZIP ใหม่ ไม่ใช้ legacy shortcut Player เปิดด้วย profile ทดสอบแยกแล้ว ดู path/arguments และขั้นตอนเก็บ hover/second-launch/close ที่ยังขาดในรายงานล่าสุด
+
 1. แตก ZIP ที่ hash ตรงลงโฟลเดอร์ใหม่ บันทึก extracted EXE path และ hash/version ตามตาราง ใช้ EXE โดยตรง หรือ shortcut ทดสอบชื่อใหม่ที่บันทึก target/arguments อย่าใช้ legacy Desktop shortcut ของ Portable 0.1.0
 2. ทำขั้นตอนภาพ full desktop/taskbar, hover/group, เปิดซ้ำ, focus, เปลี่ยนสามหน้าและปิด เช่นเดียวกับ installed app ใช้ profile Portable ทดสอบแยกเพื่อไม่แก้ playlist เดิม
 3. ถ้าจะทดสอบ installed และ Portable พร้อมกัน ให้ทำเป็นกรณีเพิ่มต่างหาก บันทึก profile/path ของทั้งสองและผลที่คาดหวังตาม single-instance/profile ไม่ใช้กรณีนี้แทนการตรวจสองแบบแยกกัน
@@ -36,6 +42,8 @@ ProductName `Audio Tech Labs Media Tools`; ProductVersion `0.2.2-beta.2`; FileVe
 ## ส่งหลักฐานและตัดสินผล
 
 ชื่อภาพแนะนำ `normal-taskbar-open.png`, `normal-taskbar-hover.png`, `normal-taskbar-second-launch.png`, `portable-taskbar-open.png`, `portable-taskbar-hover.png`, `portable-taskbar-second-launch.png` เก็บไฟล์ PNG ต้นฉบับไม่ retouch พร้อม SHA256 และ worksheet นี้ อย่าแชร์ข้อมูลแอปอื่นในภาพออก Public; เก็บใน private evidence ตรวจด้วยมือว่า taskbar อยู่ในภาพจริง
+
+ตารางต่อไปนี้เป็น **snapshot รอบ r2 ก่อนตรวจ EliteBook** ผลล่าสุดอยู่ในรายงานที่ลิงก์ไว้ด้านบน ไม่แก้ผลเก่าให้ดูเหมือนมีภาพในรอบนั้น
 
 | รายการ | Normal | Portable | Evidence path / SHA / ข้อสังเกต |
 | --- | --- | --- | --- |

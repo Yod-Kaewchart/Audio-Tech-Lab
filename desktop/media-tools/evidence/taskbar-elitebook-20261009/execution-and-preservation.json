@@ -1,0 +1,70 @@
+{
+  "checkedUtc": "2026-10-09T04:23:10.2032968Z",
+  "installed": {
+    "status": "BLOCKED",
+    "expectedExe": "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\Audio Tech Labs Media Tools.exe",
+    "exists": false,
+    "matchingUninstallEntries": [],
+    "previousCleanup": "../source-taskbar-20261009/normal-cleanup.json",
+    "noReinstall": true
+  },
+  "portable": {
+    "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+    "bytes": 246269440,
+    "productName": "Audio Tech Labs Media Tools",
+    "productVersion": "0.2.2-beta.2",
+    "fileVersion": "0.2.2.2",
+    "sha256": "94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d",
+    "signatureStatus": "NotSigned",
+    "launchMethod": "Existing extracted EXE via Playwright Electron launcher; UI navigation via @oai/sky",
+    "testProfile": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook-20261009\\portable-profile",
+    "processes": [
+      {
+        "ProcessId": 12548,
+        "ParentProcessId": 4484,
+        "ExecutablePath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "CommandLine": "\"D:/Sites/Audio Tech Labs/desktop/media-tools/test-output/beta2-portable-extracted/Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577/Audio Tech Labs Media Tools.exe\"  \"--inspect=0\" \"--remote-debugging-port=0\" \"--user-data-dir=D:/Sites/Audio Tech Labs/desktop/media-tools/test-output/taskbar-elitebook-20261009/portable-profile\""
+      },
+      {
+        "ProcessId": 8372,
+        "ParentProcessId": 12548,
+        "ExecutablePath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "CommandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=gpu-process --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook-20261009\\portable-profile\" --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --field-trial-handle=1908,i,11281496165252028931,3370088154934119404,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1912,i,173441469869208946,17009317376729089330,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=1896 /prefetch:2"
+      },
+      {
+        "ProcessId": 19104,
+        "ParentProcessId": 12548,
+        "ExecutablePath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "CommandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook-20261009\\portable-profile\" --standard-schemes=atl-media --secure-schemes=atl-media --fetch-schemes=atl-media --streaming-schemes=atl-media --field-trial-handle=1908,i,11281496165252028931,3370088154934119404,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1912,i,173441469869208946,17009317376729089330,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2156 /prefetch:11"
+      },
+      {
+        "ProcessId": 13292,
+        "ParentProcessId": 12548,
+        "ExecutablePath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "CommandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=renderer --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook-20261009\\portable-profile\" --standard-schemes=atl-media --secure-schemes=atl-media --fetch-schemes=atl-media --streaming-schemes=atl-media --app-user-model-id=AudioTechLabs.MediaTools --app-path=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\resources\\app\" --enable-sandbox --remote-debugging-port=0 --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --launch-time-ticks=41263659642 --field-trial-handle=1908,i,11281496165252028931,3370088154934119404,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1912,i,173441469869208946,17009317376729089330,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2680 /prefetch:1"
+      },
+      {
+        "ProcessId": 5748,
+        "ParentProcessId": 12548,
+        "ExecutablePath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "CommandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=renderer --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook-20261009\\portable-profile\" --standard-schemes=atl-media --secure-schemes=atl-media --fetch-schemes=atl-media --streaming-schemes=atl-media --app-user-model-id=AudioTechLabs.MediaTools --app-path=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\resources\\app\" --enable-sandbox --remote-debugging-port=0 --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=41263876508 --field-trial-handle=1908,i,11281496165252028931,3370088154934119404,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1912,i,173441469869208946,17009317376729089330,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3760 /prefetch:1"
+      }
+    ],
+    "leftRunningForManualHoverEvidence": true
+  },
+  "preservation": {
+    "profileFilesBefore": 73,
+    "profileFilesAfter": 73,
+    "profileByteHashesEqual": true,
+    "shortcutsChecked": 4,
+    "shortcutHashesAndTargetsEqual": true,
+    "pinnedShortcutFiles": [
+      "C:\\Users\\EliteBook\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\File Explorer.lnk",
+      "C:\\Users\\EliteBook\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Google Chrome.lnk",
+      "C:\\Users\\EliteBook\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Windows PowerShell.lnk"
+    ],
+    "mediaToolsPinnedLnkFound": false,
+    "noPinUnpinOrShortcutWrite": true,
+    "noAudioJobOrAudioFileOperation": true
+  }
+}
