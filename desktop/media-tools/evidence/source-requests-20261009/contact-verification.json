@@ -1,7 +1,18 @@
 {
-  "schema": 1,
+  "schema": 2,
   "reviewDate": "2026-10-09",
-  "status": "DRAFT_NOT_SENT",
+  "status": "SENT — user-reported / AWAITING RESPONSE",
+  "requestStatus": "SENT — user-reported",
+  "responseStatus": "AWAITING RESPONSE",
+  "statusBasis": "User message in this chat: พี่ยอด reports sending to both listed recipients on 9 October 2026, Thai local date. No sent-email copy or publisher response was provided.",
+  "reportedSender": "พี่ยอด",
+  "userReportedSentDate": "2026-10-09",
+  "sentDateTimezone": "Asia/Bangkok",
+  "sentLocalTime": null,
+  "sentByAgent": false,
+  "sendingEvidence": [],
+  "responseEvidence": [],
+  "draftMatchesSentEmailVerified": false,
   "requestBasis": "evidence/source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md",
   "sourceGate": "BLOCKED",
   "sourceLabel": "INCOMPLETE",
@@ -20,7 +31,10 @@
       "interpretation": "Publisher writes builds at this domain; resolve builds plus the page domain gyan.dev. The full email address is derived from that explicit publisher wording.",
       "publisherLinkedAlternative": "https://github.com/GyanD/codexffmpeg/issues",
       "deliveryTested": false,
-      "sent": false,
+      "requestStatus": "SENT — user-reported",
+      "responseStatus": "AWAITING RESPONSE",
+      "sentReportedByUser": true,
+      "sentIndependentlyVerified": false,
       "draft": "GYAN-REQUEST-DRAFT.md"
     },
     {
@@ -35,11 +49,15 @@
       "currentSource": "https://github.com/yt-dlp/yt-dlp/blob/master/THIRD_PARTY_LICENSES.txt",
       "currentEvidenceFile": "publisher/yt-dlp-current-THIRD_PARTY_LICENSES.txt",
       "deliveryTested": false,
-      "sent": false,
+      "requestStatus": "SENT — user-reported",
+      "responseStatus": "AWAITING RESPONSE",
+      "sentReportedByUser": true,
+      "sentIndependentlyVerified": false,
       "draft": "YT-DLP-REQUEST-DRAFT.md"
     }
   ],
   "attachments": [],
-  "networkScope": "HTTPS publisher pages/notices only; no mail delivery, contact form submission or issue creation",
-  "mutations": "New private draft/evidence directory only; no changes to candidate binaries, dependencies, app source, review r2 kit or release manifests"
+  "attachmentsScope": "Attachments prepared by the agent for the drafts only. Actual sent-email attachments were not provided or verified.",
+  "networkScope": "Agent activity was limited to HTTPS publisher pages/notices; the agent did not send email, submit a contact form or create an issue. Sending is reported by the user, without independent delivery verification.",
+  "mutations": "Documentation-only request-status update; no changes to candidate binaries, dependencies, app source, archived review r2 kit or release manifests"
 }

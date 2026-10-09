@@ -1,8 +1,19 @@
 # ข้อความขอ build-specific source สำหรับพี่ยอดตรวจ
 
-**DRAFT / NOT SENT — เตรียมข้อความเท่านั้น ยังไม่ได้ส่งอีเมลหรือโพสต์ issue และยังไม่เผยแพร่**
+**SENT — user-reported / AWAITING RESPONSE**
+
+พี่ยอดแจ้งว่าส่งอีเมลถึง `builds@gyan.dev` และ `maintainers@yt-dlp.org` แล้ววันที่ **9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok, UTC+07:00)** ไม่ได้ระบุเวลาส่ง จึงบันทึกเฉพาะวันที่ ไม่สร้าง timestamp ของการส่ง ยังไม่มีสำเนาอีเมลส่ง, Message-ID, delivery receipt หรือคำตอบจากผู้เผยแพร่ที่ได้รับให้ตรวจสอบ สถานะนี้อิงข้อความที่ผู้ใช้แจ้งในแชต ไม่ใช่การยืนยันการส่งหรือการรับโดยเครื่องมือ
 
 อิง [SOURCE-CLOSURE-PLAN.md ของ review r2](../source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md) และ inventory เดิม ตรวจช่องทางติดต่อและ hash ของ vendor ที่ใช้อยู่เมื่อ **9 ตุลาคม 2026** ส่วน corresponding source ยังคง **BLOCKED / INCOMPLETE** จนกว่าจะได้รับและตรวจหลักฐานครบ การพบอีเมลติดต่อไม่ใช่การปิด source gate
+
+## ติดตามคำขอ source
+
+| ผู้รับ | วันที่ส่งที่ผู้ใช้แจ้ง / timezone | สถานะคำขอ | สถานะคำตอบ | หลักฐานที่มี |
+| --- | --- | --- | --- | --- |
+| `builds@gyan.dev` | 2026-10-09 / Asia/Bangkok; ไม่ทราบเวลาส่ง | SENT — user-reported | AWAITING RESPONSE | ข้อความแจ้งจากพี่ยอดในแชต; ไม่มีหลักฐานส่งหรือคำตอบที่ตรวจสอบอิสระได้ |
+| `maintainers@yt-dlp.org` | 2026-10-09 / Asia/Bangkok; ไม่ทราบเวลาส่ง | SENT — user-reported | AWAITING RESPONSE | ข้อความแจ้งจากพี่ยอดในแชต; ไม่มีหลักฐานส่งหรือคำตอบที่ตรวจสอบอิสระได้ |
+
+สถานะที่อ่านโดยเครื่องอยู่ใน [contact-verification.json](contact-verification.json) การส่งที่รายงานไม่ปิดรายการ F1–F5 / Y1–Y6 และไม่เปลี่ยน source gate เมื่อมีคำตอบจริงจึงเก็บคำตอบ/ไฟล์/แหล่งที่มาและ hashes ที่ได้รับ แล้วตรวจ coverage ตามตารางด้านล่าง ไม่เติมคำตอบหรือ source ที่ยังไม่ได้รับ และไม่กำหนดวันตอบกลับแทนผู้เผยแพร่
 
 ## ร่างที่ให้ตรวจ
 
@@ -11,7 +22,7 @@
 | Gyan | [GYAN-REQUEST-DRAFT.md](GYAN-REQUEST-DRAFT.md) | ผูก ZIP + FFmpeg/FFprobe กับ SHA256; ขอ source/patches ของ 37 library rows และ 8 libraries ที่ไม่ระบุรุ่น, recipes/configuration, MSYS2 snapshot, transitive/hardware inputs และ source delivery mapping |
 | yt-dlp maintainers | [YT-DLP-REQUEST-DRAFT.md](YT-DLP-REQUEST-DRAFT.md) | ผูก EXE กับ SHA256; ขอ original build/wheel mapping, custom bootloader, CPython/native dependencies, curl-impersonate, EJS preferred source และ runtime redistribution records |
 
-แต่ละร่างมี To, Subject, เนื้อหาและ appendix รวมไว้แล้ว เลือกข้อความระหว่าง `EMAIL BODY START` กับ `EMAIL BODY END` เมื่อต้องการคัดลอก ไม่ต้องส่งข้อความกำกับภาษาไทยหรือ marker ไปด้วย เติม `[Sender name]` และ `[Reply-to email]` ให้ตรงกับข้อมูลที่พี่ยอดเลือกก่อนส่ง ยังไม่มีการกำหนดผู้ส่ง อีเมลตอบกลับ หรือกำหนดเวลาตอบแทนพี่ยอด
+เก็บ To, Subject, เนื้อหา, appendix และ placeholders `[Sender name]` / `[Reply-to email]` ของร่างเดิมไว้ ไม่ได้รับสำเนาฉบับที่ส่งจริง จึงไม่ยืนยันว่าเนื้อหา ผู้ส่ง อีเมลตอบกลับ หรือไฟล์แนบของฉบับส่งตรงกับร่างเหล่านี้ ส่วนระหว่าง `EMAIL BODY START` กับ `EMAIL BODY END` ยังเป็นร่างอ้างอิง ไม่ใช่หลักฐานการส่ง
 
 ## ช่องทางที่ตรวจจากผู้เผยแพร่โดยตรง
 
@@ -21,7 +32,7 @@
 | Gyan — ทางเลือก | [GyanD/codexffmpeg issues](https://github.com/GyanD/codexffmpeg/issues) | หน้า Builds ลิงก์ไปยัง issues ของ repository นี้โดยตรง | เก็บเป็นช่องทางสำรอง ไม่ได้สร้าง issue; ร่างใช้ email เพื่อให้พี่ยอดตรวจข้อความก่อนส่ง |
 | yt-dlp | `maintainers@yt-dlp.org` | [THIRD_PARTY_LICENSES.txt ที่ tag 2026.08.19](https://github.com/yt-dlp/yt-dlp/blob/2026.08.19/THIRD_PARTY_LICENSES.txt) ระบุช่องทางขอ source ของ bundled third-party components; ตรวจ [ไฟล์ปัจจุบัน](https://github.com/yt-dlp/yt-dlp/blob/master/THIRD_PARTY_LICENSES.txt) เพิ่มด้วย | อีเมลพิมพ์ไว้โดยตรงใน notices รุ่นที่ใช้; pinned/current snapshots มี SHA256 ตรงกัน ยังไม่ได้ทดสอบ mailbox/delivery |
 
-เก็บหน้าและ notices ที่อ่านไว้ใน `publisher/` พร้อม URL, UTC timestamp, size และ SHA256 ใน [publisher-receipts.json](publisher-receipts.json) ส่วน [contact-verification.json](contact-verification.json) บันทึกการตีความช่องทางและสถานะ NOT SENT หน้า Gyan ปัจจุบันใช้ตรวจช่องทางติดต่อเท่านั้น ไม่ใช้ payload ที่ URL ปัจจุบันแทน binary เดิม เก็บ publisher snapshots แบบ byte-for-byte รวม whitespace ต้นฉบับ โดยกำหนด Git attributes เฉพาะหลักฐานดิบ; เอกสารที่เขียนใหม่ยังตรวจ whitespace ตามปกติ
+เก็บหน้าและ notices ที่อ่านไว้ใน `publisher/` พร้อม URL, UTC timestamp, size และ SHA256 ใน [publisher-receipts.json](publisher-receipts.json) เป็นหลักฐานช่องทางติดต่อเท่านั้น ส่วน [contact-verification.json](contact-verification.json) แยกสถานะที่ผู้ใช้รายงานออกจากการตรวจส่งอิสระ หน้า Gyan ปัจจุบันใช้ตรวจช่องทางติดต่อเท่านั้น ไม่ใช้ payload ที่ URL ปัจจุบันแทน binary เดิม เก็บ publisher snapshots แบบ byte-for-byte รวม whitespace ต้นฉบับ โดยกำหนด Git attributes เฉพาะหลักฐานดิบ; เอกสารที่เขียนใหม่ยังตรวจ whitespace ตามปกติ
 
 ## สิ่งที่ต้องได้จากคำตอบเพื่อปิดรายการ
 
@@ -53,8 +64,10 @@
 - Version: `0.2.2-beta.2`, unsigned
 - Git status ตอนเริ่มเตรียมร่าง: clean; ก่อนเตรียม commit มีเฉพาะโฟลเดอร์ `evidence/source-requests-20261009/` ใหม่
 - เก็บเฉพาะร่างและหลักฐานชุดนี้ด้วย docs-only commit ชื่อ `docs(media-tools): prepare publisher source request drafts`; ดู hash จาก Git history ของโฟลเดอร์นี้ ไม่ใช่ source/build commit ของ candidate
-- ไม่แก้ r2 kit, release manifest, source plan, binaries, dependencies หรือ app source และไม่ rebuild
-- ผลตรวจร่างและ hashes: [validation-results.json](validation-results.json)
+- commit เก็บร่างเดิม: `1a705b7b6f6339e9590e7f43dccba5c2c93c0520`; ก่อนบันทึกสถานะที่ผู้ใช้แจ้ง Git สะอาด ไม่มีร่าง/หลักฐานที่ยังไม่ commit
+- รอบบันทึกสถานะนี้อัปเดตเอกสารติดตาม, รายงาน Public Beta และ source closure plan ใน working source เท่านั้น ไม่เปลี่ยน archived r2 kit/release manifest, binaries, dependencies หรือ app source และไม่ rebuild
+- [validation-results.json](validation-results.json) เป็น snapshot ประวัติของช่วงเตรียมร่างก่อน commit เดิม ค่า NOT SENT/false ในไฟล์นั้นอ้างอิงช่วงตรวจเดิม ไม่ใช่สถานะคำขอปัจจุบัน; ไม่แก้ผลตรวจย้อนหลัง
+- ผลตรวจรอบบันทึกสถานะ: [status-update-validation.json](status-update-validation.json)
 
 SHA256 ของ vendor binaries ตรวจซ้ำกับ `dependencies.lock.json` แล้วและใส่ในแต่ละร่างครบ:
 

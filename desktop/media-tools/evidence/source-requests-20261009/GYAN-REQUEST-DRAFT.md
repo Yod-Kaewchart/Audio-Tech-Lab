@@ -1,4 +1,6 @@
-# ร่างถึง Gyan — ยังไม่ได้ส่ง
+# ร่างอ้างอิงถึง Gyan
+
+สถานะคำขอ: **SENT — user-reported / AWAITING RESPONSE** พี่ยอดแจ้งว่าส่งถึง builds@gyan.dev แล้ววันที่ 9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok) ไม่ได้ระบุเวลาส่งและยังไม่มีสำเนาอีเมลส่งหรือคำตอบที่ได้รับให้ตรวจสอบ เอกสารนี้เก็บร่างเดิม ไม่ยืนยันว่าเป็นเนื้อหาฉบับที่ส่งจริง
 
 To: `builds@gyan.dev`
 
@@ -6,7 +8,7 @@ Subject: Build-specific source, patches and recipes for Gyan FFmpeg 9.0.2 essent
 
 ช่องทางนี้แปลงจากข้อความ “builds at this domain” บน [หน้า Notes ของผู้เผยแพร่](https://www.gyan.dev/ffmpeg/builds/#notes) เป็น builds@gyan.dev ตรวจเมื่อ 9 ตุลาคม 2026; ยังไม่ได้ทดสอบการส่งหรือการรับอีเมล
 
-พี่ยอดตรวจเนื้อหาและเติม `[Sender name]` / `[Reply-to email]` ก่อนใช้ ส่วนด้านล่างรวม appendix ที่ส่งได้โดยไม่มีไฟล์แนบ ไม่แนบ private review kit
+เก็บ placeholders `[Sender name]` / `[Reply-to email]` และเนื้อหาร่างเดิมไว้เป็นอ้างอิง ไม่เติมข้อมูลผู้ส่งหรืออีเมลตอบกลับของฉบับจริงโดยไม่มีหลักฐาน Appendix ในร่างไม่ใช่การยืนยันว่ามีหรือไม่มีไฟล์แนบในอีเมลที่พี่ยอดส่ง
 
 <!-- EMAIL BODY START -->
 

@@ -4,6 +4,19 @@
 
 งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่ได้ push, merge main, เปิด GitHub Release, upload public หรือ deploy หน้าโหลด และไม่ได้แก้ Home/backend/tunnel/Cloudflare
 
+## ติดตามคำขอ corresponding source — ผู้ใช้แจ้งส่งแล้ว
+
+**SENT — user-reported / AWAITING RESPONSE** พี่ยอดแจ้งในแชตว่าส่งอีเมลถึงผู้เผยแพร่ทั้งสองรายแล้ววันที่ **9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok, UTC+07:00)** ไม่ได้ระบุเวลาส่ง จึงไม่สร้าง timestamp ของการส่ง
+
+| ผู้รับ | สถานะคำขอ | สถานะคำตอบ | หลักฐาน / ขอบเขต |
+| --- | --- | --- | --- |
+| `builds@gyan.dev` | SENT — user-reported | AWAITING RESPONSE | ข้อความแจ้งจากพี่ยอด; ยังไม่มีสำเนาอีเมลส่ง, Message-ID, delivery receipt หรือคำตอบที่ได้รับให้ตรวจสอบ |
+| `maintainers@yt-dlp.org` | SENT — user-reported | AWAITING RESPONSE | ข้อความแจ้งจากพี่ยอด; ยังไม่มีสำเนาอีเมลส่ง, Message-ID, delivery receipt หรือคำตอบที่ได้รับให้ตรวจสอบ |
+
+ดู [เอกสารติดตาม](evidence/source-requests-20261009/README-พี่ยอด.md), [สถานะที่แยก user report ออกจากการตรวจอิสระ](evidence/source-requests-20261009/contact-verification.json) และ [ผลตรวจรอบบันทึกสถานะ](evidence/source-requests-20261009/status-update-validation.json) ร่างเดิมเก็บที่ commit `1a705b7b6f6339e9590e7f43dccba5c2c93c0520` และยังมี placeholders; ไม่ใช่หลักฐานว่าเนื้อหาฉบับส่งจริงตรงกับร่าง ไม่มีร่างหรือหลักฐานที่ยังไม่ commit ตอนเริ่มบันทึกสถานะ
+
+Source gate ยังคง **BLOCKED / INCOMPLETE**: ยังไม่ได้รับ build-specific sources/patches/recipes ที่ปิดช่องว่างเดิม การรายงานว่าส่งแล้วไม่เปลี่ยน complete corresponding source เป็น PASS ไม่มีการเปลี่ยน candidate binaries/dependencies, build, accepted artifacts หรือ archived r2 kit
+
 ## ส่งตรวจรอบ source/taskbar r2
 
 เริ่มจาก Git สะอาดที่ review commit `d701c1af3de9deccf5f563f276a9a0df7f2934ed` เก็บจุดถอย `codex/media-tools-before-source-taskbar-20261009` และทำงานบน `codex/source-taskbar-review-20261009` ไม่มี AGENTS.md ที่ใช้บังคับใน scope ที่ตรวจ รายละเอียดใน `evidence/source-taskbar-20261009/checkpoint.json`
@@ -31,7 +44,7 @@ Source-review ใหม่: `release/Audio-Tech-Labs-Media-Tools-Source-Review-0
 
 ชุดส่งตรวจใหม่ `release/review-0.2.2-beta.2-r2-11549c34e61f` แยก `private-evidence/` (path/log/screenshots ของเครื่อง) ออกจาก `candidate/` (Setup/Portable เดิม) และ `source-review/` (INCOMPLETE) ดู release-manifest.json/README ในชุดนี้ ห้ามแจกทั้ง kit เป็นแพ็กเกจผู้ใช้ รายงานและ evidence รอบก่อนยังเก็บใน kit เดิมและ Git baseline
 
-งานถัดไป: เลือกว่าจะขอ exact build-specific source/input set จากผู้เผยแพร่หรือเตรียม build ที่ควบคุม source ในรอบใหม่ตาม SOURCE-CLOSURE-PLAN.md; พี่ยอดตรวจ taskbar ด้วยภาพ desktop/taskbar จริงของทั้งสองแบบตาม worksheet; เตรียม URL/สิทธิ์ Download, clean Windows และ signing เมื่อพร้อม ไม่มีการเริ่ม replacement toolchain หรือเปลี่ยน vendor รอบนี้
+งานถัดไป: รอคำตอบสำหรับคำขอ exact build-specific source/input set ที่พี่ยอดแจ้งว่าส่งแล้ว เมื่อได้รับจึงตรวจ source/patches/recipes/hashes ตาม SOURCE-CLOSURE-PLAN.md; ทางเลือก build ที่ควบคุม source ยังเป็นข้อเสนอสำหรับรอบใหม่ ไม่ได้เริ่มทำ พี่ยอดตรวจ taskbar ด้วยภาพ desktop/taskbar จริงของทั้งสองแบบตาม worksheet; เตรียม URL/สิทธิ์ Download, clean Windows และ signing เมื่อพร้อม ไม่มีการเริ่ม replacement toolchain หรือเปลี่ยน vendor รอบนี้
 
 ## Baseline beta.2 จากรอบก่อน (เก็บ artifacts เดิม)
 

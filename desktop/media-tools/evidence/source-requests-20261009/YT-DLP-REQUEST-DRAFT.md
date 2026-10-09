@@ -1,4 +1,6 @@
-# ร่างถึง yt-dlp maintainers — ยังไม่ได้ส่ง
+# ร่างอ้างอิงถึง yt-dlp maintainers
+
+สถานะคำขอ: **SENT — user-reported / AWAITING RESPONSE** พี่ยอดแจ้งว่าส่งถึง maintainers@yt-dlp.org แล้ววันที่ 9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok) ไม่ได้ระบุเวลาส่งและยังไม่มีสำเนาอีเมลส่งหรือคำตอบที่ได้รับให้ตรวจสอบ เอกสารนี้เก็บร่างเดิม ไม่ยืนยันว่าเป็นเนื้อหาฉบับที่ส่งจริง
 
 To: `maintainers@yt-dlp.org`
 
@@ -6,7 +8,7 @@ Subject: Build-specific third-party source and recipes for yt-dlp.exe 2026.08.19
 
 ตรวจช่องทางจาก [THIRD_PARTY_LICENSES.txt ของรุ่น 2026.08.19](https://github.com/yt-dlp/yt-dlp/blob/2026.08.19/THIRD_PARTY_LICENSES.txt) และไฟล์ปัจจุบันเมื่อ 9 ตุลาคม 2026 ผู้เผยแพร่ระบุอีเมลนี้สำหรับขอ source ของส่วนประกอบที่ bundle; ยังไม่ได้ทดสอบการส่งหรือการรับอีเมล
 
-พี่ยอดตรวจเนื้อหาและเติม `[Sender name]` / `[Reply-to email]` ก่อนใช้ ส่วนด้านล่างรวม appendix ที่ส่งได้โดยไม่มีไฟล์แนบ ไม่แนบ private review kit
+เก็บ placeholders `[Sender name]` / `[Reply-to email]` และเนื้อหาร่างเดิมไว้เป็นอ้างอิง ไม่เติมข้อมูลผู้ส่งหรืออีเมลตอบกลับของฉบับจริงโดยไม่มีหลักฐาน Appendix ในร่างไม่ใช่การยืนยันว่ามีหรือไม่มีไฟล์แนบในอีเมลที่พี่ยอดส่ง
 
 <!-- EMAIL BODY START -->
 

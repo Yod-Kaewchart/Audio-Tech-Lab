@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-10-09T03:23:56.6347136Z",
+  "phase": "PRE_COMMIT",
+  "scope": "Documentation-only recording of the user's sending report. PASS refers to document consistency and preservation checks, not email delivery or corresponding-source completeness.",
+  "status": "PASS",
+  "baselineHead": "1a705b7b6f6339e9590e7f43dccba5c2c93c0520",
+  "branch": "codex/source-taskbar-review-20261009",
+  "initialGitStatus": "clean; no staged, unstaged or untracked pending drafts/evidence",
+  "requestStatus": "SENT — user-reported",
+  "responseStatus": "AWAITING RESPONSE",
+  "reportedSender": "พี่ยอด",
+  "userReportedSentDate": "2026-10-09",
+  "sentDateTimezone": "Asia/Bangkok",
+  "sentLocalTime": null,
+  "recordBasis": "The human user's message in this chat. No sent-email copy, Message-ID, delivery receipt or publisher response was provided for independent verification.",
+  "recipients": ["builds@gyan.dev", "maintainers@yt-dlp.org"],
+  "sentByAgent": false,
+  "sourceGate": "BLOCKED",
+  "sourceLabel": "INCOMPLETE",
+  "checks": [
+    {
+      "check": "Latest Git baseline and pending work",
+      "status": "PASS",
+      "evidence": "Confirmed the recorded HEAD/branch and clean status before edits. The prior draft/evidence set was already committed; there were no pending drafts to include."
+    },
+    {
+      "check": "Current request status and date provenance",
+      "status": "PASS",
+      "evidence": "Structured contact status, retained draft headings, reviewer README, Public Beta report and source closure plan consistently record SENT — user-reported / AWAITING RESPONSE. Date is 2026-10-09 in Asia/Bangkok; unknown sending time remains null."
+    },
+    {
+      "check": "No fabricated delivery or response evidence",
+      "status": "PASS",
+      "evidence": "contact-verification.json has empty sendingEvidence/responseEvidence arrays, sentByAgent false, sentIndependentlyVerified false and deliveryTested false for both recipients. It does not certify that the retained drafts match the sent emails or their attachments."
+    },
+    {
+      "check": "Original copyable email bodies and placeholders",
+      "status": "PASS",
+      "evidence": "Compared both EMAIL BODY sections against commit 1a705b7 with line endings normalized. They are unchanged, including binary hashes, technical requests, [Sender name] and [Reply-to email]. Only explanatory headers were updated."
+    },
+    {
+      "check": "Historical evidence preserved",
+      "status": "PASS",
+      "evidence": "Three publisher snapshots retain their receipt SHA256/byte sizes and match baseline Git blobs byte-for-byte. Publisher receipts and historical validation-results.json are unchanged; the README explicitly identifies the old NOT SENT snapshot as historical."
+    },
+    {
+      "check": "Vendor/dependency preservation",
+      "status": "PASS",
+      "evidence": "Current FFmpeg, FFprobe and yt-dlp SHA256 values match dependencies.lock.json. No diff in dependencies.lock.json, package.json, package-lock.json or vendor. No rebuild or runtime regression run was performed for this status-only update."
+    },
+    {
+      "check": "Source gate and changed-document diff",
+      "status": "PASS",
+      "evidence": "All current tracking reports retain BLOCKED / INCOMPLETE. Reviewed documentation diff and git diff --check; no source inputs or publisher replies were added and no release manifest or archived review kit was changed."
+    }
+  ],
+  "historicalValidation": "validation-results.json records the earlier draft-preparation snapshot. Its NOT SENT/false values are historical, not the current request status. Do not rewrite past evidence as verified sending.",
+  "limitation": "Sending is user-reported only. No independent send/delivery proof or publisher response was supplied. Download live/EJS, taskbar visual, clean-machine QA and signing/SmartScreen have no new evidence in this round."
+}
