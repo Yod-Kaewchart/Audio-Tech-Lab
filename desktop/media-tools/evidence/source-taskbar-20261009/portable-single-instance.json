@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "kind": "portable",
+  "scope": "actual EXE single-instance and focus only; taskbar icon/name/grouping visual BLOCKED",
+  "launchMethod": "EXE directly, with --user-data-dir test profile; first process controlled by Playwright",
+  "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+  "exeSha256": "94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d",
+  "profile": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\source-taskbar-round2\\portable-profile",
+  "before": {
+    "pid": 7304,
+    "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+    "version": "0.2.2-beta.2",
+    "name": "Audio Tech Labs Media Tools",
+    "windows": [
+      {
+        "id": 1,
+        "title": "Download Audio — Audio Tech Labs · Windows",
+        "url": "atl-media://app/download.html"
+      }
+    ]
+  },
+  "secondPid": 6468,
+  "second": {
+    "code": 0,
+    "signal": null
+  },
+  "after": {
+    "pid": 7304,
+    "windows": [
+      {
+        "id": 1,
+        "title": "Download Audio — Audio Tech Labs · Windows",
+        "focused": true,
+        "url": "atl-media://app/download.html"
+      }
+    ]
+  },
+  "taskbarVisual": "BLOCKED",
+  "capturedAt": "2026-10-09T01:04:28.708Z"
+}

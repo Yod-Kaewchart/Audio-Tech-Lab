@@ -1,0 +1,169 @@
+﻿2026-10-09 08:06:46.042   Log opened. (Time zone: UTC+07:00)
+2026-10-09 08:06:46.042   Setup version: Inno Setup version 6.7.3
+2026-10-09 08:06:46.043   Original Uninstall EXE: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\unins000.exe
+2026-10-09 08:06:46.043   Uninstall DAT: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\unins000.dat
+2026-10-09 08:06:46.043   Current Uninstall EXE: C:\Users\ELITEB~1\AppData\Local\Temp\is-GX4HY1FTQ5-uninstall.tmp\_unins.tmp
+2026-10-09 08:06:46.043   Uninstall command line: /SECONDPHASE="C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\unins000.exe" /FIRSTPHASEWND=$3D0794 /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /LOG="D:\Sites\Audio Tech Labs\desktop\media-tools\evidence\source-taskbar-20261009\normal-uninstall.log"
+2026-10-09 08:06:46.044   Windows version: 10.0.26300
+2026-10-09 08:06:46.044   Windows architecture: x64 (64-bit)
+2026-10-09 08:06:46.044   Machine types supported by system: x86 x64
+2026-10-09 08:06:46.044   User privileges: None
+2026-10-09 08:06:46.046   Administrative install mode: No
+2026-10-09 08:06:46.046   Install mode root key: HKEY_CURRENT_USER
+2026-10-09 08:06:46.046   RedirectionGuard status for current process: Enabled in enforcing mode
+2026-10-09 08:06:46.046   Cleaning up any residual temporary files from previous Uninstall runs.
+2026-10-09 08:06:46.047   Deleted file: C:\Users\ELITEB~1\AppData\Local\Temp\is-3GXN99SM03-uninstall.tmp\_unins.tmp
+2026-10-09 08:06:46.049   Cleanup finished (3 directories found, 3 directories checked, 1 files deleted).
+2026-10-09 08:06:46.055   Created temporary directory: C:\Users\ELITEB~1\AppData\Local\Temp\is-GSCLOZDBXS.tmp
+2026-10-09 08:06:46.109   Starting the uninstallation process.
+2026-10-09 08:06:46.109   Deleting registry key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\AudioTechLabs.MediaTools_is1
+2026-10-09 08:06:46.591   Deleting file: C:\Users\EliteBook\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Audio Tech Labs Media Tools.lnk
+2026-10-09 08:06:46.620   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\app-icon.ico
+2026-10-09 08:06:46.621   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\yt-dlp-THIRD_PARTY_LICENSES.txt
+2026-10-09 08:06:46.622   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\yt-dlp-LICENSE.txt
+2026-10-09 08:06:46.623   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\Node-LICENSE.txt
+2026-10-09 08:06:46.624   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\FFmpeg-README.txt
+2026-10-09 08:06:46.625   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\FFmpeg-GPLv3.txt
+2026-10-09 08:06:46.625   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices
+2026-10-09 08:06:46.627   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\yt-dlp.exe
+2026-10-09 08:06:46.627   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\ProcessHost.exe
+2026-10-09 08:06:46.628   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\node.exe
+2026-10-09 08:06:46.641   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\manifest.json
+2026-10-09 08:06:46.642   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\ffprobe.exe
+2026-10-09 08:06:46.643   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\ffmpeg.exe
+2026-10-09 08:06:46.643   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor
+2026-10-09 08:06:46.644   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai.ttf
+2026-10-09 08:06:46.644   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai-thai.woff2
+2026-10-09 08:06:46.645   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\Noto-Sans-Thai-OFL.txt
+2026-10-09 08:06:46.645   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai-latin.woff2
+2026-10-09 08:06:46.645   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai-latin-ext.woff2
+2026-10-09 08:06:46.647   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\media-tools.ico
+2026-10-09 08:06:46.648   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\dm-sans.ttf
+2026-10-09 08:06:46.649   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\DM-Sans-OFL.txt
+2026-10-09 08:06:46.649   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\dm-sans-latin.woff2
+2026-10-09 08:06:46.649   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\dm-sans-latin-ext.woff2
+2026-10-09 08:06:46.651   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets
+2026-10-09 08:06:46.652   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\view.js
+2026-10-09 08:06:46.654   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\theme.css
+2026-10-09 08:06:46.656   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player.js
+2026-10-09 08:06:46.656   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player.html
+2026-10-09 08:06:46.657   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player.css
+2026-10-09 08:06:46.657   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player-view.js
+2026-10-09 08:06:46.658   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player-queue.js
+2026-10-09 08:06:46.658   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\playback-host.js
+2026-10-09 08:06:46.659   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\playback-host.html
+2026-10-09 08:06:46.659   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\native.css
+2026-10-09 08:06:46.660   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\media-tools.css
+2026-10-09 08:06:46.660   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\download.html
+2026-10-09 08:06:46.661   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\convert.html
+2026-10-09 08:06:46.661   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\controller.js
+2026-10-09 08:06:46.662   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\adapters.js
+2026-10-09 08:06:46.662   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui
+2026-10-09 08:06:46.663   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\security.cjs
+2026-10-09 08:06:46.663   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\runner.cjs
+2026-10-09 08:06:46.663   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\preload.cjs
+2026-10-09 08:06:46.665   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\player-library.cjs
+2026-10-09 08:06:46.666   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\playback.cjs
+2026-10-09 08:06:46.667   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\playback-preload.cjs
+2026-10-09 08:06:46.667   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\media.cjs
+2026-10-09 08:06:46.669   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\main.cjs
+2026-10-09 08:06:46.671   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\files.cjs
+2026-10-09 08:06:46.672   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\engine.cjs
+2026-10-09 08:06:46.673   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\dependencies.cjs
+2026-10-09 08:06:46.674   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\common.cjs
+2026-10-09 08:06:46.675   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src
+2026-10-09 08:06:46.675   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\package.json
+2026-10-09 08:06:46.676   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app
+2026-10-09 08:06:46.676   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources
+2026-10-09 08:06:46.677   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\notices\ProcessHost-source\ProcessHost.cs
+2026-10-09 08:06:46.678   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\notices\ProcessHost-source
+2026-10-09 08:06:46.679   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\notices
+2026-10-09 08:06:46.679   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\zh-TW.pak
+2026-10-09 08:06:46.680   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\zh-CN.pak
+2026-10-09 08:06:46.680   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\vi.pak
+2026-10-09 08:06:46.681   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ur.pak
+2026-10-09 08:06:46.681   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\uk.pak
+2026-10-09 08:06:46.682   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\tr.pak
+2026-10-09 08:06:46.684   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\th.pak
+2026-10-09 08:06:46.685   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\te.pak
+2026-10-09 08:06:46.688   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ta.pak
+2026-10-09 08:06:46.689   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sw.pak
+2026-10-09 08:06:46.689   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sv.pak
+2026-10-09 08:06:46.691   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sr.pak
+2026-10-09 08:06:46.691   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sl.pak
+2026-10-09 08:06:46.692   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sk.pak
+2026-10-09 08:06:46.692   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ru.pak
+2026-10-09 08:06:46.693   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ro.pak
+2026-10-09 08:06:46.693   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\pt-PT.pak
+2026-10-09 08:06:46.694   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\pt-BR.pak
+2026-10-09 08:06:46.695   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\pl.pak
+2026-10-09 08:06:46.695   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\nl.pak
+2026-10-09 08:06:46.696   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\nb.pak
+2026-10-09 08:06:46.696   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ms.pak
+2026-10-09 08:06:46.697   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\mr.pak
+2026-10-09 08:06:46.697   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ml.pak
+2026-10-09 08:06:46.698   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\lv.pak
+2026-10-09 08:06:46.698   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\lt.pak
+2026-10-09 08:06:46.700   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ko.pak
+2026-10-09 08:06:46.700   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\kn.pak
+2026-10-09 08:06:46.703   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ja.pak
+2026-10-09 08:06:46.705   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\it.pak
+2026-10-09 08:06:46.706   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\id.pak
+2026-10-09 08:06:46.707   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\hu.pak
+2026-10-09 08:06:46.708   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\hr.pak
+2026-10-09 08:06:46.708   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\hi.pak
+2026-10-09 08:06:46.709   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\he.pak
+2026-10-09 08:06:46.709   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\gu.pak
+2026-10-09 08:06:46.710   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fr.pak
+2026-10-09 08:06:46.710   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fil.pak
+2026-10-09 08:06:46.710   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fi.pak
+2026-10-09 08:06:46.711   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fa.pak
+2026-10-09 08:06:46.712   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\et.pak
+2026-10-09 08:06:46.712   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\es.pak
+2026-10-09 08:06:46.713   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\es-419.pak
+2026-10-09 08:06:46.714   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\en-US.pak
+2026-10-09 08:06:46.714   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\en-GB.pak
+2026-10-09 08:06:46.715   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\el.pak
+2026-10-09 08:06:46.717   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\de.pak
+2026-10-09 08:06:46.720   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\da.pak
+2026-10-09 08:06:46.723   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\cs.pak
+2026-10-09 08:06:46.723   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ca.pak
+2026-10-09 08:06:46.724   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\bn.pak
+2026-10-09 08:06:46.725   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\bg.pak
+2026-10-09 08:06:46.725   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ar.pak
+2026-10-09 08:06:46.726   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\am.pak
+2026-10-09 08:06:46.726   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\af.pak
+2026-10-09 08:06:46.727   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales
+2026-10-09 08:06:46.727   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\vulkan-1.dll
+2026-10-09 08:06:46.727   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\vk_swiftshader_icd.json
+2026-10-09 08:06:46.728   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\vk_swiftshader.dll
+2026-10-09 08:06:46.730   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\version
+2026-10-09 08:06:46.731   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\v8_context_snapshot.bin
+2026-10-09 08:06:46.731   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\USER-GUIDE.md
+2026-10-09 08:06:46.731   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\THIRD-PARTY-NOTICES.md
+2026-10-09 08:06:46.733   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\snapshot_blob.bin
+2026-10-09 08:06:46.734   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\SHA256SUMS.json
+2026-10-09 08:06:46.735   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources.pak
+2026-10-09 08:06:46.737   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\RELEASE-NOTES.md
+2026-10-09 08:06:46.738   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\RECOVERY.md
+2026-10-09 08:06:46.739   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\LICENSES.chromium.html
+2026-10-09 08:06:46.739   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\LICENSE
+2026-10-09 08:06:46.739   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\icudtl.dat
+2026-10-09 08:06:46.741   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\ffmpeg.dll
+2026-10-09 08:06:46.741   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\dxil.dll
+2026-10-09 08:06:46.742   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\dxcompiler.dll
+2026-10-09 08:06:46.743   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\dependencies.lock.json
+2026-10-09 08:06:46.743   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\d3dcompiler_47.dll
+2026-10-09 08:06:46.744   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\chrome_200_percent.pak
+2026-10-09 08:06:46.745   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\chrome_100_percent.pak
+2026-10-09 08:06:46.745   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\build-info.json
+2026-10-09 08:06:46.747   Deleting file: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\Audio Tech Labs Media Tools.exe
+2026-10-09 08:06:46.820   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools
+2026-10-09 08:06:46.821   Failed to delete directory (145). Will retry later.
+2026-10-09 08:06:46.821   Deleting Uninstall data files.
+2026-10-09 08:06:46.822   Creating "_unins-done.tmp" file.
+2026-10-09 08:06:47.359   Deleting directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools
+2026-10-09 08:06:47.369   Uninstallation process succeeded.
+2026-10-09 08:06:47.369   Removed all? Yes
+2026-10-09 08:06:47.369   Need to restart Windows? No
+2026-10-09 08:06:47.374   Log closed.

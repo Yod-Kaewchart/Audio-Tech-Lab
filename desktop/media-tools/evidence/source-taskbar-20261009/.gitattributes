@@ -1,0 +1,10 @@
+*.log -text whitespace=-trailing-space,-blank-at-eol
+publisher/** -text whitespace=-trailing-space,-blank-at-eol
+yt-dlp-recipe/** -text whitespace=-trailing-space,-blank-at-eol
+pyinstaller-custom-recipe/** -text whitespace=-trailing-space,-blank-at-eol
+curl-impersonate-recipe/** -text whitespace=-trailing-space,-blank-at-eol
+source-text/** -text whitespace=-trailing-space,-blank-at-eol
+bundle-metadata/** -text whitespace=-trailing-space,-blank-at-eol
+curl-impersonate-recipe/patches/** -text whitespace=-trailing-space,-blank-at-eol,-space-before-tab
+# Exact upstream RST underline resembles a Git conflict marker. Preserve as blob.
+source-text/*/doc/license.rst -text -diff

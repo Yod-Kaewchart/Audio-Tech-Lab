@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "checks": [
+    "All six original/copy Setup/Portable/prior-source identities unchanged",
+    "All vendor hashes and dependency lock unchanged",
+    "84 component rows / 34 source-build input files, gaps and publisher SHA mapping",
+    "Real installed/Portable single-instance evidence consistent; visual BLOCKED; user state preserved",
+    "All JSON and local Python helper syntax",
+    "New source-review ZIP CRC/every-file SHA256; no workstation QA/screenshots/profile",
+    "Tracked diff confined to report/evidence; no app/UI/version/dependency edits"
+  ],
+  "audioRegression": "not rerun: no runtime source/payload changes",
+  "sourceGate": "BLOCKED",
+  "taskbarVisual": "BLOCKED",
+  "appVersion": "0.2.2-beta.2",
+  "appSourceCommit": "df183f4970366597d539323760108dbaf234e049"
+}

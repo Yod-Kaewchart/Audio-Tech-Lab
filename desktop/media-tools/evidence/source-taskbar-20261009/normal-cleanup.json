@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "scope": "cleanup after normal installed taskbar follow-up on existing machine",
+  "desktopPreserved": true,
+  "profileFiles": 73,
+  "profileUnchanged": true,
+  "normalInstallationRemoved": true,
+  "setupSha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27"
+}

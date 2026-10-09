@@ -1,0 +1,38 @@
+[
+  {
+    "file": "archives/Pyinstaller-Builds-5eb86b862d61.tar.gz",
+    "url": "https://github.com/yt-dlp/Pyinstaller-Builds/archive/5eb86b862d61adc3df0f44e6e0b815b7d74fa3f5.tar.gz",
+    "finalUrl": "https://codeload.github.com/yt-dlp/Pyinstaller-Builds/tar.gz/5eb86b862d61adc3df0f44e6e0b815b7d74fa3f5",
+    "bytes": 7782,
+    "sha256": "65fa1589e00923522b289ad4fbde68feca06850acd699e1a4764882b2734c582",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:05:29.970780+00:00"
+  },
+  {
+    "file": "archives/PyInstaller-70fc17210920.tar.gz",
+    "url": "https://github.com/pyinstaller/pyinstaller/archive/70fc17210920bce17f4ab09bbf8104b0dbd45338.tar.gz",
+    "finalUrl": "https://codeload.github.com/pyinstaller/pyinstaller/tar.gz/70fc17210920bce17f4ab09bbf8104b0dbd45338",
+    "bytes": 3617860,
+    "sha256": "587eb41e1087aeaf2a879b04db35b68bbe44b85f9227e263c873396806103540",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:05:32.647139+00:00"
+  },
+  {
+    "file": "publisher/gyan-repository-tree-main.json",
+    "url": "https://api.github.com/repos/GyanD/codexffmpeg/git/trees/main?recursive=1",
+    "finalUrl": "https://api.github.com/repos/GyanD/codexffmpeg/git/trees/main?recursive=1",
+    "bytes": 832,
+    "sha256": "c08c93dcef0fc0f193a4b976cbe0391cc6b69bfee3ca2b8e7e02029c8b57d811",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:05:33.066037+00:00"
+  },
+  {
+    "file": "build-inputs/curl_cffi-0.16.0-cp310-abi3-win_amd64.whl",
+    "url": "https://files.pythonhosted.org/packages/ad/03/b9df2973f1119f9d11d8fb3bf2682e5ffe5c52ef3ab89f720473c60fe97e/curl_cffi-0.16.0-cp310-abi3-win_amd64.whl",
+    "finalUrl": "https://files.pythonhosted.org/packages/ad/03/b9df2973f1119f9d11d8fb3bf2682e5ffe5c52ef3ab89f720473c60fe97e/curl_cffi-0.16.0-cp310-abi3-win_amd64.whl",
+    "bytes": 1976497,
+    "sha256": "e22a8212d830108e977ff394237f637238e265f5f65037d6c1ee71ea8cc03bcb",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:05:33.187165+00:00"
+  }
+]

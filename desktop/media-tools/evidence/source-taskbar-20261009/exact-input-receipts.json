@@ -1,0 +1,294 @@
+{
+  "releaseGitCommit": "3a08beaf031ab68f966401ead017ac81fe8486cf",
+  "sourceDirectory": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\source-review-0.2.2-beta.2-r2-INCOMPLETE",
+  "files": [
+    {
+      "file": "archives/yt-dlp-release-git-3a08beaf031a.tar.gz",
+      "url": "https://github.com/yt-dlp/yt-dlp/archive/3a08beaf031ab68f966401ead017ac81fe8486cf.tar.gz",
+      "finalUrl": "https://codeload.github.com/yt-dlp/yt-dlp/tar.gz/3a08beaf031ab68f966401ead017ac81fe8486cf",
+      "bytes": 3115089,
+      "sha256": "7206981142eb461cfa603c360a55e0d08f3ed58cc754000ed821ad3ebac31ea0",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:02.639442+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/Python-3.10.11.tar.xz",
+      "url": "https://www.python.org/ftp/python/3.10.11/Python-3.10.11.tar.xz",
+      "finalUrl": "https://www.python.org/ftp/python/3.10.11/Python-3.10.11.tar.xz",
+      "bytes": 19640792,
+      "sha256": "3c3bc3048303721c904a03eb8326b631e921f11cc3be2988456a42f115daf04c",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:03.664401+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/rubberband-v4.0.0.tar.gz",
+      "url": "https://github.com/breakfastquay/rubberband/archive/refs/tags/v4.0.0.tar.gz",
+      "finalUrl": "https://codeload.github.com/breakfastquay/rubberband/tar.gz/refs/tags/v4.0.0",
+      "bytes": 290305,
+      "sha256": "24300f48a8014b7c863b573a9647e61b1b19b37875e2cdd92005e64c6424d266",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:01.992110+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/vidstab-e2445c4.tar.gz",
+      "url": "https://github.com/georgmartius/vid.stab/archive/e2445c4.tar.gz",
+      "finalUrl": "https://codeload.github.com/georgmartius/vid.stab/tar.gz/e2445c4081658318223762a696eb1c645c2d7168",
+      "bytes": 316810,
+      "sha256": "39506541c073b2be1e376b59fc90e6a79ba4d16cbf4a4a2a58a6badc3a4ce1c3",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:02.097299+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "publisher/pypi-mutagen-1.48.1.json",
+      "url": "https://pypi.org/pypi/mutagen/1.48.1/json",
+      "finalUrl": "https://pypi.org/pypi/mutagen/1.48.1/json",
+      "bytes": 3986,
+      "sha256": "9d04c5c8befb6750ddfe7ad97af875cdf61699acec08df1b947e67264aff38e2",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:03.963238+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/mutagen-1.48.1.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/df/70/1675da133ea92227da41bf5b24e1c66be597ff736a1533ade41da986852f/mutagen-1.48.1.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/df/70/1675da133ea92227da41bf5b24e1c66be597ff736a1533ade41da986852f/mutagen-1.48.1.tar.gz",
+      "bytes": 1276978,
+      "sha256": "8f95637ab9f6f305cec6bd1294e197debe207998e3e068596563c74f86b0a173",
+      "publisherSha256": "8f95637ab9f6f305cec6bd1294e197debe207998e3e068596563c74f86b0a173",
+      "fetchedUtc": "2026-10-09T01:02:04.071704+00:00",
+      "status": "PASS",
+      "component": "mutagen",
+      "version": "1.48.1",
+      "publisherMetadata": "publisher/pypi-mutagen-1.48.1.json",
+      "projectUrls": {
+        "Homepage": "https://mutagen.readthedocs.io",
+        "Repository": "https://github.com/quodlibet/mutagen"
+      }
+    },
+    {
+      "file": "publisher/pypi-pycryptodomex-3.23.0.json",
+      "url": "https://pypi.org/pypi/pycryptodomex/3.23.0/json",
+      "finalUrl": "https://pypi.org/pypi/pycryptodomex/3.23.0/json",
+      "bytes": 42265,
+      "sha256": "bd5070e3a83c386fd3f87fc4dfd59088041600d9961bf4faa63e78bbe9b246e4",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:04.024949+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/pycryptodomex-3.23.0.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/c9/85/e24bf90972a30b0fcd16c73009add1d7d7cd9140c2498a68252028899e41/pycryptodomex-3.23.0.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/c9/85/e24bf90972a30b0fcd16c73009add1d7d7cd9140c2498a68252028899e41/pycryptodomex-3.23.0.tar.gz",
+      "bytes": 4922157,
+      "sha256": "71909758f010c82bc99b0abf4ea12012c98962fbf0583c2164f8b84533c2e4da",
+      "publisherSha256": "71909758f010c82bc99b0abf4ea12012c98962fbf0583c2164f8b84533c2e4da",
+      "fetchedUtc": "2026-10-09T01:02:04.781047+00:00",
+      "status": "PASS",
+      "component": "pycryptodomex",
+      "version": "3.23.0",
+      "publisherMetadata": "publisher/pypi-pycryptodomex-3.23.0.json",
+      "projectUrls": {
+        "Changelog": "https://www.pycryptodome.org/src/changelog",
+        "Homepage": "https://www.pycryptodome.org",
+        "Source": "https://github.com/Legrandin/pycryptodome/"
+      }
+    },
+    {
+      "file": "publisher/pypi-brotli-1.2.0.json",
+      "url": "https://pypi.org/pypi/brotli/1.2.0/json",
+      "finalUrl": "https://pypi.org/pypi/brotli/1.2.0/json",
+      "bytes": 92928,
+      "sha256": "fff7b315334c40e145ed39acf6fa025c315f2a18a023e64b39efbd4c5a4efbd8",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:03.982610+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/brotli-1.2.0.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/f7/16/c92ca344d646e71a43b8bb353f0a6490d7f6e06210f8554c8f874e454285/brotli-1.2.0.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/f7/16/c92ca344d646e71a43b8bb353f0a6490d7f6e06210f8554c8f874e454285/brotli-1.2.0.tar.gz",
+      "bytes": 7388632,
+      "sha256": "e310f77e41941c13340a95976fe66a8a95b01e783d430eeaf7a2f87e0a57dd0a",
+      "publisherSha256": "e310f77e41941c13340a95976fe66a8a95b01e783d430eeaf7a2f87e0a57dd0a",
+      "fetchedUtc": "2026-10-09T01:02:04.260585+00:00",
+      "status": "PASS",
+      "component": "brotli",
+      "version": "1.2.0",
+      "publisherMetadata": "publisher/pypi-brotli-1.2.0.json",
+      "projectUrls": {
+        "Homepage": "https://github.com/google/brotli"
+      }
+    },
+    {
+      "file": "publisher/pypi-certifi-2026.7.22.json",
+      "url": "https://pypi.org/pypi/certifi/2026.7.22/json",
+      "finalUrl": "https://pypi.org/pypi/certifi/2026.7.22/json",
+      "bytes": 4584,
+      "sha256": "c6fe912677e373608eab51e324946005998faeb0fa999e6ddada24676e3556d3",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:03.706228+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/certifi-2026.7.22.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/a3/c2/24167ea9858356b47a87a50d39908bfdb72ceeefe0041586e704e5376b3a/certifi-2026.7.22.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/a3/c2/24167ea9858356b47a87a50d39908bfdb72ceeefe0041586e704e5376b3a/certifi-2026.7.22.tar.gz",
+      "bytes": 138112,
+      "sha256": "741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55",
+      "publisherSha256": "741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55",
+      "fetchedUtc": "2026-10-09T01:02:03.779647+00:00",
+      "status": "PASS",
+      "component": "certifi",
+      "version": "2026.7.22",
+      "publisherMetadata": "publisher/pypi-certifi-2026.7.22.json",
+      "projectUrls": {
+        "Homepage": "https://github.com/certifi/python-certifi",
+        "Source": "https://github.com/certifi/python-certifi"
+      }
+    },
+    {
+      "file": "publisher/pypi-curl_cffi-0.16.0.json",
+      "url": "https://pypi.org/pypi/curl_cffi/0.16.0/json",
+      "finalUrl": "https://pypi.org/pypi/curl_cffi/0.16.0/json",
+      "bytes": 36182,
+      "sha256": "61ede413e74c1296057cac10888e4a5ba0863d15f67e2b2b255435076070849b",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:04.112800+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/curl_cffi-0.16.0.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/b4/23/d32e113b16dbfb458bea408871ed98dd12f306a366a04215e84537e0af7e/curl_cffi-0.16.0.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/b4/23/d32e113b16dbfb458bea408871ed98dd12f306a366a04215e84537e0af7e/curl_cffi-0.16.0.tar.gz",
+      "bytes": 238344,
+      "sha256": "b00b423da8028eb6221e3b63bcd63d681150c07cee8b16000d1f7ea292731895",
+      "publisherSha256": "b00b423da8028eb6221e3b63bcd63d681150c07cee8b16000d1f7ea292731895",
+      "fetchedUtc": "2026-10-09T01:02:04.483943+00:00",
+      "status": "PASS",
+      "component": "curl_cffi",
+      "version": "0.16.0",
+      "publisherMetadata": "publisher/pypi-curl_cffi-0.16.0.json",
+      "projectUrls": {
+        "repository": "https://github.com/lexiforest/curl_cffi"
+      }
+    },
+    {
+      "file": "publisher/pypi-requests-2.34.2.json",
+      "url": "https://pypi.org/pypi/requests/2.34.2/json",
+      "finalUrl": "https://pypi.org/pypi/requests/2.34.2/json",
+      "bytes": 6811,
+      "sha256": "8622e50ffd295ed759ec793f2a009172a4ed0204bbc5e948de23111bc3d2aeae",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:04.377263+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/requests-2.34.2.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz",
+      "bytes": 142856,
+      "sha256": "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed",
+      "publisherSha256": "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed",
+      "fetchedUtc": "2026-10-09T01:02:04.461109+00:00",
+      "status": "PASS",
+      "component": "requests",
+      "version": "2.34.2",
+      "publisherMetadata": "publisher/pypi-requests-2.34.2.json",
+      "projectUrls": {
+        "Documentation": "https://requests.readthedocs.io",
+        "Source": "https://github.com/psf/requests"
+      }
+    },
+    {
+      "file": "publisher/pypi-urllib3-2.7.0.json",
+      "url": "https://pypi.org/pypi/urllib3/2.7.0/json",
+      "finalUrl": "https://pypi.org/pypi/urllib3/2.7.0/json",
+      "bytes": 30292,
+      "sha256": "54db1e362e04e390c23c2182dd425a6b3f0c1a73c5bd3f3e40611c3590c7a43a",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:04.541283+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/urllib3-2.7.0.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz",
+      "bytes": 433602,
+      "sha256": "231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c",
+      "publisherSha256": "231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c",
+      "fetchedUtc": "2026-10-09T01:02:04.622586+00:00",
+      "status": "PASS",
+      "component": "urllib3",
+      "version": "2.7.0",
+      "publisherMetadata": "publisher/pypi-urllib3-2.7.0.json",
+      "projectUrls": {
+        "Changelog": "https://github.com/urllib3/urllib3/blob/main/CHANGES.rst",
+        "Code": "https://github.com/urllib3/urllib3",
+        "Documentation": "https://urllib3.readthedocs.io",
+        "Issue tracker": "https://github.com/urllib3/urllib3/issues"
+      }
+    },
+    {
+      "file": "publisher/pypi-websockets-16.1.1.json",
+      "url": "https://pypi.org/pypi/websockets/16.1.1/json",
+      "finalUrl": "https://pypi.org/pypi/websockets/16.1.1/json",
+      "bytes": 104101,
+      "sha256": "96ee39a2519d39d06c5f2f4e45b196fbb1ac9ca6bbe697ed316df511d8ae8bb6",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:04.754357+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/websockets-16.1.1.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/21/f7/bc3a25c5ec26ce62ce487690becc2f3710bbc7b33338f005ad390db0b986/websockets-16.1.1.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/21/f7/bc3a25c5ec26ce62ce487690becc2f3710bbc7b33338f005ad390db0b986/websockets-16.1.1.tar.gz",
+      "bytes": 182204,
+      "sha256": "db234eda965dcce15df96bb9709f587cd87d4d52aaf0e80e2f34ec04c7670c57",
+      "publisherSha256": "db234eda965dcce15df96bb9709f587cd87d4d52aaf0e80e2f34ec04c7670c57",
+      "fetchedUtc": "2026-10-09T01:02:05.085912+00:00",
+      "status": "PASS",
+      "component": "websockets",
+      "version": "16.1.1",
+      "publisherMetadata": "publisher/pypi-websockets-16.1.1.json",
+      "projectUrls": {
+        "Changelog": "https://websockets.readthedocs.io/en/stable/project/changelog.html",
+        "Documentation": "https://websockets.readthedocs.io/",
+        "Funding": "https://tidelift.com/subscription/pkg/pypi-websockets?utm_source=pypi-websockets&utm_medium=referral&utm_campaign=readme",
+        "Homepage": "https://github.com/python-websockets/websockets",
+        "Tracker": "https://github.com/python-websockets/websockets/issues"
+      }
+    },
+    {
+      "file": "publisher/pypi-yt-dlp-ejs-0.8.0.json",
+      "url": "https://pypi.org/pypi/yt-dlp-ejs/0.8.0/json",
+      "finalUrl": "https://pypi.org/pypi/yt-dlp-ejs/0.8.0/json",
+      "bytes": 5709,
+      "sha256": "0fb174287bd859559a12a401f0147e62d34a2b2793ad9cebc8ce31c3e24c9188",
+      "publisherSha256": null,
+      "fetchedUtc": "2026-10-09T01:02:04.768945+00:00",
+      "status": "PASS"
+    },
+    {
+      "file": "archives/yt_dlp_ejs-0.8.0.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/d3/e6/cceb9530e8f4e5940f6f7822d90e9d94f1b85343329a16baaf47bbbb3de1/yt_dlp_ejs-0.8.0.tar.gz",
+      "finalUrl": "https://files.pythonhosted.org/packages/d3/e6/cceb9530e8f4e5940f6f7822d90e9d94f1b85343329a16baaf47bbbb3de1/yt_dlp_ejs-0.8.0.tar.gz",
+      "bytes": 96571,
+      "sha256": "d5fa1639f63b5c4af8d932495f60689d5370f1a095782c944f7f62a303eb104e",
+      "publisherSha256": "d5fa1639f63b5c4af8d932495f60689d5370f1a095782c944f7f62a303eb104e",
+      "fetchedUtc": "2026-10-09T01:02:04.837156+00:00",
+      "status": "PASS",
+      "component": "yt-dlp-ejs",
+      "version": "0.8.0",
+      "publisherMetadata": "publisher/pypi-yt-dlp-ejs-0.8.0.json",
+      "projectUrls": {
+        "Documentation": "https://github.com/yt-dlp/ejs#readme",
+        "Issues": "https://github.com/yt-dlp/ejs/issues",
+        "Source": "https://github.com/yt-dlp/ejs"
+      }
+    }
+  ]
+}

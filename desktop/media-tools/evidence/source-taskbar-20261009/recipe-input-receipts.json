@@ -1,0 +1,243 @@
+[
+  {
+    "file": "publisher/pyinstaller-custom-release.json",
+    "url": "https://api.github.com/repos/yt-dlp/Pyinstaller-Builds/releases/tags/2026.08.19.215425",
+    "finalUrl": "https://api.github.com/repos/yt-dlp/Pyinstaller-Builds/releases/tags/2026.08.19.215425",
+    "bytes": 9039,
+    "sha256": "150a053effe6b0ef3144171cde375ccde6bbbe718e8dbe1a8530271f2e6884cb",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.020255+00:00"
+  },
+  {
+    "file": "publisher/pyinstaller-custom-tag.json",
+    "url": "https://api.github.com/repos/yt-dlp/Pyinstaller-Builds/commits/2026.08.19.215425",
+    "finalUrl": "https://api.github.com/repos/yt-dlp/Pyinstaller-Builds/commits/2026.08.19.215425",
+    "bytes": 9217,
+    "sha256": "f218b9f63c08bde9b0f9845f95eec508e343985204670997ea3baaa5c5efc294",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.118140+00:00"
+  },
+  {
+    "file": "publisher/gyan-repository.json",
+    "url": "https://api.github.com/repos/GyanD/codexffmpeg",
+    "finalUrl": "https://api.github.com/repos/GyanD/codexffmpeg",
+    "bytes": 5002,
+    "sha256": "7378558266743c0cca19f9742d8f72505f3c64b6787f3ad058f29f04ac275c4e",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.039371+00:00"
+  },
+  {
+    "file": "publisher/pypi-cffi-2.1.1.json",
+    "url": "https://pypi.org/pypi/cffi/2.1.1/json",
+    "finalUrl": "https://pypi.org/pypi/cffi/2.1.1/json",
+    "bytes": 89333,
+    "sha256": "2255e530e3f80593a354e3d84a29966924d0e10309d1e3a6d50f845ab7d8df66",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.431785+00:00"
+  },
+  {
+    "file": "archives/cffi-2.1.1.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz",
+    "finalUrl": "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz",
+    "bytes": 530807,
+    "sha256": "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be",
+    "publisherSha256": "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.527764+00:00",
+    "component": "cffi",
+    "version": "2.1.1",
+    "publisherMetadata": "publisher/pypi-cffi-2.1.1.json",
+    "projectUrls": {
+      "Changelog": "https://cffi.readthedocs.io/en/latest/whatsnew.html",
+      "Contact": "https://groups.google.com/forum/#!forum/python-cffi",
+      "Documentation": "https://cffi.readthedocs.io/",
+      "Download": "https://github.com/python-cffi/cffi/releases",
+      "Issue Tracker": "https://github.com/python-cffi/cffi/issues",
+      "Source Code": "https://github.com/python-cffi/cffi"
+    }
+  },
+  {
+    "file": "publisher/pypi-charset-normalizer-3.5.0.json",
+    "url": "https://pypi.org/pypi/charset-normalizer/3.5.0/json",
+    "finalUrl": "https://pypi.org/pypi/charset-normalizer/3.5.0/json",
+    "bytes": 199999,
+    "sha256": "fd331ab77816ca781a994e7d65cb05b6f0d54f404bce98170f370b027eb844cf",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.421889+00:00"
+  },
+  {
+    "file": "archives/charset_normalizer-3.5.0.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/cb/31/4971872b3ed8715346231fb6eb4da8fcba65a4143c189db151ee28a2812b/charset_normalizer-3.5.0.tar.gz",
+    "finalUrl": "https://files.pythonhosted.org/packages/cb/31/4971872b3ed8715346231fb6eb4da8fcba65a4143c189db151ee28a2812b/charset_normalizer-3.5.0.tar.gz",
+    "bytes": 169295,
+    "sha256": "49bd5feb59b0bf3cbf6ebcf4352e371c95b9da9bacd4449f8b64d0ad2c10a26e",
+    "publisherSha256": "49bd5feb59b0bf3cbf6ebcf4352e371c95b9da9bacd4449f8b64d0ad2c10a26e",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.763005+00:00",
+    "component": "charset-normalizer",
+    "version": "3.5.0",
+    "publisherMetadata": "publisher/pypi-charset-normalizer-3.5.0.json",
+    "projectUrls": {
+      "Changelog": "https://github.com/jawah/charset_normalizer/blob/master/CHANGELOG.md",
+      "Code": "https://github.com/jawah/charset_normalizer",
+      "Documentation": "https://charset-normalizer.readthedocs.io/",
+      "Issue tracker": "https://github.com/jawah/charset_normalizer/issues"
+    }
+  },
+  {
+    "file": "publisher/pypi-idna-3.18.json",
+    "url": "https://pypi.org/pypi/idna/3.18/json",
+    "finalUrl": "https://pypi.org/pypi/idna/3.18/json",
+    "bytes": 8146,
+    "sha256": "419b11e68bbc25e19d37eba0d65acdf93f6278f8768c542fa4e261f063e9e1b0",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.415016+00:00"
+  },
+  {
+    "file": "archives/idna-3.18.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz",
+    "finalUrl": "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz",
+    "bytes": 196711,
+    "sha256": "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848",
+    "publisherSha256": "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.755773+00:00",
+    "component": "idna",
+    "version": "3.18",
+    "publisherMetadata": "publisher/pypi-idna-3.18.json",
+    "projectUrls": {
+      "Changelog": "https://github.com/kjd/idna/blob/master/HISTORY.md",
+      "Issue tracker": "https://github.com/kjd/idna/issues",
+      "Source": "https://github.com/kjd/idna"
+    }
+  },
+  {
+    "file": "publisher/pypi-pycparser-3.0.json",
+    "url": "https://pypi.org/pypi/pycparser/3.0/json",
+    "finalUrl": "https://pypi.org/pypi/pycparser/3.0/json",
+    "bytes": 10557,
+    "sha256": "0bf63b485d42a7e4a3b4eb7232c24bfb3e1e6cbbe47ee803f6b4c3f8b242d669",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.163847+00:00"
+  },
+  {
+    "file": "archives/pycparser-3.0.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz",
+    "finalUrl": "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz",
+    "bytes": 103492,
+    "sha256": "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29",
+    "publisherSha256": "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.222458+00:00",
+    "component": "pycparser",
+    "version": "3.0",
+    "publisherMetadata": "publisher/pypi-pycparser-3.0.json",
+    "projectUrls": {
+      "Homepage": "https://github.com/eliben/pycparser"
+    }
+  },
+  {
+    "file": "publisher/pypi-typing-extensions-4.16.0.json",
+    "url": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+    "finalUrl": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+    "bytes": 5631,
+    "sha256": "2140da00d62dde967f52d0be0ae28444f1d6a3fe603f52c83c23988c32122d5a",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.491898+00:00"
+  },
+  {
+    "file": "archives/typing_extensions-4.16.0.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz",
+    "finalUrl": "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz",
+    "bytes": 113555,
+    "sha256": "dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5",
+    "publisherSha256": "dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.567912+00:00",
+    "component": "typing-extensions",
+    "version": "4.16.0",
+    "publisherMetadata": "publisher/pypi-typing-extensions-4.16.0.json",
+    "projectUrls": {
+      "Bug Tracker": "https://github.com/python/typing_extensions/issues",
+      "Changes": "https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+      "Documentation": "https://typing-extensions.readthedocs.io/",
+      "Home": "https://github.com/python/typing_extensions",
+      "Q & A": "https://github.com/python/typing/discussions",
+      "Repository": "https://github.com/python/typing_extensions"
+    }
+  },
+  {
+    "file": "publisher/pypi-pyinstaller-6.22.0.json",
+    "url": "https://pypi.org/pypi/pyinstaller/6.22.0/json",
+    "finalUrl": "https://pypi.org/pypi/pyinstaller/6.22.0/json",
+    "bytes": 18999,
+    "sha256": "e0decdd5aca660abcee53db54d232a7e2e66108520aeeaaaf0ea433cf2092028",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.797058+00:00"
+  },
+  {
+    "file": "archives/pyinstaller-6.22.0.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/05/03/669d06735cf57d7e2e5dfc3c2e1643554b34c559eff21449c58172ca0335/pyinstaller-6.22.0.tar.gz",
+    "finalUrl": "https://files.pythonhosted.org/packages/05/03/669d06735cf57d7e2e5dfc3c2e1643554b34c559eff21449c58172ca0335/pyinstaller-6.22.0.tar.gz",
+    "bytes": 4072247,
+    "sha256": "8b0166fff4583b374bbe7fa044bf03ddc33cab0f792a665807d96048e63f060e",
+    "publisherSha256": "8b0166fff4583b374bbe7fa044bf03ddc33cab0f792a665807d96048e63f060e",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:48.331320+00:00",
+    "component": "pyinstaller",
+    "version": "6.22.0",
+    "publisherMetadata": "publisher/pypi-pyinstaller-6.22.0.json",
+    "projectUrls": {
+      "Documentation": "https://pyinstaller.org",
+      "Homepage": "https://pyinstaller.org",
+      "Release Notes": "https://pyinstaller.org/en/stable/CHANGES.html",
+      "Source Code": "https://github.com/pyinstaller/pyinstaller"
+    }
+  },
+  {
+    "file": "publisher/pypi-pyinstaller-hooks-contrib-2026.6.json",
+    "url": "https://pypi.org/pypi/pyinstaller-hooks-contrib/2026.6/json",
+    "finalUrl": "https://pypi.org/pypi/pyinstaller-hooks-contrib/2026.6/json",
+    "bytes": 18813,
+    "sha256": "ed987330c2154376b62e3f83f8f679af16b0930751db31b27e23360708623859",
+    "publisherSha256": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:46.861735+00:00"
+  },
+  {
+    "file": "archives/pyinstaller_hooks_contrib-2026.6.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/94/5b/c9fe0db5e83ee1c39b2258fa21d23b15e1a60786b6c5990ee5074ead8bb6/pyinstaller_hooks_contrib-2026.6.tar.gz",
+    "finalUrl": "https://files.pythonhosted.org/packages/94/5b/c9fe0db5e83ee1c39b2258fa21d23b15e1a60786b6c5990ee5074ead8bb6/pyinstaller_hooks_contrib-2026.6.tar.gz",
+    "bytes": 173354,
+    "sha256": "bef5002c32f4f50bd55b005da12cff64eca8783e7eaf86a06a62410164bab725",
+    "publisherSha256": "bef5002c32f4f50bd55b005da12cff64eca8783e7eaf86a06a62410164bab725",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:47.213536+00:00",
+    "component": "pyinstaller-hooks-contrib",
+    "version": "2026.6",
+    "publisherMetadata": "publisher/pypi-pyinstaller-hooks-contrib-2026.6.json",
+    "projectUrls": {
+      "Download": "https://pypi.org/project/pyinstaller-hooks-contrib",
+      "Homepage": "https://github.com/pyinstaller/pyinstaller-hooks-contrib"
+    }
+  },
+  {
+    "file": "build-inputs/pyinstaller-6.22.0-py3-none-win_amd64.whl",
+    "url": "https://github.com/yt-dlp/Pyinstaller-Builds/releases/download/2026.08.19.215425/pyinstaller-6.22.0-py3-none-win_amd64.whl",
+    "finalUrl": "https://release-assets.githubusercontent.com/github-production-release-asset/394383934/9b8de075-44ed-4666-9b0e-00cfeaf40965?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-10-09T01%3A57%3A55Z&rscd=attachment%3B+filename%3Dpyinstaller-6.22.0-py3-none-win_amd64.whl&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-10-09T00%3A57%3A14Z&ske=2026-10-09T01%3A57%3A55Z&sks=b&skv=2018-11-09&sig=qmZ994Sts4KrNWw%2FDiPDK8CG5FHAwxFVCGnUAtJ1bdI%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc5MTUwODEzNiwibmJmIjoxNzkxNTA3ODM2LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.C5GQArN58cCiSPoZYdx_TJz1JYMZXKpaLoYn200biws&response-content-disposition=attachment%3B%20filename%3Dpyinstaller-6.22.0-py3-none-win_amd64.whl&response-content-type=application%2Foctet-stream",
+    "bytes": 1101025,
+    "sha256": "294099ecb5fdd2a13ae4c29006d4e335b697a63b6a16cf052b90ec2b40bef05a",
+    "publisherSha256": "294099ecb5fdd2a13ae4c29006d4e335b697a63b6a16cf052b90ec2b40bef05a",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:03:49.145487+00:00"
+  }
+]

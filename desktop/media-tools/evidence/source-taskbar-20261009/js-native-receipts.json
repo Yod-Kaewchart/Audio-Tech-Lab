@@ -1,0 +1,32 @@
+[
+  {
+    "file": "archives/meriyah-6.1.4.tgz",
+    "url": "https://registry.npmjs.org/meriyah/-/meriyah-6.1.4.tgz",
+    "finalUrl": "https://registry.npmjs.org/meriyah/-/meriyah-6.1.4.tgz",
+    "bytes": 278043,
+    "sha256": "c0f105d9fb01bb48c76ea6ee382e6099277b95e3f351fb99b67ddfb79d6088b8",
+    "publisherIntegrity": "sha512-Sz8FzjzI0kN13GK/6MVEsVzMZEPvOhnmmI1lU5+/1cGOiK3QUahntrNNtdVeihrO7t9JpoH75iMNXg6R6uWflQ==",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:08:58.154090+00:00"
+  },
+  {
+    "file": "archives/astring-1.9.0.tgz",
+    "url": "https://registry.npmjs.org/astring/-/astring-1.9.0.tgz",
+    "finalUrl": "https://registry.npmjs.org/astring/-/astring-1.9.0.tgz",
+    "bytes": 60574,
+    "sha256": "422cca9707aca293e85eb54fdbbc5a0a167ad415236a325ff342e720e67afb49",
+    "publisherIntegrity": "sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==",
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:08:58.319746+00:00"
+  },
+  {
+    "file": "archives/curl-impersonate-v2.0.0.tar.gz",
+    "url": "https://github.com/lexiforest/curl-impersonate/archive/refs/tags/v2.0.0.tar.gz",
+    "finalUrl": "https://codeload.github.com/lexiforest/curl-impersonate/tar.gz/refs/tags/v2.0.0",
+    "bytes": 207780,
+    "sha256": "a9827cfce8246e78b86e26f012ae9fcb9bc05822009cd7ce4c9e130af6bdfb6f",
+    "publisherIntegrity": null,
+    "status": "PASS",
+    "fetchedUtc": "2026-10-09T01:09:00.262212+00:00"
+  }
+]

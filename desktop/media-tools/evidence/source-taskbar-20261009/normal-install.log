@@ -1,0 +1,703 @@
+﻿2026-10-09 08:00:15.599   Log opened. (Time zone: UTC+07:00)
+2026-10-09 08:00:15.599   Setup version: Inno Setup version 6.7.3
+2026-10-09 08:00:15.599   Original Setup EXE: D:\Sites\Audio Tech Labs\desktop\media-tools\release\installers\Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe
+2026-10-09 08:00:15.599   Setup command line: /SL5="$90790,209732673,842752,D:\Sites\Audio Tech Labs\desktop\media-tools\release\installers\Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe" /CURRENTUSER /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /TASKS= /LOG="D:\Sites\Audio Tech Labs\desktop\media-tools\evidence\source-taskbar-20261009\normal-install.log"
+2026-10-09 08:00:15.599   Windows version: 10.0.26300
+2026-10-09 08:00:15.600   Windows architecture: x64 (64-bit)
+2026-10-09 08:00:15.600   Machine types supported by system: x86 x64
+2026-10-09 08:00:15.600   User privileges: None
+2026-10-09 08:00:15.605   Administrative install mode: No
+2026-10-09 08:00:15.605   Install mode root key: HKEY_CURRENT_USER
+2026-10-09 08:00:15.605   64-bit install mode: Yes
+2026-10-09 08:00:15.605   RedirectionGuard status for current process: Enabled in enforcing mode
+2026-10-09 08:00:15.607   Created temporary directory: C:\Users\ELITEB~1\AppData\Local\Temp\is-6GJWWTHH6A.tmp
+2026-10-09 08:00:15.831   Starting the installation process.
+2026-10-09 08:00:15.833   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools
+2026-10-09 08:00:15.834   Directory for uninstall files: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools
+2026-10-09 08:00:15.834   Creating new uninstall log: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\unins000.dat
+2026-10-09 08:00:15.859   -- File entry --
+2026-10-09 08:00:15.859   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\unins000.exe
+2026-10-09 08:00:15.859   Non-default bitness: 32-bit
+2026-10-09 08:00:15.870   Time stamp of our file: 2026-10-09 08:00:15.294
+2026-10-09 08:00:15.870   Installing the file.
+2026-10-09 08:00:15.883   Successfully installed the file.
+2026-10-09 08:00:15.883   -- File entry --
+2026-10-09 08:00:15.883   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\app-icon.ico
+2026-10-09 08:00:15.884   Time stamp of our file: 2026-10-08 17:25:00.000
+2026-10-09 08:00:15.884   Installing the file.
+2026-10-09 08:00:15.887   Successfully installed the file.
+2026-10-09 08:00:15.887   -- File entry --
+2026-10-09 08:00:15.887   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\Audio Tech Labs Media Tools.exe
+2026-10-09 08:00:15.887   Time stamp of our file: 2026-10-09 01:16:10.000
+2026-10-09 08:00:15.887   Installing the file.
+2026-10-09 08:00:26.142   Successfully installed the file.
+2026-10-09 08:00:26.142   -- File entry --
+2026-10-09 08:00:26.142   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\build-info.json
+2026-10-09 08:00:26.143   Time stamp of our file: 2026-10-09 01:16:12.000
+2026-10-09 08:00:26.143   Installing the file.
+2026-10-09 08:00:26.145   Successfully installed the file.
+2026-10-09 08:00:26.145   -- File entry --
+2026-10-09 08:00:26.146   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\chrome_100_percent.pak
+2026-10-09 08:00:26.147   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:26.147   Installing the file.
+2026-10-09 08:00:26.212   Successfully installed the file.
+2026-10-09 08:00:26.212   -- File entry --
+2026-10-09 08:00:26.212   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\chrome_200_percent.pak
+2026-10-09 08:00:26.213   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:26.213   Installing the file.
+2026-10-09 08:00:26.317   Successfully installed the file.
+2026-10-09 08:00:26.318   -- File entry --
+2026-10-09 08:00:26.318   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\d3dcompiler_47.dll
+2026-10-09 08:00:26.319   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:26.319   Installing the file.
+2026-10-09 08:00:26.574   Successfully installed the file.
+2026-10-09 08:00:26.575   -- File entry --
+2026-10-09 08:00:26.575   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\dependencies.lock.json
+2026-10-09 08:00:26.575   Time stamp of our file: 2026-10-08 12:30:50.000
+2026-10-09 08:00:26.575   Installing the file.
+2026-10-09 08:00:26.580   Successfully installed the file.
+2026-10-09 08:00:26.580   -- File entry --
+2026-10-09 08:00:26.580   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\dxcompiler.dll
+2026-10-09 08:00:26.581   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:26.583   Installing the file.
+2026-10-09 08:00:27.754   Successfully installed the file.
+2026-10-09 08:00:27.754   -- File entry --
+2026-10-09 08:00:27.754   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\dxil.dll
+2026-10-09 08:00:27.754   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:27.754   Installing the file.
+2026-10-09 08:00:27.834   Successfully installed the file.
+2026-10-09 08:00:27.834   -- File entry --
+2026-10-09 08:00:27.834   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\ffmpeg.dll
+2026-10-09 08:00:27.834   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:27.834   Installing the file.
+2026-10-09 08:00:27.992   Successfully installed the file.
+2026-10-09 08:00:27.992   -- File entry --
+2026-10-09 08:00:27.993   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\icudtl.dat
+2026-10-09 08:00:27.993   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:27.993   Installing the file.
+2026-10-09 08:00:28.529   Successfully installed the file.
+2026-10-09 08:00:28.529   -- File entry --
+2026-10-09 08:00:28.529   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\LICENSE
+2026-10-09 08:00:28.530   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:28.531   Installing the file.
+2026-10-09 08:00:28.533   Successfully installed the file.
+2026-10-09 08:00:28.534   -- File entry --
+2026-10-09 08:00:28.534   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\LICENSES.chromium.html
+2026-10-09 08:00:28.535   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:28.535   Installing the file.
+2026-10-09 08:00:28.942   Successfully installed the file.
+2026-10-09 08:00:28.942   -- File entry --
+2026-10-09 08:00:28.942   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\RECOVERY.md
+2026-10-09 08:00:28.943   Time stamp of our file: 2026-10-09 00:40:22.000
+2026-10-09 08:00:28.943   Installing the file.
+2026-10-09 08:00:28.945   Successfully installed the file.
+2026-10-09 08:00:28.945   -- File entry --
+2026-10-09 08:00:28.945   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\RELEASE-NOTES.md
+2026-10-09 08:00:28.946   Time stamp of our file: 2026-10-09 01:14:52.000
+2026-10-09 08:00:28.947   Installing the file.
+2026-10-09 08:00:28.952   Successfully installed the file.
+2026-10-09 08:00:28.952   -- File entry --
+2026-10-09 08:00:28.953   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources.pak
+2026-10-09 08:00:28.953   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:28.953   Installing the file.
+2026-10-09 08:00:29.384   Successfully installed the file.
+2026-10-09 08:00:29.384   -- File entry --
+2026-10-09 08:00:29.384   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\SHA256SUMS.json
+2026-10-09 08:00:29.385   Time stamp of our file: 2026-10-09 01:16:14.000
+2026-10-09 08:00:29.385   Installing the file.
+2026-10-09 08:00:29.388   Successfully installed the file.
+2026-10-09 08:00:29.388   -- File entry --
+2026-10-09 08:00:29.389   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\snapshot_blob.bin
+2026-10-09 08:00:29.389   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.389   Installing the file.
+2026-10-09 08:00:29.402   Successfully installed the file.
+2026-10-09 08:00:29.402   -- File entry --
+2026-10-09 08:00:29.402   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\THIRD-PARTY-NOTICES.md
+2026-10-09 08:00:29.403   Time stamp of our file: 2026-10-09 00:40:22.000
+2026-10-09 08:00:29.403   Installing the file.
+2026-10-09 08:00:29.405   Successfully installed the file.
+2026-10-09 08:00:29.405   -- File entry --
+2026-10-09 08:00:29.405   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\USER-GUIDE.md
+2026-10-09 08:00:29.405   Time stamp of our file: 2026-10-09 01:14:52.000
+2026-10-09 08:00:29.405   Installing the file.
+2026-10-09 08:00:29.410   Successfully installed the file.
+2026-10-09 08:00:29.410   -- File entry --
+2026-10-09 08:00:29.410   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\v8_context_snapshot.bin
+2026-10-09 08:00:29.411   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.411   Installing the file.
+2026-10-09 08:00:29.434   Successfully installed the file.
+2026-10-09 08:00:29.434   -- File entry --
+2026-10-09 08:00:29.434   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\version
+2026-10-09 08:00:29.435   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.435   Installing the file.
+2026-10-09 08:00:29.437   Successfully installed the file.
+2026-10-09 08:00:29.437   -- File entry --
+2026-10-09 08:00:29.437   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\vk_swiftshader.dll
+2026-10-09 08:00:29.438   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.438   Installing the file.
+2026-10-09 08:00:29.651   Successfully installed the file.
+2026-10-09 08:00:29.652   -- File entry --
+2026-10-09 08:00:29.652   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\vk_swiftshader_icd.json
+2026-10-09 08:00:29.653   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.653   Installing the file.
+2026-10-09 08:00:29.655   Successfully installed the file.
+2026-10-09 08:00:29.655   -- File entry --
+2026-10-09 08:00:29.655   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\vulkan-1.dll
+2026-10-09 08:00:29.656   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.656   Installing the file.
+2026-10-09 08:00:29.683   Successfully installed the file.
+2026-10-09 08:00:29.684   -- File entry --
+2026-10-09 08:00:29.684   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\af.pak
+2026-10-09 08:00:29.684   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.684   Installing the file.
+2026-10-09 08:00:29.685   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales
+2026-10-09 08:00:29.712   Successfully installed the file.
+2026-10-09 08:00:29.712   -- File entry --
+2026-10-09 08:00:29.712   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\am.pak
+2026-10-09 08:00:29.712   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.712   Installing the file.
+2026-10-09 08:00:29.740   Successfully installed the file.
+2026-10-09 08:00:29.740   -- File entry --
+2026-10-09 08:00:29.740   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ar.pak
+2026-10-09 08:00:29.741   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.741   Installing the file.
+2026-10-09 08:00:29.771   Successfully installed the file.
+2026-10-09 08:00:29.771   -- File entry --
+2026-10-09 08:00:29.771   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\bg.pak
+2026-10-09 08:00:29.773   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.773   Installing the file.
+2026-10-09 08:00:29.804   Successfully installed the file.
+2026-10-09 08:00:29.804   -- File entry --
+2026-10-09 08:00:29.804   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\bn.pak
+2026-10-09 08:00:29.805   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.805   Installing the file.
+2026-10-09 08:00:29.845   Successfully installed the file.
+2026-10-09 08:00:29.845   -- File entry --
+2026-10-09 08:00:29.845   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ca.pak
+2026-10-09 08:00:29.846   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.846   Installing the file.
+2026-10-09 08:00:29.870   Successfully installed the file.
+2026-10-09 08:00:29.871   -- File entry --
+2026-10-09 08:00:29.871   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\cs.pak
+2026-10-09 08:00:29.871   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.871   Installing the file.
+2026-10-09 08:00:29.896   Successfully installed the file.
+2026-10-09 08:00:29.896   -- File entry --
+2026-10-09 08:00:29.896   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\da.pak
+2026-10-09 08:00:29.897   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.897   Installing the file.
+2026-10-09 08:00:29.920   Successfully installed the file.
+2026-10-09 08:00:29.921   -- File entry --
+2026-10-09 08:00:29.921   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\de.pak
+2026-10-09 08:00:29.921   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.921   Installing the file.
+2026-10-09 08:00:29.945   Successfully installed the file.
+2026-10-09 08:00:29.945   -- File entry --
+2026-10-09 08:00:29.945   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\el.pak
+2026-10-09 08:00:29.945   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.945   Installing the file.
+2026-10-09 08:00:29.977   Successfully installed the file.
+2026-10-09 08:00:29.977   -- File entry --
+2026-10-09 08:00:29.977   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\en-GB.pak
+2026-10-09 08:00:29.977   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.977   Installing the file.
+2026-10-09 08:00:29.999   Successfully installed the file.
+2026-10-09 08:00:29.999   -- File entry --
+2026-10-09 08:00:29.999   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\en-US.pak
+2026-10-09 08:00:29.999   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:29.999   Installing the file.
+2026-10-09 08:00:30.014   Successfully installed the file.
+2026-10-09 08:00:30.014   -- File entry --
+2026-10-09 08:00:30.014   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\es-419.pak
+2026-10-09 08:00:30.015   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.015   Installing the file.
+2026-10-09 08:00:30.040   Successfully installed the file.
+2026-10-09 08:00:30.040   -- File entry --
+2026-10-09 08:00:30.040   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\es.pak
+2026-10-09 08:00:30.041   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.041   Installing the file.
+2026-10-09 08:00:30.063   Successfully installed the file.
+2026-10-09 08:00:30.063   -- File entry --
+2026-10-09 08:00:30.063   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\et.pak
+2026-10-09 08:00:30.063   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.064   Installing the file.
+2026-10-09 08:00:30.086   Successfully installed the file.
+2026-10-09 08:00:30.086   -- File entry --
+2026-10-09 08:00:30.086   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fa.pak
+2026-10-09 08:00:30.087   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.087   Installing the file.
+2026-10-09 08:00:30.116   Successfully installed the file.
+2026-10-09 08:00:30.116   -- File entry --
+2026-10-09 08:00:30.116   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fi.pak
+2026-10-09 08:00:30.116   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.116   Installing the file.
+2026-10-09 08:00:30.137   Successfully installed the file.
+2026-10-09 08:00:30.137   -- File entry --
+2026-10-09 08:00:30.137   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fil.pak
+2026-10-09 08:00:30.138   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.138   Installing the file.
+2026-10-09 08:00:30.159   Successfully installed the file.
+2026-10-09 08:00:30.159   -- File entry --
+2026-10-09 08:00:30.159   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\fr.pak
+2026-10-09 08:00:30.159   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.159   Installing the file.
+2026-10-09 08:00:30.185   Successfully installed the file.
+2026-10-09 08:00:30.185   -- File entry --
+2026-10-09 08:00:30.185   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\gu.pak
+2026-10-09 08:00:30.185   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.185   Installing the file.
+2026-10-09 08:00:30.218   Successfully installed the file.
+2026-10-09 08:00:30.218   -- File entry --
+2026-10-09 08:00:30.218   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\he.pak
+2026-10-09 08:00:30.218   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.218   Installing the file.
+2026-10-09 08:00:30.246   Successfully installed the file.
+2026-10-09 08:00:30.246   -- File entry --
+2026-10-09 08:00:30.246   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\hi.pak
+2026-10-09 08:00:30.246   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.246   Installing the file.
+2026-10-09 08:00:30.281   Successfully installed the file.
+2026-10-09 08:00:30.281   -- File entry --
+2026-10-09 08:00:30.281   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\hr.pak
+2026-10-09 08:00:30.281   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.281   Installing the file.
+2026-10-09 08:00:30.305   Successfully installed the file.
+2026-10-09 08:00:30.305   -- File entry --
+2026-10-09 08:00:30.305   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\hu.pak
+2026-10-09 08:00:30.305   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.305   Installing the file.
+2026-10-09 08:00:30.328   Successfully installed the file.
+2026-10-09 08:00:30.328   -- File entry --
+2026-10-09 08:00:30.329   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\id.pak
+2026-10-09 08:00:30.329   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.329   Installing the file.
+2026-10-09 08:00:30.350   Successfully installed the file.
+2026-10-09 08:00:30.350   -- File entry --
+2026-10-09 08:00:30.350   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\it.pak
+2026-10-09 08:00:30.351   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.351   Installing the file.
+2026-10-09 08:00:30.372   Successfully installed the file.
+2026-10-09 08:00:30.372   -- File entry --
+2026-10-09 08:00:30.372   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ja.pak
+2026-10-09 08:00:30.373   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.373   Installing the file.
+2026-10-09 08:00:30.396   Successfully installed the file.
+2026-10-09 08:00:30.397   -- File entry --
+2026-10-09 08:00:30.397   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\kn.pak
+2026-10-09 08:00:30.397   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.397   Installing the file.
+2026-10-09 08:00:30.433   Successfully installed the file.
+2026-10-09 08:00:30.433   -- File entry --
+2026-10-09 08:00:30.433   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ko.pak
+2026-10-09 08:00:30.434   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.434   Installing the file.
+2026-10-09 08:00:30.455   Successfully installed the file.
+2026-10-09 08:00:30.455   -- File entry --
+2026-10-09 08:00:30.455   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\lt.pak
+2026-10-09 08:00:30.457   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.457   Installing the file.
+2026-10-09 08:00:30.479   Successfully installed the file.
+2026-10-09 08:00:30.479   -- File entry --
+2026-10-09 08:00:30.479   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\lv.pak
+2026-10-09 08:00:30.480   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.480   Installing the file.
+2026-10-09 08:00:30.502   Successfully installed the file.
+2026-10-09 08:00:30.502   -- File entry --
+2026-10-09 08:00:30.502   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ml.pak
+2026-10-09 08:00:30.502   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.502   Installing the file.
+2026-10-09 08:00:30.537   Successfully installed the file.
+2026-10-09 08:00:30.538   -- File entry --
+2026-10-09 08:00:30.538   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\mr.pak
+2026-10-09 08:00:30.538   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.538   Installing the file.
+2026-10-09 08:00:30.568   Successfully installed the file.
+2026-10-09 08:00:30.568   -- File entry --
+2026-10-09 08:00:30.568   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ms.pak
+2026-10-09 08:00:30.568   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.568   Installing the file.
+2026-10-09 08:00:30.589   Successfully installed the file.
+2026-10-09 08:00:30.589   -- File entry --
+2026-10-09 08:00:30.589   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\nb.pak
+2026-10-09 08:00:30.589   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.589   Installing the file.
+2026-10-09 08:00:30.609   Successfully installed the file.
+2026-10-09 08:00:30.609   -- File entry --
+2026-10-09 08:00:30.609   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\nl.pak
+2026-10-09 08:00:30.609   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.609   Installing the file.
+2026-10-09 08:00:30.629   Successfully installed the file.
+2026-10-09 08:00:30.629   -- File entry --
+2026-10-09 08:00:30.629   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\pl.pak
+2026-10-09 08:00:30.629   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.630   Installing the file.
+2026-10-09 08:00:30.653   Successfully installed the file.
+2026-10-09 08:00:30.653   -- File entry --
+2026-10-09 08:00:30.653   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\pt-BR.pak
+2026-10-09 08:00:30.654   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.654   Installing the file.
+2026-10-09 08:00:30.674   Successfully installed the file.
+2026-10-09 08:00:30.674   -- File entry --
+2026-10-09 08:00:30.674   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\pt-PT.pak
+2026-10-09 08:00:30.675   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.675   Installing the file.
+2026-10-09 08:00:30.693   Successfully installed the file.
+2026-10-09 08:00:30.693   -- File entry --
+2026-10-09 08:00:30.693   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ro.pak
+2026-10-09 08:00:30.693   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.694   Installing the file.
+2026-10-09 08:00:30.714   Successfully installed the file.
+2026-10-09 08:00:30.714   -- File entry --
+2026-10-09 08:00:30.714   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ru.pak
+2026-10-09 08:00:30.714   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.714   Installing the file.
+2026-10-09 08:00:30.745   Successfully installed the file.
+2026-10-09 08:00:30.745   -- File entry --
+2026-10-09 08:00:30.745   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sk.pak
+2026-10-09 08:00:30.745   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.745   Installing the file.
+2026-10-09 08:00:30.770   Successfully installed the file.
+2026-10-09 08:00:30.770   -- File entry --
+2026-10-09 08:00:30.770   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sl.pak
+2026-10-09 08:00:30.770   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.770   Installing the file.
+2026-10-09 08:00:30.796   Successfully installed the file.
+2026-10-09 08:00:30.796   -- File entry --
+2026-10-09 08:00:30.796   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sr.pak
+2026-10-09 08:00:30.796   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.796   Installing the file.
+2026-10-09 08:00:30.828   Successfully installed the file.
+2026-10-09 08:00:30.828   -- File entry --
+2026-10-09 08:00:30.828   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sv.pak
+2026-10-09 08:00:30.828   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.828   Installing the file.
+2026-10-09 08:00:30.849   Successfully installed the file.
+2026-10-09 08:00:30.849   -- File entry --
+2026-10-09 08:00:30.849   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\sw.pak
+2026-10-09 08:00:30.851   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.851   Installing the file.
+2026-10-09 08:00:30.873   Successfully installed the file.
+2026-10-09 08:00:30.873   -- File entry --
+2026-10-09 08:00:30.873   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ta.pak
+2026-10-09 08:00:30.873   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.873   Installing the file.
+2026-10-09 08:00:30.908   Successfully installed the file.
+2026-10-09 08:00:30.908   -- File entry --
+2026-10-09 08:00:30.908   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\te.pak
+2026-10-09 08:00:30.908   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.908   Installing the file.
+2026-10-09 08:00:30.940   Successfully installed the file.
+2026-10-09 08:00:30.940   -- File entry --
+2026-10-09 08:00:30.940   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\th.pak
+2026-10-09 08:00:30.942   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.942   Installing the file.
+2026-10-09 08:00:30.969   Successfully installed the file.
+2026-10-09 08:00:30.970   -- File entry --
+2026-10-09 08:00:30.970   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\tr.pak
+2026-10-09 08:00:30.970   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.970   Installing the file.
+2026-10-09 08:00:30.991   Successfully installed the file.
+2026-10-09 08:00:30.991   -- File entry --
+2026-10-09 08:00:30.991   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\uk.pak
+2026-10-09 08:00:30.991   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:30.991   Installing the file.
+2026-10-09 08:00:31.020   Successfully installed the file.
+2026-10-09 08:00:31.020   -- File entry --
+2026-10-09 08:00:31.020   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\ur.pak
+2026-10-09 08:00:31.021   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:31.021   Installing the file.
+2026-10-09 08:00:31.044   Successfully installed the file.
+2026-10-09 08:00:31.045   -- File entry --
+2026-10-09 08:00:31.045   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\vi.pak
+2026-10-09 08:00:31.045   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:31.045   Installing the file.
+2026-10-09 08:00:31.068   Successfully installed the file.
+2026-10-09 08:00:31.068   -- File entry --
+2026-10-09 08:00:31.068   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\zh-CN.pak
+2026-10-09 08:00:31.069   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:31.069   Installing the file.
+2026-10-09 08:00:31.088   Successfully installed the file.
+2026-10-09 08:00:31.088   -- File entry --
+2026-10-09 08:00:31.088   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\locales\zh-TW.pak
+2026-10-09 08:00:31.089   Time stamp of our file: 1980-01-01 00:00:00.000
+2026-10-09 08:00:31.089   Installing the file.
+2026-10-09 08:00:31.107   Successfully installed the file.
+2026-10-09 08:00:31.107   -- File entry --
+2026-10-09 08:00:31.107   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\notices\ProcessHost-source\ProcessHost.cs
+2026-10-09 08:00:31.107   Time stamp of our file: 2026-10-08 12:30:36.000
+2026-10-09 08:00:31.107   Installing the file.
+2026-10-09 08:00:31.108   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\notices
+2026-10-09 08:00:31.108   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\notices\ProcessHost-source
+2026-10-09 08:00:31.111   Successfully installed the file.
+2026-10-09 08:00:31.111   -- File entry --
+2026-10-09 08:00:31.111   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\package.json
+2026-10-09 08:00:31.111   Time stamp of our file: 2026-10-09 01:16:12.000
+2026-10-09 08:00:31.111   Installing the file.
+2026-10-09 08:00:31.111   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources
+2026-10-09 08:00:31.111   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app
+2026-10-09 08:00:31.113   Successfully installed the file.
+2026-10-09 08:00:31.113   -- File entry --
+2026-10-09 08:00:31.113   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\common.cjs
+2026-10-09 08:00:31.114   Time stamp of our file: 2026-10-08 18:33:26.000
+2026-10-09 08:00:31.114   Installing the file.
+2026-10-09 08:00:31.115   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src
+2026-10-09 08:00:31.118   Successfully installed the file.
+2026-10-09 08:00:31.118   -- File entry --
+2026-10-09 08:00:31.118   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\dependencies.cjs
+2026-10-09 08:00:31.119   Time stamp of our file: 2026-10-08 12:33:22.000
+2026-10-09 08:00:31.119   Installing the file.
+2026-10-09 08:00:31.121   Successfully installed the file.
+2026-10-09 08:00:31.121   -- File entry --
+2026-10-09 08:00:31.121   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\engine.cjs
+2026-10-09 08:00:31.122   Time stamp of our file: 2026-10-09 01:14:48.000
+2026-10-09 08:00:31.122   Installing the file.
+2026-10-09 08:00:31.124   Successfully installed the file.
+2026-10-09 08:00:31.124   -- File entry --
+2026-10-09 08:00:31.124   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\files.cjs
+2026-10-09 08:00:31.124   Time stamp of our file: 2026-10-08 12:34:44.000
+2026-10-09 08:00:31.124   Installing the file.
+2026-10-09 08:00:31.125   Successfully installed the file.
+2026-10-09 08:00:31.125   -- File entry --
+2026-10-09 08:00:31.125   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\main.cjs
+2026-10-09 08:00:31.126   Time stamp of our file: 2026-10-09 00:35:50.000
+2026-10-09 08:00:31.126   Installing the file.
+2026-10-09 08:00:31.130   Successfully installed the file.
+2026-10-09 08:00:31.130   -- File entry --
+2026-10-09 08:00:31.130   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\media.cjs
+2026-10-09 08:00:31.131   Time stamp of our file: 2026-10-08 12:53:34.000
+2026-10-09 08:00:31.131   Installing the file.
+2026-10-09 08:00:31.133   Successfully installed the file.
+2026-10-09 08:00:31.133   -- File entry --
+2026-10-09 08:00:31.133   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\playback-preload.cjs
+2026-10-09 08:00:31.133   Time stamp of our file: 2026-10-08 20:15:38.000
+2026-10-09 08:00:31.133   Installing the file.
+2026-10-09 08:00:31.135   Successfully installed the file.
+2026-10-09 08:00:31.135   -- File entry --
+2026-10-09 08:00:31.135   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\playback.cjs
+2026-10-09 08:00:31.136   Time stamp of our file: 2026-10-08 20:44:36.000
+2026-10-09 08:00:31.136   Installing the file.
+2026-10-09 08:00:31.138   Successfully installed the file.
+2026-10-09 08:00:31.138   -- File entry --
+2026-10-09 08:00:31.138   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\player-library.cjs
+2026-10-09 08:00:31.138   Time stamp of our file: 2026-10-08 19:56:46.000
+2026-10-09 08:00:31.138   Installing the file.
+2026-10-09 08:00:31.140   Successfully installed the file.
+2026-10-09 08:00:31.140   -- File entry --
+2026-10-09 08:00:31.140   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\preload.cjs
+2026-10-09 08:00:31.140   Time stamp of our file: 2026-10-08 20:16:38.000
+2026-10-09 08:00:31.140   Installing the file.
+2026-10-09 08:00:31.143   Successfully installed the file.
+2026-10-09 08:00:31.143   -- File entry --
+2026-10-09 08:00:31.143   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\runner.cjs
+2026-10-09 08:00:31.143   Time stamp of our file: 2026-10-08 12:33:22.000
+2026-10-09 08:00:31.143   Installing the file.
+2026-10-09 08:00:31.145   Successfully installed the file.
+2026-10-09 08:00:31.145   -- File entry --
+2026-10-09 08:00:31.145   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\src\security.cjs
+2026-10-09 08:00:31.145   Time stamp of our file: 2026-10-08 19:34:36.000
+2026-10-09 08:00:31.145   Installing the file.
+2026-10-09 08:00:31.147   Successfully installed the file.
+2026-10-09 08:00:31.147   -- File entry --
+2026-10-09 08:00:31.147   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\adapters.js
+2026-10-09 08:00:31.147   Time stamp of our file: 2026-10-08 20:16:38.000
+2026-10-09 08:00:31.147   Installing the file.
+2026-10-09 08:00:31.147   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui
+2026-10-09 08:00:31.152   Successfully installed the file.
+2026-10-09 08:00:31.152   -- File entry --
+2026-10-09 08:00:31.152   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\controller.js
+2026-10-09 08:00:31.152   Time stamp of our file: 2026-10-08 18:33:46.000
+2026-10-09 08:00:31.152   Installing the file.
+2026-10-09 08:00:31.155   Successfully installed the file.
+2026-10-09 08:00:31.155   -- File entry --
+2026-10-09 08:00:31.155   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\convert.html
+2026-10-09 08:00:31.155   Time stamp of our file: 2026-10-08 23:08:50.000
+2026-10-09 08:00:31.155   Installing the file.
+2026-10-09 08:00:31.157   Successfully installed the file.
+2026-10-09 08:00:31.157   -- File entry --
+2026-10-09 08:00:31.157   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\download.html
+2026-10-09 08:00:31.157   Time stamp of our file: 2026-10-08 23:08:50.000
+2026-10-09 08:00:31.157   Installing the file.
+2026-10-09 08:00:31.159   Successfully installed the file.
+2026-10-09 08:00:31.159   -- File entry --
+2026-10-09 08:00:31.159   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\media-tools.css
+2026-10-09 08:00:31.160   Time stamp of our file: 2026-10-08 23:08:50.000
+2026-10-09 08:00:31.160   Installing the file.
+2026-10-09 08:00:31.162   Successfully installed the file.
+2026-10-09 08:00:31.162   -- File entry --
+2026-10-09 08:00:31.162   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\native.css
+2026-10-09 08:00:31.162   Time stamp of our file: 2026-10-08 19:48:38.000
+2026-10-09 08:00:31.162   Installing the file.
+2026-10-09 08:00:31.164   Successfully installed the file.
+2026-10-09 08:00:31.164   -- File entry --
+2026-10-09 08:00:31.164   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\playback-host.html
+2026-10-09 08:00:31.165   Time stamp of our file: 2026-10-08 20:15:38.000
+2026-10-09 08:00:31.165   Installing the file.
+2026-10-09 08:00:31.167   Successfully installed the file.
+2026-10-09 08:00:31.167   -- File entry --
+2026-10-09 08:00:31.167   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\playback-host.js
+2026-10-09 08:00:31.167   Time stamp of our file: 2026-10-08 20:15:38.000
+2026-10-09 08:00:31.167   Installing the file.
+2026-10-09 08:00:31.170   Successfully installed the file.
+2026-10-09 08:00:31.170   -- File entry --
+2026-10-09 08:00:31.170   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player-queue.js
+2026-10-09 08:00:31.170   Time stamp of our file: 2026-10-08 19:34:36.000
+2026-10-09 08:00:31.170   Installing the file.
+2026-10-09 08:00:31.172   Successfully installed the file.
+2026-10-09 08:00:31.172   -- File entry --
+2026-10-09 08:00:31.172   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player-view.js
+2026-10-09 08:00:31.172   Time stamp of our file: 2026-10-08 20:18:52.000
+2026-10-09 08:00:31.172   Installing the file.
+2026-10-09 08:00:31.174   Successfully installed the file.
+2026-10-09 08:00:31.174   -- File entry --
+2026-10-09 08:00:31.174   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player.css
+2026-10-09 08:00:31.175   Time stamp of our file: 2026-10-08 19:40:02.000
+2026-10-09 08:00:31.175   Installing the file.
+2026-10-09 08:00:31.177   Successfully installed the file.
+2026-10-09 08:00:31.177   -- File entry --
+2026-10-09 08:00:31.177   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player.html
+2026-10-09 08:00:31.177   Time stamp of our file: 2026-10-08 20:16:38.000
+2026-10-09 08:00:31.177   Installing the file.
+2026-10-09 08:00:31.179   Successfully installed the file.
+2026-10-09 08:00:31.179   -- File entry --
+2026-10-09 08:00:31.179   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\player.js
+2026-10-09 08:00:31.179   Time stamp of our file: 2026-10-08 20:18:52.000
+2026-10-09 08:00:31.179   Installing the file.
+2026-10-09 08:00:31.182   Successfully installed the file.
+2026-10-09 08:00:31.182   -- File entry --
+2026-10-09 08:00:31.182   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\theme.css
+2026-10-09 08:00:31.182   Time stamp of our file: 2026-10-08 22:57:52.000
+2026-10-09 08:00:31.182   Installing the file.
+2026-10-09 08:00:31.186   Successfully installed the file.
+2026-10-09 08:00:31.186   -- File entry --
+2026-10-09 08:00:31.186   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\view.js
+2026-10-09 08:00:31.187   Time stamp of our file: 2026-10-09 01:14:48.000
+2026-10-09 08:00:31.187   Installing the file.
+2026-10-09 08:00:31.189   Successfully installed the file.
+2026-10-09 08:00:31.189   -- File entry --
+2026-10-09 08:00:31.189   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\dm-sans-latin-ext.woff2
+2026-10-09 08:00:31.189   Time stamp of our file: 2026-10-08 22:57:52.000
+2026-10-09 08:00:31.189   Installing the file.
+2026-10-09 08:00:31.191   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets
+2026-10-09 08:00:31.193   Successfully installed the file.
+2026-10-09 08:00:31.193   -- File entry --
+2026-10-09 08:00:31.193   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\dm-sans-latin.woff2
+2026-10-09 08:00:31.195   Time stamp of our file: 2026-10-08 22:57:52.000
+2026-10-09 08:00:31.195   Installing the file.
+2026-10-09 08:00:31.200   Successfully installed the file.
+2026-10-09 08:00:31.200   -- File entry --
+2026-10-09 08:00:31.200   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\DM-Sans-OFL.txt
+2026-10-09 08:00:31.200   Time stamp of our file: 2026-10-05 01:02:48.000
+2026-10-09 08:00:31.200   Installing the file.
+2026-10-09 08:00:31.203   Successfully installed the file.
+2026-10-09 08:00:31.203   -- File entry --
+2026-10-09 08:00:31.203   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\dm-sans.ttf
+2026-10-09 08:00:31.203   Time stamp of our file: 2026-10-05 00:49:20.000
+2026-10-09 08:00:31.203   Installing the file.
+2026-10-09 08:00:31.217   Successfully installed the file.
+2026-10-09 08:00:31.218   -- File entry --
+2026-10-09 08:00:31.218   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\media-tools.ico
+2026-10-09 08:00:31.219   Time stamp of our file: 2026-10-08 17:25:00.000
+2026-10-09 08:00:31.219   Installing the file.
+2026-10-09 08:00:31.222   Successfully installed the file.
+2026-10-09 08:00:31.222   -- File entry --
+2026-10-09 08:00:31.222   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai-latin-ext.woff2
+2026-10-09 08:00:31.222   Time stamp of our file: 2026-10-08 22:57:52.000
+2026-10-09 08:00:31.222   Installing the file.
+2026-10-09 08:00:31.226   Successfully installed the file.
+2026-10-09 08:00:31.226   -- File entry --
+2026-10-09 08:00:31.226   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai-latin.woff2
+2026-10-09 08:00:31.226   Time stamp of our file: 2026-10-08 22:57:52.000
+2026-10-09 08:00:31.226   Installing the file.
+2026-10-09 08:00:31.230   Successfully installed the file.
+2026-10-09 08:00:31.230   -- File entry --
+2026-10-09 08:00:31.231   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\Noto-Sans-Thai-OFL.txt
+2026-10-09 08:00:31.231   Time stamp of our file: 2026-10-05 01:02:48.000
+2026-10-09 08:00:31.231   Installing the file.
+2026-10-09 08:00:31.233   Successfully installed the file.
+2026-10-09 08:00:31.233   -- File entry --
+2026-10-09 08:00:31.233   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai-thai.woff2
+2026-10-09 08:00:31.234   Time stamp of our file: 2026-10-08 22:57:52.000
+2026-10-09 08:00:31.234   Installing the file.
+2026-10-09 08:00:31.239   Successfully installed the file.
+2026-10-09 08:00:31.239   -- File entry --
+2026-10-09 08:00:31.239   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\app\ui\assets\noto-sans-thai.ttf
+2026-10-09 08:00:31.240   Time stamp of our file: 2026-10-05 00:49:20.000
+2026-10-09 08:00:31.240   Installing the file.
+2026-10-09 08:00:31.254   Successfully installed the file.
+2026-10-09 08:00:31.254   -- File entry --
+2026-10-09 08:00:31.254   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\ffmpeg.exe
+2026-10-09 08:00:31.255   Time stamp of our file: 2026-09-19 10:42:18.000
+2026-10-09 08:00:31.255   Installing the file.
+2026-10-09 08:00:31.255   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor
+2026-10-09 08:00:34.739   Successfully installed the file.
+2026-10-09 08:00:34.740   -- File entry --
+2026-10-09 08:00:34.740   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\ffprobe.exe
+2026-10-09 08:00:34.740   Time stamp of our file: 2026-09-19 10:42:18.000
+2026-10-09 08:00:34.740   Installing the file.
+2026-10-09 08:00:38.199   Successfully installed the file.
+2026-10-09 08:00:38.199   -- File entry --
+2026-10-09 08:00:38.199   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\manifest.json
+2026-10-09 08:00:38.199   Time stamp of our file: 2026-10-08 12:30:50.000
+2026-10-09 08:00:38.199   Installing the file.
+2026-10-09 08:00:38.202   Successfully installed the file.
+2026-10-09 08:00:38.202   -- File entry --
+2026-10-09 08:00:38.202   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\node.exe
+2026-10-09 08:00:38.203   Time stamp of our file: 2026-08-03 11:18:08.000
+2026-10-09 08:00:38.203   Installing the file.
+2026-10-09 08:00:41.074   Successfully installed the file.
+2026-10-09 08:00:41.074   -- File entry --
+2026-10-09 08:00:41.074   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\ProcessHost.exe
+2026-10-09 08:00:41.074   Time stamp of our file: 2026-10-08 12:30:50.000
+2026-10-09 08:00:41.074   Installing the file.
+2026-10-09 08:00:41.078   Successfully installed the file.
+2026-10-09 08:00:41.078   -- File entry --
+2026-10-09 08:00:41.078   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\yt-dlp.exe
+2026-10-09 08:00:41.078   Time stamp of our file: 2026-10-08 12:28:36.000
+2026-10-09 08:00:41.078   Installing the file.
+2026-10-09 08:00:41.492   Successfully installed the file.
+2026-10-09 08:00:41.492   -- File entry --
+2026-10-09 08:00:41.492   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\FFmpeg-GPLv3.txt
+2026-10-09 08:00:41.493   Time stamp of our file: 2026-09-19 10:42:18.000
+2026-10-09 08:00:41.493   Installing the file.
+2026-10-09 08:00:41.493   Creating directory: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices
+2026-10-09 08:00:41.495   Successfully installed the file.
+2026-10-09 08:00:41.495   -- File entry --
+2026-10-09 08:00:41.495   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\FFmpeg-README.txt
+2026-10-09 08:00:41.497   Time stamp of our file: 2026-09-19 10:42:18.000
+2026-10-09 08:00:41.497   Installing the file.
+2026-10-09 08:00:41.499   Successfully installed the file.
+2026-10-09 08:00:41.499   -- File entry --
+2026-10-09 08:00:41.499   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\Node-LICENSE.txt
+2026-10-09 08:00:41.499   Time stamp of our file: 2026-08-02 15:12:10.000
+2026-10-09 08:00:41.501   Installing the file.
+2026-10-09 08:00:41.507   Successfully installed the file.
+2026-10-09 08:00:41.507   -- File entry --
+2026-10-09 08:00:41.507   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\yt-dlp-LICENSE.txt
+2026-10-09 08:00:41.508   Time stamp of our file: 2026-10-08 12:29:02.000
+2026-10-09 08:00:41.508   Installing the file.
+2026-10-09 08:00:41.510   Successfully installed the file.
+2026-10-09 08:00:41.510   -- File entry --
+2026-10-09 08:00:41.510   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\resources\vendor\notices\yt-dlp-THIRD_PARTY_LICENSES.txt
+2026-10-09 08:00:41.511   Time stamp of our file: 2026-10-08 12:29:02.000
+2026-10-09 08:00:41.511   Installing the file.
+2026-10-09 08:00:41.517   Successfully installed the file.
+2026-10-09 08:00:41.517   -- File entry --
+2026-10-09 08:00:41.517   Dest filename: C:\Users\EliteBook\AppData\Local\Programs\Audio Tech Labs Media Tools\app-icon.ico
+2026-10-09 08:00:41.518   Time stamp of our file: 2026-10-08 17:25:00.000
+2026-10-09 08:00:41.518   Dest file exists.
+2026-10-09 08:00:41.518   Time stamp of existing file: 2026-10-08 17:25:00.000
+2026-10-09 08:00:41.518   Installing the file.
+2026-10-09 08:00:41.521   Successfully installed the file.
+2026-10-09 08:00:41.521   -- Icon entry --
+2026-10-09 08:00:41.521   Dest filename: C:\Users\EliteBook\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Audio Tech Labs Media Tools.lnk
+2026-10-09 08:00:41.522   Creating the icon.
+2026-10-09 08:00:41.803   Successfully created the icon.
+2026-10-09 08:00:41.816   Saving uninstall information.
+2026-10-09 08:00:41.816   Creating new uninstall key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\AudioTechLabs.MediaTools_is1
+2026-10-09 08:00:41.816   Writing uninstall key values.
+2026-10-09 08:00:41.816   Detected previous administrative 64-bit install? No
+2026-10-09 08:00:41.817   Detected previous administrative 32-bit install? No
+2026-10-09 08:00:41.825   Installation process succeeded.
+2026-10-09 08:00:41.825   Need to restart Windows? No
+2026-10-09 08:00:41.829   Deinitializing Setup.
+2026-10-09 08:00:41.840   Log closed.

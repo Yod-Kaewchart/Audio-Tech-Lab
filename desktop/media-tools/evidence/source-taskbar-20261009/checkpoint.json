@@ -1,0 +1,18 @@
+{
+  "project": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools",
+  "checkedDate": "2026-10-09",
+  "timezone": "Asia/Bangkok",
+  "appSourceCommit": "df183f4970366597d539323760108dbaf234e049",
+  "reviewBaselineCommit": "d701c1af3de9deccf5f563f276a9a0df7f2934ed",
+  "initialBranch": "codex/public-beta-prep-20261009",
+  "initialWorkingTree": "clean",
+  "rollbackBranch": "codex/media-tools-before-source-taskbar-20261009",
+  "workingBranch": "codex/source-taskbar-review-20261009",
+  "applicableAgentsFiles": [],
+  "agentsSearchScope": "D:/AGENTS.md, D:/Sites/AGENTS.md, workspace/AGENTS.md, desktop/AGENTS.md, media-tools/AGENTS.md and project subdirectories (excluding generated/vendor/cache/release/node_modules)",
+  "baselineHashes": "baseline-artifact-hashes.json",
+  "version": "0.2.2-beta.2",
+  "signed": false,
+  "publicRelease": false,
+  "scope": "source/taskbar private evidence only; no source/UI/version/dependency/vendor edits"
+}

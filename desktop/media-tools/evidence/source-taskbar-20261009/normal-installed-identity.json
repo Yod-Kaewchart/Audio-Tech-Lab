@@ -1,0 +1,14 @@
+{
+  "scope": "existing-machine normal installed app only",
+  "setupSha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+  "exe": "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\Audio Tech Labs Media Tools.exe",
+  "exeSha256": "94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d",
+  "version": "0.2.2-beta.2",
+  "fileVersion": "0.2.2.2",
+  "shortcutPath": "C:\\Users\\EliteBook\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Audio Tech Labs Media Tools.lnk",
+  "shortcutTarget": "C:\\Users\\EliteBook\\AppData\\Local\\Programs\\Audio Tech Labs Media Tools\\Audio Tech Labs Media Tools.exe",
+  "shortcutArguments": "",
+  "launchMethod": "EXE directly with isolated --user-data-dir; shortcut metadata observed only",
+  "desktopPreserved": true,
+  "profileUnchanged": true
+}

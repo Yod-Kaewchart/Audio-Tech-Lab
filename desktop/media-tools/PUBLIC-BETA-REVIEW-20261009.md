@@ -4,7 +4,34 @@
 
 งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่ได้ push, merge main, เปิด GitHub Release, upload public หรือ deploy หน้าโหลด และไม่ได้แก้ Home/backend/tunnel/Cloudflare
 
-## ชุดสุดท้ายที่ส่งตรวจ
+## ส่งตรวจรอบ source/taskbar r2
+
+เริ่มจาก Git สะอาดที่ review commit `d701c1af3de9deccf5f563f276a9a0df7f2934ed` เก็บจุดถอย `codex/media-tools-before-source-taskbar-20261009` และทำงานบน `codex/source-taskbar-review-20261009` ไม่มี AGENTS.md ที่ใช้บังคับใน scope ที่ตรวจ รายละเอียดใน `evidence/source-taskbar-20261009/checkpoint.json`
+
+Source/build commit ของแอปและ Setup ยังคง `df183f4970366597d539323760108dbaf234e049` รุ่น `0.2.2-beta.2` / FileVersion `0.2.2.2` / unsigned ไม่เปลี่ยน source/UI/behavior/vendor/dependencies รุ่นแอปหรือ Setup/Portable ที่ยอมรับแล้ว ตรวจ hash ของ Setup/Portable/source-review เดิมทั้งต้นฉบับและสำเนาใน kit รวม 6 ไฟล์ตรง manifest (`baseline-artifact-hashes.json`) แยก review evidence commit และ manifest commit จาก source/build commit ผ่าน release manifest และ Git history
+
+| รายการรอบนี้ | ผล | หลักฐาน / ขอบเขต |
+| --- | --- | --- |
+| Baseline hashes/checkpoint | PASS | baseline-artifact-hashes.json; checkpoint.json; ชุดเดิมเก็บไว้ |
+| ระบุ component/version/source provenance | PASS เฉพาะการรวบรวม | SOURCE-INVENTORY.md/json: 84 แถว, source/build-input 34 ไฟล์พร้อม publisher URLs/SHA; ไม่ใช่ complete transitive SBOM |
+| Complete corresponding source ของ FFmpeg/yt-dlp | BLOCKED / INCOMPLETE | SOURCE-CLOSURE-PLAN.md: FFmpeg 37 version lines + 8 libs ไม่ระบุรุ่น, exact publisher patches/build/link graph ยังขาด; yt-dlp native inputs, Windows redistributable notices, EJS preferred-source/build linkage ยังไม่ครบ |
+| ผูก native curl DLL กับ publisher wheel | PASS เฉพาะ hash mapping | curl-native-binding.json; DLL SHA ตรง wheel Windows cp310-abi3 ของ curl_cffi 0.16.0; ไม่ยืนยัน transitive source/config ทั้งหมด |
+| เปิด EXE ซ้ำ normal installed app | PASS | normal-installed-single-instance.json: process ตัวที่สองออก 0, UI เดิมหนึ่งหน้าต่างได้รับ focus; เปิด EXE โดยตรงผ่าน Playwright ด้วย profile ทดสอบแยก ไม่อ้าง shortcut visual PASS |
+| เปิด EXE ซ้ำ Portable | PASS | portable-single-instance.json: เปิด extracted candidate EXE จริง hash ตรง, process ตัวที่สองออก 0, หน้าต่างเดิม focus |
+| Taskbar icon/name/grouping ภาพจริง — normal และ Portable | BLOCKED | normal/portable-supported-windows.json ไม่มี taskbar surface; ภาพ *-app-window-NOT-TASKBAR.png เป็น app window เท่านั้น; เตรียม TASKBAR-MANUAL-QA-พี่ยอด.md |
+| ข้อมูลผู้ใช้และ shortcut เดิม | PASS ใน scope รอบนี้ | normal-cleanup.json: profile เดิม 73 ไฟล์และ Desktop shortcut hash ไม่เปลี่ยน; test normal installation ถอนออกแล้ว ไม่มีการเปิดงานเสียง/เขียนไฟล์เสียงเดิม |
+| Download live / live EJS | BLOCKED | ยังไม่มี URL พร้อมการยืนยันสิทธิ์; offline startup/source inventory ไม่ใช่ live acceptance |
+| Clean-machine installer QA | BLOCKED | ยังไม่มี Windows/VM สะอาดพร้อมช่องทางเข้าถึง; ไม่ใช้ existing-machine แทน |
+| Signing / SmartScreen | BLOCKED | ไม่มี certificate/service ที่อนุญาต; คง unsigned และไม่ตรวจ reputation ด้วยไฟล์ local |
+| Checks เอกสาร/evidence/source ZIP | PASS | checks.json และ syntax-checks.json; JSON/Python/Node/PowerShell syntax, archive CRC/ทุกไฟล์ SHA, vendor/dependency lock/accepted artifacts ไม่เปลี่ยน; ไม่รัน audio regression ทั้งชุดซ้ำเพราะ runtime ไม่เปลี่ยน |
+
+Source-review ใหม่: `release/Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip` ขนาด **74366790 bytes**, SHA256 **3445fc139ac50b75bd6aeb156e9ad19ea49b4192aa0a827e1840ec44bf5ba08a**; โฟลเดอร์ `release/source-review-0.2.2-beta.2-r2-INCOMPLETE` เก็บชุดเก่าไว้ทั้งหมด ไม่ใช่ source ที่พร้อมแจก Public มี publisher wheels ใน build-inputs สำหรับตรวจ provenance เท่านั้น
+
+ชุดส่งตรวจใหม่ `release/review-0.2.2-beta.2-r2-11549c34e61f` แยก `private-evidence/` (path/log/screenshots ของเครื่อง) ออกจาก `candidate/` (Setup/Portable เดิม) และ `source-review/` (INCOMPLETE) ดู release-manifest.json/README ในชุดนี้ ห้ามแจกทั้ง kit เป็นแพ็กเกจผู้ใช้ รายงานและ evidence รอบก่อนยังเก็บใน kit เดิมและ Git baseline
+
+งานถัดไป: เลือกว่าจะขอ exact build-specific source/input set จากผู้เผยแพร่หรือเตรียม build ที่ควบคุม source ในรอบใหม่ตาม SOURCE-CLOSURE-PLAN.md; พี่ยอดตรวจ taskbar ด้วยภาพ desktop/taskbar จริงของทั้งสองแบบตาม worksheet; เตรียม URL/สิทธิ์ Download, clean Windows และ signing เมื่อพร้อม ไม่มีการเริ่ม replacement toolchain หรือเปลี่ยน vendor รอบนี้
+
+## Baseline beta.2 จากรอบก่อน (เก็บ artifacts เดิม)
 
 App source และ installer recipe ใช้ commit เดียวกัน: `df183f4970366597d539323760108dbaf234e049` รุ่น Windows numeric/FileVersion `0.2.2.2` และ ProductVersion `0.2.2-beta.2` Electron version ไม่ถูกใช้เป็น FileVersion ของแอป
 

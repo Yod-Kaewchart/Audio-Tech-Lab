@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "node": "single-instance.cjs: node --check",
+  "powershell": "taskbar-existing-machine.ps1: PowerShell AST parse",
+  "runtimeMutation": false
+}

@@ -1,0 +1,71 @@
+[
+  {
+    "file": "publisher/yt-dlp-build.yml",
+    "url": "https://raw.githubusercontent.com/yt-dlp/yt-dlp/2026.08.19/.github/workflows/build.yml",
+    "finalUrl": "https://raw.githubusercontent.com/yt-dlp/yt-dlp/2026.08.19/.github/workflows/build.yml",
+    "bytes": 22091,
+    "sha256": "cd9aae06afaa22166670bd7182d7279ae12dad2c1034c1cbeb0db3f5d993fc04",
+    "fetchedUtc": "2026-10-09T00:59:13.338124+00:00",
+    "status": "PASS"
+  },
+  {
+    "file": "publisher/yt-dlp-release.json",
+    "url": "https://api.github.com/repos/yt-dlp/yt-dlp/releases/tags/2026.08.19",
+    "finalUrl": "https://api.github.com/repos/yt-dlp/yt-dlp/releases/tags/2026.08.19",
+    "bytes": 52421,
+    "sha256": "1134d953ec70111238ccc4763ddece00a22ca77c75f3e6025a1360bde8c771b9",
+    "fetchedUtc": "2026-10-09T00:59:13.515256+00:00",
+    "status": "PASS"
+  },
+  {
+    "file": "publisher/yt-dlp-tag.json",
+    "url": "https://api.github.com/repos/yt-dlp/yt-dlp/commits/2026.08.19",
+    "finalUrl": "https://api.github.com/repos/yt-dlp/yt-dlp/commits/2026.08.19",
+    "bytes": 16847,
+    "sha256": "4d9e2a81a3d35fec9bf1545b497f7a16178f89282a960a03ff3323586859fb5f",
+    "fetchedUtc": "2026-10-09T00:59:13.490152+00:00",
+    "status": "PASS"
+  },
+  {
+    "file": "publisher/gyan-builds.html",
+    "url": "https://www.gyan.dev/ffmpeg/builds/",
+    "finalUrl": "https://www.gyan.dev/ffmpeg/builds/",
+    "bytes": 52159,
+    "sha256": "a7dcdc4a0ac4a7dc6531a6c22513d70493ab430cfd41aa67c5cae21fdae2d881",
+    "fetchedUtc": "2026-10-09T00:59:14.685701+00:00",
+    "status": "PASS"
+  },
+  {
+    "file": "publisher/gyan-repository-tree.json",
+    "url": "https://api.github.com/repos/GyanD/codexffmpeg/git/trees/master?recursive=1",
+    "status": "BLOCKED",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "publisher/gyan-readme.md",
+    "url": "https://raw.githubusercontent.com/GyanD/codexffmpeg/master/README.md",
+    "finalUrl": "https://raw.githubusercontent.com/GyanD/codexffmpeg/master/README.md",
+    "bytes": 1467,
+    "sha256": "4a545ee9d2c70424dd3d1672181f84584f4f1fbe0d37ccd6afa62395c58b5dd9",
+    "fetchedUtc": "2026-10-09T00:59:13.811795+00:00",
+    "status": "PASS"
+  },
+  {
+    "file": "publisher/ffmpeg-legal.html",
+    "url": "https://ffmpeg.org/legal.html",
+    "finalUrl": "https://ffmpeg.org/legal.html",
+    "bytes": 10686,
+    "sha256": "cd51dc25f9e3200b1e3953aee036f499ed51f01f7ba30563873186cb3f870eda",
+    "fetchedUtc": "2026-10-09T00:59:14.412962+00:00",
+    "status": "PASS"
+  },
+  {
+    "file": "publisher/gpl-3.0.html",
+    "url": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "finalUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "bytes": 50244,
+    "sha256": "73cd8ecdcf33b5923f3c092fba6d8f8c3faecf64d84a9ecfa6c5e028f980211a",
+    "fetchedUtc": "2026-10-09T00:59:15.257158+00:00",
+    "status": "PASS"
+  }
+]
