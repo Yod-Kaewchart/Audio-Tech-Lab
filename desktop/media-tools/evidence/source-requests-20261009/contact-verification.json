@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "reviewDate": "2026-10-09",
+  "status": "DRAFT_NOT_SENT",
+  "requestBasis": "evidence/source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md",
+  "sourceGate": "BLOCKED",
+  "sourceLabel": "INCOMPLETE",
+  "baselineHead": "3f3fc918f48dd0761fe67946a5c93be55198280c",
+  "binarySourceCommit": "df183f4970366597d539323760108dbaf234e049",
+  "appVersion": "0.2.2-beta.2",
+  "contacts": [
+    {
+      "publisher": "Gyan",
+      "channel": "email",
+      "address": "builds@gyan.dev",
+      "primarySource": "https://www.gyan.dev/ffmpeg/builds/#notes",
+      "evidenceFile": "publisher/gyan-builds.html",
+      "evidenceSha256": "a7dcdc4a0ac4a7dc6531a6c22513d70493ab430cfd41aa67c5cae21fdae2d881",
+      "fetchedUtc": "2026-10-09T01:34:26.2139488Z",
+      "interpretation": "Publisher writes builds at this domain; resolve builds plus the page domain gyan.dev. The full email address is derived from that explicit publisher wording.",
+      "publisherLinkedAlternative": "https://github.com/GyanD/codexffmpeg/issues",
+      "deliveryTested": false,
+      "sent": false,
+      "draft": "GYAN-REQUEST-DRAFT.md"
+    },
+    {
+      "publisher": "yt-dlp",
+      "channel": "email",
+      "address": "maintainers@yt-dlp.org",
+      "primarySource": "https://github.com/yt-dlp/yt-dlp/blob/2026.08.19/THIRD_PARTY_LICENSES.txt",
+      "evidenceFile": "publisher/yt-dlp-2026.08.19-THIRD_PARTY_LICENSES.txt",
+      "evidenceSha256": "472aefe951c7db35e1657c1d13fd337140511ed6f2b329205105ad441c5a02b7",
+      "fetchedUtc": "2026-10-09T01:34:26.5279567Z",
+      "interpretation": "The release-pinned publisher notice explicitly prints this email for bundled third-party source requests. Current master notice was also fetched and has the same SHA256.",
+      "currentSource": "https://github.com/yt-dlp/yt-dlp/blob/master/THIRD_PARTY_LICENSES.txt",
+      "currentEvidenceFile": "publisher/yt-dlp-current-THIRD_PARTY_LICENSES.txt",
+      "deliveryTested": false,
+      "sent": false,
+      "draft": "YT-DLP-REQUEST-DRAFT.md"
+    }
+  ],
+  "attachments": [],
+  "networkScope": "HTTPS publisher pages/notices only; no mail delivery, contact form submission or issue creation",
+  "mutations": "New private draft/evidence directory only; no changes to candidate binaries, dependencies, app source, review r2 kit or release manifests"
+}

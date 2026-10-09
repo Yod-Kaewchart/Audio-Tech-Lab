@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-10-09T02:57:26.7178283Z",
+  "phase": "PRE_COMMIT",
+  "scope": "Documentation and source-request draft evidence only. No build, audio regression, live Download/EJS, taskbar or installer QA rerun.",
+  "status": "PASS",
+  "sourceGate": "BLOCKED",
+  "sourceLabel": "INCOMPLETE",
+  "sent": false,
+  "head": "3f3fc918f48dd0761fe67946a5c93be55198280c",
+  "branch": "codex/source-taskbar-review-20261009",
+  "basis": {
+    "file": "evidence/source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md",
+    "sha256": "bd74e70017d9eee93e349347226c6545778239a2b94244d2cc4fbe523e929d19"
+  },
+  "vendorHashes": [
+    {
+      "file": "ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec"
+    },
+    {
+      "file": "ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+    },
+    {
+      "file": "yt-dlp.exe",
+      "sha256": "66674953fe251b89f4d08c5f0e35e0728679bd67ab3d7d05c0562af101dd3e7a"
+    }
+  ],
+  "checks": [
+    {
+      "check": "Current vendor SHA256 and draft identities",
+      "status": "PASS",
+      "evidence": "Get-FileHash for all three current vendor binaries matches dependencies.lock.json; exact hashes are present in the relevant request bodies."
+    },
+    {
+      "check": "Gyan original ZIP identity",
+      "status": "PASS",
+      "evidence": "Draft ZIP SHA256 matches dependencies.lock.json archive identity; current mutable publisher URL was not used as a replacement payload."
+    },
+    {
+      "check": "Gyan reported library versions and FFmpeg configuration",
+      "status": "PASS",
+      "evidence": "All 37 known external-library version values match r2 source-inventory.json; eight unversioned libraries are listed explicitly. The Appendix B configure arguments match r2 ffmpeg-version.log in order."
+    },
+    {
+      "check": "yt-dlp appendix input hashes",
+      "status": "PASS",
+      "evidence": "Rehashed the custom PyInstaller wheel, curl_cffi Windows wheel and yt-dlp release sdist in release/source-review-0.2.2-beta.2-r2-INCOMPLETE. All match r2 inventory and draft hashes. This does not establish complete native build inputs."
+    },
+    {
+      "check": "curl native binding statement",
+      "status": "PASS",
+      "evidence": "Draft wheel/DLL hashes and byte-match statement match the existing curl-native-binding.json. No new static dependency closure claim is made."
+    },
+    {
+      "check": "Publisher snapshot receipts",
+      "status": "PASS",
+      "evidence": "All three new publisher snapshots rehash to publisher-receipts.json with matching byte sizes. git hash-object --no-filters matches each staged blob, proving byte-for-byte preservation in the index."
+    },
+    {
+      "check": "Direct publisher contact evidence",
+      "status": "PASS",
+      "evidence": "Gyan snapshot contains builds at this domain wording and its GitHub issues link; the email is explicitly documented as derived. Release-pinned yt-dlp notice prints maintainers@yt-dlp.org. Current/pinned notice bytes match at fetch time. Mail delivery was not tested."
+    },
+    {
+      "check": "Copyable email bodies and retained gates",
+      "status": "PASS",
+      "evidence": "Both bodies have unfilled sender/reply-to fields and contain no workstation paths, EliteBook profile name or private-kit attachment reference; draft whitespace/replacement-character checks passed. contact-verification.json keeps sent/deliveryTested false, attachments empty and source gate BLOCKED / INCOMPLETE."
+    },
+    {
+      "check": "Git baseline and scope",
+      "status": "PASS",
+      "evidence": "Validation captured before the docs-only commit. HEAD is the recorded baseline. Exactly ten added files are staged under desktop/media-tools/evidence/source-requests-20261009/; no other staged or unstaged changes. git diff --cached --check passes. Raw publisher snapshot whitespace is preserved with scoped Git attributes and verified by SHA256; authored text uses normal whitespace checks."
+    },
+    {
+      "check": "Authored JSON/text and reviewer links",
+      "status": "PASS",
+      "evidence": "All three JSON files parse. Authored root-level text has no trailing spaces or replacement characters and ends with a newline. Local links from the reviewer README resolve. Sender name/reply-to placeholders remain unfilled in both copyable email bodies."
+    }
+  ],
+  "gitStatus": "PRE_COMMIT: ten added files staged exclusively under desktop/media-tools/evidence/source-requests-20261009/; no other changes",
+  "limitation": "Draft/content and published contact checks only. No message sent and no publisher reply obtained. No new corresponding-source completeness, runtime QA or release-readiness PASS."
+}

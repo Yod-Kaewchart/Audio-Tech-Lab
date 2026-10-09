@@ -1,0 +1,4 @@
+# Preserve downloaded publisher snapshots byte-for-byte, including upstream whitespace.
+publisher/** -text whitespace=-trailing-space,cr-at-eol
+# Preserve the receipt encoding/line endings; CRLF is intentional.
+publisher-receipts.json -text whitespace=cr-at-eol
