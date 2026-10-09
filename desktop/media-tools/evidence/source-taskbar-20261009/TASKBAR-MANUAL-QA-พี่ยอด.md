@@ -1,6 +1,8 @@
 # ตรวจ taskbar จริง — สำหรับพี่ยอด
 
-สถานะล่าสุด **BLOCKED รวม / Portable ยังขาด A. hover/thumbnail**: follow-up EliteBook 9 ตุลาคม 2026 เวลา 11:48–11:51 ไทย ตรวจ **B. เปิดซ้ำ/focus/grouping PASS** และ **C. หลังปิด PASS** พร้อมภาพเต็ม desktop จริงและ window/process snapshots แล้ว Player ปิดตามปกติ ไม่มี UI/process ค้าง ส่วน A ทำ hover ไม่ได้ผ่าน API และไม่มีภาพชื่อ/thumbnail จึงคง BLOCKED ดู [รายงาน follow-up](../taskbar-elitebook-20261009/portable-followup/README-พี่ยอด.md) และ [captures/hashes](../taskbar-elitebook-20261009/portable-followup/captures.json)
+สถานะล่าสุด **Portable taskbar PASS / Installed BLOCKED**: เก็บ PNG manual hover จากพี่ยอดแล้ว [portable-hover-thumbnail-manual.png](../taskbar-elitebook-20261009/portable-hover-thumbnail-manual.png) SHA256 `c0f45882d1793844e44d97b2be1dc7453d1c527dd3d3cb22202f252ff330fb2e` — 187231 bytes, 1366×768 ภาพเห็น wave บน taskbar, thumbnail เป็น Player, ชื่อ thumbnail ถูกตัดตามพื้นที่ และ title bar เต็มตรงแอป **A PASS** รวม **B/C PASS เดิม** ตาม [รายงาน follow-up](../taskbar-elitebook-20261009/portable-followup/README-พี่ยอด.md) และ [captures/hashes](../taskbar-elitebook-20261009/portable-followup/captures.json)
+
+ดู source path/ผู้ถ่าย/เวลา metadata และเวลา copy/ตรวจจริงใน [manual-hover-evidence.json](../taskbar-elitebook-20261009/manual-hover-evidence.json) A เป็นภาพ manual ไม่ใช่ API; EXE/hash ตรง beta.2 เดิม แต่ process metadata ของ manual ใช้ test profile `test-output/taskbar-elitebook` ต่างจาก B/C เดิม ไม่อ้าง session/profile เดียวกัน ไม่ต้องถ่ายใหม่หรือเปิดแอปซ้ำในรอบเก็บหลักฐานนี้ **cache access denied ยังไม่ยืนยันสาเหตุ**
 
 Installed ไม่พบ EXE เดิมและรอบก่อนถอน test installation แล้ว **รอบนี้ห้าม reinstall หรือใช้รุ่นอื่นแทน** คง Installed BLOCKED โดยไม่ใช้ผล Portable แทน ภาพ icon/active รอบ 11:13 ยังเก็บที่ [รายงานเดิม](../taskbar-elitebook-20261009/README-พี่ยอด.md) และ [ภาพเดิม](../taskbar-elitebook-20261009/portable-player-full-desktop.png)
 

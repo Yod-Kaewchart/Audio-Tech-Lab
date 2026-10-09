@@ -1,8 +1,18 @@
 # EliteBook taskbar visual — 0.2.2-beta.2
 
-วันที่ 9 ตุลาคม 2026 (Asia/Bangkok) · **private review evidence** · ไม่เผยแพร่ · **Taskbar visual รวม BLOCKED**
+วันที่ 9 ตุลาคม 2026 (Asia/Bangkok) · **private review evidence** · ไม่เผยแพร่ · **Portable PASS / Installed BLOCKED / Public readiness BLOCKED**
 
-## สถานะล่าสุดหลัง follow-up 11:48–11:51 ไทย
+## สถานะล่าสุด — เก็บ manual hover/thumbnail แล้ว
+
+**A PASS และ Portable taskbar PASS ในขอบเขตหลักฐานรวม**: พี่ยอดส่ง PNG manual ต้นฉบับบน EliteBook ตรวจภาพจริงและคัดลอกไม่แก้ภาพไว้ที่ [portable-hover-thumbnail-manual.png](portable-hover-thumbnail-manual.png) SHA256 **`c0f45882d1793844e44d97b2be1dc7453d1c527dd3d3cb22202f252ff330fb2e`**, 187231 bytes, 1366×768 เห็น taskbar wave, thumbnail ของ Player, ชื่อที่ถูกตัดตามพื้นที่ และ title bar เต็มตรงแอป ใช้ **B/C PASS เดิม** ใน commit `f97b20965cfbb16cd92889f843bfd3cb5d551606` ตาม scope เดิม ไม่รัน B/C หรือถ่ายภาพใหม่
+
+ต้นฉบับจริง `C:\Users\EliteBook\Pictures\Screenshots\สกรีนช็อต 2026-10-09 123026.png` ไม่ใช่ scratch path ผู้ถ่ายเป็นพี่ยอดตามคำแจ้งผู้ใช้ Copy/ตรวจ **12:37:33.855 / 12:37:34.975 ไทย วันที่ 9 ตุลาคม 2026** แยก source filesystem timestamps, clock ในภาพ 12:30 และเวลา 12:30:26 ที่อนุมานจากชื่อไฟล์ใน [manual-hover-evidence.json](manual-hover-evidence.json) ไม่อ้าง exact capture time จากชื่อไฟล์เพียงอย่างเดียว
+
+ตรวจ candidate EXE/version/hash แบบ read-only ตรงเดิม; current manual process main PID 17876 ใช้ profile `D:\Sites\Audio Tech Labs\desktop\media-tools\test-output\taskbar-elitebook` ขณะที่ B/C ใช้ `D:\Sites\Audio Tech Labs\desktop\media-tools\test-output\taskbar-elitebook-20261009\portable-profile` จึงแยก A/B/C ตาม profile/วิธีเปิด ไม่อ้างว่า PNG ฝัง EXE hash/profile หรือพิสูจน์ session เดียวกัน Agent ไม่เปิด/ปิดแอปหรือถ่ายภาพซ้ำในรอบนี้
+
+**Installed BLOCKED**, source **BLOCKED / INCOMPLETE — AWAITING RESPONSE**, Download live/EJS, clean-machine QA และ signing/SmartScreen คงเดิม **cache access denied ไม่ได้ปิดประเด็นจากภาพนี้** เก็บภาพเป็น QA ภายใน ไม่รวม user package/archived kit ดู [validation](manual-hover-validation.json)
+
+## Snapshot หลัง follow-up 11:48–11:51 ไทย ก่อนรับภาพ manual
 
 **A. Hover/thumbnail BLOCKED**, **B. เปิดซ้ำ/focus/grouping PASS**, **C. หลังปิด PASS** โดยใช้ EXE/profile/launcher เดิม มีภาพเต็ม desktop ใหม่ 3 ภาพ, native window observations และ OS process snapshots ดู [รายงาน follow-up](portable-followup/README-พี่ยอด.md), [captures/SHA256](portable-followup/captures.json) และ [validation](portable-followup/validation.json) Portable taskbar gate ยัง BLOCKED จน A มีภาพชื่อ/thumbnail จริง; Installed/source/gate อื่นคงเดิม
 

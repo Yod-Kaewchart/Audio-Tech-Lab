@@ -1,6 +1,14 @@
 # Portable taskbar follow-up — QA ภายใน
 
-9 ตุลาคม 2026 · Asia/Bangkok · **Portable gate BLOCKED เพราะยังไม่มี A. hover/thumbnail** · ไม่เผยแพร่ภาพ/แพ็กเกจ
+9 ตุลาคม 2026 · Asia/Bangkok · **Snapshot B/C รอบ 11:48–11:51** · ไม่เผยแพร่ภาพ/แพ็กเกจ
+
+## สถานะล่าสุดหลังรับภาพ manual
+
+เก็บ [ภาพ hover/thumbnail ของพี่ยอด](../portable-hover-thumbnail-manual.png) แล้ว **A PASS / Portable taskbar PASS ในขอบเขตหลักฐานรวม** ดู [manual receipt](../manual-hover-evidence.json) และ [validation](../manual-hover-validation.json) อ้าง **B/C PASS เดิม** ใน commit `f97b20965cfbb16cd92889f843bfd3cb5d551606` ตาม launcher/profile ที่ทดสอบ ไม่แก้ผล JSON หรือภาพย้อนหลังให้เหมือนตรวจ manual ในรอบนั้น
+
+A manual ใช้ binary beta.2 SHA เดียวกัน แต่ current process metadata ระบุ profile ทดสอบ `test-output/taskbar-elitebook` ต่างจาก B/C ในรายงานนี้ จึงไม่อ้างการทดสอบต่อเนื่องใน profile/session เดียวกัน Installed/source/gate อื่นคง BLOCKED **cache access denied ยังไม่ยืนยันสาเหตุ ไม่ปิดจากภาพ** ไม่มีการเปิดแอปหรือถ่ายภาพซ้ำรอบเก็บ manual หลักฐาน/ขั้นตอน manual ที่ยังค้างในข้อความด้านล่างเป็น snapshot ก่อนภาพได้รับและจัดเก็บ
+
+## Snapshot เดิมก่อนรับภาพ manual
 
 เริ่ม HEAD `e7e2412685394986fecb7dd9d6d33da9caf05a56` บน `codex/source-taskbar-review-20261009`, Git สะอาด ไม่พบ AGENTS.md ใน ancestor/project/evidence scope ที่ตรวจ รักษา evidence รอบเดิม ไม่ overwrite ภาพ/JSON เดิม ไม่มี reinstall/rebuild เปลี่ยนโปรแกรม/vendor/dependencies/version หรือ push/merge/upload/deploy Source/build commit ยังคง `df183f4970366597d539323760108dbaf234e049`; docs-only review commit ของชุดนี้ดูจาก Git history
 

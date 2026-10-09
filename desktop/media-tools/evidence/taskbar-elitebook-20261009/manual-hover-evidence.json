@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "reviewBaselineCommit": "f97b20965cfbb16cd92889f843bfd3cb5d551606",
+  "branch": "codex/source-taskbar-review-20261009",
+  "initialGitStatus": "clean",
+  "sourceBuildCommit": "df183f4970366597d539323760108dbaf234e049",
+  "evidenceType": "Manual screenshot supplied by user; not API screenshot",
+  "photographer": "พี่ยอด",
+  "photographerBasis": "User identifies this attached image as their manual QA evidence",
+  "sourcePath": "C:\\Users\\EliteBook\\Pictures\\Screenshots\\สกรีนช็อต 2026-10-09 123026.png",
+  "sourcePathVerifiedOnEliteBook": true,
+  "scratchPathUsed": false,
+  "evidenceFile": "portable-hover-thumbnail-manual.png",
+  "bytes": 187231,
+  "width": 1366,
+  "height": 768,
+  "sourceSha256": "c0f45882d1793844e44d97b2be1dc7453d1c527dd3d3cb22202f252ff330fb2e",
+  "evidenceSha256": "c0f45882d1793844e44d97b2be1dc7453d1c527dd3d3cb22202f252ff330fb2e",
+  "byteIdentical": true,
+  "editedCroppedOrReencoded": false,
+  "copiedUtc": "2026-10-09T05:37:33.8553421Z",
+  "copiedThai": "2026-10-09 12:37:33.855 Asia/Bangkok",
+  "reviewedUtc": "2026-10-09T05:37:34.9755059Z",
+  "reviewedThai": "2026-10-09 12:37:34.975 Asia/Bangkok",
+  "sourceMetadata": {
+    "creationTimeUtc": "2026-10-09T05:30:26.9908369Z",
+    "lastWriteTimeUtc": "2026-10-09T05:30:27.0771876Z",
+    "creationTimeThai": "2026-10-09 12:30:26.990 Asia/Bangkok",
+    "scope": "Filesystem timestamps observed on EliteBook; not independent capture-time certification"
+  },
+  "captureTiming": {
+    "visibleClock": "12:30 and 9/10/2569",
+    "filenameInferredThai": "2026-10-09 12:30:26 Asia/Bangkok",
+    "filenameInferenceOnly": true,
+    "exactCaptureTimestampUserConfirmed": false,
+    "noFabricatedExactCaptureTime": true
+  },
+  "candidate": {
+    "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+    "bytes": 246269440,
+    "productName": "Audio Tech Labs Media Tools",
+    "productVersion": "0.2.2-beta.2",
+    "fileVersion": "0.2.2.2",
+    "sha256": "94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d",
+    "portableZipSha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+    "bcTestProfile": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook-20261009\\portable-profile",
+    "observedManualTestProfile": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook",
+    "manualProfileMatchesBcProfile": false,
+    "observedProcessCheckedUtc": "2026-10-09T05:37:34.9755059Z",
+    "observedProcesses": [
+      {
+        "pid": 17876,
+        "parentPid": 8792,
+        "createdUtc": "2026-10-09T05:08:17.8378420Z",
+        "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "commandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" \"--user-data-dir=D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook"
+      },
+      {
+        "pid": 8652,
+        "parentPid": 17876,
+        "createdUtc": "2026-10-09T05:08:18.2317040Z",
+        "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "commandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=gpu-process --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook\" --gpu-preferences=WAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --field-trial-handle=1748,i,6854135877936874426,15030301437040136845,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1752,i,13221157358950683385,16650823207453894266,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=1732 /prefetch:2"
+      },
+      {
+        "pid": 18488,
+        "parentPid": 17876,
+        "createdUtc": "2026-10-09T05:08:18.2541610Z",
+        "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "commandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook\" --standard-schemes=atl-media --secure-schemes=atl-media --fetch-schemes=atl-media --streaming-schemes=atl-media --field-trial-handle=1748,i,6854135877936874426,15030301437040136845,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1752,i,13221157358950683385,16650823207453894266,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=1980 /prefetch:11"
+      },
+      {
+        "pid": 17544,
+        "parentPid": 17876,
+        "createdUtc": "2026-10-09T05:08:18.2890870Z",
+        "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "commandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=renderer --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook\" --standard-schemes=atl-media --secure-schemes=atl-media --fetch-schemes=atl-media --streaming-schemes=atl-media --app-user-model-id=AudioTechLabs.MediaTools --app-path=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\resources\\app\" --enable-sandbox --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --launch-time-ticks=44646577948 --field-trial-handle=1748,i,6854135877936874426,15030301437040136845,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1752,i,13221157358950683385,16650823207453894266,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2872 /prefetch:1"
+      },
+      {
+        "pid": 1632,
+        "parentPid": 17876,
+        "createdUtc": "2026-10-09T05:08:18.4177070Z",
+        "exe": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "commandLine": "\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe\" --type=renderer --user-data-dir=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook\" --standard-schemes=atl-media --secure-schemes=atl-media --fetch-schemes=atl-media --streaming-schemes=atl-media --app-user-model-id=AudioTechLabs.MediaTools --app-path=\"D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\resources\\app\" --enable-sandbox --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=44646700660 --field-trial-handle=1748,i,6854135877936874426,15030301437040136845,262144 --enable-features=AllowWindowCaptureExclusionInRemoteSessions,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,NetworkServiceSandbox,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=1752,i,13221157358950683385,16650823207453894266,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3488 /prefetch:1"
+      }
+    ],
+    "correlationScope": "User supplies this photo for Portable beta.2 QA; read-only current EXE version/hash and process path/profile corroborate identity. PNG itself does not encode EXE hash/profile. A manual isolated profile differs from B/C profile; no same-session/same-profile sequence claim",
+    "manualLaunchMethod": "User-launched EXE; current command line has --user-data-dir only, no Playwright debug arguments",
+    "agentLaunchedOrCapturedAgain": false
+  },
+  "assessment": {
+    "A": "PASS",
+    "windowsTaskbarVisible": true,
+    "waveIconMatches": true,
+    "thumbnailTitle": "Player — Audio Tech Labs...",
+    "thumbnailTitleTruncatedToAvailableWidth": true,
+    "thumbnailShowsPlayer": true,
+    "fullWindowTitle": "Player — Audio Tech Labs · Windows",
+    "noGenericElectronIcon": true,
+    "B": "PASS - inherited original launch/profile scope",
+    "C": "PASS - inherited original launch/profile scope",
+    "bcEvidenceCommit": "f97b20965cfbb16cd92889f843bfd3cb5d551606",
+    "bcEvidence": "portable-followup/results.json",
+    "portableTaskbarGate": "PASS - combined evidence for same beta.2 binary; A and B/C isolated profiles differ",
+    "installedTaskbarGate": "BLOCKED - installed EXE missing",
+    "sourceGate": "BLOCKED / INCOMPLETE — AWAITING RESPONSE",
+    "downloadLiveEjs": "BLOCKED",
+    "cleanMachineQa": "BLOCKED",
+    "signingSmartScreen": "BLOCKED",
+    "cacheAccessDenied": "Cause unconfirmed; not closed by screenshot",
+    "publicReleaseReadiness": "BLOCKED"
+  },
+  "privateQaOnly": true,
+  "includedInUserPackage": false,
+  "noReinstallRebuildRuntimeDependencyVendorVersionChanges": true,
+  "noPushMergeUploadPublish": true
+}

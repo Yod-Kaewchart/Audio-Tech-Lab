@@ -4,7 +4,25 @@
 
 งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่ได้ push, merge main, เปิด GitHub Release, upload public หรือ deploy หน้าโหลด และไม่ได้แก้ Home/backend/tunnel/Cloudflare
 
-## Portable taskbar follow-up — 9 ตุลาคม 2026 เวลา 11:48–11:51 ไทย
+## Portable taskbar gate PASS — ภาพ manual hover จากพี่ยอด
+
+เริ่มรอบเก็บภาพจาก HEAD `f97b20965cfbb16cd92889f843bfd3cb5d551606`, branch `codex/source-taskbar-review-20261009` และ Git สะอาด พบ PNG ต้นฉบับจริงบน EliteBook ที่ `C:\Users\EliteBook\Pictures\Screenshots\สกรีนช็อต 2026-10-09 123026.png` เปิดตรวจแล้ว copy ไม่แก้ภาพไปที่ [portable-hover-thumbnail-manual.png](evidence/taskbar-elitebook-20261009/portable-hover-thumbnail-manual.png) SHA256 ต้นฉบับ/สำเนาตรง **`c0f45882d1793844e44d97b2be1dc7453d1c527dd3d3cb22202f252ff330fb2e`**, **187231 bytes**, **1366×768** เป็น manual QA จากผู้ใช้ ไม่ใช่ภาพจาก API หรือ scratch path
+
+| กรณี | ผลล่าสุด | หลักฐาน / ขอบเขต |
+| --- | --- | --- |
+| A. Hover/thumbnail | PASS | ภาพจากพี่ยอดเห็น taskbar wave, thumbnail ตรง Player, ชื่อ `Player — Audio Tech Labs…` ถูกตัดตามพื้นที่แสดง และ title bar เต็ม `Player — Audio Tech Labs · Windows` |
+| B. เปิดซ้ำ/focus/grouping | PASS — ผลเดิม | อ้าง portable-followup/results.json และภาพก่อน–หลังใน commit `f97b20965cfbb16cd92889f843bfd3cb5d551606` ตาม launcher/profile เดิม ไม่รันทดสอบซ้ำ |
+| C. หลังปิดตามปกติ | PASS — ผลเดิม | อ้าง normal-close/processes-after-close/final windows และภาพหลังปิดใน commit เดียวกัน ไม่อ้างว่า manual session ปัจจุบันถูกปิดโดย agent |
+| Portable taskbar gate | PASS ในขอบเขตหลักฐานรวม | A manual + B/C เดิมใช้ binary beta.2 SHA เดียวกัน แยก profile/เวลา/วิธีเปิดตาม receipt; ไม่ปิด Installed gate |
+| Installed taskbar gate | BLOCKED | ไม่พบ EXE เดิมตามหลักฐานเดิม ไม่มี reinstall หรือใช้รุ่นอื่นแทน |
+
+EXE/version/hash ตรวจแบบ read-only ตรง candidate เดิม: `0.2.2-beta.2` / `0.2.2.2`, EXE SHA `94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d` Process metadata ปัจจุบันยืนยัน path เดิม แต่ manual ใช้ profile ทดสอบ `test-output/taskbar-elitebook` ต่างจาก B/C ที่ใช้ `test-output/taskbar-elitebook-20261009/portable-profile` จึงไม่อ้างว่าเป็นการทดสอบต่อเนื่องใน profile/session เดียวกัน PNG ไม่ได้ฝัง hash หรือ profile; ความเชื่อมโยงใช้คำแจ้งผู้ใช้ + EXE/process metadata ปัจจุบัน + evidence เดิม รายละเอียดใน [manual-hover-evidence.json](evidence/taskbar-elitebook-20261009/manual-hover-evidence.json)
+
+เวลา copy/ตรวจหลักฐานที่บันทึกจริง: **9 ตุลาคม 2026 12:37:33.855 / 12:37:34.975 ไทย** Source CreationTimeUtc `2026-10-09T05:30:26.9908369Z` และ LastWriteTimeUtc `2026-10-09T05:30:27.0771876Z` เป็น filesystem metadata; เวลา **12:30:26** อนุมานจากชื่อไฟล์ ส่วน clock ในภาพเห็น **12:30** ไม่สร้าง exact capture time ที่ผู้ใช้ไม่ได้ยืนยัน
+
+ภาพเป็น **QA ภายใน ไม่รวมแพ็กเกจผู้ใช้** ไม่เปิด/ปิดแอปหรือถ่ายภาพซ้ำ ไม่แก้ binary/dependency/vendor/version ไม่ rebuild/reinstall หรือ push/merge/upload/publish คง **Public Beta readiness BLOCKED**, source **BLOCKED / INCOMPLETE — AWAITING RESPONSE**, Download live/EJS, clean-machine QA และ signing/SmartScreen ตามเดิม **cache access denied ยังไม่ยืนยันสาเหตุ ไม่ปิดประเด็นจากภาพนี้** ดู [ผล validation](evidence/taskbar-elitebook-20261009/manual-hover-validation.json)
+
+## Portable taskbar follow-up — snapshot 9 ตุลาคม 2026 เวลา 11:48–11:51 ไทย
 
 เริ่มจาก HEAD `e7e2412685394986fecb7dd9d6d33da9caf05a56`, branch เดิม และ Git สะอาด ตรวจ EXE/path/version/hash และ process command line ว่าเป็น Portable beta.2 เดิมใน profile ทดสอบ `test-output/taskbar-elitebook-20261009/portable-profile` ไม่มี reinstall/rebuild หรือเปลี่ยน binaries/dependencies/vendor/version
 
