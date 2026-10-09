@@ -1,0 +1,332 @@
+[
+  {
+    "file": "\\Code Cache\\js\\index",
+    "bytes": 24,
+    "sha256": "fbcfe23a2ecb82b7100c50811691dde0a33aa3da8d176be9882a9db485dc0f2d",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Code Cache\\js\\index-dir\\the-real-index",
+    "bytes": 48,
+    "sha256": "1482985b01ad190f2ac992fa20c36014f124f5c124d9590fa23881069eae64ae",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Code Cache\\wasm\\index",
+    "bytes": 24,
+    "sha256": "fbcfe23a2ecb82b7100c50811691dde0a33aa3da8d176be9882a9db485dc0f2d",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Code Cache\\wasm\\index-dir\\the-real-index",
+    "bytes": 48,
+    "sha256": "342cfd260360e08a8e0d77980c70296389e8632f29f1a2a18c5eb60bfda6e6d6",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_0",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_1",
+    "bytes": 270336,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_2",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_3",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\index",
+    "bytes": 262512,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_0",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_1",
+    "bytes": 270336,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_2",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_3",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\index",
+    "bytes": 262512,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\declarative_performance_observer.db",
+    "bytes": 32768,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\declarative_performance_observer.db-journal",
+    "bytes": 0,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DevToolsActivePort",
+    "bytes": 60,
+    "sha256": "9fbc74084292acc30935d15d711955844079c3cbd5ce96f6e80cfc3d1a4b872e",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\DIPS",
+    "bytes": 4096,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\DIPS-wal",
+    "bytes": 32,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GPUCache\\data_0",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GPUCache\\data_1",
+    "bytes": 270336,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GPUCache\\data_2",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GPUCache\\data_3",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GPUCache\\index",
+    "bytes": 262512,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GPUPersistentCache\\DawnGraphiteCache\\5IQM42UTUKB3VIRRMR5FSNOJ6XMOWXDZ\\cache.db",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\GPUPersistentCache\\DawnGraphiteCache\\5IQM42UTUKB3VIRRMR5FSNOJ6XMOWXDZ\\cache.db-wal",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\GPUPersistentCache\\DawnGraphiteCache\\5IQM42UTUKB3VIRRMR5FSNOJ6XMOWXDZ\\cache.journal",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\GrShaderCache\\data_0",
+    "bytes": 45056,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GrShaderCache\\data_1",
+    "bytes": 270336,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GrShaderCache\\data_2",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GrShaderCache\\data_3",
+    "bytes": 4202496,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\GrShaderCache\\f_000001",
+    "bytes": 16532,
+    "sha256": "5290b9ce32a811983029866b511f2f2fede95a976535988ff8ab017c66df3b9e",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\GrShaderCache\\f_000002",
+    "bytes": 21200,
+    "sha256": "83189ab71dd391bc5b46470f0842949766b71bdc324b1edc1bb6e846c681ed6e",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\GrShaderCache\\index",
+    "bytes": 262512,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Local State",
+    "bytes": 490,
+    "sha256": "ef06a4988b4dd66ebadc5e3d594bb5fbb693fedeb5441f21d2c264a221108d4e",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\000003.log",
+    "bytes": 0,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\CURRENT",
+    "bytes": 16,
+    "sha256": "0f1bad70c7bd1e0a69562853ec529355462fcd0423263a3d39d6d0d70b780443",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\LOCK",
+    "bytes": 0,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\LOG",
+    "bytes": 0,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\MANIFEST-000001",
+    "bytes": 41,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\lockfile",
+    "bytes": 0,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Network\\NetworkDataMigrated",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Network\\Network Persistent State",
+    "bytes": 59,
+    "sha256": "0178d3cd64965de13e56a805628521262dc0b9bb2294d6eda186252382fe1f11",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Network\\Trust Tokens",
+    "bytes": 36864,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Network\\Trust Tokens-journal",
+    "bytes": 0,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Preferences",
+    "bytes": 57,
+    "sha256": "be4b8924ab38e8acf350e6e3b9f1f63a1a94952d8002759acd6946c4d5d0b5de",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\ShaderCache\\data_0",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\ShaderCache\\data_1",
+    "bytes": 270336,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\ShaderCache\\data_2",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\ShaderCache\\data_3",
+    "bytes": 8192,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\ShaderCache\\index",
+    "bytes": 262512,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Shared Dictionary\\cache\\index",
+    "bytes": 24,
+    "sha256": "fbcfe23a2ecb82b7100c50811691dde0a33aa3da8d176be9882a9db485dc0f2d",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Shared Dictionary\\cache\\index-dir\\the-real-index",
+    "bytes": 48,
+    "sha256": "5ab57ea7fad7448b32e7f17c468efe5fdac381e235a4be4a00969304ea0ba8f2",
+    "readStatus": "readable"
+  },
+  {
+    "file": "\\Shared Dictionary\\db",
+    "bytes": 45056,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  },
+  {
+    "file": "\\Shared Dictionary\\db-journal",
+    "bytes": 0,
+    "sha256": null,
+    "readStatus": "locked/unreadable while app running"
+  }
+]

@@ -2,6 +2,14 @@
 
 วันที่ 9 ตุลาคม 2026 (Asia/Bangkok) · **private review evidence** · ไม่เผยแพร่ · **Taskbar visual รวม BLOCKED**
 
+## สถานะล่าสุดหลัง follow-up 11:48–11:51 ไทย
+
+**A. Hover/thumbnail BLOCKED**, **B. เปิดซ้ำ/focus/grouping PASS**, **C. หลังปิด PASS** โดยใช้ EXE/profile/launcher เดิม มีภาพเต็ม desktop ใหม่ 3 ภาพ, native window observations และ OS process snapshots ดู [รายงาน follow-up](portable-followup/README-พี่ยอด.md), [captures/SHA256](portable-followup/captures.json) และ [validation](portable-followup/validation.json) Portable taskbar gate ยัง BLOCKED จน A มีภาพชื่อ/thumbnail จริง; Installed/source/gate อื่นคงเดิม
+
+Player และ Snipping Tool ปิดตามปกติแล้ว ไม่เหลือ Portable native window หรือ related EXE/profile processes ข้อมูลผู้ใช้จริง 73 ไฟล์และ shortcut 4 ไฟล์คงเดิม Test profile เปลี่ยนแยกต่างหากและไม่ได้ restore/delete ข้อความว่า Player/Snipping Tool เปิดค้างและขั้นตอนที่ยังขาดด้านล่างเป็น **snapshot รอบ 11:13 ก่อน follow-up** ตอนนี้เหลือ manual เฉพาะ A ตามรายงานล่าสุด ไม่ต้องทำ B/C ซ้ำเพราะเหตุว่า A ยัง BLOCKED
+
+## Snapshot รอบ 11:13 ก่อน follow-up
+
 เริ่มที่ `9fe2cf2a8c692882ca9a8110ed0e310e63ed1f84` บน `codex/source-taskbar-review-20261009`, Git สะอาด ไม่มี AGENTS.md ใน ancestor/scope ที่ตรวจ (`agents-scope.json`) Source/build commit เดิม `df183f4970366597d539323760108dbaf234e049` แยกจาก docs-only review commit ของชุดนี้ซึ่งดูได้จาก Git history ไม่มีการเปลี่ยนโปรแกรม, dependencies, vendor, version หรือแพ็กเกจ ไม่ rebuild/reinstall/push/upload/deploy
 
 เครื่อง HP EliteBook 840r G4, Windows 11 Pro 10.0.26300 build 26300 (`baseline.json`) ภาพ PNG 1366×768; ไม่ได้เปลี่ยน display scale, combine, auto-hide หรือ pin settings และยังไม่ได้ตรวจค่าการตั้งค่าเหล่านี้แยกจากภาพ

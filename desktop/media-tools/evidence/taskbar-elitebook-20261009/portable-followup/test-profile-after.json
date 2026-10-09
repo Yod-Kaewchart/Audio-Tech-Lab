@@ -1,0 +1,292 @@
+[
+  {
+    "file": "\\Code Cache\\js\\index",
+    "bytes": 24,
+    "sha256": "fbcfe23a2ecb82b7100c50811691dde0a33aa3da8d176be9882a9db485dc0f2d"
+  },
+  {
+    "file": "\\Code Cache\\js\\index-dir\\the-real-index",
+    "bytes": 48,
+    "sha256": "1482985b01ad190f2ac992fa20c36014f124f5c124d9590fa23881069eae64ae"
+  },
+  {
+    "file": "\\Code Cache\\wasm\\index",
+    "bytes": 24,
+    "sha256": "fbcfe23a2ecb82b7100c50811691dde0a33aa3da8d176be9882a9db485dc0f2d"
+  },
+  {
+    "file": "\\Code Cache\\wasm\\index-dir\\the-real-index",
+    "bytes": 48,
+    "sha256": "342cfd260360e08a8e0d77980c70296389e8632f29f1a2a18c5eb60bfda6e6d6"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_0",
+    "bytes": 8192,
+    "sha256": "d6a5fe39cd672781b256e0e3102f7022635f1d4bb7cfcc90a80fffe4d0f3877e"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_1",
+    "bytes": 270336,
+    "sha256": "6071bdd7eb4279ffa264c81002bd0979624b7e0fdeeb15ab1e28e5019ef2ef17"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_2",
+    "bytes": 8192,
+    "sha256": "ec1702806f4cc7c42a82fc2b38e89835fde7c64bb32060e0823c9077ca92efb7"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\data_3",
+    "bytes": 8192,
+    "sha256": "e09f42c398d688dce168570291f1f92d079987deda3099a34adb9e8c0522b30c"
+  },
+  {
+    "file": "\\DawnGraphiteCache\\index",
+    "bytes": 262512,
+    "sha256": "4098a3501432119e5ea1e41f4ed839e988adbebe111f2ceaf102746fac42599a"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_0",
+    "bytes": 8192,
+    "sha256": "d6a5fe39cd672781b256e0e3102f7022635f1d4bb7cfcc90a80fffe4d0f3877e"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_1",
+    "bytes": 270336,
+    "sha256": "0006b6e8668b83d8c3def511168adc595dfacc40f4ab68808a3241dccf15bddf"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_2",
+    "bytes": 8192,
+    "sha256": "ec1702806f4cc7c42a82fc2b38e89835fde7c64bb32060e0823c9077ca92efb7"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\data_3",
+    "bytes": 8192,
+    "sha256": "e09f42c398d688dce168570291f1f92d079987deda3099a34adb9e8c0522b30c"
+  },
+  {
+    "file": "\\DawnWebGPUCache\\index",
+    "bytes": 262512,
+    "sha256": "0cf3b9445c614d58444022f0acf287e2ebeda2ea2cd1f5a1ac6d1fd3f93a7d08"
+  },
+  {
+    "file": "\\declarative_performance_observer.db",
+    "bytes": 32768,
+    "sha256": "6b77b54313df8d759334819fdad7d879f15dce045017bd11bb557dd94ce52f66"
+  },
+  {
+    "file": "\\declarative_performance_observer.db-journal",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\DevToolsActivePort",
+    "bytes": 60,
+    "sha256": "bcb9370dcd0ac2b551b82171f993dab0c31008c1eca623a928925d70e2de38f4"
+  },
+  {
+    "file": "\\DIPS",
+    "bytes": 36864,
+    "sha256": "b6ae86baeb5f79655976b9bab0011178d995281cb6585e18a5581b10978a1211"
+  },
+  {
+    "file": "\\GPUCache\\data_0",
+    "bytes": 8192,
+    "sha256": "d6a5fe39cd672781b256e0e3102f7022635f1d4bb7cfcc90a80fffe4d0f3877e"
+  },
+  {
+    "file": "\\GPUCache\\data_1",
+    "bytes": 270336,
+    "sha256": "6f77a1cc6596e0d3b92a5597ea7395ab239a08cd53b8b9cf8d4f6a77ded14774"
+  },
+  {
+    "file": "\\GPUCache\\data_2",
+    "bytes": 8192,
+    "sha256": "ec1702806f4cc7c42a82fc2b38e89835fde7c64bb32060e0823c9077ca92efb7"
+  },
+  {
+    "file": "\\GPUCache\\data_3",
+    "bytes": 8192,
+    "sha256": "e09f42c398d688dce168570291f1f92d079987deda3099a34adb9e8c0522b30c"
+  },
+  {
+    "file": "\\GPUCache\\index",
+    "bytes": 262512,
+    "sha256": "d089cc369838345ed44cbe221ba8754cdf3e8d4ddb88759daf57129bdd9ae822"
+  },
+  {
+    "file": "\\GPUPersistentCache\\DawnGraphiteCache\\5IQM42UTUKB3VIRRMR5FSNOJ6XMOWXDZ\\cache.db",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\GPUPersistentCache\\DawnGraphiteCache\\5IQM42UTUKB3VIRRMR5FSNOJ6XMOWXDZ\\cache.db-wal",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\GPUPersistentCache\\DawnGraphiteCache\\5IQM42UTUKB3VIRRMR5FSNOJ6XMOWXDZ\\cache.journal",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\GrShaderCache\\data_0",
+    "bytes": 45056,
+    "sha256": "42dd843b0b1e532773920bb2c3ea9c84a42729fe28a4d26db10b718c956e1260"
+  },
+  {
+    "file": "\\GrShaderCache\\data_1",
+    "bytes": 270336,
+    "sha256": "7d972b2405c9a69243300e8d68e6d07fd4ca8f29bb85679f6745762ccf2650c8"
+  },
+  {
+    "file": "\\GrShaderCache\\data_2",
+    "bytes": 8192,
+    "sha256": "ec1702806f4cc7c42a82fc2b38e89835fde7c64bb32060e0823c9077ca92efb7"
+  },
+  {
+    "file": "\\GrShaderCache\\data_3",
+    "bytes": 4202496,
+    "sha256": "9cea52a41b7d49d749463b3150eac1c1fdd7ff383d8e2abe66c1803344fb408a"
+  },
+  {
+    "file": "\\GrShaderCache\\f_000001",
+    "bytes": 16532,
+    "sha256": "5290b9ce32a811983029866b511f2f2fede95a976535988ff8ab017c66df3b9e"
+  },
+  {
+    "file": "\\GrShaderCache\\f_000002",
+    "bytes": 21200,
+    "sha256": "83189ab71dd391bc5b46470f0842949766b71bdc324b1edc1bb6e846c681ed6e"
+  },
+  {
+    "file": "\\GrShaderCache\\index",
+    "bytes": 262512,
+    "sha256": "f5bc0c037f4f0159ea760e30706153eefe8e0b0b88d897e70bb63d50f930d5d7"
+  },
+  {
+    "file": "\\Local State",
+    "bytes": 490,
+    "sha256": "ef06a4988b4dd66ebadc5e3d594bb5fbb693fedeb5441f21d2c264a221108d4e"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\000003.log",
+    "bytes": 49,
+    "sha256": "af47b5d07d2f1aa55711e00774a429289267a82e604602df8fdd2c5047626159"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\CURRENT",
+    "bytes": 16,
+    "sha256": "0f1bad70c7bd1e0a69562853ec529355462fcd0423263a3d39d6d0d70b780443"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\LOCK",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\LOG",
+    "bytes": 371,
+    "sha256": "c162b551e210e8c1b0a1dcc7f84d64d7a82b71aed58d10aac9cbcaa7575c7990"
+  },
+  {
+    "file": "\\Local Storage\\leveldb\\MANIFEST-000001",
+    "bytes": 41,
+    "sha256": "f9d31b278e215eb0d0e9cd709edfa037e828f36214ab7906f612160fead4b2b4"
+  },
+  {
+    "file": "\\Network\\NetworkDataMigrated",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\Network\\Network Persistent State",
+    "bytes": 111,
+    "sha256": "88c9590388d22bb0bd8da3f7d50389311957024ee5c2dfe562e2649ad427fd7d"
+  },
+  {
+    "file": "\\Network\\Trust Tokens",
+    "bytes": 36864,
+    "sha256": "48dc8b9acbedb0b7de6579f89e873e9434ca389b8c6ed986f705c86fd2819599"
+  },
+  {
+    "file": "\\Network\\Trust Tokens-journal",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\Preferences",
+    "bytes": 57,
+    "sha256": "be4b8924ab38e8acf350e6e3b9f1f63a1a94952d8002759acd6946c4d5d0b5de"
+  },
+  {
+    "file": "\\Session Storage\\000003.log",
+    "bytes": 68,
+    "sha256": "bd25adf5d7bb8fa202eb194c0a1258f3f27d745f1cc562472baeb908ffc57f63"
+  },
+  {
+    "file": "\\Session Storage\\CURRENT",
+    "bytes": 16,
+    "sha256": "0f1bad70c7bd1e0a69562853ec529355462fcd0423263a3d39d6d0d70b780443"
+  },
+  {
+    "file": "\\Session Storage\\LOCK",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "\\Session Storage\\LOG",
+    "bytes": 357,
+    "sha256": "19b8c52304bf87f898fa8fefb699d9d6bcc9d8df02682981f2b91d1301a8dc04"
+  },
+  {
+    "file": "\\Session Storage\\MANIFEST-000001",
+    "bytes": 41,
+    "sha256": "f9d31b278e215eb0d0e9cd709edfa037e828f36214ab7906f612160fead4b2b4"
+  },
+  {
+    "file": "\\ShaderCache\\data_0",
+    "bytes": 8192,
+    "sha256": "d6a5fe39cd672781b256e0e3102f7022635f1d4bb7cfcc90a80fffe4d0f3877e"
+  },
+  {
+    "file": "\\ShaderCache\\data_1",
+    "bytes": 270336,
+    "sha256": "caac36d9f056e5c0cc2a9a4dd71237f3e3347ea89bf3d96d00b902c8fa89dc6a"
+  },
+  {
+    "file": "\\ShaderCache\\data_2",
+    "bytes": 8192,
+    "sha256": "ec1702806f4cc7c42a82fc2b38e89835fde7c64bb32060e0823c9077ca92efb7"
+  },
+  {
+    "file": "\\ShaderCache\\data_3",
+    "bytes": 8192,
+    "sha256": "e09f42c398d688dce168570291f1f92d079987deda3099a34adb9e8c0522b30c"
+  },
+  {
+    "file": "\\ShaderCache\\index",
+    "bytes": 262512,
+    "sha256": "dde66bdbeec2b6676cf143fa8e2bb2fd552229a2026dbeeafde3badd4bc56699"
+  },
+  {
+    "file": "\\Shared Dictionary\\cache\\index",
+    "bytes": 24,
+    "sha256": "fbcfe23a2ecb82b7100c50811691dde0a33aa3da8d176be9882a9db485dc0f2d"
+  },
+  {
+    "file": "\\Shared Dictionary\\cache\\index-dir\\the-real-index",
+    "bytes": 48,
+    "sha256": "5ab57ea7fad7448b32e7f17c468efe5fdac381e235a4be4a00969304ea0ba8f2"
+  },
+  {
+    "file": "\\Shared Dictionary\\db",
+    "bytes": 45056,
+    "sha256": "db9734c1e3001f7abd08bcc472a7b4f5daf8076eaee708f04ba98b11bd70131d"
+  },
+  {
+    "file": "\\Shared Dictionary\\db-journal",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

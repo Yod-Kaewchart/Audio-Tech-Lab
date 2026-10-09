@@ -1,0 +1,20 @@
+[
+  {
+    "case": "B before repeat",
+    "image": "portable-before-repeat-full-desktop.png",
+    "sourcePath": "C:/Users/EliteBook/Pictures/Screenshots/สกรีนช็อต 2026-10-09 114811.png",
+    "requestedUtc": "2026-10-09T04:48:10.746Z"
+  },
+  {
+    "case": "B after repeat",
+    "image": "portable-after-repeat-full-desktop.png",
+    "sourcePath": "C:/Users/EliteBook/Pictures/Screenshots/สกรีนช็อต 2026-10-09 114943.png",
+    "requestedUtc": "2026-10-09T04:49:43.082Z"
+  },
+  {
+    "case": "C after normal close",
+    "image": "portable-after-close-full-desktop.png",
+    "sourcePath": "C:/Users/EliteBook/Pictures/Screenshots/สกรีนช็อต 2026-10-09 115114.png",
+    "requestedUtc": "2026-10-09T04:51:13.861Z"
+  }
+]

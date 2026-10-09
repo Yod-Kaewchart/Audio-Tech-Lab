@@ -1,0 +1,200 @@
+{
+  "checkedUtc": "2026-10-09T04:52:18.0569226Z",
+  "status": "PASS - real profile/shortcuts preservation",
+  "realProfilePath": "C:\\Users\\EliteBook\\AppData\\Roaming\\Audio Tech Labs Media Tools",
+  "realProfileFilesBefore": 73,
+  "realProfileFilesAfter": 73,
+  "realProfileHashesAndSizesEqual": true,
+  "shortcutFiles": 4,
+  "shortcutHashesTargetsArgumentsIconsEqual": true,
+  "testProfilePath": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\taskbar-elitebook-20261009\\portable-profile",
+  "testProfileFilesBefore": 55,
+  "testProfileFilesAfter": 58,
+  "testProfileBeforeLockedFiles": 38,
+  "testProfileChanges": [
+    {
+      "file": "\\DawnGraphiteCache\\data_0",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnGraphiteCache\\data_1",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnGraphiteCache\\data_2",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnGraphiteCache\\data_3",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnGraphiteCache\\index",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnWebGPUCache\\data_0",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnWebGPUCache\\data_1",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnWebGPUCache\\data_2",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnWebGPUCache\\data_3",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DawnWebGPUCache\\index",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\declarative_performance_observer.db",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\declarative_performance_observer.db-journal",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DevToolsActivePort",
+      "kind": "changed in isolated test profile"
+    },
+    {
+      "file": "\\DIPS",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GPUCache\\data_0",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GPUCache\\data_1",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GPUCache\\data_2",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GPUCache\\data_3",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GPUCache\\index",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GrShaderCache\\data_0",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GrShaderCache\\data_1",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GrShaderCache\\data_2",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GrShaderCache\\data_3",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\GrShaderCache\\index",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Local Storage\\leveldb\\000003.log",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Local Storage\\leveldb\\LOCK",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Local Storage\\leveldb\\LOG",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Local Storage\\leveldb\\MANIFEST-000001",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Network\\Network Persistent State",
+      "kind": "changed in isolated test profile"
+    },
+    {
+      "file": "\\Network\\Trust Tokens",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Network\\Trust Tokens-journal",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Session Storage\\000003.log",
+      "kind": "created in isolated test profile"
+    },
+    {
+      "file": "\\Session Storage\\CURRENT",
+      "kind": "created in isolated test profile"
+    },
+    {
+      "file": "\\Session Storage\\LOCK",
+      "kind": "created in isolated test profile"
+    },
+    {
+      "file": "\\Session Storage\\LOG",
+      "kind": "created in isolated test profile"
+    },
+    {
+      "file": "\\Session Storage\\MANIFEST-000001",
+      "kind": "created in isolated test profile"
+    },
+    {
+      "file": "\\ShaderCache\\data_0",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\ShaderCache\\data_1",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\ShaderCache\\data_2",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\ShaderCache\\data_3",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\ShaderCache\\index",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Shared Dictionary\\db",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\Shared Dictionary\\db-journal",
+      "kind": "before hash unavailable while running; after close hash readable"
+    },
+    {
+      "file": "\\DIPS-wal",
+      "kind": "removed by app in isolated test profile"
+    },
+    {
+      "file": "\\lockfile",
+      "kind": "removed by app in isolated test profile"
+    }
+  ],
+  "testProfileScope": "Isolated Electron cache/storage and normal close changes; no test profile unchanged claim; locked before hashes remain unknown",
+  "noProfileRestorationOrDeletion": true,
+  "noShortcutWritePinUnpin": true,
+  "noAudioFileOperation": true
+}

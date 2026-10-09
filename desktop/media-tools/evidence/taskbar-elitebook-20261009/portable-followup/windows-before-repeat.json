@@ -1,0 +1,53 @@
+{
+  "checkedUtc": "2026-10-09T04:47:45.520Z",
+  "windows": [
+    {
+      "id": 2,
+      "title": "Audio Tech Labs Playback",
+      "visible": false,
+      "focused": false,
+      "minimized": false,
+      "url": "atl-media://app/playback-host.html"
+    },
+    {
+      "id": 1,
+      "title": "Player — Audio Tech Labs · Windows",
+      "visible": true,
+      "focused": false,
+      "minimized": false,
+      "url": "atl-media://app/player.html"
+    }
+  ],
+  "supportedWindows": [
+    {
+      "app": "Microsoft.ScreenSketch_8wekyb3d8bbwe!App",
+      "id": 3541112,
+      "title": "เครื่องมือสนิป"
+    },
+    {
+      "app": "process:D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+      "id": 264400,
+      "title": "Player — Audio Tech Labs · Windows"
+    },
+    {
+      "app": "OpenAI.Codex_2p2nqsd0c76g0!App",
+      "id": 1705326,
+      "title": "ChatGPT"
+    },
+    {
+      "app": "Chrome",
+      "id": 263396,
+      "title": "วางแผนเผยแพร่โปรแกรม - Google Chrome"
+    },
+    {
+      "app": "process:C:\\Windows\\explorer.exe",
+      "id": 1247512,
+      "title": "taskbar-elitebook-20261009 - File Explorer"
+    },
+    {
+      "app": "process:C:\\Program Files (x86)\\ManyCam\\ManyCam.exe",
+      "id": 1771368,
+      "title": "ManyCam"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "case": "B before repeat",
+    "file": "portable-before-repeat-full-desktop.png",
+    "bytes": 369341,
+    "sha256": "037f45384ee1938f1f71ee7364b0b099f350b71734a2d111de6e7bc1479bab8a",
+    "sourcePath": "C:/Users/EliteBook/Pictures/Screenshots/สกรีนช็อต 2026-10-09 114811.png",
+    "sourceSha256": "037f45384ee1938f1f71ee7364b0b099f350b71734a2d111de6e7bc1479bab8a",
+    "createdUtc": "2026-10-09T04:48:11.3810479Z",
+    "capturedThai": "2026-10-09 11:48:11.381 Asia/Bangkok",
+    "width": 1366,
+    "height": 768,
+    "method": "Existing Windows Snipping Tool Full screen via supported sky UI; native auto-save then unchanged copy",
+    "privateReviewOnly": true,
+    "retouchedCroppedOrComposited": false
+  },
+  {
+    "case": "B after repeat",
+    "file": "portable-after-repeat-full-desktop.png",
+    "bytes": 370623,
+    "sha256": "613b72817a4023977d60908af8403107bf153b4c0a021262a5ade17af26d7e3f",
+    "sourcePath": "C:/Users/EliteBook/Pictures/Screenshots/สกรีนช็อต 2026-10-09 114943.png",
+    "sourceSha256": "613b72817a4023977d60908af8403107bf153b4c0a021262a5ade17af26d7e3f",
+    "createdUtc": "2026-10-09T04:49:43.8536937Z",
+    "capturedThai": "2026-10-09 11:49:43.853 Asia/Bangkok",
+    "width": 1366,
+    "height": 768,
+    "method": "Existing Windows Snipping Tool Full screen via supported sky UI; native auto-save then unchanged copy",
+    "privateReviewOnly": true,
+    "retouchedCroppedOrComposited": false
+  },
+  {
+    "case": "C after normal close",
+    "file": "portable-after-close-full-desktop.png",
+    "bytes": 747440,
+    "sha256": "f8ffdb2c6509ebe7ec451d4cae776744003c12633feb5301a53b75e512b45129",
+    "sourcePath": "C:/Users/EliteBook/Pictures/Screenshots/สกรีนช็อต 2026-10-09 115114.png",
+    "sourceSha256": "f8ffdb2c6509ebe7ec451d4cae776744003c12633feb5301a53b75e512b45129",
+    "createdUtc": "2026-10-09T04:51:14.4778194Z",
+    "capturedThai": "2026-10-09 11:51:14.477 Asia/Bangkok",
+    "width": 1366,
+    "height": 768,
+    "method": "Existing Windows Snipping Tool Full screen via supported sky UI; native auto-save then unchanged copy",
+    "privateReviewOnly": true,
+    "retouchedCroppedOrComposited": false
+  }
+]

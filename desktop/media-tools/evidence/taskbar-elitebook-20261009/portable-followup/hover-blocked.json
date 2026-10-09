@@ -1,0 +1,10 @@
+{
+  "checkedUtc": "2026-10-09T04:47:45.603Z",
+  "case": "A. Hover/thumbnail",
+  "status": "BLOCKED",
+  "reason": "Supported sky API has no hover/move method and list_windows returns no taskbar surface; restored real Player but no taskbar hover capture",
+  "windowTitle": "Player — Audio Tech Labs · Windows",
+  "windowId": 264400,
+  "manualRequired": "Hover wave entry by hand and save a full desktop PNG with actual thumbnail/name; do not count caption or resource metadata as hover evidence",
+  "supportedWindowInventory": "windows-before-repeat.json"
+}

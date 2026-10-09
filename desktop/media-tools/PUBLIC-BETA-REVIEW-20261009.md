@@ -4,7 +4,24 @@
 
 งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่ได้ push, merge main, เปิด GitHub Release, upload public หรือ deploy หน้าโหลด และไม่ได้แก้ Home/backend/tunnel/Cloudflare
 
-## Taskbar visual บน EliteBook — หลักฐานเพิ่มเติม 9 ตุลาคม 2026
+## Portable taskbar follow-up — 9 ตุลาคม 2026 เวลา 11:48–11:51 ไทย
+
+เริ่มจาก HEAD `e7e2412685394986fecb7dd9d6d33da9caf05a56`, branch เดิม และ Git สะอาด ตรวจ EXE/path/version/hash และ process command line ว่าเป็น Portable beta.2 เดิมใน profile ทดสอบ `test-output/taskbar-elitebook-20261009/portable-profile` ไม่มี reinstall/rebuild หรือเปลี่ยน binaries/dependencies/vendor/version
+
+| กรณี | ผล | หลักฐาน / ขอบเขต |
+| --- | --- | --- |
+| A. Hover/thumbnail | BLOCKED | คืน Player ได้ แต่ `@oai/sky` ไม่มี hover/move API และไม่มี taskbar target ใน inventory; ไม่มีภาพชื่อ/thumbnail จึงไม่ใช้ caption หรือภาพก่อน–หลังแทน |
+| B. เปิดซ้ำ/focus/grouping | PASS เฉพาะ launch/profile ที่ทดสอบ | เปิดด้วย Playwright `_electron.launch` แบบเดิมและ profile เดิม ตัวที่สอง PID 18596 ออก 0; native UI เดิม window 264400 / BrowserWindow 1 ได้ focus, visible UI หนึ่งหน้าต่าง และ taskbar wave entry เดียวใน PNG ก่อน–หลัง; hidden playback window ไม่เพิ่ม entry ไม่ตัดสินจาก process count เพียงอย่างเดียว |
+| C. หลังปิดตามปกติ | PASS | Alt+F4 หลังยืนยัน Player idle/playlist 0; ภาพเต็ม desktop ไม่เหลือ Media Tools entry/running indicator/thumbnail, native window และ related EXE/profile processes เป็น 0; ไม่มี pin/unpin หรือ kill process ที่ไม่เกี่ยวข้อง |
+| ข้อมูลผู้ใช้และ shortcut | PASS ใน scope นี้ | profile จริง 73 ไฟล์ hash/ขนาดตรง baseline และก่อน–หลัง; shortcut เดิม 4 ไฟล์ hash/target/arguments/icon ตรงเดิม แยก test profile 55 → 58 ไฟล์; 38 before hashes อ่านไม่ได้เพราะ app lock จึงไม่อ้างความคงเดิมของ test profile |
+
+เก็บภาพเต็ม desktop ใหม่ 3 ภาพจาก Windows Snipping Tool พร้อมเวลาไทย/source path/size/SHA256 ใน [captures.json](evidence/taskbar-elitebook-20261009/portable-followup/captures.json) และ [รายงาน follow-up](evidence/taskbar-elitebook-20261009/portable-followup/README-พี่ยอด.md) เป็น **QA ภายในเท่านั้น** ไม่มีภาพจำลองหรือการแก้ภาพ ภาพ/JSON รอบเดิมคงไว้ Player และ Snipping Tool ปิดตามปกติแล้ว สถานะเปิดค้างในรายงาน 11:13 ด้านล่างเป็น snapshot ก่อน follow-up
+
+Log ของ second launch มี GPU/disk cache `Access is denied` และ Playwright connection closed; เก็บ log เต็มไว้ ไม่ยืนยันสาเหตุของ cache warning ว่าแก้แล้ว ตัวที่สอง exit 0, UI เดิมได้ focus และไม่เกิด taskbar group ซ้ำ Harness พยายาม cleanup เฉพาะ PID ของ second launch ที่ออกไปแล้ว (`process not found`); ไม่มีการ kill process ที่ไม่เกี่ยวข้อง ไม่แก้ runtime รอบนี้
+
+**Portable taskbar gate ยัง BLOCKED เพราะ A ยังขาดภาพจริง**; Installed ยังคง BLOCKED เพราะไม่พบ EXE เดิม ไม่ใช้ Portable ปิด Installed gate Corresponding source **BLOCKED / INCOMPLETE — AWAITING RESPONSE** และ source requests **SENT — user-reported / AWAITING RESPONSE**; Download live/EJS, clean-machine QA, signing/SmartScreen คง BLOCKED ตรวจ JSON/local links/hashes/diff และ commit เฉพาะ docs/evidence ไม่มี build/audio regression ซ้ำ
+
+## Taskbar visual บน EliteBook — snapshot รอบ 11:13 วันที่ 9 ตุลาคม 2026
 
 เริ่มจาก branch `codex/source-taskbar-review-20261009`, HEAD `9fe2cf2a8c692882ca9a8110ed0e310e63ed1f84` และ working tree สะอาด ไม่พบ AGENTS.md ใน scope ที่ใช้บังคับ ตรวจ Setup/Portable เดิมใน private r2 kit ว่า SHA256 ตรง release manifest ก่อนเปิด ไม่มี reinstall, rebuild หรือเปลี่ยน binaries/dependencies รุ่นยังเป็น `0.2.2-beta.2` / `0.2.2.2` / unsigned; source/build commit ยังคง `df183f4970366597d539323760108dbaf234e049` งานรอบนี้เป็น review documentation/evidence เท่านั้น
 

@@ -1,0 +1,82 @@
+{
+  "startedUtc": "2026-10-09T04:48:53.461Z",
+  "method": "Same Playwright _electron.launch, existing executable and same --user-data-dir; normal single-instance rejection expected",
+  "launchResolved": false,
+  "launchLog": "Error: electron.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> \"D:/Sites/Audio Tech Labs/desktop/media-tools/test-output/beta2-portable-extracted/Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577/Audio Tech Labs Media Tools.exe\" \"--inspect=0\" \"--remote-debugging-port=0\" \"--user-data-dir=D:/Sites/Audio Tech Labs/desktop/media-tools/test-output/taskbar-elitebook-20261009/portable-profile\" \n<launched> pid=18596\n[pid=18596][out] \n[pid=18596][err] Debugger listening on ws://127.0.0.1:59328/1018d352-bcf3-4812-80cf-e30761e163c4\n[pid=18596][err] For help, see: https://nodejs.org/learn/getting-started/debugging\n[pid=18596][err] Debugger attached.\n[pid=18596][err] \n[pid=18596][err] DevTools listening on ws://127.0.0.1:59330/devtools/browser/6bf966b9-00e1-43fa-9782-32e63a093a1b\n[pid=18596][err] [7752:1009/114853.768:ERROR:net\\disk_cache\\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)\n[pid=18596][err] [7752:1009/114853.772:ERROR:net\\disk_cache\\disk_cache.cc:290] Unable to create cache\n[pid=18596][err] [7752:1009/114853.772:ERROR:gpu\\ipc\\host\\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2\nCall log:\n\u001b[2m  - <launching> \"D:/Sites/Audio Tech Labs/desktop/media-tools/test-output/beta2-portable-extracted/Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577/Audio Tech Labs Media Tools.exe\" \"--inspect=0\" \"--remote-debugging-port=0\" \"--user-data-dir=D:/Sites/Audio Tech Labs/desktop/media-tools/test-output/taskbar-elitebook-20261009/portable-profile\"\u001b[22m\n\u001b[2m  - <launched> pid=18596\u001b[22m\n\u001b[2m  - [pid=18596][out]\u001b[22m\n\u001b[2m  - [pid=18596][err] Debugger listening on ws://127.0.0.1:59328/1018d352-bcf3-4812-80cf-e30761e163c4\u001b[22m\n\u001b[2m  - [pid=18596][err] For help, see: https://nodejs.org/learn/getting-started/debugging\u001b[22m\n\u001b[2m  - <ws connecting> ws://127.0.0.1:59328/1018d352-bcf3-4812-80cf-e30761e163c4\u001b[22m\n\u001b[2m  - <ws connected> ws://127.0.0.1:59328/1018d352-bcf3-4812-80cf-e30761e163c4\u001b[22m\n\u001b[2m  - [pid=18596][err] Debugger attached.\u001b[22m\n\u001b[2m  - [pid=18596][err]\u001b[22m\n\u001b[2m  - [pid=18596][err] DevTools listening on ws://127.0.0.1:59330/devtools/browser/6bf966b9-00e1-43fa-9782-32e63a093a1b\u001b[22m\n\u001b[2m  - <ws connecting> ws://127.0.0.1:59330/devtools/browser/6bf966b9-00e1-43fa-9782-32e63a093a1b\u001b[22m\n\u001b[2m  - [pid=18596][err] [7752:1009/114853.768:ERROR:net\\disk_cache\\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)\u001b[22m\n\u001b[2m  - [pid=18596][err] [7752:1009/114853.772:ERROR:net\\disk_cache\\disk_cache.cc:290] Unable to create cache\u001b[22m\n\u001b[2m  - [pid=18596][err] [7752:1009/114853.772:ERROR:gpu\\ipc\\host\\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2\u001b[22m\n\u001b[2m  - <ws connected> ws://127.0.0.1:59330/devtools/browser/6bf966b9-00e1-43fa-9782-32e63a093a1b\u001b[22m\n\u001b[2m  - <ws disconnected> ws://127.0.0.1:59328/1018d352-bcf3-4812-80cf-e30761e163c4 code=1005 reason=\u001b[22m\n\u001b[2m  - <ws disconnected> ws://127.0.0.1:59330/devtools/browser/6bf966b9-00e1-43fa-9782-32e63a093a1b code=1006 reason=\u001b[22m\n\u001b[2m  - [pid=18596] <kill>\u001b[22m\n\u001b[2m  - [pid=18596] <will force kill>\u001b[22m\n\u001b[2m  - [pid=18596] taskkill stderr: ERROR: The process \"18596\" not found.\u001b[22m\n\u001b[2m  - [pid=18596] <process did exit: exitCode=0, signal=null>\u001b[22m\n\u001b[2m  - [pid=18596] starting temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=18596] finished temporary directories cleanup\u001b[22m\n",
+  "secondPid": 18596,
+  "exitCode": 0,
+  "afterUtc": "2026-10-09T04:48:54.149Z",
+  "before": {
+    "checkedUtc": "2026-10-09T04:48:53.453Z",
+    "windows": [
+      {
+        "id": 2,
+        "title": "Audio Tech Labs Playback",
+        "visible": false,
+        "focused": false,
+        "minimized": false,
+        "url": "atl-media://app/playback-host.html"
+      },
+      {
+        "id": 1,
+        "title": "Player — Audio Tech Labs · Windows",
+        "visible": true,
+        "focused": false,
+        "minimized": false,
+        "url": "atl-media://app/player.html"
+      }
+    ]
+  },
+  "after": {
+    "windows": [
+      {
+        "id": 2,
+        "title": "Audio Tech Labs Playback",
+        "visible": false,
+        "focused": false,
+        "minimized": false,
+        "url": "atl-media://app/playback-host.html"
+      },
+      {
+        "id": 1,
+        "title": "Player — Audio Tech Labs · Windows",
+        "visible": true,
+        "focused": true,
+        "minimized": false,
+        "url": "atl-media://app/player.html"
+      }
+    ],
+    "supportedWindows": [
+      {
+        "app": "process:D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\test-output\\beta2-portable-extracted\\Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577\\Audio Tech Labs Media Tools.exe",
+        "id": 264400,
+        "title": "Player — Audio Tech Labs · Windows"
+      },
+      {
+        "app": "Microsoft.ScreenSketch_8wekyb3d8bbwe!App",
+        "id": 2359430,
+        "title": "เครื่องมือสนิป"
+      },
+      {
+        "app": "OpenAI.Codex_2p2nqsd0c76g0!App",
+        "id": 1705326,
+        "title": "ChatGPT"
+      },
+      {
+        "app": "Chrome",
+        "id": 263396,
+        "title": "วางแผนเผยแพร่โปรแกรม - Google Chrome"
+      },
+      {
+        "app": "process:C:\\Windows\\explorer.exe",
+        "id": 1247512,
+        "title": "taskbar-elitebook-20261009 - File Explorer"
+      },
+      {
+        "app": "process:C:\\Program Files (x86)\\ManyCam\\ManyCam.exe",
+        "id": 1771368,
+        "title": "ManyCam"
+      }
+    ]
+  }
+}

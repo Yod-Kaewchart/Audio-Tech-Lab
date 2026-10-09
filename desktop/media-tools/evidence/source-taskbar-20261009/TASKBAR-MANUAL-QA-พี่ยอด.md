@@ -1,6 +1,8 @@
 # ตรวจ taskbar จริง — สำหรับพี่ยอด
 
-สถานะล่าสุด **BLOCKED รวม / Portable มีหลักฐานบางส่วน**: รอบ EliteBook 9 ตุลาคม 2026 จับภาพเต็ม desktop/taskbar จริงผ่าน Windows Snipping Tool ได้แล้ว Portable icon/active ของ Player ผ่านเฉพาะภาพนี้ แต่ยังขาด hover/ชื่อ/group หลังเปิดซ้ำและหลังปิด ส่วน Installed ไม่พบ EXE เดิมและรอบก่อนถอน test installation แล้ว **รอบนี้ห้าม reinstall หรือใช้รุ่นอื่นแทน** ดู [รายงานล่าสุด](../taskbar-elitebook-20261009/README-พี่ยอด.md) และ [ภาพจริง](../taskbar-elitebook-20261009/portable-player-full-desktop.png)
+สถานะล่าสุด **BLOCKED รวม / Portable ยังขาด A. hover/thumbnail**: follow-up EliteBook 9 ตุลาคม 2026 เวลา 11:48–11:51 ไทย ตรวจ **B. เปิดซ้ำ/focus/grouping PASS** และ **C. หลังปิด PASS** พร้อมภาพเต็ม desktop จริงและ window/process snapshots แล้ว Player ปิดตามปกติ ไม่มี UI/process ค้าง ส่วน A ทำ hover ไม่ได้ผ่าน API และไม่มีภาพชื่อ/thumbnail จึงคง BLOCKED ดู [รายงาน follow-up](../taskbar-elitebook-20261009/portable-followup/README-พี่ยอด.md) และ [captures/hashes](../taskbar-elitebook-20261009/portable-followup/captures.json)
+
+Installed ไม่พบ EXE เดิมและรอบก่อนถอน test installation แล้ว **รอบนี้ห้าม reinstall หรือใช้รุ่นอื่นแทน** คง Installed BLOCKED โดยไม่ใช้ผล Portable แทน ภาพ icon/active รอบ 11:13 ยังเก็บที่ [รายงานเดิม](../taskbar-elitebook-20261009/README-พี่ยอด.md) และ [ภาพเดิม](../taskbar-elitebook-20261009/portable-player-full-desktop.png)
 
 ข้อจำกัดของรอบ r2 เดิม: API Windows จับเฉพาะหน้าต่างแอป ไม่มี taskbar target ใน inventory ภาพ `*-app-window-NOT-TASKBAR.png` ใช้แทนภาพ taskbar ไม่ได้ PE icon hash, WM_GETICON, shortcut icon และ AppUserModelID ไม่ใช่หลักฐาน visual การใช้ Snipping Tool รอบใหม่ไม่เพิ่ม taskbar target/hover ให้ API
 
@@ -33,7 +35,7 @@ ProductName `Audio Tech Labs Media Tools`; ProductVersion `0.2.2-beta.2`; FileVe
 
 ## Portable (ตรวจแยกหลังปิด installed app)
 
-รอบ EliteBook ใช้โฟลเดอร์ที่แตกไว้เดิมและตรวจ EXE hash/version ไม่แตก ZIP ใหม่ ไม่ใช้ legacy shortcut Player เปิดด้วย profile ทดสอบแยกแล้ว ดู path/arguments และขั้นตอนเก็บ hover/second-launch/close ที่ยังขาดในรายงานล่าสุด
+รอบ EliteBook ใช้โฟลเดอร์ที่แตกไว้เดิมและตรวจ EXE hash/version ไม่แตก ZIP ใหม่ ไม่ใช้ legacy shortcut Follow-up เปิดซ้ำด้วย Playwright launcher/profile เดิมและปิด Player แล้ว เหลือเฉพาะภาพ hover/thumbnail ที่ต้องเก็บด้วยมือโดยเปิด EXE/profile เดิมใหม่ ดู path/arguments และขั้นตอนในรายงาน follow-up
 
 1. แตก ZIP ที่ hash ตรงลงโฟลเดอร์ใหม่ บันทึก extracted EXE path และ hash/version ตามตาราง ใช้ EXE โดยตรง หรือ shortcut ทดสอบชื่อใหม่ที่บันทึก target/arguments อย่าใช้ legacy Desktop shortcut ของ Portable 0.1.0
 2. ทำขั้นตอนภาพ full desktop/taskbar, hover/group, เปิดซ้ำ, focus, เปลี่ยนสามหน้าและปิด เช่นเดียวกับ installed app ใช้ profile Portable ทดสอบแยกเพื่อไม่แก้ playlist เดิม

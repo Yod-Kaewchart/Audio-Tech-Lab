@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-10-09T04:55:58.6782378Z",
+  "version": "0.2.2-beta.2",
+  "windowsVersion": "0.2.2.2",
+  "sourceBuildCommit": "df183f4970366597d539323760108dbaf234e049",
+  "reviewBaselineCommit": "e7e2412685394986fecb7dd9d6d33da9caf05a56",
+  "exeSha256": "94b0deb9e81e26c2aec82551c811811de415214666ec1622d9e326946ed8a05d",
+  "A": {
+    "status": "BLOCKED",
+    "scope": "Hover/thumbnail name and Player preview",
+    "reason": "Supported sky API has no hover/move and no targetable taskbar surface",
+    "evidence": "hover-blocked.json",
+    "manualRemaining": "README-พี่ยอด.md"
+  },
+  "B": {
+    "status": "PASS",
+    "scope": "Same Playwright launcher / existing EXE / same isolated profile; original Player UI gains focus and no duplicate taskbar group",
+    "visibleUiBefore": 1,
+    "visibleUiAfter": 1,
+    "originalBrowserWindowId": 1,
+    "originalNativeWindowId": 264400,
+    "mainPid": 12548,
+    "secondPid": 18596,
+    "secondExitCode": 0,
+    "focusedBefore": false,
+    "focusedAfter": true,
+    "images": [
+      "portable-before-repeat-full-desktop.png",
+      "portable-after-repeat-full-desktop.png"
+    ],
+    "visibleTaskbarMediaToolsEntriesAfter": 1,
+    "processCountNotUsedAlone": true,
+    "diagnostic": "Second-launch GPU/disk cache access-denied log preserved; cause not confirmed or fixed; Playwright cleanup attempt found second PID already absent"
+  },
+  "C": {
+    "status": "PASS",
+    "scope": "Normal Alt+F4 close; no remaining real taskbar icon/indicator/thumbnail, native window or related EXE/profile process",
+    "image": "portable-after-close-full-desktop.png",
+    "relatedProcessCount": 0,
+    "relatedNativeWindowCount": 0,
+    "originalProcessExitCodeRecorded": false,
+    "pinUnpinOrUnrelatedKill": false
+  },
+  "preservation": {
+    "status": "PASS",
+    "realUserProfileFiles": 73,
+    "realUserProfileHashesSizesEqual": true,
+    "originalShortcuts": 4,
+    "shortcutsEqual": true,
+    "testProfileFilesBefore": 55,
+    "testProfileFilesAfter": 58,
+    "testProfileLockedBefore": 38,
+    "testProfileUnchangedClaim": false
+  },
+  "portableTaskbarGate": "BLOCKED - A incomplete",
+  "installedTaskbarGate": "BLOCKED - original installed EXE missing; no reinstall",
+  "sourceGate": "BLOCKED / INCOMPLETE — AWAITING RESPONSE",
+  "sourceRequests": "SENT — user-reported / AWAITING RESPONSE",
+  "otherGatesUnchanged": [
+    "Download live/EJS BLOCKED",
+    "Clean-machine QA BLOCKED",
+    "Signing/SmartScreen BLOCKED"
+  ],
+  "privateQaOnly": true,
+  "runtimeChanged": false,
+  "noRebuild": true,
+  "noReinstall": true,
+  "noPushMergeUploadRelease": true
+}
