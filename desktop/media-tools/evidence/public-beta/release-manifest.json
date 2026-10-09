@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "version": "0.2.2-beta.2",
   "windowsVersion": "0.2.2.2",
   "appSourceCommit": "df183f4970366597d539323760108dbaf234e049",
@@ -13,19 +13,24 @@
       "role": "Setup",
       "sha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
       "file": "Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe",
-      "bytes": 210937650
+      "bytes": 210937650,
+      "path": "candidate/Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe"
     },
     {
       "role": "Portable",
       "sha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
       "file": "Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577.zip",
-      "bytes": 288706248
+      "bytes": 288706248,
+      "path": "candidate/Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577.zip"
     },
     {
       "role": "Source review INCOMPLETE",
-      "sha256": "26e1ce545a97722dc5685631b6f49fdc4ca0defbba210d3f0573f3e2db79e42a",
-      "file": "Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-INCOMPLETE.zip",
-      "bytes": 23335381
+      "file": "Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip",
+      "path": "source-review/Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip",
+      "bytes": 74366790,
+      "sha256": "3445fc139ac50b75bd6aeb156e9ad19ea49b4192aa0a827e1840ec44bf5ba08a",
+      "label": "INCOMPLETE",
+      "completeCorrespondingSource": false
     }
   ],
   "payloadInventorySha256": "7751028de3baecfe7724326b52fb3d836075fe4738ac3b9f157d6f2b793e6073",
@@ -106,83 +111,140 @@
     {
       "item": "Checkpoint + original hashes",
       "status": "PASS",
-      "evidence": "checkpoint.json"
+      "evidence": "checkpoint.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Folder recovery / concurrent inspection / restart / no new work",
       "status": "PASS",
-      "evidence": "unit.log, folder-recovery-ui.json"
+      "evidence": "unit.log, folder-recovery-ui.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Installer payload validation + real missing/corrupt font and FFmpeg rejection",
       "status": "PASS",
-      "evidence": "payload-validation.json, installer-rejection.json, stale-0.2.1-rejection.json"
+      "evidence": "payload-validation.json, installer-rejection.json, stale-0.2.1-rejection.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "EXE/setup name/version/icon, window pixels, shortcuts/uninstall icon and AppUserModelID",
       "status": "PASS",
-      "evidence": "setup-branding.json, windows-icon.json, native-window.png, normal-installer.json"
+      "evidence": "setup-branding.json, windows-icon.json, native-window.png, normal-installer.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Actual taskbar visual",
       "status": "BLOCKED",
-      "reason": "Supported native window inventory did not expose taskbar; AppUserModelID and shortcut association verified separately."
+      "reason": "Supported native-window API exposed app window only, not actual taskbar, for both installed and Portable launches. No taskbar image or icon/name/grouping visual acceptance. See manual worksheet for พี่ยอด.",
+      "evidenceScope": "This r2 attempt",
+      "evidence": "private-evidence/source-taskbar-20261009/normal-supported-windows.json; portable-supported-windows.json; TASKBAR-MANUAL-QA-พี่ยอด.md"
     },
     {
       "item": "YouTube inspect/Original/MP3/lossless/cancel/network loss/retry/live EJS",
       "status": "BLOCKED",
-      "reason": "User confirmed there is no owner-authorized test URL. No mock/Convert substitute accepted."
+      "reason": "User confirmed there is no owner-authorized test URL. No mock/Convert substitute accepted.",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Dependency notices / fonts bundled offline",
       "status": "PASS",
-      "evidence": "payload-validation.json, portable.json, normal-installed.json"
+      "evidence": "payload-validation.json, portable.json, normal-installed.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Complete FFmpeg/yt-dlp corresponding source",
       "status": "BLOCKED",
-      "reason": "Upstream sources/notices collected; exact external dependency sources/patches/build scripts and bundled GPL components not fully verified.",
-      "evidence": "source-review.json"
+      "reason": "INCOMPLETE: original FFmpeg publisher recipes/patches/direct and transitive library inputs; yt-dlp native/compiler/redistributable and JS preferred-source linkage audit remains incomplete. Exact archives alone are not complete source.",
+      "evidence": "private-evidence/source-taskbar-20261009/source-inventory.json; SOURCE-CLOSURE-PLAN.md",
+      "evidenceScope": "This r2 audit"
     },
     {
       "item": "Normal installer fresh/0.2.1 upgrade/uninstall/reinstall on this existing Windows",
       "status": "PASS",
-      "evidence": "normal-installer.json"
+      "evidence": "normal-installer.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Normal installer on a clean Windows machine",
       "status": "BLOCKED",
-      "reason": "User confirmed no clean machine/VM access."
+      "reason": "User confirmed no clean machine/VM access.",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "User profile, external audio fixture, original desktop shortcut preserved",
       "status": "PASS",
-      "evidence": "normal-installer.json, desktop-shortcut-preservation.json"
+      "evidence": "normal-installer.json, desktop-shortcut-preservation.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Code signing / SmartScreen",
       "status": "BLOCKED",
-      "reason": "User confirmed no authorized certificate/signing service; candidate unsigned. Reputation/download-origin SmartScreen not tested."
+      "reason": "User confirmed no authorized certificate/signing service; candidate unsigned. Reputation/download-origin SmartScreen not tested.",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Local Defender scan",
       "status": "PASS",
-      "evidence": "defender-setup.json, defender-portable.json and raw scan logs; no threats for these hashes with installed signatures."
+      "evidence": "defender-setup.json, defender-portable.json and raw scan logs; no threats for these hashes with installed signatures.",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Source and extracted portable Convert/Player/continuous playback + min/normal Thai UI",
       "status": "PASS",
-      "evidence": "development-regressions.json, portable-regressions.json, portable.json, normal-installed.json"
+      "evidence": "development-regressions.json, portable-regressions.json, portable.json, normal-installed.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Runtime payload contains no developer evidence/logs/profiles",
       "status": "PASS",
-      "evidence": "payload-validation.json, package-content-scan.json; 129 inventory entries plus SHA256SUMS.json itself (130 files)"
+      "evidence": "payload-validation.json, package-content-scan.json; 129 inventory entries plus SHA256SUMS.json itself (130 files)",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
     },
     {
       "item": "Local-only download preview / guides / review artifacts",
       "status": "PASS",
-      "evidence": "download-preview.json"
+      "evidence": "download-preview.json",
+      "evidenceScope": "Inherited from review baseline d701c1a; audio/package QA not rerun because accepted binaries unchanged"
+    },
+    {
+      "item": "Installed and Portable actual EXE repeated launch / focus",
+      "status": "PASS",
+      "evidence": "private-evidence/source-taskbar-20261009/normal-installed-single-instance.json; portable-single-instance.json",
+      "evidenceScope": "Real accepted EXEs with isolated user-data-dir; second process exits 0, same one UI window focuses. No shortcut/taskbar visual claim."
+    },
+    {
+      "item": "New source provenance inventory and private review integrity",
+      "status": "PASS",
+      "evidence": "private-evidence/source-taskbar-20261009/checks.json",
+      "evidenceScope": "Evidence/archives/hashes only; complete corresponding source remains BLOCKED"
+    },
+    {
+      "item": "Original profile and Desktop shortcut after normal follow-up cleanup",
+      "status": "PASS",
+      "evidence": "private-evidence/source-taskbar-20261009/normal-cleanup.json",
+      "evidenceScope": "Existing Windows only; 73 profile file hashes unchanged; original Desktop shortcut unchanged; test installation removed"
     }
-  ]
+  ],
+  "reviewBaselineCommit": "d701c1af3de9deccf5f563f276a9a0df7f2934ed",
+  "reviewCommit": "0351649cbb5b5152bb1edc9c040ac816ecdf49a3",
+  "reviewCommitScope": "Source/taskbar evidence commit; submission manifest assembly is a subsequent documentation commit recorded by Git history.",
+  "reviewRound": "source-taskbar-r2",
+  "sourceGate": {
+    "status": "BLOCKED",
+    "label": "INCOMPLETE",
+    "completeCorrespondingSource": false,
+    "inventory": "private-evidence/source-taskbar-20261009/source-inventory.json",
+    "closurePlan": "private-evidence/source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md",
+    "componentRows": 84,
+    "sourceBuildInputFiles": 34
+  },
+  "retainedPriorSourceReview": {
+    "role": "Source review INCOMPLETE",
+    "sha256": "26e1ce545a97722dc5685631b6f49fdc4ca0defbba210d3f0573f3e2db79e42a",
+    "file": "Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-INCOMPLETE.zip",
+    "bytes": 23335381
+  },
+  "privateReviewEvidence": true,
+  "inheritedEvidenceDirectory": "private-evidence/public-beta",
+  "currentEvidenceDirectory": "private-evidence/source-taskbar-20261009"
 }

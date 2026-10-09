@@ -10,6 +10,8 @@
 
 Source/build commit ของแอปและ Setup ยังคง `df183f4970366597d539323760108dbaf234e049` รุ่น `0.2.2-beta.2` / FileVersion `0.2.2.2` / unsigned ไม่เปลี่ยน source/UI/behavior/vendor/dependencies รุ่นแอปหรือ Setup/Portable ที่ยอมรับแล้ว ตรวจ hash ของ Setup/Portable/source-review เดิมทั้งต้นฉบับและสำเนาใน kit รวม 6 ไฟล์ตรง manifest (`baseline-artifact-hashes.json`) แยก review evidence commit และ manifest commit จาก source/build commit ผ่าน release manifest และ Git history
 
+Review evidence commit รอบนี้: `0351649cbb5b5152bb1edc9c040ac816ecdf49a3` ส่วน commit ประกอบ manifest/kit เป็น documentation commit ถัดมา ดู `submission-commit.json` ใน private kit หลัง commit ไม่ใช้ review commit แทน build commit และไม่พยายามฝัง SHA ของ commit ตัวเองในไฟล์ที่ commit นั้น hash อยู่
+
 | รายการรอบนี้ | ผล | หลักฐาน / ขอบเขต |
 | --- | --- | --- |
 | Baseline hashes/checkpoint | PASS | baseline-artifact-hashes.json; checkpoint.json; ชุดเดิมเก็บไว้ |

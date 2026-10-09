@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "node": "single-instance.cjs: node --check",
+  "node": "single-instance.cjs, prepare-review-r2.cjs, finalize-review-files.cjs: node --check",
   "powershell": "taskbar-existing-machine.ps1: PowerShell AST parse",
   "runtimeMutation": false
 }

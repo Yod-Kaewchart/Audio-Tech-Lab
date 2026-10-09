@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "manifestSha256": "592f0a0874ed0c8180d44d4809a4a8dc69aacd6858d384a0101eb9226694cadb",
+  "artifactsVerified": [
+    {
+      "role": "Setup",
+      "sha256": "11549c34e61f94dab4170e781db2176fbd2def6add9de849a2ea8fc0bc901c27",
+      "file": "Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe",
+      "bytes": 210937650,
+      "path": "candidate/Audio-Tech-Labs-Media-Tools-Setup-0.2.2-beta.2-Win64.exe"
+    },
+    {
+      "role": "Portable",
+      "sha256": "3b17cfe6d19d03375c86a23a37ce62d8f69f4261a091bedb19db47f5724dbdfc",
+      "file": "Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577.zip",
+      "bytes": 288706248,
+      "path": "candidate/Media-Tools-0.2.2-beta.2-win-x64-20261008T181605577.zip"
+    },
+    {
+      "role": "Source review INCOMPLETE",
+      "file": "Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip",
+      "path": "source-review/Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip",
+      "bytes": 74366790,
+      "sha256": "3445fc139ac50b75bd6aeb156e9ad19ea49b4192aa0a827e1840ec44bf5ba08a",
+      "label": "INCOMPLETE",
+      "completeCorrespondingSource": false
+    }
+  ],
+  "sourceBuildCommit": "df183f4970366597d539323760108dbaf234e049",
+  "reviewEvidenceCommit": "0351649cbb5b5152bb1edc9c040ac816ecdf49a3",
+  "blocked": [
+    "Actual taskbar visual",
+    "YouTube inspect/Original/MP3/lossless/cancel/network loss/retry/live EJS",
+    "Complete FFmpeg/yt-dlp corresponding source",
+    "Normal installer on a clean Windows machine",
+    "Code signing / SmartScreen"
+  ],
+  "scope": "Private review assembly integrity only; no audio regression rerun; old accepted artifacts unchanged"
+}

@@ -1,43 +1,29 @@
 {
   "status": "BLOCKED",
+  "label": "INCOMPLETE",
   "completeCorrespondingSource": false,
-  "FFmpegCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
-  "reason": "Exact external-library sources/patches/build scripts and yt-dlp bundled GPL components have not been verified; upstream archives alone are incomplete.",
-  "files": [
-    {
-      "file": "dependencies.lock.json",
-      "bytes": 2681,
-      "sha256": "db7152bdfe328dee09931d3fd5c5f3ca6ddc40985bb9d9695285ae784dc91903"
-    },
-    {
-      "file": "FFmpeg-946fcce07b.tar.gz",
-      "bytes": 17333895,
-      "sha256": "0aa2b1de2a5698b20a23e93d539a9a8e82ca0117496c5bdf05d198805f42bb3b"
-    },
-    {
-      "file": "FFmpeg-GPLv3.txt",
-      "bytes": 35147,
-      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
-    },
-    {
-      "file": "FFmpeg-README.txt",
-      "bytes": 41577,
-      "sha256": "0342de6bb39dd421cbec2c00d89ad274b640d75ad3f2cab09ffd647ce2d8f949"
-    },
-    {
-      "file": "yt-dlp-2026.08.19.tar.gz",
-      "bytes": 6020567,
-      "sha256": "072aad4f2a7604e92155f61a275a4752dc64046c8f6d90df3710525d94cd37c1"
-    },
-    {
-      "file": "yt-dlp-SHA2-256SUMS.txt",
-      "bytes": 1595,
-      "sha256": "a63701f30755cb4d9317950d69703e9d751d490cb1b7059e1bb501a353fe7dcb"
-    },
-    {
-      "file": "yt-dlp-THIRD_PARTY_LICENSES.txt",
-      "bytes": 243550,
-      "sha256": "472aefe951c7db35e1657c1d13fd337140511ed6f2b329205105ad441c5a02b7"
-    }
-  ]
+  "reviewCommit": "0351649cbb5b5152bb1edc9c040ac816ecdf49a3",
+  "inventory": "../source-taskbar-20261009/source-inventory.json",
+  "componentRows": 84,
+  "sourceBuildInputFiles": 34,
+  "reason": "See SOURCE-CLOSURE-PLAN.md for component-specific unresolved source/build/patch/linkage inputs.",
+  "sourceArtifact": {
+    "file": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip",
+    "directory": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\source-review-0.2.2-beta.2-r2-INCOMPLETE",
+    "bytes": 74366790,
+    "sha256": "3445fc139ac50b75bd6aeb156e9ad19ea49b4192aa0a827e1840ec44bf5ba08a",
+    "label": "INCOMPLETE",
+    "completeCorrespondingSource": false,
+    "status": "BLOCKED",
+    "inventorySha256": "61f7df29b488c0b0b3198692abf58bb80730811919c524d208bfe0194c671676",
+    "files": 136,
+    "scope": "NEW private source-review provenance collection; not a user runtime package",
+    "retainedPriorArchive": "Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-INCOMPLETE.zip"
+  },
+  "retainedPriorSourceReview": {
+    "role": "Source review INCOMPLETE",
+    "sha256": "26e1ce545a97722dc5685631b6f49fdc4ca0defbba210d3f0573f3e2db79e42a",
+    "file": "Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-INCOMPLETE.zip",
+    "bytes": 23335381
+  }
 }

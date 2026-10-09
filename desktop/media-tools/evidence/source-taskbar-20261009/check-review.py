@@ -19,6 +19,14 @@ for r in i['components']:
 source=root/'release/source-review-0.2.2-beta.2-r2-INCOMPLETE'
 for r in i['sourceFiles']:assert sha(source/r['file'])==r['sha256']
 checks.append('84 component rows / 34 source-build input files, gaps and publisher SHA mapping')
+for name in ('publisher-receipts.json','exact-input-receipts.json','recipe-input-receipts.json','build-provenance-receipts.json','js-native-receipts.json'):
+    data=read(out/name);receipts=data['files'] if isinstance(data,dict) else data
+    for r in receipts:
+        if r['status']!='PASS':continue
+        p=(out if r['file'].startswith('publisher/') else source)/r['file']
+        assert sha(p)==r['sha256'];assert p.stat().st_size==r['bytes']
+        if r.get('publisherSha256'):assert r['publisherSha256']==r['sha256']
+checks.append('Every successfully fetched publisher document/archive receipt matches saved bytes')
 assert read(out/'curl-native-binding.json')['matched']
 for kind in ('normal-installed','portable'):
     r=read(out/(kind+'-single-instance.json'));assert r['status']=='PASS';assert r['taskbarVisual']=='BLOCKED';assert r['second']['code']==0

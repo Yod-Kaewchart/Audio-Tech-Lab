@@ -4,6 +4,7 @@
     "All six original/copy Setup/Portable/prior-source identities unchanged",
     "All vendor hashes and dependency lock unchanged",
     "84 component rows / 34 source-build input files, gaps and publisher SHA mapping",
+    "Every successfully fetched publisher document/archive receipt matches saved bytes",
     "Real installed/Portable single-instance evidence consistent; visual BLOCKED; user state preserved",
     "All JSON and local Python helper syntax",
     "New source-review ZIP CRC/every-file SHA256; no workstation QA/screenshots/profile",

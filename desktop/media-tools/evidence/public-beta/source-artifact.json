@@ -1,7 +1,13 @@
 {
-  "file": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-INCOMPLETE.zip",
-  "bytes": 23335381,
-  "sha256": "26e1ce545a97722dc5685631b6f49fdc4ca0defbba210d3f0573f3e2db79e42a",
+  "file": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-r2-INCOMPLETE.zip",
+  "directory": "D:\\Sites\\Audio Tech Labs\\desktop\\media-tools\\release\\source-review-0.2.2-beta.2-r2-INCOMPLETE",
+  "bytes": 74366790,
+  "sha256": "3445fc139ac50b75bd6aeb156e9ad19ea49b4192aa0a827e1840ec44bf5ba08a",
+  "label": "INCOMPLETE",
   "completeCorrespondingSource": false,
-  "status": "BLOCKED"
+  "status": "BLOCKED",
+  "inventorySha256": "61f7df29b488c0b0b3198692abf58bb80730811919c524d208bfe0194c671676",
+  "files": 136,
+  "scope": "NEW private source-review provenance collection; not a user runtime package",
+  "retainedPriorArchive": "Audio-Tech-Labs-Media-Tools-Source-Review-0.2.2-beta.2-INCOMPLETE.zip"
 }
