@@ -1,6 +1,6 @@
 # ร่างอ้างอิงถึง Gyan
 
-สถานะคำขอ: **SENT — user-reported / AWAITING RESPONSE** พี่ยอดแจ้งว่าส่งถึง builds@gyan.dev แล้ววันที่ 9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok) ไม่ได้ระบุเวลาส่งและยังไม่มีสำเนาอีเมลส่งหรือคำตอบที่ได้รับให้ตรวจสอบ เอกสารนี้เก็บร่างเดิม ไม่ยืนยันว่าเป็นเนื้อหาฉบับที่ส่งจริง
+สถานะล่าสุด: **Gyan RESPONDED — user-provided email text** พี่ยอดให้ข้อความคำตอบในแชตวันที่ 10 ตุลาคม 2026; ดู [หลักฐาน/audit](../gyan-response-20261010/README.md) และ [ร่างถามกลับ — NOT SENT](../gyan-response-20261010/GYAN-FOLLOWUP-DRAFT.md) เอกสารนี้เก็บเนื้อหาร่างเดิมจากรอบ 9 ตุลาคม ไม่ยืนยันว่าเป็นฉบับที่ส่งจริง; ไม่มี original email headers หรือ independent authentication
 
 To: `builds@gyan.dev`
 

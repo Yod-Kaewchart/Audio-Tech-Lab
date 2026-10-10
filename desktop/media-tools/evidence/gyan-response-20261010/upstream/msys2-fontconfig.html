@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <script src="https://packages.msys2.org/static/theme.js"></script>
+        <script type="module" src="https://packages.msys2.org/static/index.js"></script>
+        <link rel="preload" href="https://packages.msys2.org/static/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://packages.msys2.org/static/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="shortcut icon" href="https://packages.msys2.org/static/images/favicon.ico"/>
+        <link rel="stylesheet" href="https://packages.msys2.org/static/index.css">
+
+        <title>Package: mingw-w64-ucrt-x86_64-fontconfig - MSYS2 Packages</title>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-body-tertiary">
+      <a class="navbar-brand" href="https://packages.msys2.org/" style="line-height: 2em">
+          <img src="https://packages.msys2.org/static/images/logo.svg" style="width:2em;height:2em;margin-right:0.5em;border-radius:.25rem" class="d-inline-block align-top" alt="MSYS2"> MSYS2 Packages
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        
+        <form class="ms-auto input-group input-group-sm" style="width: auto" action="https://packages.msys2.org/search" method="get">
+            <input class="form-control" type="search" name="q" placeholder="Package Search" aria-label="Package Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        
+        <div class="d-block d-md-none">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/queue">Pending Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/updates">Repo Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/outofdate">Outdated Packages</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/repos">Repos</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/base">Base Packages</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="https://packages.msys2.org/packages/">Packages</a>
+  </li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/basegroups/">Base Groups</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/groups/">Groups</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/security">Security</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/search">Search</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/stats">Traffic Stats</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/mirrors">Mirrors</a>
+</li>
+          </ul>
+        </div>
+        <div class="ms-auto navbar-buttons">
+            <input type="checkbox" class="btn-check" id="dark-mode-check" autocomplete="off">
+            <label class="btn btn-sm btn-outline-secondary" for="dark-mode-check" id="dark-mode-label"></label>
+          <a href="https://www.msys2.org" class="btn btn-sm btn-outline-primary ml-auto">Get MSYS2</a>
+          <a href="https://github.com/msys2/msys2-web" class="btn btn-sm
+          btn-outline-info">Fork on GitHub</a>
+          <a href="https://packages.msys2.org/api/" class="btn btn-sm btn-outline-success">API</a>
+        </div>
+      </div>
+    </nav>
+
+<div class="container-xl">
+<div class="container-fluid p-0 p-md-2">
+  <div class="row">
+        <div class="col-md-2 p-0 px-2 text-center text-md-start d-none d-md-block">
+            <div class="sticky-top bg-body-tertiary card overflow-hidden">
+             <ul class="nav flex-column">
+                <li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/queue">Pending Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/updates">Repo Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/outofdate">Outdated Packages</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/repos">Repos</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/base">Base Packages</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="https://packages.msys2.org/packages/">Packages</a>
+  </li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/basegroups/">Base Groups</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/groups/">Groups</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/security">Security</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/search">Search</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/stats">Traffic Stats</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/mirrors">Mirrors</a>
+</li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-md-10 p-0" id="main">
+
+
+
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h4 class="card-title">Package: <a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-fontconfig">mingw-w64-ucrt-x86_64-fontconfig</a></h4>
+  </div>
+  <div class="card-header text-muted">
+    <div class="row">
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/tree/master/mingw-w64-fontconfig" class="card-link">Source Files</a>
+        </div>
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/commits/master/mingw-w64-fontconfig" class="card-link">View Changes</a>
+        </div>
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/issues?q=is%3Aissue+is%3Aopen+fontconfig" class="card-link">View Issues</a>
+        </div>
+        <div class="col-sm text-center">
+            <a href="https://github.com/msys2/MINGW-packages/issues/new?template=bug_report.yml&amp;title=%5Bfontconfig%5D+" class="card-link">Report Issue</a>
+        </div>
+    </div>
+  </div>
+  <div class="card-body overflow-auto">
+    <dl class="row">
+      <dt class="col-sm-3 text-sm-end">Base Package:</dt>
+      <dd class="col-sm-9"><a href="https://packages.msys2.org/base/mingw-w64-fontconfig">mingw-w64-fontconfig</a></dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Description:</dt>
+      <dd class="col-sm-9">
+        A library for configuring and customizing font access (mingw-w64)
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Group(s):</dt>
+      <dd class="col-sm-9">
+        
+        -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Repo:</dt>
+      <dd class="col-sm-9">ucrt64</dd>
+
+      
+      <dt class="col-sm-3 text-sm-end">Homepage:</dt>
+      <dd class="col-sm-9">
+        <a href="https://wiki.freedesktop.org/www/Software/fontconfig/">https://wiki.freedesktop.org/www/Software/fontconfig/</a>
+      </dd>
+      
+      <dt class="col-sm-3 text-sm-end">Repository:</dt>
+      <dd class="col-sm-9">
+        <a href="https://gitlab.freedesktop.org/fontconfig/fontconfig">https://gitlab.freedesktop.org/fontconfig/fontconfig</a>
+      </dd>
+      
+
+      <dt class="col-sm-3 text-sm-end">License(s):</dt>
+      <dd class="col-sm-9">custom</dd>
+
+      <dt class="col-sm-3 text-sm-end">Version:</dt>
+      <dd class="col-sm-9">2.18.3-1</dd>
+
+      <dt class="col-sm-3 text-sm-end mb-2">External:</dt>
+      <dd class="col-sm-9">
+        <dl class="row mb-0">
+        
+          <dt class="text-muted small">Anitya</dt>
+          <dd>
+            <a href="https://release-monitoring.org/project/fontconfig">fontconfig</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Arch Linux</dt>
+          <dd>
+            <a href="https://archlinux.org/packages/extra/x86_64/fontconfig/">2.18.3</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">AUR</dt>
+          <dd>
+            <a href="https://aur.archlinux.org/packages/fontconfig-git">2.14.1</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Cygwin</dt>
+          <dd>
+            <a href="https://cygwin.com/packages/summary/fontconfig-src.html">2.18.3</a>
+            
+            | <a href="https://ftp.acc.umu.se/mirror/cygwin/x86_64/release/fontconfig/fontconfig-2.18.3-1-src.tar.xz">fontconfig-2.18.3-1-src.tar.xz</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Cygwin-mingw64</dt>
+          <dd>
+            <a href="https://cygwin.com/packages/summary/mingw64-x86_64-fontconfig-src.html">2.12.6</a>
+            
+            | <a href="https://ftp.acc.umu.se/mirror/cygwin/noarch/release/mingw64-x86_64-fontconfig/mingw64-x86_64-fontconfig-2.12.6-1-src.tar.xz">mingw64-x86_64-fontconfig-2.12.6-1-src.tar.xz</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Gentoo</dt>
+          <dd>
+            <a href="https://packages.gentoo.org/packages/media-libs/fontconfig">2.18.3</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Repology</dt>
+          <dd>
+            <a href="https://repology.org/tools/project-by?repo=msys2_mingw&amp;name_type=srcname&amp;target_page=project_versions&amp;name=mingw-w64-fontconfig">fontconfig</a>
+            
+          </dd>
+        
+        </dl>
+      </dd>
+
+    
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Installation:</dt>
+      <dd class="col-sm-9">
+        <div class="copyable rounded">
+          <div class="highlight">
+            <pre><code>pacman -S mingw-w64-ucrt-x86_64-fontconfig</code></pre>
+          </div>
+          <button class="btn" aria-label="Copy to clipboard" onclick="App.copyToClipboard(this);">📋</button>
+        </div>
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">File:</dt>
+      <dd class="col-sm-9"> <a href="https://mirror.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-fontconfig-2.18.3-1-any.pkg.tar.zst">https://mirror.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-fontconfig-2.18.3-1-any.pkg.tar.zst</a></dd>
+
+      <dt class="col-sm-3 text-sm-end">SHA256:</dt>
+      <dd class="col-sm-9"><code>d0b364f3ee37e3b6f6c136688ce8fa909bb6d8a69df7e08de1aa40870d9e1d60</code></dd>
+
+      <dt class="col-sm-3 text-sm-end">Last Packager:</dt>
+      <dd class="col-sm-9">CI (https://github.com/msys2/msys2-autobuild/actions/runs/31154837955/job/92791986494)</dd>
+
+      <dt class="col-sm-3 text-sm-end">Build Date:</dt>
+      <dd class="col-sm-9">2026-08-07 06:47:28</dd>
+
+      <dt class="col-sm-3 text-sm-end">Package Size:</dt>
+      <dd class="col-sm-9">0.29 MB</dd>
+
+      <dt class="col-sm-3 text-sm-end">Installed Size:</dt>
+      <dd class="col-sm-9">1.80 MB</dd>
+
+      <dt class="col-sm-3 text-sm-end">Source-Only Tarball:</dt>
+      <dd class="col-sm-9"><a href="https://mirror.msys2.org/mingw/sources/mingw-w64-fontconfig-2.18.3-1.src.tar.zst">https://mirror.msys2.org/mingw/sources/mingw-w64-fontconfig-2.18.3-1.src.tar.zst</a></dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            <ul class="list-unstyled">
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cc-libs">mingw-w64-ucrt-x86_64-cc-libs</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-expat">mingw-w64-ucrt-x86_64-expat</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-freetype">mingw-w64-ucrt-x86_64-freetype</a> <span class="text-muted"></span></li>
+                
+            </ul>
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Optional Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Build Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            <ul class="list-unstyled">
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cc">mingw-w64-ucrt-x86_64-cc</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gperf">mingw-w64-ucrt-x86_64-gperf</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-meson">mingw-w64-ucrt-x86_64-meson</a> <span class="text-muted"></span></li>
+                
+            </ul>
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Check Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Provides:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Conflicts:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Replaces:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Provided By:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Required By:</dt>
+      <dd class="col-sm-9">
+        
+            <ul class="list-unstyled">
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-agar">mingw-w64-ucrt-x86_64-agar</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-binwalk">mingw-w64-ucrt-x86_64-binwalk</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cairo">mingw-w64-ucrt-x86_64-cairo</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-coin">mingw-w64-ucrt-x86_64-coin</a> <span class="text-muted">(make, optional)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-coin-docs">mingw-w64-ucrt-x86_64-coin-docs</a> <span class="text-muted">(make, optional)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-efl">mingw-w64-ucrt-x86_64-efl</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ffmpeg">mingw-w64-ucrt-x86_64-ffmpeg</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ghostscript">mingw-w64-ucrt-x86_64-ghostscript</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gimp">mingw-w64-ucrt-x86_64-gimp</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gr">mingw-w64-ucrt-x86_64-gr</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-graphicsmagick">mingw-w64-ucrt-x86_64-graphicsmagick</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gtksourceview5">mingw-w64-ucrt-x86_64-gtksourceview5</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-imagemagick">mingw-w64-ucrt-x86_64-imagemagick</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-inkscape">mingw-w64-ucrt-x86_64-inkscape</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-krita">mingw-w64-ucrt-x86_64-krita</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libass">mingw-w64-ucrt-x86_64-libass</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libcaca">mingw-w64-ucrt-x86_64-libcaca</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgd">mingw-w64-ucrt-x86_64-libgd</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgdiplus">mingw-w64-ucrt-x86_64-libgdiplus</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libosmscout">mingw-w64-ucrt-x86_64-libosmscout</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libvips">mingw-w64-ucrt-x86_64-libvips</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-octave">mingw-w64-ucrt-x86_64-octave</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-openscad">mingw-w64-ucrt-x86_64-openscad</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-pango">mingw-w64-ucrt-x86_64-pango</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-podofo">mingw-w64-ucrt-x86_64-podofo</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-python-manimpango">mingw-w64-ucrt-x86_64-python-manimpango</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-qemu">mingw-w64-ucrt-x86_64-qemu</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-qt5-base">mingw-w64-ucrt-x86_64-qt5-base</a> <span class="text-muted">(make, normal)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-qt5-base-debug">mingw-w64-ucrt-x86_64-qt5-base-debug</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-qtwebkit">mingw-w64-ucrt-x86_64-qtwebkit</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-texlive-bin">mingw-w64-ucrt-x86_64-texlive-bin</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ttf-cm-unicode">mingw-w64-ucrt-x86_64-ttf-cm-unicode</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ttf-dejavu">mingw-w64-ucrt-x86_64-ttf-dejavu</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-turbo">mingw-w64-ucrt-x86_64-turbo</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-tuxpaint">mingw-w64-ucrt-x86_64-tuxpaint</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-vlc">mingw-w64-ucrt-x86_64-vlc</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-vtk">mingw-w64-ucrt-x86_64-vtk</a> <span class="text-muted">(make, optional)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-wt">mingw-w64-ucrt-x86_64-wt</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-wxwidgets3.2-gtk3-libs">mingw-w64-ucrt-x86_64-wxwidgets3.2-gtk3-libs</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-wxwidgets3.3-gtk3-libs">mingw-w64-ucrt-x86_64-wxwidgets3.3-gtk3-libs</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-xpdf">mingw-w64-ucrt-x86_64-xpdf</a></li>
+                
+            </ul>
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Files:</dt>
+      <dd class="col-sm-9 text-nowrap">
+        <pre class="file-list small"><code>/ucrt64/bin/fc-cache.exe
+/ucrt64/bin/fc-cat.exe
+/ucrt64/bin/fc-conflist.exe
+/ucrt64/bin/fc-genconf.exe
+/ucrt64/bin/fc-list.exe
+/ucrt64/bin/fc-match.exe
+/ucrt64/bin/fc-pattern.exe
+/ucrt64/bin/fc-query.exe
+/ucrt64/bin/fc-scan.exe
+/ucrt64/bin/fc-validate.exe
+/ucrt64/bin/libfontconfig-1.dll
+/ucrt64/etc/fonts/conf.d/10-hinting-slight.conf
+/ucrt64/etc/fonts/conf.d/10-scale-bitmap-fonts.conf
+/ucrt64/etc/fonts/conf.d/10-sub-pixel-none.conf
+/ucrt64/etc/fonts/conf.d/10-yes-antialias.conf
+/ucrt64/etc/fonts/conf.d/11-lcdfilter-default.conf
+/ucrt64/etc/fonts/conf.d/20-unhint-small-vera.conf
+/ucrt64/etc/fonts/conf.d/30-metric-aliases.conf
+/ucrt64/etc/fonts/conf.d/40-nonlatin.conf
+/ucrt64/etc/fonts/conf.d/45-generic.conf
+/ucrt64/etc/fonts/conf.d/45-latin.conf
+/ucrt64/etc/fonts/conf.d/48-guessfamily.conf
+/ucrt64/etc/fonts/conf.d/48-spacing.conf
+/ucrt64/etc/fonts/conf.d/49-sansserif.conf
+/ucrt64/etc/fonts/conf.d/50-user.conf
+/ucrt64/etc/fonts/conf.d/51-local.conf
+/ucrt64/etc/fonts/conf.d/60-generic.conf
+/ucrt64/etc/fonts/conf.d/60-latin.conf
+/ucrt64/etc/fonts/conf.d/65-fonts-persian.conf
+/ucrt64/etc/fonts/conf.d/65-nonlatin.conf
+/ucrt64/etc/fonts/conf.d/69-unifont.conf
+/ucrt64/etc/fonts/conf.d/70-no-bitmaps-except-emoji.conf
+/ucrt64/etc/fonts/conf.d/80-delicious.conf
+/ucrt64/etc/fonts/conf.d/90-synthetic.conf
+/ucrt64/etc/fonts/conf.d/README
+/ucrt64/etc/fonts/fonts.conf
+/ucrt64/include/fontconfig/fcfreetype.h
+/ucrt64/include/fontconfig/fcprivate.h
+/ucrt64/include/fontconfig/fontconfig.h
+/ucrt64/lib/libfontconfig.a
+/ucrt64/lib/libfontconfig.dll.a
+/ucrt64/lib/pkgconfig/fontconfig.pc
+/ucrt64/share/fontconfig/conf.avail/05-reset-dirs-sample.conf
+/ucrt64/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf
+/ucrt64/share/fontconfig/conf.avail/10-autohint.conf
+/ucrt64/share/fontconfig/conf.avail/10-hinting-full.conf
+/ucrt64/share/fontconfig/conf.avail/10-hinting-medium.conf
+/ucrt64/share/fontconfig/conf.avail/10-hinting-none.conf
+/ucrt64/share/fontconfig/conf.avail/10-hinting-slight.conf
+/ucrt64/share/fontconfig/conf.avail/10-no-antialias.conf
+/ucrt64/share/fontconfig/conf.avail/10-scale-bitmap-fonts.conf
+/ucrt64/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf
+/ucrt64/share/fontconfig/conf.avail/10-sub-pixel-none.conf
+/ucrt64/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
+/ucrt64/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf
+/ucrt64/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf
+/ucrt64/share/fontconfig/conf.avail/10-unhinted.conf
+/ucrt64/share/fontconfig/conf.avail/10-yes-antialias.conf
+/ucrt64/share/fontconfig/conf.avail/11-lcdfilter-default.conf
+/ucrt64/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf
+/ucrt64/share/fontconfig/conf.avail/11-lcdfilter-light.conf
+/ucrt64/share/fontconfig/conf.avail/11-lcdfilter-none.conf
+/ucrt64/share/fontconfig/conf.avail/20-unhint-small-vera.conf
+/ucrt64/share/fontconfig/conf.avail/25-unhint-nonlatin.conf
+/ucrt64/share/fontconfig/conf.avail/30-metric-aliases.conf
+/ucrt64/share/fontconfig/conf.avail/35-lang-normalize.conf
+/ucrt64/share/fontconfig/conf.avail/40-nonlatin.conf
+/ucrt64/share/fontconfig/conf.avail/45-generic.conf
+/ucrt64/share/fontconfig/conf.avail/45-latin.conf
+/ucrt64/share/fontconfig/conf.avail/48-guessfamily.conf
+/ucrt64/share/fontconfig/conf.avail/48-spacing.conf
+/ucrt64/share/fontconfig/conf.avail/49-sansserif.conf
+/ucrt64/share/fontconfig/conf.avail/50-user.conf
+/ucrt64/share/fontconfig/conf.avail/51-local.conf
+/ucrt64/share/fontconfig/conf.avail/60-generic.conf
+/ucrt64/share/fontconfig/conf.avail/60-latin.conf
+/ucrt64/share/fontconfig/conf.avail/65-fonts-persian.conf
+/ucrt64/share/fontconfig/conf.avail/65-khmer.conf
+/ucrt64/share/fontconfig/conf.avail/65-nonlatin.conf
+/ucrt64/share/fontconfig/conf.avail/69-unifont.conf
+/ucrt64/share/fontconfig/conf.avail/70-no-bitmaps-and-emoji.conf
+/ucrt64/share/fontconfig/conf.avail/70-no-bitmaps-except-emoji.conf
+/ucrt64/share/fontconfig/conf.avail/70-no-bitmaps.conf
+/ucrt64/share/fontconfig/conf.avail/70-yes-bitmaps.conf
+/ucrt64/share/fontconfig/conf.avail/80-delicious.conf
+/ucrt64/share/fontconfig/conf.avail/90-synthetic.conf
+/ucrt64/share/gettext/its/fontconfig.its
+/ucrt64/share/gettext/its/fontconfig.loc
+/ucrt64/share/licenses/fontconfig/COPYING
+/ucrt64/share/locale/ka/LC_MESSAGES/fontconfig-conf.mo
+/ucrt64/share/locale/ka/LC_MESSAGES/fontconfig.mo
+/ucrt64/share/locale/zh_CN/LC_MESSAGES/fontconfig-conf.mo
+/ucrt64/share/locale/zh_CN/LC_MESSAGES/fontconfig.mo
+/ucrt64/share/xml/fontconfig/fonts.dtd
+/usr/share/libalpm/hooks/mingw-w64-ucrt-x86_64-fontconfig.hook
+</code></pre>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+
+
+        </div>
+  </div>
+</div>
+<div>
+    <small class="text-muted">
+        Last Update: 2026-10-10 15:37:22
+        [<a href="#" id="refresh-link" title="Request the backend to fetch new data from external sources">Request update</a>]
+    </small>
+</div>
+</div>
+
+    </body>
+
+    <script type="module">
+        let button = document.getElementById('refresh-link');
+        button.addEventListener('click', (event) => {
+          fetch('/api/trigger_update', {method: 'POST'});
+          event.preventDefault();
+        });
+    </script>
+</html>

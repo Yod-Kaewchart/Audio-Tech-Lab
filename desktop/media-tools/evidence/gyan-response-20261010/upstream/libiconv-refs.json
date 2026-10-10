@@ -1,0 +1,14 @@
+{
+  "repository": "https://git.savannah.gnu.org/git/libiconv.git",
+  "command": [
+    "git",
+    "ls-remote",
+    "https://git.savannah.gnu.org/git/libiconv.git",
+    "refs/tags/v1.19",
+    "refs/tags/v1.19^{}"
+  ],
+  "fetchedUtc": "2026-10-10T15:38:46.892222+00:00",
+  "exitCode": 0,
+  "stdout": "db5f4572146f1299bb0f0a5d71ae6598e5c4442f\trefs/tags/v1.19\na8850dc314a906b7bbe49a7c60424c7b10f57236\trefs/tags/v1.19^{}\n",
+  "stderr": "warning: redirecting to https://https.git.savannah.gnu.org/git/libiconv.git/\n"
+}

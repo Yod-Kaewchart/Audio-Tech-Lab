@@ -4,6 +4,12 @@
 
 งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่ได้ push, merge main, เปิด GitHub Release, upload public หรือ deploy หน้าโหลด และไม่ได้แก้ Home/backend/tunnel/Cloudflare
 
+## Source follow-up — 10 ตุลาคม 2026
+
+**Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE.** เก็บข้อความที่พี่ยอดให้ พร้อม hashes/coverage และอัปเดต working inventory ของ 8 libraries: หา source archives ได้ครบ 8 และ full Git commits 7; GMP Mercurial revision ยังตรวจไม่ได้ (403) ตรวจ candidate MSYS2 recipes/patches/dependencies แล้ว แต่ original scripts/configuration, patch declaration, package snapshot และ actual static link graph ยังขาด จึงคง source gate และ Public Beta readiness **BLOCKED / INCOMPLETE**
+
+ดู [source audit/ช่องว่างที่เหลือ](evidence/gyan-response-20261010/README.md), [inventory](evidence/source-taskbar-20261009/SOURCE-INVENTORY.md) และ [ร่างถามกลับ — NOT SENT](evidence/gyan-response-20261010/GYAN-FOLLOWUP-DRAFT.md) ข้อความ email ไม่มี original headers หรือ independent authentication; ไม่ใช้ quoted request date เป็นเวลาคำตอบ รอบนี้แก้เฉพาะ docs/evidence; binaries, release manifests และ archived r2 kit คงเดิม ไม่มี rebuild/push/publish สถานะ AWAITING RESPONSE ของ Gyan ในบันทึกวันที่ 9 ตุลาคมด้านล่างเป็นประวัติก่อนคำตอบนี้
+
 ## Portable taskbar gate PASS — ภาพ manual hover จากพี่ยอด
 
 เริ่มรอบเก็บภาพจาก HEAD `f97b20965cfbb16cd92889f843bfd3cb5d551606`, branch `codex/source-taskbar-review-20261009` และ Git สะอาด พบ PNG ต้นฉบับจริงบน EliteBook ที่ `C:\Users\EliteBook\Pictures\Screenshots\สกรีนช็อต 2026-10-09 123026.png` เปิดตรวจแล้ว copy ไม่แก้ภาพไปที่ [portable-hover-thumbnail-manual.png](evidence/taskbar-elitebook-20261009/portable-hover-thumbnail-manual.png) SHA256 ต้นฉบับ/สำเนาตรง **`c0f45882d1793844e44d97b2be1dc7453d1c527dd3d3cb22202f252ff330fb2e`**, **187231 bytes**, **1366×768** เป็น manual QA จากผู้ใช้ ไม่ใช่ภาพจาก API หรือ scratch path

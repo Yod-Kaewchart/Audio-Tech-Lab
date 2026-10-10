@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> GMP 6.3.0 released
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gmp-announce%40gmplib.org?Subject=Re%3A%20GMP%206.3.0%20released&In-Reply-To=%3C8635157ca2.fsf%40shell.gmplib.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>GMP 6.3.0 released</H1>
+    <B>Torbj&#246;rn Granlund</B> 
+    <A HREF="mailto:gmp-announce%40gmplib.org?Subject=Re%3A%20GMP%206.3.0%20released&In-Reply-To=%3C8635157ca2.fsf%40shell.gmplib.org%3E"
+       TITLE="GMP 6.3.0 released">tg at gmplib.org
+       </A><BR>
+    <I>Sun Jul 30 15:35:17 CEST 2023</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A new release of the GNU Multiple Precision Arithmetic Library (GMP) is
+now available.  The new release is identified as 6.3.0.
+
+The release can be downloaded from here:
+
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.lz">https://gmplib.org/download/gmp/gmp-6.3.0.tar.lz</A>   (smallest)
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz">https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz</A>
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.2.1.tar.xz">https://gmplib.org/download/gmp/gmp-6.2.1.tar.xz</A>
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.zst">https://gmplib.org/download/gmp/gmp-6.3.0.tar.zst</A>
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.bz2">https://gmplib.org/download/gmp/gmp-6.3.0.tar.bz2</A>
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.gz">https://gmplib.org/download/gmp/gmp-6.3.0.tar.gz</A>   (largest)
+
+(The signature files for the .zst are missing at the time of writing
+this, but that should be sorted soon.)
+
+These files can also be found at the GNU main site as well as its many
+mirrors.  (The .zst file and signature are missing from gnu.org and its
+mirrors at the time of writing this.)
+
+Signature files are also available:
+
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.lz.sig">https://gmplib.org/download/gmp/gmp-6.3.0.tar.lz.sig</A>
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz.sig">https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz.sig</A>
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.zst.sig">https://gmplib.org/download/gmp/gmp-6.3.0.tar.zst.sig</A>  (available soon)
+   <A HREF="https://gmplib.org/download/gmp/gmp-6.3.0.tar.bz2.sig">https://gmplib.org/download/gmp/gmp-6.3.0.tar.bz2.sig</A>
+
+The 6.3.0 release is a feature release, with an asortment of
+improvements and improved portability.
+
+As usually, we repeat and underline: please run &quot;make check&quot; after
+you've built your library.  And if &quot;make check&quot; stops with an error, do
+not use the compiled library.  When this happens, you've almost surely
+run into a compiler bug, not a GMP bug, since we've of course made sure
+the library passes its own test suite.  The first thing to try at this
+point is using a different compiler.  See also <A HREF="https://gmplib.org/.">https://gmplib.org/.</A>
+
+Thanks to both the broad testing and careful development, we expect
+this to be a very stable release.
+
+This release would not have been possible without the continuous work of
+improvement, revision and refinement by the whole GMP team: Marco
+Bodrato, Marc Glisse, Torbj&#246;rn Granlund, and Niels M&#246;ller.
+
+
+Changes between GMP version 6.2.* and 6.3.*.
+
+  BUGS FIXED
+  * A possible overflow of type int is avoided for mpz_cmp on huge operands.
+
+  * A possible error condition when a malformed file is read with
+    mpz_inp_raw is now correctly handled.
+
+  FEATURES
+  * New public function mpz_prevprime, companion of the existing
+    mpz_nextprime.
+
+  * New documented pointer types mpz_ptr, mpz_srcptr, and similar for
+    other GMP types. Refer to the manual for full list and suggested
+    usage. These types have been present in gmp.h at least since
+    GMP-4.0, but previously not advertised to users.
+
+  * Support for 64-bit Arm under Macos.
+
+  * Support for the loongarch64 CPU family.
+
+  * Support for building with LTO, link-time optimisations.
+
+  SPEEDUPS
+  * New special code for base = 2 in mpz_powm reduces the average time
+    for the functions that test primality.
+
+  * Speedup for the function mpz_nextprime on large operands.
+
+  * Speedup for multiplications (some sizes only) thanks to new
+    internal functions to compute small negacyclic products.
+
+  * Special assembly code for IBM z13 and later &quot;mainframe&quot; CPUs, resulting in
+    a huge speedup.
+
+  * Improved assembly for several 64-bit x86 CPUs, Risc-V, 64-bit Arm.
+
+
+-- 
+Torbj&#246;rn
+Please encrypt, key id 0xC8601622
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://gmplib.org/mailman/listinfo/gmp-announce">More information about the gmp-announce
+mailing list</a><br>
+</body></html>

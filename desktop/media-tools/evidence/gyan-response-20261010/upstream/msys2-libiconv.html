@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <script src="https://packages.msys2.org/static/theme.js"></script>
+        <script type="module" src="https://packages.msys2.org/static/index.js"></script>
+        <link rel="preload" href="https://packages.msys2.org/static/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://packages.msys2.org/static/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="shortcut icon" href="https://packages.msys2.org/static/images/favicon.ico"/>
+        <link rel="stylesheet" href="https://packages.msys2.org/static/index.css">
+
+        <title>Package: mingw-w64-ucrt-x86_64-libiconv - MSYS2 Packages</title>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-body-tertiary">
+      <a class="navbar-brand" href="https://packages.msys2.org/" style="line-height: 2em">
+          <img src="https://packages.msys2.org/static/images/logo.svg" style="width:2em;height:2em;margin-right:0.5em;border-radius:.25rem" class="d-inline-block align-top" alt="MSYS2"> MSYS2 Packages
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        
+        <form class="ms-auto input-group input-group-sm" style="width: auto" action="https://packages.msys2.org/search" method="get">
+            <input class="form-control" type="search" name="q" placeholder="Package Search" aria-label="Package Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        
+        <div class="d-block d-md-none">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/queue">Pending Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/updates">Repo Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/outofdate">Outdated Packages</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/repos">Repos</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/base">Base Packages</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="https://packages.msys2.org/packages/">Packages</a>
+  </li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/basegroups/">Base Groups</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/groups/">Groups</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/security">Security</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/search">Search</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/stats">Traffic Stats</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/mirrors">Mirrors</a>
+</li>
+          </ul>
+        </div>
+        <div class="ms-auto navbar-buttons">
+            <input type="checkbox" class="btn-check" id="dark-mode-check" autocomplete="off">
+            <label class="btn btn-sm btn-outline-secondary" for="dark-mode-check" id="dark-mode-label"></label>
+          <a href="https://www.msys2.org" class="btn btn-sm btn-outline-primary ml-auto">Get MSYS2</a>
+          <a href="https://github.com/msys2/msys2-web" class="btn btn-sm
+          btn-outline-info">Fork on GitHub</a>
+          <a href="https://packages.msys2.org/api/" class="btn btn-sm btn-outline-success">API</a>
+        </div>
+      </div>
+    </nav>
+
+<div class="container-xl">
+<div class="container-fluid p-0 p-md-2">
+  <div class="row">
+        <div class="col-md-2 p-0 px-2 text-center text-md-start d-none d-md-block">
+            <div class="sticky-top bg-body-tertiary card overflow-hidden">
+             <ul class="nav flex-column">
+                <li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/queue">Pending Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/updates">Repo Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/outofdate">Outdated Packages</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/repos">Repos</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/base">Base Packages</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="https://packages.msys2.org/packages/">Packages</a>
+  </li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/basegroups/">Base Groups</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/groups/">Groups</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/security">Security</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/search">Search</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/stats">Traffic Stats</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/mirrors">Mirrors</a>
+</li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-md-10 p-0" id="main">
+
+
+
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h4 class="card-title">Package: <a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libiconv">mingw-w64-ucrt-x86_64-libiconv</a></h4>
+  </div>
+  <div class="card-header text-muted">
+    <div class="row">
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/tree/master/mingw-w64-libiconv" class="card-link">Source Files</a>
+        </div>
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/commits/master/mingw-w64-libiconv" class="card-link">View Changes</a>
+        </div>
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/issues?q=is%3Aissue+is%3Aopen+libiconv" class="card-link">View Issues</a>
+        </div>
+        <div class="col-sm text-center">
+            <a href="https://github.com/msys2/MINGW-packages/issues/new?template=bug_report.yml&amp;title=%5Blibiconv%5D+" class="card-link">Report Issue</a>
+        </div>
+    </div>
+  </div>
+  <div class="card-body overflow-auto">
+    <dl class="row">
+      <dt class="col-sm-3 text-sm-end">Base Package:</dt>
+      <dd class="col-sm-9"><a href="https://packages.msys2.org/base/mingw-w64-libiconv">mingw-w64-libiconv</a></dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Description:</dt>
+      <dd class="col-sm-9">
+        Character encoding conversion library (mingw-w64)
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Group(s):</dt>
+      <dd class="col-sm-9">
+        
+        -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Repo:</dt>
+      <dd class="col-sm-9">ucrt64</dd>
+
+      
+      <dt class="col-sm-3 text-sm-end">Homepage:</dt>
+      <dd class="col-sm-9">
+        <a href="https://www.gnu.org/software/libiconv/">https://www.gnu.org/software/libiconv/</a>
+      </dd>
+      
+      <dt class="col-sm-3 text-sm-end">Repository:</dt>
+      <dd class="col-sm-9">
+        <a href="https://cgit.git.savannah.gnu.org/cgit/libiconv.git">https://cgit.git.savannah.gnu.org/cgit/libiconv.git</a>
+      </dd>
+      
+
+      <dt class="col-sm-3 text-sm-end">License(s):</dt>
+      <dd class="col-sm-9"><a href="https://spdx.org/licenses/LGPL-2.1-or-later.html">LGPL-2.1-or-later</a> OR documentation:spdx:GPL-3.0-or-later</dd>
+
+      <dt class="col-sm-3 text-sm-end">Version:</dt>
+      <dd class="col-sm-9">1.19-1</dd>
+
+      <dt class="col-sm-3 text-sm-end mb-2">External:</dt>
+      <dd class="col-sm-9">
+        <dl class="row mb-0">
+        
+          <dt class="text-muted small">Anitya</dt>
+          <dd>
+            <a href="https://release-monitoring.org/project/libiconv">libiconv</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Arch Linux</dt>
+          <dd>
+            <a href="https://archlinux.org/packages/extra/x86_64/libiconv/">1.19</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Cygwin</dt>
+          <dd>
+            <a href="https://cygwin.com/packages/summary/libiconv-src.html">1.19</a>
+            
+            | <a href="https://ftp.acc.umu.se/mirror/cygwin/src/release/libiconv/libiconv-1.19-2-src.tar.xz">libiconv-1.19-2-src.tar.xz</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Gentoo</dt>
+          <dd>
+            <a href="https://packages.gentoo.org/packages/virtual/libiconv">0-r2</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Repology</dt>
+          <dd>
+            <a href="https://repology.org/tools/project-by?repo=msys2_mingw&amp;name_type=srcname&amp;target_page=project_versions&amp;name=mingw-w64-libiconv">libiconv</a>
+            
+          </dd>
+        
+        </dl>
+      </dd>
+
+    
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Installation:</dt>
+      <dd class="col-sm-9">
+        <div class="copyable rounded">
+          <div class="highlight">
+            <pre><code>pacman -S mingw-w64-ucrt-x86_64-libiconv</code></pre>
+          </div>
+          <button class="btn" aria-label="Copy to clipboard" onclick="App.copyToClipboard(this);">📋</button>
+        </div>
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">File:</dt>
+      <dd class="col-sm-9"> <a href="https://mirror.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libiconv-1.19-1-any.pkg.tar.zst">https://mirror.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libiconv-1.19-1-any.pkg.tar.zst</a></dd>
+
+      <dt class="col-sm-3 text-sm-end">SHA256:</dt>
+      <dd class="col-sm-9"><code>9a500f38c2b91808741c62fae746b3e9110b33a1ecf5c30fa0c66dbedddf7e16</code></dd>
+
+      <dt class="col-sm-3 text-sm-end">Last Packager:</dt>
+      <dd class="col-sm-9">CI (msys2/msys2-autobuild/5e407709/23084514348)</dd>
+
+      <dt class="col-sm-3 text-sm-end">Build Date:</dt>
+      <dd class="col-sm-9">2026-03-14 08:45:32</dd>
+
+      <dt class="col-sm-3 text-sm-end">Package Size:</dt>
+      <dd class="col-sm-9">0.71 MB</dd>
+
+      <dt class="col-sm-3 text-sm-end">Installed Size:</dt>
+      <dd class="col-sm-9">2.44 MB</dd>
+
+      <dt class="col-sm-3 text-sm-end">Source-Only Tarball:</dt>
+      <dd class="col-sm-9"><a href="https://mirror.msys2.org/mingw/sources/mingw-w64-libiconv-1.19-1.src.tar.zst">https://mirror.msys2.org/mingw/sources/mingw-w64-libiconv-1.19-1.src.tar.zst</a></dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Optional Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Build Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            <ul class="list-unstyled">
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-autotools">mingw-w64-ucrt-x86_64-autotools</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cc">mingw-w64-ucrt-x86_64-cc</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gettext-tools">mingw-w64-ucrt-x86_64-gettext-tools</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gperf">mingw-w64-ucrt-x86_64-gperf</a> <span class="text-muted"></span></li>
+                
+            </ul>
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Check Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Provides:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Conflicts:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Replaces:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Provided By:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Required By:</dt>
+      <dd class="col-sm-9">
+        
+            <ul class="list-unstyled">
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-aegisub">mingw-w64-ucrt-x86_64-aegisub</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-blender">mingw-w64-ucrt-x86_64-blender</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-boost-libs">mingw-w64-ucrt-x86_64-boost-libs</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cabextract">mingw-w64-ucrt-x86_64-cabextract</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cc-libs">mingw-w64-ucrt-x86_64-cc-libs</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-crystal">mingw-w64-ucrt-x86_64-crystal</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ctags">mingw-w64-ucrt-x86_64-ctags</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-dcmtk">mingw-w64-ucrt-x86_64-dcmtk</a> <span class="text-muted">(make, optional)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-djvulibre">mingw-w64-ucrt-x86_64-djvulibre</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-doxygen">mingw-w64-ucrt-x86_64-doxygen</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-exiv2">mingw-w64-ucrt-x86_64-exiv2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ffmpeg">mingw-w64-ucrt-x86_64-ffmpeg</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-firebird">mingw-w64-ucrt-x86_64-firebird</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-fltk">mingw-w64-ucrt-x86_64-fltk</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-fltk1.3">mingw-w64-ucrt-x86_64-fltk1.3</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-fontforge">mingw-w64-ucrt-x86_64-fontforge</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-freetds">mingw-w64-ucrt-x86_64-freetds</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gcc">mingw-w64-ucrt-x86_64-gcc</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gcc-ada">mingw-w64-ucrt-x86_64-gcc-ada</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gcc-fortran">mingw-w64-ucrt-x86_64-gcc-fortran</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gcc-libs">mingw-w64-ucrt-x86_64-gcc-libs</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gcc-objc">mingw-w64-ucrt-x86_64-gcc-objc</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gcc-plugin">mingw-w64-ucrt-x86_64-gcc-plugin</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gdal">mingw-w64-ucrt-x86_64-gdal</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gdb">mingw-w64-ucrt-x86_64-gdb</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gdbm">mingw-w64-ucrt-x86_64-gdbm</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gdcm">mingw-w64-ucrt-x86_64-gdcm</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gettext-libtextstyle">mingw-w64-ucrt-x86_64-gettext-libtextstyle</a> <span class="text-muted">(make, normal)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gettext-runtime">mingw-w64-ucrt-x86_64-gettext-runtime</a> <span class="text-muted">(make, normal)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gettext-tools">mingw-w64-ucrt-x86_64-gettext-tools</a> <span class="text-muted">(make, normal)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ghostscript">mingw-w64-ucrt-x86_64-ghostscript</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gmime">mingw-w64-ucrt-x86_64-gmime</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnatcoll-gmp">mingw-w64-ucrt-x86_64-gnatcoll-gmp</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnatcoll-iconv">mingw-w64-ucrt-x86_64-gnatcoll-iconv</a> <span class="text-muted">(make, normal)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnatcoll-lzma">mingw-w64-ucrt-x86_64-gnatcoll-lzma</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnatcoll-omp">mingw-w64-ucrt-x86_64-gnatcoll-omp</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnatcoll-python">mingw-w64-ucrt-x86_64-gnatcoll-python</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnatcoll-readline">mingw-w64-ucrt-x86_64-gnatcoll-readline</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnatcoll-zlib">mingw-w64-ucrt-x86_64-gnatcoll-zlib</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gnustep-base">mingw-w64-ucrt-x86_64-gnustep-base</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-gphoto2">mingw-w64-ucrt-x86_64-gphoto2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-handbrake">mingw-w64-ucrt-x86_64-handbrake</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-iconv">mingw-w64-ucrt-x86_64-iconv</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-id3lib">mingw-w64-ucrt-x86_64-id3lib</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-inkscape">mingw-w64-ucrt-x86_64-inkscape</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-lame">mingw-w64-ucrt-x86_64-lame</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-langkit_support">mingw-w64-ucrt-x86_64-langkit_support</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libarchive">mingw-w64-ucrt-x86_64-libarchive</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libass">mingw-w64-ucrt-x86_64-libass</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libatomic">mingw-w64-ucrt-x86_64-libatomic</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libcdio">mingw-w64-ucrt-x86_64-libcdio</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libdatrie">mingw-w64-ucrt-x86_64-libdatrie</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libdsm">mingw-w64-ucrt-x86_64-libdsm</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libfreexl">mingw-w64-ucrt-x86_64-libfreexl</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libftdi">mingw-w64-ucrt-x86_64-libftdi</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgcc">mingw-w64-ucrt-x86_64-libgcc</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgccjit">mingw-w64-ucrt-x86_64-libgccjit</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgd">mingw-w64-ucrt-x86_64-libgd</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgfortran">mingw-w64-ucrt-x86_64-libgfortran</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgit2">mingw-w64-ucrt-x86_64-libgit2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgit2-winhttp">mingw-w64-ucrt-x86_64-libgit2-winhttp</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgomp">mingw-w64-ucrt-x86_64-libgomp</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libgphoto2">mingw-w64-ucrt-x86_64-libgphoto2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libidn">mingw-w64-ucrt-x86_64-libidn</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libidn2">mingw-w64-ucrt-x86_64-libidn2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libmupdf">mingw-w64-ucrt-x86_64-libmupdf</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libobjc">mingw-w64-ucrt-x86_64-libobjc</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libpsl">mingw-w64-ucrt-x86_64-libpsl</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libpst">mingw-w64-ucrt-x86_64-libpst</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libqalculate">mingw-w64-ucrt-x86_64-libqalculate</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libquadmath">mingw-w64-ucrt-x86_64-libquadmath</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-librdata">mingw-w64-ucrt-x86_64-librdata</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libspatialite">mingw-w64-ucrt-x86_64-libspatialite</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libstdc++">mingw-w64-ucrt-x86_64-libstdc++</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libunistring">mingw-w64-ucrt-x86_64-libunistring</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libvmime">mingw-w64-ucrt-x86_64-libvmime</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-libxml2">mingw-w64-ucrt-x86_64-libxml2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-lto-dump">mingw-w64-ucrt-x86_64-lto-dump</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mapserver">mingw-w64-ucrt-x86_64-mapserver</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mcpp">mingw-w64-ucrt-x86_64-mcpp</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mecab">mingw-w64-ucrt-x86_64-mecab</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mlt">mingw-w64-ucrt-x86_64-mlt</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mtools">mingw-w64-ucrt-x86_64-mtools</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mupdf">mingw-w64-ucrt-x86_64-mupdf</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mupdf-gl">mingw-w64-ucrt-x86_64-mupdf-gl</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-mupdf-tools">mingw-w64-ucrt-x86_64-mupdf-tools</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-neovim">mingw-w64-ucrt-x86_64-neovim</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-octave">mingw-w64-ucrt-x86_64-octave</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-odt2txt">mingw-w64-ucrt-x86_64-odt2txt</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-opencv">mingw-w64-ucrt-x86_64-opencv</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-pdf2djvu">mingw-w64-ucrt-x86_64-pdf2djvu</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-postgis">mingw-w64-ucrt-x86_64-postgis</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-pulseaudio">mingw-w64-ucrt-x86_64-pulseaudio</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-python-mupdf">mingw-w64-ucrt-x86_64-python-mupdf</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-qemu">mingw-w64-ucrt-x86_64-qemu</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-qemu-guest-agent">mingw-w64-ucrt-x86_64-qemu-guest-agent</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-qemu-image-util">mingw-w64-ucrt-x86_64-qemu-image-util</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-readstat">mingw-w64-ucrt-x86_64-readstat</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-SDL">mingw-w64-ucrt-x86_64-SDL</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-SDL2">mingw-w64-ucrt-x86_64-SDL2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-sdl3">mingw-w64-ucrt-x86_64-sdl3</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-shards">mingw-w64-ucrt-x86_64-shards</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-spatialite-tools">mingw-w64-ucrt-x86_64-spatialite-tools</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-supertux">mingw-w64-ucrt-x86_64-supertux</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-texinfo">mingw-w64-ucrt-x86_64-texinfo</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-tigervnc">mingw-w64-ucrt-x86_64-tigervnc</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-unixodbc">mingw-w64-ucrt-x86_64-unixodbc</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-vlc">mingw-w64-ucrt-x86_64-vlc</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-wget2">mingw-w64-ucrt-x86_64-wget2</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-xmlstarlet">mingw-w64-ucrt-x86_64-xmlstarlet</a> <span class="text-muted">(make)</span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-zbar">mingw-w64-ucrt-x86_64-zbar</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-zvbi">mingw-w64-ucrt-x86_64-zvbi</a></li>
+                
+            </ul>
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Files:</dt>
+      <dd class="col-sm-9 text-nowrap">
+        <pre class="file-list small"><code>/ucrt64/bin/libcharset-1.dll
+/ucrt64/bin/libiconv-2.dll
+/ucrt64/include/iconv.h
+/ucrt64/include/libcharset.h
+/ucrt64/include/localcharset.h
+/ucrt64/lib/libcharset.a
+/ucrt64/lib/libcharset.dll.a
+/ucrt64/lib/libiconv.a
+/ucrt64/lib/libiconv.dll.a
+/ucrt64/lib/pkgconfig/iconv.pc
+/ucrt64/share/doc/libiconv/iconv.3.html
+/ucrt64/share/doc/libiconv/iconv_close.3.html
+/ucrt64/share/doc/libiconv/iconv_open.3.html
+/ucrt64/share/doc/libiconv/iconv_open_into.3.html
+/ucrt64/share/doc/libiconv/iconvctl.3.html
+/ucrt64/share/licenses/libiconv/COPYING
+/ucrt64/share/licenses/libiconv/COPYING.LIB
+/ucrt64/share/licenses/libiconv/README
+/ucrt64/share/licenses/libiconv/libcharset/COPYING.LIB
+/ucrt64/share/man/man3/iconv.3.gz
+/ucrt64/share/man/man3/iconv_close.3.gz
+/ucrt64/share/man/man3/iconv_open.3.gz
+/ucrt64/share/man/man3/iconv_open_into.3.gz
+/ucrt64/share/man/man3/iconvctl.3.gz
+</code></pre>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+
+
+        </div>
+  </div>
+</div>
+<div>
+    <small class="text-muted">
+        Last Update: 2026-10-10 15:37:22
+        [<a href="#" id="refresh-link" title="Request the backend to fetch new data from external sources">Request update</a>]
+    </small>
+</div>
+</div>
+
+    </body>
+
+    <script type="module">
+        let button = document.getElementById('refresh-link');
+        button.addEventListener('click', (event) => {
+          fetch('/api/trigger_update', {method: 'POST'});
+          event.preventDefault();
+        });
+    </script>
+</html>

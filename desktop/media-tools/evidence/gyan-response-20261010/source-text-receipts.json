@@ -1,0 +1,474 @@
+[
+  {
+    "file": "source-text/bzip2/Makefile",
+    "member": "bzip2-1.0.8/Makefile",
+    "sourceArchive": "archives/bzip2-1.0.8.tar.gz",
+    "archiveSha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+    "bytes": 6297,
+    "sha256": "7e7cf0f050748c29caa9cb6abd30639d46d3b9c7880562f2834f9b908ac97f80"
+  },
+  {
+    "file": "source-text/bzip2/LICENSE",
+    "member": "bzip2-1.0.8/LICENSE",
+    "sourceArchive": "archives/bzip2-1.0.8.tar.gz",
+    "archiveSha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+    "bytes": 1896,
+    "sha256": "c6dbbf828498be844a89eaa3b84adbab3199e342eb5cb2ed2f0d4ba7ec0f38a3"
+  },
+  {
+    "file": "source-text/bzip2/README",
+    "member": "bzip2-1.0.8/README",
+    "sourceArchive": "archives/bzip2-1.0.8.tar.gz",
+    "archiveSha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+    "bytes": 7451,
+    "sha256": "152f0da2867a1160a8f956628296ff45e766e492ad0d7054ffb8d981f7518782"
+  },
+  {
+    "file": "source-text/bzip2/Makefile-libbz2_so",
+    "member": "bzip2-1.0.8/Makefile-libbz2_so",
+    "sourceArchive": "archives/bzip2-1.0.8.tar.gz",
+    "archiveSha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+    "bytes": 1729,
+    "sha256": "0c3c80f466d648432a5e11f0dd188dc86de273476726283cc35a38e39a6d3960"
+  },
+  {
+    "file": "source-text/fontconfig/COPYING",
+    "member": "fontconfig-2.18.3/COPYING",
+    "sourceArchive": "archives/fontconfig-2.18.3.tar.gz",
+    "archiveSha256": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3",
+    "bytes": 8616,
+    "sha256": "51a51aa9823704fd90bccc616cdd17ebabb5b2b3e9cbde886ca02c7002288067"
+  },
+  {
+    "file": "source-text/fontconfig/NEWS",
+    "member": "fontconfig-2.18.3/NEWS",
+    "sourceArchive": "archives/fontconfig-2.18.3.tar.gz",
+    "archiveSha256": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3",
+    "bytes": 127455,
+    "sha256": "481fc24f74431f7bc9c64ee98f8ee9c5e1ab7692f018a0e4a1240a7401113113"
+  },
+  {
+    "file": "source-text/fontconfig/README.md",
+    "member": "fontconfig-2.18.3/README.md",
+    "sourceArchive": "archives/fontconfig-2.18.3.tar.gz",
+    "archiveSha256": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3",
+    "bytes": 1560,
+    "sha256": "7bdd4277f6bd80e7b9ecb6aa2841499dbd3772bef6eadac0d2e233679936fc67"
+  },
+  {
+    "file": "source-text/fontconfig/configure.ac",
+    "member": "fontconfig-2.18.3/configure.ac",
+    "sourceArchive": "archives/fontconfig-2.18.3.tar.gz",
+    "archiveSha256": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3",
+    "bytes": 27165,
+    "sha256": "7aae4eb516b6b50803579194b1a7c0c73e462fef82c9c26b489849ac300cd7ba"
+  },
+  {
+    "file": "source-text/fontconfig/meson.build",
+    "member": "fontconfig-2.18.3/meson.build",
+    "sourceArchive": "archives/fontconfig-2.18.3.tar.gz",
+    "archiveSha256": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3",
+    "bytes": 19484,
+    "sha256": "ea972b1281a1557cdbdaa48a64eedabfbc278994c02223d4203c81e8f822b745"
+  },
+  {
+    "file": "source-text/fontconfig/meson.options",
+    "member": "fontconfig-2.18.3/meson.options",
+    "sourceArchive": "archives/fontconfig-2.18.3.tar.gz",
+    "archiveSha256": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3",
+    "bytes": 3048,
+    "sha256": "6e5c1b69a41b2c4038c1db5c20b901871f0ecfdd9dcfb3bcb7b30e5ffeb0d70d"
+  },
+  {
+    "file": "source-text/gmp/COPYING",
+    "member": "gmp-6.3.0/COPYING",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 35147,
+    "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+  },
+  {
+    "file": "source-text/gmp/configure.ac",
+    "member": "gmp-6.3.0/configure.ac",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 143002,
+    "sha256": "38b226f22ec77282a758f72831da9faf0efd1473a6abdfad5bcb90a0b0a3fd5a"
+  },
+  {
+    "file": "source-text/gmp/README",
+    "member": "gmp-6.3.0/README",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 4051,
+    "sha256": "5e9f9325fd702bc4bcda27d7a78fea88a2a09fa39b4b15ac7b9b205e0863dc7e"
+  },
+  {
+    "file": "source-text/gmp/configure",
+    "member": "gmp-6.3.0/configure",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 942195,
+    "sha256": "a7f4836f9d77f63d0bffc70d27c6c303b6bb83edcdb7b13615c9cc96b761e092"
+  },
+  {
+    "file": "source-text/gmp/COPYING.LESSERv3",
+    "member": "gmp-6.3.0/COPYING.LESSERv3",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 7639,
+    "sha256": "a853c2ffec17057872340eee242ae4d96cbf2b520ae27d903e1b2fef1a5f9d1c"
+  },
+  {
+    "file": "source-text/gmp/COPYINGv3",
+    "member": "gmp-6.3.0/COPYINGv3",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 35150,
+    "sha256": "e6037104443f9a7829b2aa7c5370d0789a7bda3ca65a0b904cdc0c2e285d9195"
+  },
+  {
+    "file": "source-text/gmp/COPYINGv2",
+    "member": "gmp-6.3.0/COPYINGv2",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 18092,
+    "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+  },
+  {
+    "file": "source-text/gmp/NEWS",
+    "member": "gmp-6.3.0/NEWS",
+    "sourceArchive": "archives/gmp-6.3.0.tar.xz",
+    "archiveSha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+    "bytes": 39948,
+    "sha256": "237b65e721368b2bf6af8cfe464ea84c333220c6047ef5ba5b257540d38dd902"
+  },
+  {
+    "file": "source-text/gnutls/COPYING",
+    "member": "gnutls-3.8.13/COPYING",
+    "sourceArchive": "archives/gnutls-3.8.13.tar.xz",
+    "archiveSha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e",
+    "bytes": 35149,
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  {
+    "file": "source-text/gnutls/COPYING.LESSERv2",
+    "member": "gnutls-3.8.13/COPYING.LESSERv2",
+    "sourceArchive": "archives/gnutls-3.8.13.tar.xz",
+    "archiveSha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e",
+    "bytes": 26419,
+    "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+  },
+  {
+    "file": "source-text/gnutls/NEWS",
+    "member": "gnutls-3.8.13/NEWS",
+    "sourceArchive": "archives/gnutls-3.8.13.tar.xz",
+    "archiveSha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e",
+    "bytes": 433988,
+    "sha256": "c9dc8d11f72990a351903cb4f6c53dc36ca7697067de5ea7d369e0f6e350ecb9"
+  },
+  {
+    "file": "source-text/gnutls/README.md",
+    "member": "gnutls-3.8.13/README.md",
+    "sourceArchive": "archives/gnutls-3.8.13.tar.xz",
+    "archiveSha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e",
+    "bytes": 9367,
+    "sha256": "5e4aca90e8e08e47558dfd21e2a42251a139242b0016a06708739eeb8f0da60c"
+  },
+  {
+    "file": "source-text/gnutls/configure",
+    "member": "gnutls-3.8.13/configure",
+    "sourceArchive": "archives/gnutls-3.8.13.tar.xz",
+    "archiveSha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e",
+    "bytes": 2844705,
+    "sha256": "60ac25bd2c775ce1d7f324438df522050203b468e8a5c3a212318ddeff897051"
+  },
+  {
+    "file": "source-text/gnutls/configure.ac",
+    "member": "gnutls-3.8.13/configure.ac",
+    "sourceArchive": "archives/gnutls-3.8.13.tar.xz",
+    "archiveSha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e",
+    "bytes": 54272,
+    "sha256": "f53b3f129acb1d3725a46e03aea630aaceb6d063f56adb6da5bbeda66b7caf07"
+  },
+  {
+    "file": "source-text/gnutls/lib/gnutls.pc.in",
+    "member": "gnutls-3.8.13/lib/gnutls.pc.in",
+    "sourceArchive": "archives/gnutls-3.8.13.tar.xz",
+    "archiveSha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e",
+    "bytes": 840,
+    "sha256": "329c5213c67804269cc4c59e1fdef44d8ee474e0bf496cd9826817d07813f98e"
+  },
+  {
+    "file": "source-text/libiconv/COPYING.LIB",
+    "member": "libiconv-1.19/COPYING.LIB",
+    "sourceArchive": "archives/libiconv-1.19.tar.gz",
+    "archiveSha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "bytes": 26419,
+    "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+  },
+  {
+    "file": "source-text/libiconv/configure",
+    "member": "libiconv-1.19/configure",
+    "sourceArchive": "archives/libiconv-1.19.tar.gz",
+    "archiveSha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "bytes": 1085943,
+    "sha256": "baa212741ec24518d16ee459b365f1d838b26d2c8ccf06c57175bc4c17ee6570"
+  },
+  {
+    "file": "source-text/libiconv/NEWS",
+    "member": "libiconv-1.19/NEWS",
+    "sourceArchive": "archives/libiconv-1.19.tar.gz",
+    "archiveSha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "bytes": 11067,
+    "sha256": "8cc359791e2e43088a6274087c843c1553803d4286f87680cd4738a20944052d"
+  },
+  {
+    "file": "source-text/libiconv/README",
+    "member": "libiconv-1.19/README",
+    "sourceArchive": "archives/libiconv-1.19.tar.gz",
+    "archiveSha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "bytes": 5741,
+    "sha256": "4ae66e61d1c6593c84c47105b368d579bcee1af566dbb959ec63a0c48425dcf4"
+  },
+  {
+    "file": "source-text/libiconv/configure.ac",
+    "member": "libiconv-1.19/configure.ac",
+    "sourceArchive": "archives/libiconv-1.19.tar.gz",
+    "archiveSha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "bytes": 7083,
+    "sha256": "6f1f9e57818243853d4511ae894f888482cf08b3781eed27a090bf7e54fd5a81"
+  },
+  {
+    "file": "source-text/libiconv/libcharset/COPYING.LIB",
+    "member": "libiconv-1.19/libcharset/COPYING.LIB",
+    "sourceArchive": "archives/libiconv-1.19.tar.gz",
+    "archiveSha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "bytes": 26419,
+    "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+  },
+  {
+    "file": "source-text/libiconv/COPYING",
+    "member": "libiconv-1.19/COPYING",
+    "sourceArchive": "archives/libiconv-1.19.tar.gz",
+    "archiveSha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "bytes": 35147,
+    "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+  },
+  {
+    "file": "source-text/xz/CMakeLists.txt",
+    "member": "xz-5.8.4/CMakeLists.txt",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 96647,
+    "sha256": "3e29d8d080c29998d4ed975da563129dc5e9c3dbf52d336c1a70ca90ee08b0d1"
+  },
+  {
+    "file": "source-text/xz/COPYING",
+    "member": "xz-5.8.4/COPYING",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 3119,
+    "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8"
+  },
+  {
+    "file": "source-text/xz/COPYING.0BSD",
+    "member": "xz-5.8.4/COPYING.0BSD",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 607,
+    "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1"
+  },
+  {
+    "file": "source-text/xz/COPYING.GPLv2",
+    "member": "xz-5.8.4/COPYING.GPLv2",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 17984,
+    "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+  },
+  {
+    "file": "source-text/xz/COPYING.GPLv3",
+    "member": "xz-5.8.4/COPYING.GPLv3",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 35149,
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  {
+    "file": "source-text/xz/COPYING.LGPLv2.1",
+    "member": "xz-5.8.4/COPYING.LGPLv2.1",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 26419,
+    "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+  },
+  {
+    "file": "source-text/xz/NEWS",
+    "member": "xz-5.8.4/NEWS",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 126391,
+    "sha256": "5849716bf4f514368c92e5e9da8228a492907fe5669f6f515f3c5af0b43cf91c"
+  },
+  {
+    "file": "source-text/xz/README",
+    "member": "xz-5.8.4/README",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 11393,
+    "sha256": "63835489293d61f417043b97bad206447c390e007605ddff97fc70a31e9d6d55"
+  },
+  {
+    "file": "source-text/xz/configure",
+    "member": "xz-5.8.4/configure",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 805453,
+    "sha256": "9ab935cecc0642e7d2221c7a8e05e057cad51baf21ed1fca68b13962931e2e99"
+  },
+  {
+    "file": "source-text/xz/configure.ac",
+    "member": "xz-5.8.4/configure.ac",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 47422,
+    "sha256": "dc4bba60bc4b980c68cd46ab464bf46e1632aa87c59a6d9502dc8d76155ac8b4"
+  },
+  {
+    "file": "source-text/xz/src/liblzma/liblzma.pc.in",
+    "member": "xz-5.8.4/src/liblzma/liblzma.pc.in",
+    "sourceArchive": "archives/xz-5.8.4.tar.xz",
+    "archiveSha256": "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b",
+    "bytes": 388,
+    "sha256": "07d4cd846dc56fe290a1db518fbb0d438b18d92d2e87d0be2aa9b7f1c3f390f1"
+  },
+  {
+    "file": "source-text/libxml2/CMakeLists.txt",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/CMakeLists.txt",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 28464,
+    "sha256": "ef1b24cb2646031054c9aff04622c0f2a68ed65922b5e636a000a4e4539d7d4a"
+  },
+  {
+    "file": "source-text/libxml2/Copyright",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/Copyright",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 1314,
+    "sha256": "5d4873884a890122a4b9b20ad56ac6f7da1d796a5bfcf04a427970ac96217626"
+  },
+  {
+    "file": "source-text/libxml2/NEWS",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/NEWS",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 243248,
+    "sha256": "4e433a21e87c5c0da61c01867f315bcc0cdef57f206065f3e39497da7fa1d9dd"
+  },
+  {
+    "file": "source-text/libxml2/README.md",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/README.md",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 7290,
+    "sha256": "803858a1f2e9a04f4e2a978376c4e4b03f5e38b7cad41f3dade36b5884901822"
+  },
+  {
+    "file": "source-text/libxml2/VERSION",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/VERSION",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 7,
+    "sha256": "6a5953413ab0b83ab7c6c3f080df322580d42cc33524f5857533ca01f3da6312"
+  },
+  {
+    "file": "source-text/libxml2/configure.ac",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/configure.ac",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 29505,
+    "sha256": "1873c12b3c79c99ba6977dc5527156b76b45ea9168a6d70cb42629296cdfe8f8"
+  },
+  {
+    "file": "source-text/libxml2/libxml-2.0.pc.in",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/libxml-2.0.pc.in",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 362,
+    "sha256": "f5d76e81bae8ca402a251d082bd1d4082a21c84e7dd6d71e2d8bf15f3d57f9fd"
+  },
+  {
+    "file": "source-text/libxml2/meson.build",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/meson.build",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 17405,
+    "sha256": "55ee49666eb4f323de660e977b0724573b89de64d483e543c86c7572a14940b9"
+  },
+  {
+    "file": "source-text/libxml2/meson_options.txt",
+    "member": "libxml2-31094e5d0f65a528965e8c32a488e5a7f36118ca/meson_options.txt",
+    "sourceArchive": "archives/libxml2-31094e5d.tar.gz",
+    "archiveSha256": "59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91",
+    "bytes": 2867,
+    "sha256": "837f6039c8bfb16ecf39732b2e59efe04af621671b7e5b65ac9bcda87848ce81"
+  },
+  {
+    "file": "source-text/zlib-ng/CMakeLists.txt",
+    "member": "zlib-ng-9174ab6bf58ac9a518dbe197b948c897f74834f5/CMakeLists.txt",
+    "sourceArchive": "archives/zlib-ng-9174ab6.tar.gz",
+    "archiveSha256": "1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402",
+    "bytes": 66741,
+    "sha256": "e0c50413e2b28e81a394fc3e9d8800b67d62993806f4ac9de55ec00d25e3558d"
+  },
+  {
+    "file": "source-text/zlib-ng/LICENSE.md",
+    "member": "zlib-ng-9174ab6bf58ac9a518dbe197b948c897f74834f5/LICENSE.md",
+    "sourceArchive": "archives/zlib-ng-9174ab6.tar.gz",
+    "archiveSha256": "1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402",
+    "bytes": 867,
+    "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee"
+  },
+  {
+    "file": "source-text/zlib-ng/README.md",
+    "member": "zlib-ng-9174ab6bf58ac9a518dbe197b948c897f74834f5/README.md",
+    "sourceArchive": "archives/zlib-ng-9174ab6.tar.gz",
+    "archiveSha256": "1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402",
+    "bytes": 16015,
+    "sha256": "3bd1f83ace518191f1bad05cbe4b937b78c3efe4cddcc274288c30e810daff31"
+  },
+  {
+    "file": "source-text/zlib-ng/configure",
+    "member": "zlib-ng-9174ab6bf58ac9a518dbe197b948c897f74834f5/configure",
+    "sourceArchive": "archives/zlib-ng-9174ab6.tar.gz",
+    "archiveSha256": "1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402",
+    "bytes": 92307,
+    "sha256": "d1e0178091253e74c00457a0e8e1f5b085eb08fccc595f168d3e1876644ba0f9"
+  },
+  {
+    "file": "source-text/zlib-ng/zlib.h.in",
+    "member": "zlib-ng-9174ab6bf58ac9a518dbe197b948c897f74834f5/zlib.h.in",
+    "sourceArchive": "archives/zlib-ng-9174ab6.tar.gz",
+    "archiveSha256": "1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402",
+    "bytes": 98874,
+    "sha256": "dfcf34af1411da7470ecd96d9c50710d0bfc9f8773e1644685dd4e1d9d2bfcb0"
+  },
+  {
+    "file": "source-text/zlib-ng/zlib.pc.cmakein",
+    "member": "zlib-ng-9174ab6bf58ac9a518dbe197b948c897f74834f5/zlib.pc.cmakein",
+    "sourceArchive": "archives/zlib-ng-9174ab6.tar.gz",
+    "archiveSha256": "1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402",
+    "bytes": 391,
+    "sha256": "5fdcd28e9df89e5c474a89dbdd01b47f16c1d878053d963a649e50489e206c3e"
+  },
+  {
+    "file": "source-text/zlib-ng/zlib.pc.in",
+    "member": "zlib-ng-9174ab6bf58ac9a518dbe197b948c897f74834f5/zlib.pc.in",
+    "sourceArchive": "archives/zlib-ng-9174ab6.tar.gz",
+    "archiveSha256": "1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402",
+    "bytes": 339,
+    "sha256": "7730423a5863248399b422b09c9bda5316b874ca2f09da3bd48a5ad9c3628abe"
+  }
+]

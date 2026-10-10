@@ -1,0 +1,169 @@
+bzip2 ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
+fontconfig 9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3
+gmp a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898
+gnutls ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e
+libiconv 88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6
+xz 4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b
+libxml2 59331aad695deccb223fa24c26f4f0c4dce97bfd749283368c9e2e6585d25d91
+zlib-ng 1c831bec942239255eea0ae64a4b3543c465f8549794c3875fe7495434d4e402
+
+RECIPE bzip2
+pkgver=1.0.8
+pkgrel=4
+makedepends=(
+source=("https://sourceware.org/pub/bzip2/bzip2-${pkgver}.tar.gz"
+sha256sums=('ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269'
+  patch -p1 -i "$srcdir/"bzip2-cygming-1.0.6.src.all.patch
+  patch -p1 -i "$srcdir/"bzip2-buildsystem.all.patch
+  patch -p1 -i "$srcdir/"bzip2-1.0.6-progress.all.patch
+    --enable-shared
+
+RECIPE fontconfig
+pkgver=2.18.3
+pkgrel=1
+makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
+depends=("${MINGW_PACKAGE_PREFIX}-cc-libs"
+source=("https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/${pkgver}/fontconfig-${pkgver}.tar.gz"
+sha256sums=('9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3'
+  patch -p1 -i "${srcdir}"/0011-conf-copy-instead-of-symlink.patch
+  patch -p1 -i "${srcdir}"/0012-conf-copy-drive-relative.patch
+
+RECIPE gmp
+pkgver=6.3.0
+pkgrel=2
+makedepends=("${MINGW_PACKAGE_PREFIX}-autotools" "${MINGW_PACKAGE_PREFIX}-cc")
+source=(https://ftp.gnu.org/gnu/gmp/${_realname}-${pkgver}.tar.xz{,.sig}
+sha256sums=('a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898'
+  patch -p2 -i "${srcdir}"/do-not-use-dllimport.diff
+  patch -p1 -i "${srcdir}"/gmp-staticlib.diff
+      extra_config+=(--enable-fat)
+      extra_config+=(--disable-assembly)
+    --enable-cxx \
+    --enable-static \
+    --disable-shared
+    --enable-cxx \
+    --disable-static \
+    --enable-shared
+
+RECIPE gnutls
+pkgver=3.8.13
+pkgrel=3
+depends=("${MINGW_PACKAGE_PREFIX}-cc-libs"
+makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
+source=(https://www.gnupg.org/ftp/gcrypt/gnutls/v${pkgver%.*}/${_realname}-${pkgver}.tar.xz{,.sig}
+sha256sums=('ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e'
+    patch -Nbp1 -i "${srcdir}"/${_fname}
+    0001-fix-build-with-mingw-w64-clang.patch \
+    0003-gnutls-fix-external-libtasn1-detection.patch \
+    0004-disable-broken-examples.patch \
+  CFLAGS+=" -D_POSIX_C_SOURCE -Wno-int-conversion"
+  CXXFLAGS+=" -D_POSIX_C_SOURCE -Wno-int-conversion"
+      extra_config+=(--disable-hardware-acceleration)
+  CPPFLAGS+=" -DIN_LIBUNISTRING" \
+    --disable-shared \
+    --enable-static \
+    --enable-cxx \
+    --enable-nls \
+    --enable-openssl-compatibility \
+    --disable-rpath \
+    --disable-gtk-doc \
+    --with-libiconv-prefix=${MINGW_PREFIX} \
+    --without-libintl-prefix \
+    --disable-libdane \
+    --disable-tests \
+    --without-p11-kit \
+    --enable-shared \
+    --disable-static \
+    --enable-cxx \
+    --enable-nls \
+    --enable-openssl-compatibility \
+    --disable-rpath \
+    --disable-gtk-doc \
+    --with-libiconv-prefix=${MINGW_PREFIX} \
+    --without-libintl-prefix \
+    --disable-libdane \
+    --disable-tests \
+  # Since we use --without-p11-kit for the static build
+
+RECIPE libiconv
+pkgver=1.19
+pkgrel=1
+makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
+source=("https://ftp.gnu.org/pub/gnu/${_realname}/${_realname}-${pkgver}.tar.gz"{,.sig}
+sha256sums=('88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6'
+  for _patch in "$@"
+    patch -Nbp1 -i "${srcdir}/${_patch}"
+    0002-fix-cr-for-awk-in-configure.all.patch \
+    fix-pointer-buf.patch \
+    --enable-static \
+    --enable-shared \
+    --enable-extra-encodings \
+    --enable-relocatable \
+    --disable-rpath \
+    --enable-silent-rules \
+    --enable-nls
+
+RECIPE libxml2
+pkgver=2.15.4
+pkgrel=1
+depends=(
+makedepends=(
+optdepends=("${MINGW_PACKAGE_PREFIX}-python: Python bindings")
+source=("https://download.gnome.org/sources/libxml2/${pkgver%.*}/${_realname}-${pkgver}.tar.xz"
+sha256sums=('98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821'
+    patch -Nbp1 -i "${srcdir}"/${_fname}
+    0031-apply-msvc-relocation.patch \
+    --without-python \
+    --with-modules \
+    --with-legacy \
+    --with-http \
+    --enable-static \
+    --disable-shared \
+    --with-threads=win32 \
+    CFLAGS="${CFLAGS} -DLIBXML_STATIC_FOR_DLL -DNOLIBTOOL"
+    --with-python \
+    --with-modules \
+    --with-legacy \
+    --with-http \
+    --with-docs \
+    --disable-static \
+    --enable-shared \
+    --with-threads=win32
+
+RECIPE xz
+pkgver=5.8.4
+pkgrel=1
+depends=("${MINGW_PACKAGE_PREFIX}-gettext-runtime")
+makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
+source=("https://github.com/tukaani-project/xz/releases/download/v${pkgver}/xz-${pkgver}.tar.xz"{,.sig})
+sha256sums=('4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b'
+    _extra_config+=("--disable-doxygen")
+    _extra_config+=("--enable-doxygen")
+  # pass --disable-nls for msvcrt builds
+    _extra_config+=("--disable-nls")
+    --disable-rpath \
+    --disable-lzma-links \
+
+RECIPE zlib-ng
+pkgver=2.3.3
+pkgrel=2
+makedepends=(
+source=("${url}/archive/refs/tags/${pkgver}/${_realname}-${pkgver}.tar.gz"
+sha256sums=('f9c65aa9c852eb8255b636fd9f07ce1c406f061ec19a2e7d508b318ca0c907d1'
+  patch -p1 -i "${srcdir}/0001-match-existing-zlib-naming.patch"
+  patch -p1 -i "${srcdir}/0002-separate-cmake-lib-types.patch"
+    -DCMAKE_INSTALL_PREFIX="${MINGW_PREFIX}"
+    -DWITH_GTEST=OFF
+    _extra_config+=("-DZLIB_ENABLE_TESTS=OFF")
+    _extra_config+=("-DCMAKE_BUILD_TYPE=Release")
+    _extra_config+=("-DCMAKE_BUILD_TYPE=Debug")
+  MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
+      -DBUILD_SHARED_LIBS=OFF \
+  MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
+      -DBUILD_SHARED_LIBS=ON \
+  MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
+      -DBUILD_SHARED_LIBS=OFF \
+      -DZLIB_COMPAT=ON
+  MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
+      -DBUILD_SHARED_LIBS=ON \
+      -DZLIB_COMPAT=ON

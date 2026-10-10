@@ -1,0 +1,14 @@
+{
+  "repository": "https://gitlab.freedesktop.org/fontconfig/fontconfig.git",
+  "command": [
+    "git",
+    "ls-remote",
+    "https://gitlab.freedesktop.org/fontconfig/fontconfig.git",
+    "refs/tags/2.18.3",
+    "refs/tags/2.18.3^{}"
+  ],
+  "fetchedUtc": "2026-10-10T15:38:44.526743+00:00",
+  "exitCode": 0,
+  "stdout": "06009a87a8ff2d7978c6032cf55d514d4ee303b1\trefs/tags/2.18.3\n0f236723a3c26bd9745e32ba2b3ee21e5f809295\trefs/tags/2.18.3^{}\n",
+  "stderr": ""
+}

@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/zlib-ng/zlib-ng.git",
+  "command": [
+    "git",
+    "ls-remote",
+    "https://github.com/zlib-ng/zlib-ng.git",
+    "refs/tags/v1.2.8_jtkv4",
+    "refs/tags/v1.2.8_jtkv4^{}"
+  ],
+  "fetchedUtc": "2026-10-10T15:38:43.483214+00:00",
+  "exitCode": 0,
+  "stdout": "e6c6b12ab6040ea4125ead2a76b16471ad12ced6\trefs/tags/v1.2.8_jtkv4\ne176b3c23ace88d5ded5b8f8371bbab6d7b02ba8\trefs/tags/v1.2.8_jtkv4^{}\n",
+  "stderr": ""
+}

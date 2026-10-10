@@ -1,17 +1,31 @@
 {
-  "schema": 2,
-  "reviewDate": "2026-10-09",
-  "status": "SENT — user-reported / AWAITING RESPONSE",
+  "schema": 3,
+  "reviewDate": "2026-10-10",
+  "status": "Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE",
   "requestStatus": "SENT — user-reported",
-  "responseStatus": "AWAITING RESPONSE",
-  "statusBasis": "User message in this chat: พี่ยอด reports sending to both listed recipients on 9 October 2026, Thai local date. No sent-email copy or publisher response was provided.",
+  "responseStatus": "MIXED: Gyan RESPONDED; yt-dlp AWAITING RESPONSE",
+  "statusBasis": "User supplied a text attributed to Gyan in this chat on 10 October 2026 (Asia/Bangkok). No original reply headers or independent authentication. yt-dlp remains awaiting response.",
   "reportedSender": "พี่ยอด",
   "userReportedSentDate": "2026-10-09",
   "sentDateTimezone": "Asia/Bangkok",
   "sentLocalTime": null,
   "sentByAgent": false,
   "sendingEvidence": [],
-  "responseEvidence": [],
+  "responseEvidence": [
+    {
+      "file": "../gyan-response-20261010/gyan-user-provided-email.txt",
+      "sha256": "e5f81061bbd74bcf4f62f55f20191698210ece41ff86e71756023c8bd6eda8de",
+      "bytes": 954,
+      "type": "user-provided email text",
+      "providedLocalDate": "2026-10-10",
+      "timezone": "Asia/Bangkok",
+      "originalEmailHeadersReceived": false,
+      "independentlyAuthenticated": false,
+      "responseSentDate": null,
+      "whitespaceNormalized": true,
+      "transportEscapesRetained": true
+    }
+  ],
   "draftMatchesSentEmailVerified": false,
   "requestBasis": "evidence/source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md",
   "sourceGate": "BLOCKED",
@@ -32,10 +46,28 @@
       "publisherLinkedAlternative": "https://github.com/GyanD/codexffmpeg/issues",
       "deliveryTested": false,
       "requestStatus": "SENT — user-reported",
-      "responseStatus": "AWAITING RESPONSE",
+      "responseStatus": "RESPONDED — user-provided email text",
       "sentReportedByUser": true,
       "sentIndependentlyVerified": false,
-      "draft": "GYAN-REQUEST-DRAFT.md"
+      "draft": "GYAN-REQUEST-DRAFT.md",
+      "responseEvidence": [
+        {
+          "file": "../gyan-response-20261010/gyan-user-provided-email.txt",
+          "sha256": "e5f81061bbd74bcf4f62f55f20191698210ece41ff86e71756023c8bd6eda8de",
+          "bytes": 954,
+          "type": "user-provided email text",
+          "providedLocalDate": "2026-10-10",
+          "timezone": "Asia/Bangkok",
+          "originalEmailHeadersReceived": false,
+          "independentlyAuthenticated": false,
+          "responseSentDate": null,
+          "whitespaceNormalized": true,
+          "transportEscapesRetained": true
+        }
+      ],
+      "responseIndependentlyVerified": false,
+      "followupDraft": "../gyan-response-20261010/GYAN-FOLLOWUP-DRAFT.md",
+      "followupStatus": "DRAFT — NOT SENT"
     },
     {
       "publisher": "yt-dlp",
@@ -58,6 +90,6 @@
   ],
   "attachments": [],
   "attachmentsScope": "Attachments prepared by the agent for the drafts only. Actual sent-email attachments were not provided or verified.",
-  "networkScope": "Agent activity was limited to HTTPS publisher pages/notices; the agent did not send email, submit a contact form or create an issue. Sending is reported by the user, without independent delivery verification.",
-  "mutations": "Documentation-only request-status update; no changes to candidate binaries, dependencies, app source, archived review r2 kit or release manifests"
+  "networkScope": "Read-only HTTPS upstream refs/APIs/source archives and candidate MSYS2 recipes. No agent email, contact form or issue submission. Original sending remains user-reported; supplied Gyan reply text has no independent delivery/authentication.",
+  "mutations": "Working docs/evidence only; binaries, dependencies, archived r2 kit and release manifests unchanged"
 }

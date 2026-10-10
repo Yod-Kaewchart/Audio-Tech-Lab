@@ -1,0 +1,6 @@
+# Preserve downloaded evidence and the supplied transcription byte-for-byte.
+upstream/** -text -diff
+recipes/** -text -diff
+dependencies/** -text -diff
+source-text/** -text -diff
+gyan-user-provided-email.txt -text -diff

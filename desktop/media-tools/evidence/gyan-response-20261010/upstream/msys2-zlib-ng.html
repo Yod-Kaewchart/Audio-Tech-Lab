@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <script src="https://packages.msys2.org/static/theme.js"></script>
+        <script type="module" src="https://packages.msys2.org/static/index.js"></script>
+        <link rel="preload" href="https://packages.msys2.org/static/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://packages.msys2.org/static/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="shortcut icon" href="https://packages.msys2.org/static/images/favicon.ico"/>
+        <link rel="stylesheet" href="https://packages.msys2.org/static/index.css">
+
+        <title>Package: mingw-w64-ucrt-x86_64-zlib-ng - MSYS2 Packages</title>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-body-tertiary">
+      <a class="navbar-brand" href="https://packages.msys2.org/" style="line-height: 2em">
+          <img src="https://packages.msys2.org/static/images/logo.svg" style="width:2em;height:2em;margin-right:0.5em;border-radius:.25rem" class="d-inline-block align-top" alt="MSYS2"> MSYS2 Packages
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        
+        <form class="ms-auto input-group input-group-sm" style="width: auto" action="https://packages.msys2.org/search" method="get">
+            <input class="form-control" type="search" name="q" placeholder="Package Search" aria-label="Package Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        
+        <div class="d-block d-md-none">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/queue">Pending Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/updates">Repo Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/outofdate">Outdated Packages</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/repos">Repos</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/base">Base Packages</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="https://packages.msys2.org/packages/">Packages</a>
+  </li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/basegroups/">Base Groups</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/groups/">Groups</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/security">Security</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/search">Search</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/stats">Traffic Stats</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/mirrors">Mirrors</a>
+</li>
+          </ul>
+        </div>
+        <div class="ms-auto navbar-buttons">
+            <input type="checkbox" class="btn-check" id="dark-mode-check" autocomplete="off">
+            <label class="btn btn-sm btn-outline-secondary" for="dark-mode-check" id="dark-mode-label"></label>
+          <a href="https://www.msys2.org" class="btn btn-sm btn-outline-primary ml-auto">Get MSYS2</a>
+          <a href="https://github.com/msys2/msys2-web" class="btn btn-sm
+          btn-outline-info">Fork on GitHub</a>
+          <a href="https://packages.msys2.org/api/" class="btn btn-sm btn-outline-success">API</a>
+        </div>
+      </div>
+    </nav>
+
+<div class="container-xl">
+<div class="container-fluid p-0 p-md-2">
+  <div class="row">
+        <div class="col-md-2 p-0 px-2 text-center text-md-start d-none d-md-block">
+            <div class="sticky-top bg-body-tertiary card overflow-hidden">
+             <ul class="nav flex-column">
+                <li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/queue">Pending Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/updates">Repo Updates</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/outofdate">Outdated Packages</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/repos">Repos</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/base">Base Packages</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="https://packages.msys2.org/packages/">Packages</a>
+  </li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/basegroups/">Base Groups</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/groups/">Groups</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/security">Security</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link " href="https://packages.msys2.org/search">Search</a>
+</li>
+<hr>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/stats">Traffic Stats</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link " href="https://packages.msys2.org/mirrors">Mirrors</a>
+</li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-md-10 p-0" id="main">
+
+
+
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h4 class="card-title">Package: <a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-zlib-ng">mingw-w64-ucrt-x86_64-zlib-ng</a></h4>
+  </div>
+  <div class="card-header text-muted">
+    <div class="row">
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/tree/master/mingw-w64-zlib-ng" class="card-link">Source Files</a>
+        </div>
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/commits/master/mingw-w64-zlib-ng" class="card-link">View Changes</a>
+        </div>
+        <div class="col-sm border-end text-center">
+            <a href="https://github.com/msys2/MINGW-packages/issues?q=is%3Aissue+is%3Aopen+zlib-ng" class="card-link">View Issues</a>
+        </div>
+        <div class="col-sm text-center">
+            <a href="https://github.com/msys2/MINGW-packages/issues/new?template=bug_report.yml&amp;title=%5Bzlib-ng%5D+" class="card-link">Report Issue</a>
+        </div>
+    </div>
+  </div>
+  <div class="card-body overflow-auto">
+    <dl class="row">
+      <dt class="col-sm-3 text-sm-end">Base Package:</dt>
+      <dd class="col-sm-9"><a href="https://packages.msys2.org/base/mingw-w64-zlib-ng">mingw-w64-zlib-ng</a></dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Description:</dt>
+      <dd class="col-sm-9">
+        zlib replacement with optimizations for next generation systems (mingw-w64)
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Group(s):</dt>
+      <dd class="col-sm-9">
+        
+        -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Repo:</dt>
+      <dd class="col-sm-9">ucrt64</dd>
+
+      
+      <dt class="col-sm-3 text-sm-end">Homepage:</dt>
+      <dd class="col-sm-9">
+        <a href="https://github.com/zlib-ng/zlib-ng">https://github.com/zlib-ng/zlib-ng</a>
+      </dd>
+      
+      <dt class="col-sm-3 text-sm-end">Repository:</dt>
+      <dd class="col-sm-9">
+        <a href="https://github.com/zlib-ng/zlib-ng">https://github.com/zlib-ng/zlib-ng</a>
+      </dd>
+      
+
+      <dt class="col-sm-3 text-sm-end">License(s):</dt>
+      <dd class="col-sm-9"><a href="https://spdx.org/licenses/Zlib.html">Zlib</a></dd>
+
+      <dt class="col-sm-3 text-sm-end">Version:</dt>
+      <dd class="col-sm-9">2.3.3-2</dd>
+
+      <dt class="col-sm-3 text-sm-end mb-2">External:</dt>
+      <dd class="col-sm-9">
+        <dl class="row mb-0">
+        
+          <dt class="text-muted small">Anitya</dt>
+          <dd>
+            <a href="https://release-monitoring.org/project/115592">zlib-ng</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Arch Linux</dt>
+          <dd>
+            <a href="https://archlinux.org/packages/extra/x86_64/zlib-ng/">2.3.3</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">AUR</dt>
+          <dd>
+            <a href="https://aur.archlinux.org/packages/zlib-ng-git">2.2.4.r50.gg617c852e</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Cygwin</dt>
+          <dd>
+            <a href="https://cygwin.com/packages/summary/zlib-src.html">1.3.2</a>
+            
+            | <a href="https://ftp.acc.umu.se/mirror/cygwin/x86_64/release/zlib/zlib-1.3.2-1-src.tar.zst">zlib-1.3.2-1-src.tar.zst</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Cygwin-mingw64</dt>
+          <dd>
+            <a href="https://cygwin.com/packages/summary/mingw64-x86_64-zlib-src.html">1.3.2</a>
+            
+            | <a href="https://ftp.acc.umu.se/mirror/cygwin/noarch/release/mingw64-x86_64-zlib/mingw64-x86_64-zlib-1.3.2-1-src.tar.zst">mingw64-x86_64-zlib-1.3.2-1-src.tar.zst</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Gentoo</dt>
+          <dd>
+            <a href="https://packages.gentoo.org/packages/sys-libs/zlib-ng">2.3.3</a>
+            
+          </dd>
+        
+          <dt class="text-muted small">Repology</dt>
+          <dd>
+            <a href="https://repology.org/tools/project-by?repo=msys2_mingw&amp;name_type=srcname&amp;target_page=project_versions&amp;name=mingw-w64-zlib-ng">zlib-ng</a>
+            
+          </dd>
+        
+        </dl>
+      </dd>
+
+    
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Installation:</dt>
+      <dd class="col-sm-9">
+        <div class="copyable rounded">
+          <div class="highlight">
+            <pre><code>pacman -S mingw-w64-ucrt-x86_64-zlib-ng</code></pre>
+          </div>
+          <button class="btn" aria-label="Copy to clipboard" onclick="App.copyToClipboard(this);">📋</button>
+        </div>
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">File:</dt>
+      <dd class="col-sm-9"> <a href="https://mirror.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-zlib-ng-2.3.3-2-any.pkg.tar.zst">https://mirror.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-zlib-ng-2.3.3-2-any.pkg.tar.zst</a></dd>
+
+      <dt class="col-sm-3 text-sm-end">SHA256:</dt>
+      <dd class="col-sm-9"><code>1d7dda169b6833a8f5d6cbbd2c630e2b88165fa47ed3de709b732fa3259023b7</code></dd>
+
+      <dt class="col-sm-3 text-sm-end">Last Packager:</dt>
+      <dd class="col-sm-9">CI (msys2/msys2-autobuild/287a26b3/22909997811)</dd>
+
+      <dt class="col-sm-3 text-sm-end">Build Date:</dt>
+      <dd class="col-sm-9">2026-03-10 15:25:28</dd>
+
+      <dt class="col-sm-3 text-sm-end">Package Size:</dt>
+      <dd class="col-sm-9">0.15 MB</dd>
+
+      <dt class="col-sm-3 text-sm-end">Installed Size:</dt>
+      <dd class="col-sm-9">0.62 MB</dd>
+
+      <dt class="col-sm-3 text-sm-end">Source-Only Tarball:</dt>
+      <dd class="col-sm-9"><a href="https://mirror.msys2.org/mingw/sources/mingw-w64-zlib-ng-2.3.3-2.src.tar.zst">https://mirror.msys2.org/mingw/sources/mingw-w64-zlib-ng-2.3.3-2.src.tar.zst</a></dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Optional Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Build Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            <ul class="list-unstyled">
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cc">mingw-w64-ucrt-x86_64-cc</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-cmake">mingw-w64-ucrt-x86_64-cmake</a> <span class="text-muted"></span></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-ninja">mingw-w64-ucrt-x86_64-ninja</a> <span class="text-muted"></span></li>
+                
+            </ul>
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Check Dependencies:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Provides:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Conflicts:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Replaces:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Provided By:</dt>
+      <dd class="col-sm-9">
+        
+            -
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end">Required By:</dt>
+      <dd class="col-sm-9">
+        
+            <ul class="list-unstyled">
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-dosbox-staging">mingw-w64-ucrt-x86_64-dosbox-staging</a></li>
+                
+                    <li><a href="https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-hdf5">mingw-w64-ucrt-x86_64-hdf5</a></li>
+                
+            </ul>
+        
+      </dd>
+
+      <dt class="col-sm-3 text-sm-end"></dt>
+      <dd class="col-sm-9"><hr></dd>
+
+      <dt class="col-sm-3 text-sm-end">Files:</dt>
+      <dd class="col-sm-9 text-nowrap">
+        <pre class="file-list small"><code>/ucrt64/bin/libz-ng2.dll
+/ucrt64/include/zconf-ng.h
+/ucrt64/include/zlib-ng.h
+/ucrt64/include/zlib_name_mangling-ng.h
+/ucrt64/lib/cmake/zlib-ng/zlib-ng-config-version.cmake
+/ucrt64/lib/cmake/zlib-ng/zlib-ng-config.cmake
+/ucrt64/lib/cmake/zlib-ng/zlib-ng-shared-targets-release.cmake
+/ucrt64/lib/cmake/zlib-ng/zlib-ng-shared-targets.cmake
+/ucrt64/lib/cmake/zlib-ng/zlib-ng-static-targets-release.cmake
+/ucrt64/lib/cmake/zlib-ng/zlib-ng-static-targets.cmake
+/ucrt64/lib/libz-ng.a
+/ucrt64/lib/libz-ng.dll.a
+/ucrt64/lib/pkgconfig/zlib-ng.pc
+/ucrt64/share/doc/zlib-ng/README.md
+/ucrt64/share/licenses/zlib-ng/LICENSE.md
+</code></pre>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+
+
+        </div>
+  </div>
+</div>
+<div>
+    <small class="text-muted">
+        Last Update: 2026-10-10 15:37:22
+        [<a href="#" id="refresh-link" title="Request the backend to fetch new data from external sources">Request update</a>]
+    </small>
+</div>
+</div>
+
+    </body>
+
+    <script type="module">
+        let button = document.getElementById('refresh-link');
+        button.addEventListener('click', (event) => {
+          fetch('/api/trigger_update', {method: 'POST'});
+          event.preventDefault();
+        });
+    </script>
+</html>

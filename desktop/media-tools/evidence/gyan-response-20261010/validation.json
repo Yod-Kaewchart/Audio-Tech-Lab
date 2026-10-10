@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "status": "PASS",
+  "reviewLocalDate": "2026-10-10",
+  "timezone": "Asia/Bangkok",
+  "baselineHead": "3bbb7779b8a8d784a686cddae4c701bafe6deb80",
+  "componentRows": 84,
+  "updatedRows": [
+    "FFmpeg external: bzlib/bzip2",
+    "FFmpeg external: fontconfig",
+    "FFmpeg external: gmp",
+    "FFmpeg external: gnutls",
+    "FFmpeg external: iconv",
+    "FFmpeg external: libxml2",
+    "FFmpeg external: lzma/xz",
+    "FFmpeg external: zlib"
+  ],
+  "allOtherComponentRowsUnchanged": true,
+  "ytDlpContactUnchanged": true,
+  "originalRequestEmailBodyUnchanged": true,
+  "ytDlpResponse": "AWAITING RESPONSE",
+  "sourceGate": "BLOCKED / INCOMPLETE",
+  "binaryHashes": {
+    "ffmpeg.exe": {
+      "expected": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "actual": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec"
+    },
+    "ffprobe.exe": {
+      "expected": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "actual": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+    },
+    "yt-dlp.exe": {
+      "expected": "66674953fe251b89f4d08c5f0e35e0728679bd67ab3d7d05c0562af101dd3e7a",
+      "actual": "66674953fe251b89f4d08c5f0e35e0728679bd67ab3d7d05c0562af101dd3e7a"
+    }
+  },
+  "originalZipHashUnchanged": true,
+  "archivedR2InventoryAnd34InputsUnchanged": true,
+  "receiptFilesVerified": 158,
+  "jsonFilesParsed": 34,
+  "upstreamSourceArchives": 8,
+  "fullGitCommitsResolved": 7,
+  "gmpMercurialRevision": "UNRESOLVED: HTTP 403; release archive pinned",
+  "releaseArchiveHashesMatchCandidateRecipes": 6,
+  "patchChecks": 14,
+  "gitApplyPass": 13,
+  "gnuPatchPassWithFuzz": 1,
+  "publisherPatchUsageVerified": false,
+  "gpgSignaturesVerified": false,
+  "failedRequestsPreserved": [
+    {
+      "file": null,
+      "requestedFile": "upstream/gmp-tags.html",
+      "url": "https://gmplib.org/repo/gmp/tags",
+      "fetchedUtc": "2026-10-10T15:38:42.305861+00:00",
+      "status": "FAILED",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "file": null,
+      "requestedFile": "upstream/gmp-branch-hgtags.txt",
+      "url": "https://gmplib.org/repo/gmp-6.3/raw-file/tip/.hgtags",
+      "fetchedUtc": "2026-10-10T15:39:41.848742+00:00",
+      "status": "FAILED",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "file": null,
+      "requestedFile": "upstream/gmp-hgtags.txt",
+      "url": "https://gmplib.org/repo/gmp/raw-file/tip/.hgtags",
+      "fetchedUtc": "2026-10-10T15:39:41.843322+00:00",
+      "status": "FAILED",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "file": null,
+      "requestedFile": "archives/fontconfig-2.18.3.tar.xz",
+      "url": "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.18.3.tar.xz",
+      "fetchedUtc": "2026-10-10T15:39:41.865140+00:00",
+      "status": "FAILED",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "file": null,
+      "requestedFile": "upstream/gmp-lookup.txt",
+      "url": "https://gmplib.org/repo/gmp?cmd=lookup&key=GMP_6_3_0",
+      "fetchedUtc": "2026-10-10T15:42:34.790918+00:00",
+      "status": "FAILED",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "docsEvidenceScopeOnly": true,
+  "diffCheck": "PASS",
+  "followupEmail": "DRAFT — NOT SENT",
+  "binariesChanged": false,
+  "rebuildPerformed": false,
+  "pushPerformed": false,
+  "publishPerformed": false,
+  "localLinksVerified": 40
+}

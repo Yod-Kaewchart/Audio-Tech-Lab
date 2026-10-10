@@ -1,0 +1,14 @@
+{
+  "repository": "https://sourceware.org/git/bzip2.git",
+  "command": [
+    "git",
+    "ls-remote",
+    "https://sourceware.org/git/bzip2.git",
+    "refs/tags/bzip2-1.0.8",
+    "refs/tags/bzip2-1.0.8^{}"
+  ],
+  "fetchedUtc": "2026-10-10T15:38:43.752423+00:00",
+  "exitCode": 0,
+  "stdout": "75a94bea3918e612b879d6a11ca64b8689526147\trefs/tags/bzip2-1.0.8\n6a8690fc8d26c815e798c588f796eabe9d684cf0\trefs/tags/bzip2-1.0.8^{}\n",
+  "stderr": ""
+}

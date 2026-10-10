@@ -1,8 +1,8 @@
 # ข้อความขอ build-specific source สำหรับพี่ยอดตรวจ
 
-**SENT — user-reported / AWAITING RESPONSE**
+**Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE**
 
-พี่ยอดแจ้งว่าส่งอีเมลถึง `builds@gyan.dev` และ `maintainers@yt-dlp.org` แล้ววันที่ **9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok, UTC+07:00)** ไม่ได้ระบุเวลาส่ง จึงบันทึกเฉพาะวันที่ ไม่สร้าง timestamp ของการส่ง ยังไม่มีสำเนาอีเมลส่ง, Message-ID, delivery receipt หรือคำตอบจากผู้เผยแพร่ที่ได้รับให้ตรวจสอบ สถานะนี้อิงข้อความที่ผู้ใช้แจ้งในแชต ไม่ใช่การยืนยันการส่งหรือการรับโดยเครื่องมือ
+พี่ยอดแจ้งว่าส่งอีเมลถึง `builds@gyan.dev` และ `maintainers@yt-dlp.org` แล้ววันที่ **9 ตุลาคม 2026 ตามเวลาไทย (Asia/Bangkok, UTC+07:00)** ไม่ได้ระบุเวลาส่ง ต่อมาวันที่ **10 ตุลาคม 2026** ให้ข้อความอีเมลที่ลงชื่อ Gyan ในแชต เก็บเป็น [Gyan RESPONDED — user-provided email text](../gyan-response-20261010/gyan-user-provided-email.txt) ยังไม่มี original email headers/Message-ID หรือ independent delivery/authentication; yt-dlp ยังรอคำตอบ ไม่ใช้วันที่ของข้อความเก่าที่ถูก quote เป็นเวลาส่งคำตอบ
 
 อิง [SOURCE-CLOSURE-PLAN.md ของ review r2](../source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md) และ inventory เดิม ตรวจช่องทางติดต่อและ hash ของ vendor ที่ใช้อยู่เมื่อ **9 ตุลาคม 2026** ส่วน corresponding source ยังคง **BLOCKED / INCOMPLETE** จนกว่าจะได้รับและตรวจหลักฐานครบ การพบอีเมลติดต่อไม่ใช่การปิด source gate
 
@@ -10,10 +10,10 @@
 
 | ผู้รับ | วันที่ส่งที่ผู้ใช้แจ้ง / timezone | สถานะคำขอ | สถานะคำตอบ | หลักฐานที่มี |
 | --- | --- | --- | --- | --- |
-| `builds@gyan.dev` | 2026-10-09 / Asia/Bangkok; ไม่ทราบเวลาส่ง | SENT — user-reported | AWAITING RESPONSE | ข้อความแจ้งจากพี่ยอดในแชต; ไม่มีหลักฐานส่งหรือคำตอบที่ตรวจสอบอิสระได้ |
+| `builds@gyan.dev` | 2026-10-09 / Asia/Bangkok; ไม่ทราบเวลาส่ง | SENT — user-reported | RESPONDED — user-provided email text | ข้อความอีเมลที่ผู้ใช้ให้ 2026-10-10; เก็บ text/hash; ไม่มี original headers หรือ independent authentication |
 | `maintainers@yt-dlp.org` | 2026-10-09 / Asia/Bangkok; ไม่ทราบเวลาส่ง | SENT — user-reported | AWAITING RESPONSE | ข้อความแจ้งจากพี่ยอดในแชต; ไม่มีหลักฐานส่งหรือคำตอบที่ตรวจสอบอิสระได้ |
 
-สถานะที่อ่านโดยเครื่องอยู่ใน [contact-verification.json](contact-verification.json) การส่งที่รายงานไม่ปิดรายการ F1–F5 / Y1–Y6 และไม่เปลี่ยน source gate เมื่อมีคำตอบจริงจึงเก็บคำตอบ/ไฟล์/แหล่งที่มาและ hashes ที่ได้รับ แล้วตรวจ coverage ตามตารางด้านล่าง ไม่เติมคำตอบหรือ source ที่ยังไม่ได้รับ และไม่กำหนดวันตอบกลับแทนผู้เผยแพร่
+สถานะที่อ่านโดยเครื่องอยู่ใน [contact-verification.json](contact-verification.json) คำตอบ Gyan ระบุ versions เพิ่ม 8 รายการและว่า scripts เป็น custom/non-portable แต่ไม่ได้ส่ง scripts/configuration หรือยืนยัน no-patch จึงอัปเดต F1/F3 เป็น partial; F2/F4/F5 ยังเปิด ดู [audit/source/tag/full commits และช่องว่าง](../gyan-response-20261010/README.md), [coverage](../gyan-response-20261010/response-coverage.json) และ [ร่างถามกลับ — NOT SENT](../gyan-response-20261010/GYAN-FOLLOWUP-DRAFT.md) Y1–Y6 ยังคงเดิม และ source gate ยัง BLOCKED / INCOMPLETE
 
 ## ร่างที่ให้ตรวจ
 
@@ -38,9 +38,9 @@
 
 | ID ในร่าง | หลักฐานที่ยังขาด | สิ่งที่ใช้ตรวจรับคำตอบ |
 | --- | --- | --- |
-| F1 | core patch/no-patch declaration และ source/patch/license mapping ของ libraries; รุ่นที่ขาดของ fontconfig, iconv, GnuTLS, libxml2, GMP, bzip2, XZ/liblzma, zlib | exact commit/archive + hashes + patches หรือยืนยัน no-patch ตรงกับ build เดิม; 37 version lines ใน appendix ต้อง resolve ได้ |
+| F1 | PARTIAL: ได้ข้อความ versions ของ 8 รายการแล้ว; upstream source 8 archives และ Git commits 7 รายการ; GMP Mercurial revision ยังไม่ resolve; core/library patches และ actual source-to-binary mapping ยังขาด | exact commit/archive + hashes + patches หรือยืนยัน no-patch ตรงกับ build เดิม; 37 version lines ใน appendix ยังต้อง resolve |
 | F2 | library build flags/commands และ FFmpeg/FFprobe build/link/config records | scripts + configuration + link/package manifest ที่อธิบาย executable hashes เดิมได้ |
-| F3 | original MSYS2/compiler package snapshot/source packages/PKGBUILDs | รุ่นและ checksums ณ build เดิม พร้อม recipes/patches; แยก toolchain จาก runtime ที่ incorporate |
+| F3 | PARTIAL: 3 package-style version/revisions ตรง candidate MSYS2 recipes; original MSYS2/compiler/package snapshot และการยืนยันว่าใช้ recipes/patches เหล่านี้ยังขาด | รุ่นและ checksums ณ build เดิม พร้อม recipes/patches; แยก toolchain จาก runtime ที่ incorporate |
 | F4 | actual transitive/hardware graph และ libmfx/libvpl mapping | ระบุ included/excluded/system components และ source/licensing scope ของ inputs ที่ใช้จริง; ไม่ตีว่ารายชื่อคำถามทุกตัว bundle |
 | F5 | complete source/notices delivery set สำหรับ FFmpeg/FFprobe เดิม | mapping ที่ครอบคลุม source + modifications + scripts/instructions ที่เกี่ยวข้อง ไม่ใช่ core tarball/notice อย่างเดียว |
 | Y1 | EXE-to-build/wheel/bootloader mapping และ original compiler snapshot | original release/run record, selected artifact hashes, recipe/source commits และ patch/no-patch evidence |

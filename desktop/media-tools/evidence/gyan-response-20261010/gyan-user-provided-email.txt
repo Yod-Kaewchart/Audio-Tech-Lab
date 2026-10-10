@@ -1,0 +1,37 @@
+Hi Yod,\
+\
+On 2026-10-09 08:41 am, Yod Kaewchart wrote:\
+\
+\>  1.\
+\>     The exact source versions or commits and any patches used for FFmpeg\
+\>     and its linked external libraries, including transitive dependencies.\
+\
+\
+All external libs are sourced from their official repos or mirrors.\
+Their version should be listed at the bottom of the README.\
+\
+\>  2.\
+\>     The build scripts, package recipes, configuration and linking\
+\>     information used to produce these binaries.\
+ >  3.\
+ >     The relevant MSYS2 UCRT64 package versions and source recipes used\
+ >     at build time.\
+\
+\
+The build scripts are custom to my setup and not portable.\
+\
+\
+\> Our current unresolved library versions include fontconfig, iconv,\
+\> GnuTLS, libxml2, GMP, bzip2, XZ and zlib.\
+\
+bzip2 1.0.8-4\
+fontconfig 2.18.3\
+gmp 6.3.0\
+gnutls 3.8.13-3\
+iconv 1.19-1\
+libxml2 v2.15.0-126-g31094e5d\
+xz 5.8.4\
+zlib-ng v1.2.8\\\_jtkv4-2966-g9174ab6\
+\
+Regards,\
+Gyan

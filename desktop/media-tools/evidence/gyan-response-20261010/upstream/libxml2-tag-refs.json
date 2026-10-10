@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/GNOME/libxml2.git",
+  "command": [
+    "git",
+    "ls-remote",
+    "https://github.com/GNOME/libxml2.git",
+    "refs/tags/v2.15.0",
+    "refs/tags/v2.15.0^{}"
+  ],
+  "fetchedUtc": "2026-10-10T15:38:43.387778+00:00",
+  "exitCode": 0,
+  "stdout": "1b21b6c77bc1860e1a2b732bd2d9bff304d112c3\trefs/tags/v2.15.0\n0bea77c8289324483c0504d36ac730bb03f6a70b\trefs/tags/v2.15.0^{}\n",
+  "stderr": ""
+}

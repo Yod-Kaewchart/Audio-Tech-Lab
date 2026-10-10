@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/gnutls/gnutls.git",
+  "command": [
+    "git",
+    "ls-remote",
+    "https://github.com/gnutls/gnutls.git",
+    "refs/tags/3.8.13",
+    "refs/tags/3.8.13^{}"
+  ],
+  "fetchedUtc": "2026-10-10T15:38:43.432558+00:00",
+  "exitCode": 0,
+  "stdout": "92a9e0eec0f1feeaa5cd4d5e9a2aa9026aa93fcb\trefs/tags/3.8.13\nb390d80208ed60f1b33ad899475951a8efb40ccd\trefs/tags/3.8.13^{}\n",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "responseEvidence": {
+    "file": "../gyan-response-20261010/gyan-user-provided-email.txt",
+    "sha256": "e5f81061bbd74bcf4f62f55f20191698210ece41ff86e71756023c8bd6eda8de",
+    "bytes": 954,
+    "type": "user-provided email text",
+    "providedLocalDate": "2026-10-10",
+    "timezone": "Asia/Bangkok",
+    "originalEmailHeadersReceived": false,
+    "independentlyAuthenticated": false,
+    "responseSentDate": null,
+    "whitespaceNormalized": true,
+    "transportEscapesRetained": true
+  },
+  "claimScope": "Version assertions and official-repo/mirror statement; scripts described as custom/non-portable but not supplied",
+  "F1": "PARTIAL: eight version strings supplied; original repo selection and patches/no-patches not confirmed",
+  "F2": "OPEN: original scripts/configuration/linkage not supplied; non-portability is not an explicit refusal to supply",
+  "F3": "PARTIAL: three package-style revisions given; original UCRT/toolchain/package/source snapshot unconfirmed",
+  "F4": "OPEN: actual transitive static graph unconfirmed",
+  "F5": "OPEN: complete source delivery not supplied",
+  "ytDlpResponseStatus": "AWAITING RESPONSE",
+  "followupStatus": "DRAFT — NOT SENT",
+  "sourceGate": "BLOCKED / INCOMPLETE"
+}
