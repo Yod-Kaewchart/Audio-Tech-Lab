@@ -1,0 +1,1428 @@
+{
+  "schema": 1,
+  "reviewLocalDate": "2026-10-11",
+  "timezone": "Asia/Bangkok",
+  "baselineCommit": "db1be04fdfa7cb663338156b1f839e7d8f9bcfae",
+  "criterion": {
+    "reviewLocalDate": "2026-10-11",
+    "taxonomy": {
+      "A": "Necessary corresponding source/build controls",
+      "B": "Additional audit/reproducibility evidence",
+      "C": "Unresolved scope/selection requiring classification"
+    },
+    "officialReferences": [
+      {
+        "url": "https://www.gnu.org/licenses/gpl-3.0.html#section1",
+        "localFile": "legal/gpl-3.0.html",
+        "scope": "Section 1; preferred source, necessary build/install/run/modify control scripts; exclusions and regenerable material"
+      },
+      {
+        "url": "https://www.gnu.org/licenses/gpl-faq.en.html#MustSourceBuildToMatchExactHashOfBinary",
+        "localFile": "legal/gpl-faq.en.html",
+        "scope": "Source of the actual binaries; exact rebuilt hash not required"
+      }
+    ],
+    "bitIdenticalRebuildRequired": false,
+    "allEphemeralLogsRequired": false,
+    "publisherOpinionClosesGate": false,
+    "writtenNoPatchDeclarationMandatoryByItself": false,
+    "interpretation": "Reviewer application of official criteria to retained evidence; not an assertion that every candidate library or tool is included. B does not block by itself; C requires resolution and may expose A requirements."
+  },
+  "issues": [
+    {
+      "id": "A-FF-SOURCE",
+      "category": "A",
+      "scope": "FFmpeg",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "35 of the 37 README external-library rows still have no collected source archive in this working set (rubberband and vid.stab collected). Applicable modifications and included transitive sources also need coverage.",
+      "closure": "Collect the actual preferred source/version and modifications for included components, plus applicable licenses/notices. Hardware/header-only and System Library scope must be resolved rather than assumed."
+    },
+    {
+      "id": "A-FF-CONTROL",
+      "category": "A",
+      "scope": "FFmpeg",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "The publisher identifies custom build scripts but has not supplied the portions controlling generation/installation of the combined binaries. Upstream build systems, selected recipes and saved FFmpeg configure arguments provide partial coverage, not a complete documented build path for this input set.",
+      "closure": "Include the build/install control scripts and non-regenerable configuration inputs actually needed. Identify selected sources, patches and dependencies; ordinary unmodified available tools need not be archived as corresponding source. Review which original custom portions are necessary; do not demand unrelated machine automation or every historical log."
+    },
+    {
+      "id": "C-FF-PATCHES",
+      "category": "C",
+      "scope": "FFmpeg",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Actual local modifications/patch selection for core and libraries remain incompletely known. Vanilla CMake is not a blanket no-patch declaration.",
+      "closure": "Resolve the actual modified source/patch set. A written no-patch statement is one evidence route, not a separately prescribed GPL document. If modifications exist, their preferred source is category A."
+    },
+    {
+      "id": "C-FF-GRAPH",
+      "category": "C",
+      "scope": "FFmpeg",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Actual included transitive libraries, static/shared selections and System Library/SDK scope remain unresolved; package depends lists do not establish a link graph.",
+      "closure": "Use selected build inputs, package/source metadata or equivalent evidence to identify actual inclusion and scope. A link map is helpful but not the only acceptable evidence. Collect required sources after classification."
+    },
+    {
+      "id": "C-FF-RECIPES",
+      "category": "C",
+      "scope": "FFmpeg",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "MSYS2 origin is confirmed for bzip2/GnuTLS/libiconv/GMP. Exact recipe commit, architecture and patch selection are not expressly identified; GMP pkgrel 2 remains candidate. fontconfig/XZ MSYS2 provenance is not confirmed.",
+      "closure": "Tie version-matching recipes/source packages to selected inputs. Keep bzip2 1.0.8-4, GnuTLS 3.8.13-3 and libiconv 1.19-1 version matches distinct from recipe-commit proof; identify GMP package revision."
+    },
+    {
+      "id": "C-FF-XML-CONFIG",
+      "category": "C",
+      "scope": "FFmpeg/libxml2",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Repo/commit and vanilla CMake are publisher-confirmed, but selected iconv/ICU/zlib/thread and static/shared configuration is not itemized.",
+      "closure": "Establish only the selected settings/dependency inputs needed to describe and build the library used. Upstream defaults are evidence about source, not proof of actual choices; necessary configuration becomes A."
+    },
+    {
+      "id": "C-FF-ZLIB-CONFIG",
+      "category": "C",
+      "scope": "FFmpeg/zlib-ng",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Repo/commit and compatibility ON, with all downstream using it, are publisher-confirmed through supplied text. Other selections and modifications are not established.",
+      "closure": "Use the confirmed compatibility choice in the build description; verify required configuration/patch scope. Apply downstream assertion to Gyan FFmpeg build context only, not yt-dlp or the whole app."
+    },
+    {
+      "id": "A-YT-NATIVE",
+      "category": "A",
+      "scope": "yt-dlp",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Preferred sources/modifications for confirmed CPython native inputs and required native wheel components are not fully collected. Candidate curl static dependencies remain subject to inclusion/version classification.",
+      "closure": "Collect the actual sources/patches for required included CPython, native wheel, curl and bootloader components; distinguish separate copies and respect System Library exclusions."
+    },
+    {
+      "id": "A-YT-JS",
+      "category": "A",
+      "scope": "yt-dlp",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Preferred-source coverage for Meriyah/Astring and the required JS generation inputs is incomplete. EJS TS/config/lock source exists; compiled npm dist alone does not establish preferred source.",
+      "closure": "Collect missing preferred JS/TS and necessary control/configuration inputs. General-purpose unmodified available build tools are not automatically part of corresponding source."
+    },
+    {
+      "id": "A-YT-CONTROL",
+      "category": "A",
+      "scope": "yt-dlp",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Release bundle/workflow, custom PyInstaller recipe and CPython build scripts provide partial coverage; necessary control/configuration inputs for unresolved native builds are not yet fully included.",
+      "closure": "Complete the build/install source path for the actual included native inputs and any non-regenerable generated configuration. No bit-identical rebuild is required."
+    },
+    {
+      "id": "C-YT-MAPPING",
+      "category": "C",
+      "scope": "yt-dlp",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Selected bootloader/native wheel source and modifications, JS-to-payload correspondence and actual transitive native versions are not fully resolved. No new yt-dlp reply received.",
+      "closure": "Use existing wheel/DLL hashes, recipes and publisher information to identify source inputs; keep Gyan confirmations separate. A hash comparison can be useful evidence without requiring rebuilt EXE hash identity."
+    },
+    {
+      "id": "C-YT-RUNTIME",
+      "category": "C",
+      "scope": "yt-dlp",
+      "state": "OPEN",
+      "blocksSourceGateByItself": true,
+      "gap": "Redistributable terms/notices, System Library scope and platform-union notice entries still require classification.",
+      "closure": "Determine actual Windows payload and rights/notices. Do not require unrelated OSS source for closed-source runtime DLLs or assume all cross-platform notice entries are included."
+    },
+    {
+      "id": "B-LOGS",
+      "category": "B",
+      "scope": "both",
+      "state": "OPEN",
+      "blocksSourceGateByItself": false,
+      "gap": "Ephemeral config.log, link maps, build logs and package manifests are helpful audit evidence when available; publisher says most ephemeral artifacts were not archived.",
+      "closure": "Use alternative sufficient source/build descriptions. Missing logs alone do not fail GPL; extract any indispensable non-regenerable configuration/build control into A rather than classifying it as optional."
+    },
+    {
+      "id": "B-TOOLCHAIN",
+      "category": "B",
+      "scope": "both",
+      "state": "OPEN",
+      "blocksSourceGateByItself": false,
+      "gap": "Exact compiler/runner/environment snapshots improve reproducibility but are not automatically corresponding source.",
+      "closure": "Record known tool identity if useful. Assess modifications or incorporated runtime components separately under A/C; do not treat every general-purpose tool or compiler source as required."
+    },
+    {
+      "id": "B-EXACT-HASH",
+      "category": "B",
+      "scope": "both",
+      "state": "NOT REQUIRED",
+      "blocksSourceGateByItself": false,
+      "gap": "No rebuild or bit-identical SHA256 comparison has been performed.",
+      "closure": "GNU FAQ explicitly does not require a rebuild matching the distributed binary hash. Preserve binary identity and source provenance without using this as an acceptance gate."
+    },
+    {
+      "id": "B-GMP-HG",
+      "category": "B",
+      "scope": "FFmpeg/GMP",
+      "state": "RETIRED AS STANDALONE BLOCKER",
+      "blocksSourceGateByItself": false,
+      "gap": "GMP Mercurial metadata remains inaccessible (historical HTTP 403), but the version-matching MSYS2 recipe uses a checksummed 6.3.0 release tarball, not a Mercurial checkout.",
+      "closure": "Retire Mercurial full changeset as a standalone blocker for the release-tarball route. Reopen source identity under C only if evidence points to a different checkout; no revision is invented."
+    }
+  ],
+  "componentReviews": [
+    {
+      "index": 0,
+      "component": "FFmpeg / FFprobe core (avcodec,avformat,avutil,avfilter,avdevice,swresample,swscale)",
+      "priorMissingAtBaseline": [
+        "Gyan patch/no-patch declaration for core and every dependency",
+        "Exact configure/link commands, config.log/config.h/link map, per-library build flags",
+        "Original source inputs for direct and transitive static libraries",
+        "Pinned MSYS2/UCRT package sources/PKGBUILDs/patches and toolchain manifest"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS",
+        "B-TOOLCHAIN",
+        "B-EXACT-HASH"
+      ]
+    },
+    {
+      "index": 1,
+      "component": "FFmpeg external: AMF",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.5.2-2-gc35f613",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 2,
+      "component": "FFmpeg external: aom",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v3.15.0-25-g023743a7d7",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 3,
+      "component": "FFmpeg external: AviSynthPlus",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v3.7.5-383-g5c82777b",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 4,
+      "component": "FFmpeg external: cairo",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 1.18.5",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 5,
+      "component": "FFmpeg external: ffnvcodec",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for n13.1.15.0-1-geddcea9",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 6,
+      "component": "FFmpeg external: freetype",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for VER-2-14-3",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 7,
+      "component": "FFmpeg external: fribidi",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.0.16-19-gc928e4c",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 8,
+      "component": "FFmpeg external: gsm",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 1.0.24",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 9,
+      "component": "FFmpeg external: harfbuzz",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 14.4.0-108-g64e2b532",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 10,
+      "component": "FFmpeg external: lame",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 3.100",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 11,
+      "component": "FFmpeg external: libass",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 0.17.5-8-gb2fe9d8",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 12,
+      "component": "FFmpeg external: libgme",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 0.6.6",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 13,
+      "component": "FFmpeg external: libopencore-amrnb",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 0.1.6",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 14,
+      "component": "FFmpeg external: libopencore-amrwb",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 0.1.6",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 15,
+      "component": "FFmpeg external: libssh",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 0.12.2",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 16,
+      "component": "FFmpeg external: libtheora",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.2.0",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 17,
+      "component": "FFmpeg external: libwebp",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.6.0-249-g1f34635",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 18,
+      "component": "FFmpeg external: openal-soft",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 1.25.2-48-g7532541",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 19,
+      "component": "FFmpeg external: openjpeg2",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 2.5.4",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 20,
+      "component": "FFmpeg external: openmpt",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for libopenmpt-0.6.30-3-g6c0a06bc",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 21,
+      "component": "FFmpeg external: opus",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.6.1-68-g503d81b1",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 22,
+      "component": "FFmpeg external: rubberband",
+      "priorMissingAtBaseline": [
+        "Publisher patches/no-patch declaration and exact dependency build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 23,
+      "component": "FFmpeg external: SDL",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for release-2.32.0-234-gb90ac9502",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 24,
+      "component": "FFmpeg external: speex",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for Speex-1.2.1-51-g0589522",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 25,
+      "component": "FFmpeg external: srt",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.5.7-7-gcae8f62",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 26,
+      "component": "FFmpeg external: VAAPI",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 2.25.0.",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 27,
+      "component": "FFmpeg external: vidstab",
+      "priorMissingAtBaseline": [
+        "Publisher patches/no-patch declaration and exact dependency build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 28,
+      "component": "FFmpeg external: vmaf",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v3.2.0-13-gf85a8536",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 29,
+      "component": "FFmpeg external: vo-amrwbenc",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 0.1.3",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 30,
+      "component": "FFmpeg external: vorbis",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.3.7-37-g1b75110b",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 31,
+      "component": "FFmpeg external: VPL",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 2.17",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 32,
+      "component": "FFmpeg external: vpx",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.17.0-57-gd2413e2ca",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 33,
+      "component": "FFmpeg external: x264",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v0.165.3223",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 34,
+      "component": "FFmpeg external: x265",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 4.3-45-g116b875",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 35,
+      "component": "FFmpeg external: xvid",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for v1.3.7",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 36,
+      "component": "FFmpeg external: zeromq",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for 4.3.5",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 37,
+      "component": "FFmpeg external: zimg",
+      "priorMissingAtBaseline": [
+        "Exact source archive/checksum for release-3.0.6-253-g67e0603",
+        "Individual license/notices, patches and exact build flags/link map"
+      ],
+      "currentIssueIds": [
+        "A-FF-SOURCE",
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 38,
+      "component": "FFmpeg external: fontconfig",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-RECIPES",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 39,
+      "component": "FFmpeg external: iconv",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-RECIPES",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 40,
+      "component": "FFmpeg external: gnutls",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-RECIPES",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 41,
+      "component": "FFmpeg external: libxml2",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-XML-CONFIG",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 42,
+      "component": "FFmpeg external: gmp",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source",
+        "Upstream Mercurial tag/full changeset unresolved (HTTP 403); exact release tarball SHA256 is pinned"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-RECIPES",
+        "B-LOGS",
+        "B-TOOLCHAIN",
+        "B-GMP-HG"
+      ]
+    },
+    {
+      "index": 43,
+      "component": "FFmpeg external: bzlib/bzip2",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-RECIPES",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 44,
+      "component": "FFmpeg external: lzma/xz",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-RECIPES",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 45,
+      "component": "FFmpeg external: zlib",
+      "priorMissingAtBaseline": [
+        "Publisher patch/no-patch declaration and exact build flags/link map still missing",
+        "Candidate MSYS2 recipe/package revisions and dependency versions are not bound to the original Gyan binary",
+        "Confirm source repository and any local changes for the actual input; source archive alone does not close corresponding source"
+      ],
+      "currentIssueIds": [
+        "A-FF-CONTROL",
+        "C-FF-PATCHES",
+        "C-FF-GRAPH",
+        "C-FF-ZLIB-CONFIG",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 46,
+      "component": "FFmpeg hardware / SDK / transitive inputs",
+      "priorMissingAtBaseline": [
+        "CUDA/LLVM, Windows SDK/Media Foundation header/runtime provenance; libmfx vs libvpl alias discrepancy needs publisher clarification",
+        "Transitive graph is not disclosed: cairo/pixman/png, fontconfig/expat, gnutls/nettle/hogweed/p11-kit/tasn1, vorbis/ogg, rubberband FFT/resampler choices, pthread/compiler runtime as applicable",
+        "Names above are candidate dependencies to resolve, NOT a claim that each is linked; require linker map / package manifest"
+      ],
+      "currentIssueIds": [
+        "C-FF-GRAPH",
+        "C-FF-PATCHES",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 47,
+      "component": "yt-dlp application",
+      "priorMissingAtBaseline": [
+        "Full bundled native dependency closure below remains incomplete; source gate applies to combined EXE, not just yt-dlp main"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-JS",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-EXACT-HASH"
+      ]
+    },
+    {
+      "index": 48,
+      "component": "PyInstaller bootloader / runtime hooks",
+      "priorMissingAtBaseline": [
+        "MSYS2 update:true/compiler packages are floating; exact runner/compiler/pkg snapshot not retained in collected evidence",
+        "Need confirm actual bootloader section against wheel and publisher patch/no-patch statement; no rebuild performed"
+      ],
+      "currentIssueIds": [
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 49,
+      "component": "CPython runtime / standard library",
+      "priorMissingAtBaseline": [
+        "Windows installer/runtime build provenance and external native input closure below; PCbuild scripts alone do not prove actual compiler/patch choices"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 50,
+      "component": "yt-dlp Python package: mutagen",
+      "priorMissingAtBaseline": [
+        "Pure Python source collected; unmodified-source linkage/combined build audit still pending"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING"
+      ]
+    },
+    {
+      "index": 51,
+      "component": "yt-dlp Python package: pycryptodomex",
+      "priorMissingAtBaseline": [
+        "Source archive and recipe version captured; compiled extension/wheel build inputs and patch attestation need verification"
+      ],
+      "currentIssueIds": [
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 52,
+      "component": "yt-dlp Python package: brotli",
+      "priorMissingAtBaseline": [
+        "Source archive and recipe version captured; compiled extension/wheel build inputs and patch attestation need verification"
+      ],
+      "currentIssueIds": [
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 53,
+      "component": "yt-dlp Python package: certifi",
+      "priorMissingAtBaseline": [
+        "Pure Python source collected; unmodified-source linkage/combined build audit still pending"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING"
+      ]
+    },
+    {
+      "index": 54,
+      "component": "yt-dlp Python package: curl_cffi",
+      "priorMissingAtBaseline": [
+        "Source archive and recipe version captured; compiled extension/wheel build inputs and patch attestation need verification"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 55,
+      "component": "yt-dlp Python package: requests",
+      "priorMissingAtBaseline": [
+        "Pure Python source collected; unmodified-source linkage/combined build audit still pending"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING"
+      ]
+    },
+    {
+      "index": 56,
+      "component": "yt-dlp Python package: urllib3",
+      "priorMissingAtBaseline": [
+        "Pure Python source collected; unmodified-source linkage/combined build audit still pending"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING"
+      ]
+    },
+    {
+      "index": 57,
+      "component": "yt-dlp Python package: websockets",
+      "priorMissingAtBaseline": [
+        "Source archive and recipe version captured; compiled extension/wheel build inputs and patch attestation need verification"
+      ],
+      "currentIssueIds": [
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 58,
+      "component": "yt-dlp Python package: cffi",
+      "priorMissingAtBaseline": [
+        "Source archive and recipe version captured; compiled extension/wheel build inputs and patch attestation need verification"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 59,
+      "component": "yt-dlp Python package: charset-normalizer",
+      "priorMissingAtBaseline": [
+        "Source archive and recipe version captured; compiled extension/wheel build inputs and patch attestation need verification"
+      ],
+      "currentIssueIds": [
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 60,
+      "component": "yt-dlp Python package: idna",
+      "priorMissingAtBaseline": [
+        "Pure Python source collected; unmodified-source linkage/combined build audit still pending"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING"
+      ]
+    },
+    {
+      "index": 61,
+      "component": "yt-dlp Python package: pycparser",
+      "priorMissingAtBaseline": [
+        "Pure Python source collected; unmodified-source linkage/combined build audit still pending"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING"
+      ]
+    },
+    {
+      "index": 62,
+      "component": "yt-dlp Python package: typing-extensions",
+      "priorMissingAtBaseline": [
+        "Pure Python source collected; unmodified-source linkage/combined build audit still pending"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING"
+      ]
+    },
+    {
+      "index": 63,
+      "component": "yt-dlp JS: yt-dlp-ejs",
+      "priorMissingAtBaseline": [
+        "EJS minified output/source linkage needs publisher wheel byte comparison; collect preferred TS/JS sources if npm tarball only has compiled dist",
+        "Pinned build devDependency source closure / reproducible rollup invocation not fully audited"
+      ],
+      "currentIssueIds": [
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 64,
+      "component": "yt-dlp JS: Meriyah",
+      "priorMissingAtBaseline": [
+        "EJS minified output/source linkage needs publisher wheel byte comparison; collect preferred TS/JS sources if npm tarball only has compiled dist",
+        "Pinned build devDependency source closure / reproducible rollup invocation not fully audited"
+      ],
+      "currentIssueIds": [
+        "A-YT-JS",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 65,
+      "component": "yt-dlp JS: Astring",
+      "priorMissingAtBaseline": [
+        "EJS minified output/source linkage needs publisher wheel byte comparison; collect preferred TS/JS sources if npm tarball only has compiled dist",
+        "Pinned build devDependency source closure / reproducible rollup invocation not fully audited"
+      ],
+      "currentIssueIds": [
+        "A-YT-JS",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 66,
+      "component": "yt-dlp CPython native: bzip2",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 67,
+      "component": "yt-dlp CPython native: libffi",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 68,
+      "component": "yt-dlp CPython native: OpenSSL 1.x",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 69,
+      "component": "yt-dlp CPython native: SQLite",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 70,
+      "component": "yt-dlp CPython native: liblzma",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 71,
+      "component": "yt-dlp CPython native: zlib",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 72,
+      "component": "yt-dlp CPython native: Expat",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 73,
+      "component": "yt-dlp CPython native: mpdecimal",
+      "priorMissingAtBaseline": [
+        "Exact external archive/checksum/patches and Windows external-build scripts; recipe version is not independent binary proof",
+        "Embedded/static copy provenance must be distinguished from other copies in this EXE"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 74,
+      "component": "yt-dlp curl-impersonate / libcurl",
+      "priorMissingAtBaseline": [
+        "Original Windows curl-impersonate release build flags, patches, exact transitive source graph and source archive checksums remain unverified",
+        "Version 2.0.0 is recipe selection; actual release-DLL vs impersonate release asset hash not yet compared"
+      ],
+      "currentIssueIds": [
+        "A-YT-NATIVE",
+        "A-YT-CONTROL",
+        "C-YT-MAPPING",
+        "B-LOGS",
+        "B-TOOLCHAIN"
+      ]
+    },
+    {
+      "index": 75,
+      "component": "yt-dlp curl native: BoringSSL",
+      "priorMissingAtBaseline": [
+        "Resolve actual Windows linker graph and exact dependency revisions/config/patches from publisher",
+        "Collect corresponding archives/hashes for actual graph, not current upstream releases"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 76,
+      "component": "yt-dlp curl native: nghttp2",
+      "priorMissingAtBaseline": [
+        "Resolve actual Windows linker graph and exact dependency revisions/config/patches from publisher",
+        "Collect corresponding archives/hashes for actual graph, not current upstream releases"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 77,
+      "component": "yt-dlp curl native: ngtcp2",
+      "priorMissingAtBaseline": [
+        "Resolve actual Windows linker graph and exact dependency revisions/config/patches from publisher",
+        "Collect corresponding archives/hashes for actual graph, not current upstream releases"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 78,
+      "component": "yt-dlp curl native: nghttp3",
+      "priorMissingAtBaseline": [
+        "Resolve actual Windows linker graph and exact dependency revisions/config/patches from publisher",
+        "Collect corresponding archives/hashes for actual graph, not current upstream releases"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 79,
+      "component": "yt-dlp curl native: zstd",
+      "priorMissingAtBaseline": [
+        "Resolve actual Windows linker graph and exact dependency revisions/config/patches from publisher",
+        "Collect corresponding archives/hashes for actual graph, not current upstream releases"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 80,
+      "component": "yt-dlp curl native: brotli",
+      "priorMissingAtBaseline": [
+        "Resolve actual Windows linker graph and exact dependency revisions/config/patches from publisher",
+        "Collect corresponding archives/hashes for actual graph, not current upstream releases"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 81,
+      "component": "yt-dlp curl native: zlib",
+      "priorMissingAtBaseline": [
+        "Resolve actual Windows linker graph and exact dependency revisions/config/patches from publisher",
+        "Collect corresponding archives/hashes for actual graph, not current upstream releases"
+      ],
+      "currentIssueIds": [
+        "C-YT-MAPPING",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 82,
+      "component": "Windows redistributable runtime DLLs",
+      "priorMissingAtBaseline": [
+        "Confirm redistributable source/licensing scope and original approved redistribution notices; closed-source system DLLs are not replaced with unrelated OSS tarballs"
+      ],
+      "currentIssueIds": [
+        "C-YT-RUNTIME",
+        "B-LOGS"
+      ]
+    },
+    {
+      "index": 83,
+      "component": "Platform-union notices not proven bundled",
+      "priorMissingAtBaseline": [
+        "Do not claim all notice entries are Windows payload components",
+        "Resolve possible statically linked entries via link map; omit confirmed other-platform-only components from final Windows source set"
+      ],
+      "currentIssueIds": [
+        "C-YT-RUNTIME",
+        "B-LOGS"
+      ]
+    }
+  ],
+  "ffmpeg": {
+    "sourceGate": "BLOCKED",
+    "sourceLabel": "INCOMPLETE",
+    "knownExternalRowsWithoutCollectedSource": [
+      "FFmpeg external: AMF",
+      "FFmpeg external: aom",
+      "FFmpeg external: AviSynthPlus",
+      "FFmpeg external: cairo",
+      "FFmpeg external: ffnvcodec",
+      "FFmpeg external: freetype",
+      "FFmpeg external: fribidi",
+      "FFmpeg external: gsm",
+      "FFmpeg external: harfbuzz",
+      "FFmpeg external: lame",
+      "FFmpeg external: libass",
+      "FFmpeg external: libgme",
+      "FFmpeg external: libopencore-amrnb",
+      "FFmpeg external: libopencore-amrwb",
+      "FFmpeg external: libssh",
+      "FFmpeg external: libtheora",
+      "FFmpeg external: libwebp",
+      "FFmpeg external: openal-soft",
+      "FFmpeg external: openjpeg2",
+      "FFmpeg external: openmpt",
+      "FFmpeg external: opus",
+      "FFmpeg external: SDL",
+      "FFmpeg external: speex",
+      "FFmpeg external: srt",
+      "FFmpeg external: VAAPI",
+      "FFmpeg external: vmaf",
+      "FFmpeg external: vo-amrwbenc",
+      "FFmpeg external: vorbis",
+      "FFmpeg external: VPL",
+      "FFmpeg external: vpx",
+      "FFmpeg external: x264",
+      "FFmpeg external: x265",
+      "FFmpeg external: xvid",
+      "FFmpeg external: zeromq",
+      "FFmpeg external: zimg"
+    ],
+    "remainingKnownExternalCount": 35,
+    "reason": "Actual source collection and necessary combined-build control coverage incomplete; selected modifications/transitive scope still unresolved. Logs and exact-hash rebuild do not decide the gate."
+  },
+  "ytDlp": {
+    "responseStatus": "AWAITING RESPONSE",
+    "sourceGate": "BLOCKED",
+    "sourceLabel": "INCOMPLETE",
+    "newTechnicalEvidenceFromGyan": false,
+    "reason": "Native preferred sources/build controls and JS preferred-source coverage incomplete, plus unresolved payload/runtime scope; no Gyan assertion closes these gaps."
+  },
+  "nonSourceGates": {
+    "portableTaskbar": "PASS",
+    "normalInstalledTaskbarVisual": "BLOCKED",
+    "liveDownloadEjs": "BLOCKED",
+    "cleanMachineInstaller": "BLOCKED",
+    "signingSmartScreen": "BLOCKED",
+    "publicBetaReadiness": "BLOCKED",
+    "basis": "Preserved existing evidence; no runtime QA repeated in this docs-only round."
+  }
+}

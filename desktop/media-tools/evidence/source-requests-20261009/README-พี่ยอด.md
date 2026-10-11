@@ -1,3 +1,24 @@
+# สถานะ source requests ล่าสุด — 11 ตุลาคม 2026
+
+**Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE.** เก็บคำตอบรอบสองที่ผู้ใช้ให้เพียงหนึ่งชุด [text/provenance/ผลตรวจ](../gyan-followup-20261011/README.md) ไม่มี .eml, headers หรือ independent authentication; เวลา `2026-10-10 09:31 pm` เป็นคำขอ Yod ที่ถูก quote ไม่ใช่เวลาคำตอบ
+
+ยืนยัน repo/full commit ของ libxml2 และ zlib-ng, compat ON และ downstream ตามคำตอบในขอบเขต Gyan FFmpeg, vanilla CMake ของ libxml2 และ MSYS2 origin ของ bzip2/GnuTLS/libiconv/GMP ไม่ขยายถึง fontconfig/XZ/yt-dlp หรือทุก package dependency
+
+| Request | Current coverage / gaps |
+| --- | --- |
+| F1 source/patches | สอง Git inputs publisher-confirmed; แปด archives เดิม retained; source ของ 35 README external rows ยังไม่เก็บ (A), actual patch set ยังไม่ชัด (C) |
+| F2 build controls | Upstream CMake/README และ recipes เป็น partial coverage; ส่วน custom controls ที่จำเป็นยังไม่ส่ง (A); selected settings (C); ephemeral logs เป็น B ตามเนื้อหาจริง |
+| F3 MSYS2 | Origin ยืนยันสี่ libraries; matching version/rel ของสามรายการตรวจได้ แต่ recipe commit/architecture/patch selection และ GMP pkgrel ยัง C; compiler snapshot เป็น B โดยตัวมันเอง |
+| F4 inclusion | Actual transitive/SDK/System Library scope ยัง C; ไม่ใช้ package depends เป็นหลักฐานว่า linked ทั้งหมด |
+| F5 source delivery | ชุด actual sources/modifications/necessary controls ยังไม่ครบ (A/C); source gate BLOCKED / INCOMPLETE |
+| Y1–Y6 | ยัง AWAITING RESPONSE; ข้อเท็จจริง yt-dlp เดิมคงไว้ แยก A native/JS/controls, C payload/runtime scope และ B logs/compiler; ไม่ใช้คำตอบ Gyan ปิดรายการ |
+
+Follow-up **RESPONDED** อิง request ที่ถูก quote ในข้อความผู้ใช้ ไม่มีการส่งโดย agent หรือยืนยันฉบับส่งตรงร่าง เก็บ [ร่างเดิมพร้อม metadata ประวัติ](../gyan-response-20261010/GYAN-FOLLOWUP-DRAFT.md) และ request drafts เดิม; ไม่ร่างหรือส่งคำขอซ้ำในรอบนี้ ดู [structured tracking](contact-verification.json), [A/B/C assessment](../gyan-followup-20261011/source-gap-assessment.json) และ [closure plan](../source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md)
+
+## ประวัติการติดตามถึง 10 ตุลาคม (เก็บข้อความเดิม)
+
+ข้อความต่อไปนี้เป็น snapshot ก่อนคำตอบรอบสอง เกณฑ์ที่รวม logs/compiler/Hg เป็น required โดยไม่แยกประเภทให้ใช้ assessment ล่าสุดด้านบนแทน
+
 # ข้อความขอ build-specific source สำหรับพี่ยอดตรวจ
 
 **Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE**

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-10-11T10:40:28.388239+00:00",
+  "status": "PASS",
+  "baselineCommit": "db1be04fdfa7cb663338156b1f839e7d8f9bcfae",
+  "checks": {
+    "docsOnlyScope": {
+      "status": "PASS",
+      "pathsChecked": 27,
+      "runtimeBinaryDependencyVersionChanges": false
+    },
+    "syntax": {
+      "jsonFilesParsed": 9,
+      "pythonFilesCompiledWithoutExecution": 4,
+      "status": "PASS"
+    },
+    "reply": {
+      "status": "PASS",
+      "singleRetainedRecord": true,
+      "replyTimestampNotInvented": true,
+      "sha256": "fe521dcb2e3da76b1923a959fbd9ed65620dd09950916ffc6360cf79680ac5b4"
+    },
+    "officialLegalReferences": {
+      "status": "PASS",
+      "rawReceiptsChecked": 3
+    },
+    "inventoryAndAssessment": {
+      "status": "PASS",
+      "componentRows": 84,
+      "retainedInputFiles": 42,
+      "uncollectedKnownFfmpegRows": 35,
+      "publisherConfirmedGitInputs": 2,
+      "publisherConfirmedMsysOrigins": 4,
+      "allSourceGates": "BLOCKED / INCOMPLETE",
+      "ytDlpTechnicalFactsPreserved": true
+    },
+    "retainedSourceRecipePatchReceipts": {
+      "status": "PASS",
+      "previousFetchTextReceiptsChecked": 158,
+      "recipeHashesChecked": 8,
+      "patchHashesChecked": 14,
+      "patchApplicabilityRerun": false
+    },
+    "contactDraftHistory": {
+      "status": "PASS",
+      "replyRecords": 2,
+      "oldDraftBodyUnchanged": true,
+      "noAgentSending": true
+    },
+    "archivedR2Preservation": {
+      "status": "PASS",
+      "manifestFilesRehashed": 135,
+      "archivedInputRecords": 34
+    },
+    "binaryAndGatePreservation": {
+      "status": "PASS",
+      "vendorToolsRehashed": 5,
+      "originalFfmpegZipRehashed": true,
+      "dependencyLockUnchanged": true,
+      "portableManualEvidenceUnchanged": true,
+      "runtimeTestsOrRebuildPerformed": false
+    },
+    "localMarkdownLinks": {
+      "status": "PASS",
+      "filesChecked": 7,
+      "linksChecked": 118,
+      "ownReportWrittenAtEnd": true
+    },
+    "privateDestination": {
+      "status": "PASS",
+      "liveCheckReceiptUtc": "2026-10-11T10:40:25.931362+00:00",
+      "visibility": "private",
+      "pushNotPerformedByValidator": true
+    }
+  },
+  "distinctLocalFilesHashed": 307
+}

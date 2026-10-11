@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "reply": {
+    "file": "gyan-reply-text.txt",
+    "bytes": 1768,
+    "sha256": "fe521dcb2e3da76b1923a959fbd9ed65620dd09950916ffc6360cf79680ac5b4",
+    "status": "RESPONDED — user-provided email text",
+    "type": "user-provided email text transcription",
+    "providedLocalDate": "2026-10-11",
+    "timezone": "Asia/Bangkok",
+    "responseSentDate": null,
+    "originalEmailHeadersReceived": false,
+    "independentlyAuthenticated": false,
+    "quotedRequestDateTimeText": "2026-10-10 09:31 pm",
+    "quotedRequestAuthor": "Yod Kaewchart",
+    "quotedRequestTimezone": null,
+    "quotedTimeIsReplyTime": false,
+    "suppliedCopies": 2,
+    "retainedReplyRecords": 1,
+    "retainedCopy": "first complete copy ending Regards, Gyan",
+    "whitespaceNormalized": true,
+    "transportEscapesRetained": true,
+    "summaryOnly": false,
+    "transcriptionNote": "One complete supplied reply retained; ordinary spaces replace nonbreaking/indent spaces. Markdown link markup and transport backslashes remain. Not a .eml or original MIME/header record."
+  },
+  "userTaskInstructions": {
+    "file": "user-task-instructions.txt",
+    "bytes": 10165,
+    "sha256": "01b0e0c5704c638b8e27361eeb5571d1bc9bc3d4e23880f11cee58a3745651ed"
+  }
+}

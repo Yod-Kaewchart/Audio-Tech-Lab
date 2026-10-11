@@ -1,10 +1,10 @@
 {
-  "schema": 3,
-  "reviewDate": "2026-10-10",
+  "schema": 4,
+  "reviewDate": "2026-10-11",
   "status": "Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE",
   "requestStatus": "SENT — user-reported",
   "responseStatus": "MIXED: Gyan RESPONDED; yt-dlp AWAITING RESPONSE",
-  "statusBasis": "User supplied a text attributed to Gyan in this chat on 10 October 2026 (Asia/Bangkok). No original reply headers or independent authentication. yt-dlp remains awaiting response.",
+  "statusBasis": "Second reply supplied on 2026-10-11 Asia/Bangkok, deduplicated once. Quoted 2026-10-10 09:31 pm belongs to Yod request, not Gyan reply; no original reply headers or independent authentication. yt-dlp still awaiting.",
   "reportedSender": "พี่ยอด",
   "userReportedSentDate": "2026-10-09",
   "sentDateTimezone": "Asia/Bangkok",
@@ -24,13 +24,36 @@
       "responseSentDate": null,
       "whitespaceNormalized": true,
       "transportEscapesRetained": true
+    },
+    {
+      "file": "../gyan-followup-20261011/gyan-reply-text.txt",
+      "bytes": 1768,
+      "sha256": "fe521dcb2e3da76b1923a959fbd9ed65620dd09950916ffc6360cf79680ac5b4",
+      "status": "RESPONDED — user-provided email text",
+      "type": "user-provided email text transcription",
+      "providedLocalDate": "2026-10-11",
+      "timezone": "Asia/Bangkok",
+      "responseSentDate": null,
+      "originalEmailHeadersReceived": false,
+      "independentlyAuthenticated": false,
+      "quotedRequestDateTimeText": "2026-10-10 09:31 pm",
+      "quotedRequestAuthor": "Yod Kaewchart",
+      "quotedRequestTimezone": null,
+      "quotedTimeIsReplyTime": false,
+      "suppliedCopies": 2,
+      "retainedReplyRecords": 1,
+      "retainedCopy": "first complete copy ending Regards, Gyan",
+      "whitespaceNormalized": true,
+      "transportEscapesRetained": true,
+      "summaryOnly": false,
+      "transcriptionNote": "One complete supplied reply retained; ordinary spaces replace nonbreaking/indent spaces. Markdown link markup and transport backslashes remain. Not a .eml or original MIME/header record."
     }
   ],
   "draftMatchesSentEmailVerified": false,
   "requestBasis": "evidence/source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md",
   "sourceGate": "BLOCKED",
   "sourceLabel": "INCOMPLETE",
-  "baselineHead": "3f3fc918f48dd0761fe67946a5c93be55198280c",
+  "baselineHead": "db1be04fdfa7cb663338156b1f839e7d8f9bcfae",
   "binarySourceCommit": "df183f4970366597d539323760108dbaf234e049",
   "appVersion": "0.2.2-beta.2",
   "contacts": [
@@ -63,11 +86,43 @@
           "responseSentDate": null,
           "whitespaceNormalized": true,
           "transportEscapesRetained": true
+        },
+        {
+          "file": "../gyan-followup-20261011/gyan-reply-text.txt",
+          "bytes": 1768,
+          "sha256": "fe521dcb2e3da76b1923a959fbd9ed65620dd09950916ffc6360cf79680ac5b4",
+          "status": "RESPONDED — user-provided email text",
+          "type": "user-provided email text transcription",
+          "providedLocalDate": "2026-10-11",
+          "timezone": "Asia/Bangkok",
+          "responseSentDate": null,
+          "originalEmailHeadersReceived": false,
+          "independentlyAuthenticated": false,
+          "quotedRequestDateTimeText": "2026-10-10 09:31 pm",
+          "quotedRequestAuthor": "Yod Kaewchart",
+          "quotedRequestTimezone": null,
+          "quotedTimeIsReplyTime": false,
+          "suppliedCopies": 2,
+          "retainedReplyRecords": 1,
+          "retainedCopy": "first complete copy ending Regards, Gyan",
+          "whitespaceNormalized": true,
+          "transportEscapesRetained": true,
+          "summaryOnly": false,
+          "transcriptionNote": "One complete supplied reply retained; ordinary spaces replace nonbreaking/indent spaces. Markdown link markup and transport backslashes remain. Not a .eml or original MIME/header record."
         }
       ],
       "responseIndependentlyVerified": false,
       "followupDraft": "../gyan-response-20261010/GYAN-FOLLOWUP-DRAFT.md",
-      "followupStatus": "DRAFT — NOT SENT"
+      "followupStatus": "RESPONDED — user-provided email text",
+      "followupSendingEvidence": {
+        "basis": "Yod request is quoted in the user-provided reply",
+        "quotedRequestDateTimeText": "2026-10-10 09:31 pm",
+        "timezoneKnown": false,
+        "independentlyVerified": false,
+        "draftMatchesQuotedOrSentEmailVerified": false,
+        "sentByAgent": false
+      },
+      "followupDraftStatus": "HISTORICAL DRAFT — never sent by agent; exact sent-copy match not verified"
     },
     {
       "publisher": "yt-dlp",
@@ -90,6 +145,7 @@
   ],
   "attachments": [],
   "attachmentsScope": "Attachments prepared by the agent for the drafts only. Actual sent-email attachments were not provided or verified.",
-  "networkScope": "Read-only HTTPS upstream refs/APIs/source archives and candidate MSYS2 recipes. No agent email, contact form or issue submission. Original sending remains user-reported; supplied Gyan reply text has no independent delivery/authentication.",
-  "mutations": "Working docs/evidence only; binaries, dependencies, archived r2 kit and release manifests unchanged"
+  "networkScope": "Read-only official GPL/FAQ and authenticated private-destination metadata checks; authorized docs-only Git push to verified private-backup. No email, issue, public push or deployment.",
+  "mutations": "Working docs/evidence only; binaries, dependencies, archived r2 kit and release manifests unchanged",
+  "currentSourceAssessment": "../gyan-followup-20261011/source-gap-assessment.json"
 }

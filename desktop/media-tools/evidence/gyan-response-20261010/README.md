@@ -1,3 +1,5 @@
+> **Historical snapshot — 10 October 2026.** Latest publisher confirmations and A/B/C criteria supersede this snapshot: [11 October review](../gyan-followup-20261011/README.md). GMP Hg metadata/logs are not current standalone blockers. Original receipts/results and first reply are preserved. Do not re-run the historical apply-response.py to update the current inventory.
+
 # Gyan RESPONDED — user-provided email text
 
 บันทึก follow-up วันที่ **10 ตุลาคม 2026 / Asia/Bangkok** สำหรับ binary ชุดเดิมของ candidate `0.2.2-beta.2` โดย **yt-dlp ยัง AWAITING RESPONSE** และ source gate ยัง **BLOCKED / INCOMPLETE**

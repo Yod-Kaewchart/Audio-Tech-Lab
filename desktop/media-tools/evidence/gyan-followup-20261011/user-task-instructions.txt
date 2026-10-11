@@ -1,0 +1,91 @@
+ตรวจและอัปเดต source review ของ Audio Tech Labs Media Tools จากคำตอบ Gyan รอบที่สอง แล้ว commit และ push งานเอกสาร/หลักฐานไป Private Backup โดยยังไม่เผยแพร่ Public Beta
+
+ตำแหน่ง:
+- Repository: `D:\Sites\Audio Tech Labs`
+- App: `desktop\media-tools`
+- Branch ที่คาดหมาย: `codex/source-taskbar-review-20261009`
+- HEAD ล่าสุดที่ทราบ: `db1be04fdfa7cb663338156b1f839e7d8f9bcfae`
+- Private remote ที่คาดหมาย: `private-backup`
+- URL: `https://github.com/Yod-Kaewchart/Audio-Tech-Lab-Private-Backup.git`
+
+1. ตรวจ baseline ก่อนแก้ไข
+
+อ่าน AGENTS.md ที่เกี่ยวข้อง ตรวจ Git status, branch, HEAD, upstream และ remote จริง หากสถานะเปลี่ยนจากข้อมูลข้างต้น ให้ตรวจและรักษางานที่มีอยู่ ห้าม reset, clean, stash หรือรวมงานผู้อื่นเข้า commit โดยอัตโนมัติ
+
+อ่านรายงานรวม, SOURCE-INVENTORY, SOURCE-CLOSURE-PLAN และหลักฐานใน `evidence/gyan-response-20261010/` ก่อนอัปเดต
+
+2. บันทึกคำตอบใหม่เพียงหนึ่งครั้ง
+
+ผู้ใช้ส่งข้อความตอบกลับ Gyan ซ้ำสองชุด แต่เป็นคำตอบเดียวกัน บันทึกเป็น:
+`RESPONDED — user-provided email text`
+
+ผู้ใช้แจ้งคำตอบนี้วันที่ 11 ตุลาคม 2026 เวลาไทย แต่ไม่ได้ให้ timestamp/header ของอีเมลตอบกลับ อย่าใช้เวลา `2026-10-10 09:31 pm` เป็นเวลาที่ Gyan ตอบ เพราะเป็นเวลาของอีเมล Yod ที่ถูก quote
+
+ข้อมูลจากคำตอบที่ผู้ใช้ให้มา:
+
+- Gyan ระบุว่ายังไม่เคยถูกขอ scripts/configuration artifacts เหล่านี้เพื่อ license compliance และเห็นว่าไม่น่าจำเป็น
+- หลักฐานชั่วคราวส่วนใหญ่ไม่ได้เก็บไว้
+- อาจเริ่มเก็บข้อมูลตั้งแต่ 9.1 เป็นต้นไป ไม่ใช่คำรับรองว่าจะมีครบ
+- ระบุว่า build instructions ของแต่ละ dependency อยู่บน website/repository ของ dependency
+- ยืนยัน libxml2:
+  repository `https://github.com/GNOME/libxml2.git`
+  commit `31094e5d0f65a528965e8c32a488e5a7f36118ca`
+- ยืนยัน zlib-ng:
+  repository `https://github.com/zlib-ng/zlib-ng.git`
+  commit `9174ab6bf58ac9a518dbe197b948c897f74834f5`
+  ข้อความ: “Compat on. All downstream use this lib.”
+- libxml2 build: “Vanilla cmake, nothing custom.”
+- bzip2, GnuTLS และ libiconv ใช้ MSYS2 packages และ GMP ด้วย
+
+บันทึกเป็นข้อมูลที่ผู้เผยแพร่ยืนยันผ่านข้อความที่ผู้ใช้ส่งมา แยกจากผลตรวจที่ Codex ทำเอง ไม่มีไฟล์ .eml หรือหลักฐานยืนยันผู้ส่งอิสระ ห้ามสร้าง header หรือหลักฐานการส่งขึ้นใหม่ หากบันทึกเป็นข้อความสรุป ให้ระบุว่าเป็น summary ไม่ใช่อีเมลต้นฉบับครบถ้วน
+
+3. อัปเดต inventory ตามขอบเขตที่ยืนยันจริง
+
+- เลื่อน repository/commit ของ libxml2 และ zlib-ng จาก candidate เป็น publisher-confirmed
+- บันทึก zlib compatibility ON และการใช้ downstream ตามคำตอบ โดยยังแยกจากการตรวจ binary เอง
+- บันทึก MSYS2 provenance ของสี่ไลบรารีที่กล่าวถึง ตรวจ recipe revisions/source archives/patches ที่มีอยู่เทียบรุ่นเดิม
+- อย่าขยายคำยืนยัน MSYS2 ไปถึง fontconfig, XZ หรือ dependency ทั้งชุด
+- “Vanilla cmake” ไม่ใช่การยืนยันทุก feature flag หรือประกาศว่า source ไม่มี patches ทั้งหมด
+- อย่าถือว่า package dependencies ทุกตัวถูก linked เข้า binary จริง
+- ทบทวนว่า GMP Mercurial metadata ยังจำเป็นหรือไม่ หากหลักฐานชี้ว่าใช้ MSYS2 recipe กับ release tarball
+
+4. ปรับเกณฑ์ source review ให้ตรงความจำเป็น
+
+อ่านแหล่งทางการ:
+- https://www.gnu.org/licenses/gpl-3.0.html
+- https://www.gnu.org/licenses/gpl-faq.en.html#MustSourceBuildToMatchExactHashOfBinary
+
+แยกแต่ละช่องว่างเป็น:
+A. Source/patches/scripts หรือ build inputs ที่จำเป็นสำหรับ corresponding source
+B. หลักฐาน audit/reproducibility เพิ่มเติม เช่น ephemeral logs หรือ compiler snapshot
+C. สิ่งที่ยังไม่ทราบ ต้องตรวจเพิ่มก่อนจัดประเภท
+
+GPL ไม่กำหนดว่า rebuild ต้องได้ SHA256 เหมือน binary เดิมทุกบิต อย่าถือว่าขาด logs ทุกไฟล์แล้วเป็นข้อผิดพลาดด้าน license โดยอัตโนมัติ และอย่าถือว่าความเห็นของผู้เผยแพร่ทำให้ source gate PASS
+
+ตรวจว่า instructions และ recipes ที่มีอยู่ครอบคลุมการสร้างจาก source จริงเพียงใด พร้อมระบุช่องว่างเฉพาะเจาะจง อย่าตัดรายการ scripts ที่จำเป็นออกเพียงเพราะเรียกว่า audit
+
+ประเมิน FFmpeg และ yt-dlp แยกกัน อย่าให้คำตอบ Gyan ปิดช่องว่างของ yt-dlp หากหลักฐานยังไม่ครบ ให้คง source gate BLOCKED / INCOMPLETE พร้อมเหตุผลที่ปรับแล้ว
+
+5. จัดเอกสารและตรวจความสอดคล้อง
+
+เพิ่ม evidence รอบใหม่ในโฟลเดอร์ที่เหมาะสม อัปเดตรายงานรวม, inventory, closure plan และสถานะ follow-up ให้สอดคล้องกัน เก็บร่างเดิมและประวัติไว้ หากระบุการส่ง follow-up ให้ใช้ user-provided evidence และไม่สร้างหลักฐานส่งเพิ่มเติม
+
+ตรวจ JSON, local links, hashes ของหลักฐานที่เพิ่ม/อ้างอิง และ diff ให้ผ่าน งานรอบนี้เป็นเอกสาร/หลักฐาน จึงใช้ checks ที่ตรงกับการเปลี่ยนแปลง ไม่ต้องเปิดแอปหรือรัน playback tests ซ้ำโดยไม่มีเหตุผล
+
+6. Commit และเก็บออนไลน์
+
+ตรวจ staged diff แล้ว commit เฉพาะไฟล์ของงานนี้ เช่น:
+`docs(media-tools): record Gyan follow-up and refine source review`
+
+ตรวจ URL ของ private-backup และยืนยันว่า repository ยังเป็น private ก่อน push branch ปัจจุบัน จากนั้นตรวจ local/remote commit ตรงกัน และรายงาน Git status จริง
+
+ห้าม push branch นี้ไป public origin ห้าม force push, merge main, สร้าง release, deploy หรือเผยแพร่ screenshots/review kit สู่สาธารณะ หากยืนยันปลายทาง private ไม่ได้ ให้เก็บ local commit และรายงานสาเหตุที่ push ไม่สำเร็จ
+
+ข้อจำกัด:
+- ไม่เปลี่ยน binaries, dependencies, vendor, version หรือ runtime code
+- ไม่ rebuild, reinstall หรืออัปเกรด FFmpeg เป็น 9.1
+- ไม่แก้ข้อมูลผู้ใช้หรือ shortcuts
+- ไม่ส่งอีเมลหรือเปิด issue
+- คง Portable taskbar PASS และ gate อื่นตามหลักฐานเดิม
+
+รายงานจบงาน: สิ่งที่ยืนยันเพิ่ม, ช่องว่างที่เหลือพร้อมประเภท A/B/C, source gate ล่าสุด, ไฟล์ที่เปลี่ยน, ผล validation, commit hash, ผล private push และ Git status

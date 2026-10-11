@@ -1,0 +1,32 @@
+[
+  {
+    "file": "legal/gpl-3.0.html",
+    "url": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "finalUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "httpStatus": 200,
+    "bytes": 50244,
+    "sha256": "73cd8ecdcf33b5923f3c092fba6d8f8c3faecf64d84a9ecfa6c5e028f980211a",
+    "fetchedUtc": "2026-10-11T10:20:33.102330+00:00",
+    "status": "FETCHED"
+  },
+  {
+    "file": "legal/gpl-faq.en.html",
+    "url": "https://www.gnu.org/licenses/gpl-faq.en.html",
+    "finalUrl": "https://www.gnu.org/licenses/gpl-faq.en.html",
+    "httpStatus": 200,
+    "bytes": 197518,
+    "sha256": "5053fe23f1da3b76245b17c416640cde37ce21b8175effc0c6619d6673a25d2e",
+    "fetchedUtc": "2026-10-11T10:20:33.380074+00:00",
+    "status": "FETCHED"
+  },
+  {
+    "file": "legal/gpl-3.0.txt",
+    "url": "https://www.gnu.org/licenses/gpl-3.0.txt",
+    "finalUrl": "https://www.gnu.org/licenses/gpl-3.0.txt",
+    "httpStatus": 200,
+    "bytes": 35149,
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "fetchedUtc": "2026-10-11T10:20:32.847731+00:00",
+    "status": "FETCHED"
+  }
+]

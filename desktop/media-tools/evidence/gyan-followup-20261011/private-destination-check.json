@@ -1,0 +1,21 @@
+{
+  "id": 1413395337,
+  "full_name": "Yod-Kaewchart/Audio-Tech-Lab-Private-Backup",
+  "html_url": "https://github.com/Yod-Kaewchart/Audio-Tech-Lab-Private-Backup",
+  "private": true,
+  "visibility": "private",
+  "archived": false,
+  "disabled": false,
+  "permissions": {
+    "admin": true,
+    "maintain": true,
+    "push": true,
+    "triage": true,
+    "pull": true
+  },
+  "checkedUtc": "2026-10-11T10:40:25.931362+00:00",
+  "fetchAndPushUrl": "https://github.com/Yod-Kaewchart/Audio-Tech-Lab-Private-Backup.git",
+  "status": "PRIVATE VERIFIED",
+  "method": "Authenticated GitHub REST GET using existing Git credential in memory; secret not persisted or printed",
+  "connectorMetadataCheck": "Earlier connector returned 404 / NOT_FOUND; not evidence of repository visibility"
+}

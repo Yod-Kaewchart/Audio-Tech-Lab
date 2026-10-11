@@ -1,6 +1,8 @@
 # ร่างถามกลับเรื่อง source และ build inputs ชุดเดิม
 
-**DRAFT — NOT SENT** สำหรับพี่ยอดตรวจและส่งต่อใน email thread เดิม อิง Gyan RESPONDED — user-provided email text; source gate ยัง BLOCKED / INCOMPLETE
+**HISTORICAL DRAFT — ไม่เคยส่งโดย agent; ไม่ยืนยันว่าฉบับส่งตรงกับร่างนี้**
+
+วันที่ 11 ตุลาคม 2026 ผู้ใช้ให้ [คำตอบรอบสอง](../gyan-followup-20261011/README.md) ซึ่ง quote คำขอ Yod ลงวันที่ 2026-10-10 09:31 pm; follow-up จึงเป็น **RESPONDED — user-provided email text** ไม่มี headers/หลักฐานส่งอิสระ และเวลา quote ไม่ใช่เวลาที่ Gyan ตอบ เก็บเนื้อหาร่างเดิมด้านล่างเป็นประวัติ; ประเด็น repo/commit และ compat ที่ถามได้รับคำยืนยันเพิ่มแล้ว เกณฑ์ logs/compiler/Hg ในร่างเก่าปรับตาม [assessment ล่าสุด](../gyan-followup-20261011/source-gap-assessment.json)
 
 To: `builds@gyan.dev`
 

@@ -2,9 +2,25 @@
 
 วันที่ 9 ตุลาคม 2026 (Asia/Bangkok) · **Candidate 0.2.2-beta.2 · UNSIGNED · ยังไม่อนุมัติให้เผยแพร่**
 
-งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่ได้ push, merge main, เปิด GitHub Release, upload public หรือ deploy หน้าโหลด และไม่ได้แก้ Home/backend/tunnel/Cloudflare
+งานที่ไม่ติดเงื่อนไขดำเนินการครบแล้ว แต่ **Public Beta readiness = BLOCKED** ไม่มี public push, merge main, GitHub Release, public upload หรือ deploy หน้าโหลด; งาน docs/evidence รอบ 11 ตุลาคมอนุญาตให้เก็บที่ private-backup หลังตรวจ private destination และไม่ได้แก้ Home/backend/tunnel/Cloudflare
 
-## Source follow-up — 10 ตุลาคม 2026
+## Source follow-up ล่าสุด — 11 ตุลาคม 2026
+
+**Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE.** คำตอบที่ผู้ใช้ให้ซ้ำสองชุดเก็บเพียงหนึ่งชุด; ไม่มี reply headers/timestamp หรือ independent authentication เวลา `2026-10-10 09:31 pm` เป็นคำขอ Yod ที่ถูก quote
+
+ยืนยัน libxml2 `31094e5d0f65a528965e8c32a488e5a7f36118ca` จาก GNOME/libxml2 และ zlib-ng `9174ab6bf58ac9a518dbe197b948c897f74834f5` จาก zlib-ng/zlib-ng, compatibility ON และ downstream ใช้ lib นี้ตามคำตอบในบริบท Gyan FFmpeg; libxml2 ใช้ vanilla CMake ยืนยัน MSYS2 origin ของ bzip2/GnuTLS/libiconv/GMP เท่านั้น ยังไม่ยืนยันทุก flags/patches, exact recipe commit, GMP pkgrel หรือ graph ทั้งชุด ไม่ขยายคำตอบถึง yt-dlp
+
+| ประเภท | ช่องว่างปัจจุบัน |
+| --- | --- |
+| A — necessary source/build inputs | source ของ 35 ใน 37 README external-library rows ยังไม่เก็บ (มี rubberband/vid.stab); necessary custom build/install controls และ actual transitive/modified sources ยังไม่ครบ; yt-dlp native/JS preferred-source และ necessary native controls ยังเปิด |
+| B — audit/reproducibility | ephemeral logs/link maps/compiler snapshots เป็นหลักฐานเสริมโดยตัวมันเอง; หากมี indispensable input ภายในให้แยกเป็น A ไม่ต้อง rebuild ให้ SHA เหมือนทุกบิต และ GMP Hg metadata ไม่เป็น standalone blocker สำหรับ release-tarball route |
+| C — ต้องตรวจ scope/selection | actual patch/config/link inclusion, exact MSYS2 recipe/architecture/GMP pkgrel และ runtime/System Library scope ยังไม่ชัด; package depends ไม่ได้แปลว่า linked ทุกตัว |
+
+**FFmpeg source gate BLOCKED / INCOMPLETE; yt-dlp source gate BLOCKED / INCOMPLETE; Public Beta readiness BLOCKED. Portable taskbar PASS คงเดิม; normal taskbar visual, live Download/EJS, clean-machine installer และ signing/SmartScreen คง BLOCKED** ไม่มี runtime QA/rebuild หรือเปลี่ยน binaries/dependencies/vendor/version/shortcuts รอบนี้ ตรวจ official GPLv3 §1 และ GNU FAQ แล้ว: necessary control scripts ต้องมีตาม scope แต่ขาด logs ทุกไฟล์ไม่ใช่ automatic failure และ exact rebuilt hash ไม่ใช่ข้อกำหนด [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html#section1), [GNU FAQ](https://www.gnu.org/licenses/gpl-faq.en.html#MustSourceBuildToMatchExactHashOfBinary)
+
+ดู [หลักฐานและผลตรวจรอบสอง](evidence/gyan-followup-20261011/README.md), [inventory ล่าสุด](evidence/source-taskbar-20261009/SOURCE-INVENTORY.md), [closure plan](evidence/source-taskbar-20261009/SOURCE-CLOSURE-PLAN.md) และ [request tracking](evidence/source-requests-20261009/contact-verification.json) ร่างเก่าเก็บเป็นประวัติ; ไม่ส่ง email/issue ใหม่ Archived r2 kit/manifests คงเดิม งานนี้ commit เฉพาะ docs/evidence และใช้เฉพาะ verified private-backup; ผล push/commit จริงรายงานหลังตรวจ remote
+
+## Source follow-up — 10 ตุลาคม 2026 (ประวัติ; superseded by 11 ตุลาคม)
 
 **Gyan RESPONDED — user-provided email text / yt-dlp AWAITING RESPONSE.** เก็บข้อความที่พี่ยอดให้ พร้อม hashes/coverage และอัปเดต working inventory ของ 8 libraries: หา source archives ได้ครบ 8 และ full Git commits 7; GMP Mercurial revision ยังตรวจไม่ได้ (403) ตรวจ candidate MSYS2 recipes/patches/dependencies แล้ว แต่ original scripts/configuration, patch declaration, package snapshot และ actual static link graph ยังขาด จึงคง source gate และ Public Beta readiness **BLOCKED / INCOMPLETE**
 

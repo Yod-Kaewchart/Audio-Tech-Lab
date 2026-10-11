@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "baselineHead": "db1be04fdfa7cb663338156b1f839e7d8f9bcfae",
+  "branch": "codex/source-taskbar-review-20261009",
+  "initialWorkingTree": "CLEAN",
+  "upstream": "private-backup/codex/source-taskbar-review-20261009",
+  "sourceInventoryBaselineSha256": "9be88d801865361ffb139accfe9ecd5d2605951abe7bea4b3a49d3bfdb7f4e59",
+  "preservedBinarySourceCommit": "df183f4970366597d539323760108dbaf234e049",
+  "vendorHashes": {
+    "ffmpeg.exe": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+    "ffprobe.exe": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+    "yt-dlp.exe": "66674953fe251b89f4d08c5f0e35e0728679bd67ab3d7d05c0562af101dd3e7a"
+  },
+  "policy": "Docs/evidence only; private-backup push authorized by attached user task instructions. No public origin push, force push, merge, release, deployment, runtime/binary/dependency/version changes or rebuild."
+}
