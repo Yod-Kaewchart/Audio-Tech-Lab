@@ -36,8 +36,21 @@ const done=await jsonPost("/upload/complete",{uploadId:init.uploadId});if(view!=
 audio.addEventListener("loadedmetadata",()=>{if(previewProbe)clearTimeout(previewProbe);previewProbe=null;const s=Math.floor(audio.duration||0),m=Math.floor(s/60),ss=String(s%60).padStart(2,"0"),mode=previewMode==="converted"?"Lossless FLAC Preview from Server":previewMode==="stream"?"Streaming from Server":"Local playback";previewStatus.textContent="Duration "+m+":"+ss+" · "+mode});
 audio.addEventListener("error",()=>{if(previewProbe)clearTimeout(previewProbe);previewProbe=null;const ext=((selectedFile?.name||nameEl.textContent).split(".").pop()||"").toLowerCase();if(previewMode==="stream"&&ext==="m4a"&&uploadedFileId){prepareLosslessPreview(uploadedFileId);return}previewStatus.textContent=previewMode==="stream"?"Streaming Preview ไม่สามารถเล่นไฟล์นี้ได้":previewMode==="converted"?"Lossless FLAC Preview ไม่สามารถเล่นได้":"Browser ไม่สามารถเล่น Local Preview ของไฟล์นี้ได้ · Upload to Server เพื่อใช้ Streaming Preview"});
 window.addEventListener("beforeunload",()=>{if(objectUrl)URL.revokeObjectURL(objectUrl)});
+function showAnalysisResult(data,jobId,elapsedSeconds=null){
+  if(!data||!Array.isArray(data.detections)||!Number.isFinite(Number(data.duration))||Number(data.duration)<=0||!Array.isArray(data.waveform?.minimum)||!Array.isArray(data.waveform?.maximum))throw new Error("Saved analysis result is incomplete");
+  analysisStatus.hidden=false;
+  analysisState.textContent="ANALYZE COMPLETE";
+  const suffix=Number.isFinite(elapsedSeconds)?(" · "+elapsedSeconds.toFixed(1)+" s"):" · Loaded from Server";
+  analysisText.textContent=data.detections.length+" detections · "+(data.duration/60).toFixed(2)+" min"+suffix;
+  lastAnalysis=data;analysisJobId=jobId;boundaryRevision=0;
+  editableBoundaries=data.detections.map(d=>normalizeBoundary(Number(d.time))).filter(t=>Number.isFinite(t)&&t>0&&t<Number(data.duration)).sort((a,b)=>a-b);
+  renderWaveform(data);renderTracks(data);exportPanel.hidden=false;
+  exportStatus.textContent="พร้อม Export "+(data.detections.length+1)+" Tracks";
+  downloadList.replaceChildren();analyzeButton.textContent="Re-analyze";analyzeButton.disabled=false;setFileRemoveBusy(false);
+  window.lastAnalysis=data;window.dispatchEvent(new Event("demo-analysis-changed"));syncSplitServerButtons();
+}
 analyzeButton.addEventListener("click",async()=>{if(!uploadedFileId)return;analyzeButton.disabled=true;setFileRemoveBusy(true);analysisStatus.hidden=false;analysisState.textContent="ANALYZING…";analysisText.textContent="Analyze V2 กำลังประมวลผลบนเครื่อง Server";error.hidden=true;const started=performance.now();
-try{let completedAnalysisJobId=null;const data=await runProcessingJob("/analyze",{fileId:uploadedFileId},job=>{analysisState.textContent=job.status==="queued"?"WAITING IN QUEUE":"ANALYZING…";analysisText.textContent=job.status==="queued"?"รอคิวลำดับที่ "+job.position+" · ประมวลผลครั้งละหนึ่งงาน":"Analyze V2 กำลังประมวลผลบนเครื่อง Server"},{onCompleted:job=>{completedAnalysisJobId=job.jobId}});const elapsed=(performance.now()-started)/1000;analysisState.textContent="ANALYZE COMPLETE";analysisText.textContent=data.detections.length+" detections · "+(data.duration/60).toFixed(2)+" min · "+elapsed.toFixed(1)+" s";lastAnalysis=data;analysisJobId=completedAnalysisJobId;boundaryRevision=0;editableBoundaries=data.detections.map(d=>normalizeBoundary(Number(d.time))).filter(t=>Number.isFinite(t)&&t>0&&t<Number(data.duration)).sort((a,b)=>a-b);renderWaveform(data);renderTracks(data);exportPanel.hidden=false;exportStatus.textContent="พร้อม Export "+(data.detections.length+1)+" Tracks";downloadList.replaceChildren();analyzeButton.textContent="Re-analyze";analyzeButton.disabled=false;setFileRemoveBusy(false);window.lastAnalysis=data;window.dispatchEvent(new Event("demo-analysis-changed"));syncSplitServerButtons()}
+try{let completedAnalysisJobId=null;const data=await runProcessingJob("/analyze",{fileId:uploadedFileId},job=>{analysisState.textContent=job.status==="queued"?"WAITING IN QUEUE":"ANALYZING…";analysisText.textContent=job.status==="queued"?"รอคิวลำดับที่ "+job.position+" · ประมวลผลครั้งละหนึ่งงาน":"Analyze V2 กำลังประมวลผลบนเครื่อง Server"},{onCompleted:job=>{completedAnalysisJobId=job.jobId}});const elapsed=(performance.now()-started)/1000;showAnalysisResult(data,completedAnalysisJobId,elapsed)}
 catch(e){if(e.stale)return;analysisState.textContent=e.cancelled?"CANCELLED":"ANALYZE FAILED";analysisText.textContent=e.message;analyzeButton.disabled=false;setFileRemoveBusy(false);syncSplitServerButtons()}
 });
 function formatTime(seconds){seconds=Math.max(0,Number(seconds)||0);const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60),s=Math.floor(seconds%60);return h?String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0"):String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
@@ -81,6 +94,14 @@ window.demoSplitAI={
  setBusy:busy=>{setFileRemoveBusy(Boolean(busy),busy?"AI Review…":"Processing…");syncSplitServerButtons()},
  playAround:(time,seconds=5)=>{if(!lastAnalysis||!Number.isFinite(Number(time)))return false;const duration=Number(lastAnalysis.duration)||0,start=Math.max(0,Number(time)-Math.max(1,Number(seconds)||5)),end=Math.min(duration,Number(time)+Math.max(1,Number(seconds)||5));audio.pause();stopTrackPlayback();audio.currentTime=start;activeTrackEnd=end;waveformTime.textContent=formatTime(start);audio.play().catch(()=>stopTrackPlayback());return true},
  applyBoundaries:(times,{analysisJobId:expectedJobId,boundaryRevision:expectedRevision,allowOverwrite=false}={})=>{if(!lastAnalysis||!Array.isArray(times)||!analysisJobId||expectedJobId!==analysisJobId)return{ok:false,reason:"stale-analysis"};if(expectedRevision!==boundaryRevision&&!allowOverwrite)return{ok:false,reason:"boundaries-changed"};const duration=Number(lastAnalysis.duration)||0,next=[...new Set(times.map(Number).filter(Number.isFinite).map(normalizeBoundary).filter(t=>t>0&&t<duration))].sort((a,b)=>a-b);if(!next.length)return{ok:false,reason:"empty"};editableBoundaries=next;boundaryRevision++;stopTrackPlayback();renderTracks(lastAnalysis);renderWaveform(lastAnalysis);exportStatus.textContent="AI Review applied · พร้อม Export "+(editableBoundaries.length+1)+" Tracks";window.dispatchEvent(new CustomEvent("demo-boundaries-changed",{detail:{boundaryRevision,source:"ai-review"}}));return{ok:true,boundaryRevision}}
+};
+window.demoSplitAI.restoreAnalysis=(job,file)=>{
+  if(!job||job.kind!=="analyze"||job.status!=="succeeded"||typeof job.jobId!=="string"||!job.result)throw new Error("Completed Analyze result is unavailable");
+  if(!file||file.fileId!==job.fileId)throw new Error("Original audio is no longer available");
+  if(input.disabled||fileRemove.disabled||previewPreparing)throw new Error("Current processing is still active in this workspace");
+  if(!Array.isArray(job.result.detections)||!Array.isArray(job.result.waveform?.minimum)||!Array.isArray(job.result.waveform?.maximum))throw new Error("Saved analysis result is incomplete");
+  if(uploadedFileId!==job.fileId)selectUploadedFile(file);
+  showAnalysisResult(job.result,job.jobId);
 };
 window.demoResourceView=()=>({fileId:uploadedFileId,exportId:currentExportJobId,epoch:processingEpoch});
 window.addEventListener('demo-resources',({detail:{view,state}})=>{

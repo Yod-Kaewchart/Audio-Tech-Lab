@@ -43,6 +43,7 @@ async function refreshProcessingJobs() {
     if (snapshot === jobsSnapshot) return;
     jobsSnapshot = snapshot;
     jobsContainer.replaceChildren();
+    const shownResults = new Set();
     jobsMessage.textContent = active.length ? active.length + ' งานของคุณ · ประมวลผลร่วมกันครั้งละหนึ่งงาน' : 'ไม่มีงานรอคิว · ประมวลผลครั้งละหนึ่งงาน';
     for (const job of jobs.slice(0, 8)) {
       const row = document.createElement('div'); row.className = 'upload-file-row';
@@ -51,6 +52,33 @@ async function refreshProcessingJobs() {
       const status = document.createElement('span'); status.className = 'upload-file-meta';
       status.textContent = job.status === 'queued' ? 'รอคิวลำดับที่ ' + job.position : ({ running: 'กำลังประมวลผล', succeeded: 'เสร็จแล้ว', failed: 'ไม่สำเร็จ · ' + (job.error || ''), cancelled: 'ยกเลิกแล้ว' })[job.status];
       info.append(name, status); row.append(info);
+      if (job.kind === 'analyze' && job.status === 'succeeded' && !shownResults.has(job.fileId)) {
+        shownResults.add(job.fileId);
+        const load = document.createElement('button'); load.type = 'button'; load.className = 'upload-analyze-button';
+        load.textContent = 'Load Result';
+        load.addEventListener('click', async () => {
+          load.disabled = true; load.textContent = 'Loading…';
+          const usernameAtClick = window.demoAuth?.user.username;
+          try {
+            const [detail, uploads] = await Promise.all([
+              queuedJSON('/jobs/' + encodeURIComponent(job.jobId)),
+              queuedJSON('/uploads')
+            ]);
+            if (usernameAtClick !== window.demoAuth?.user.username) return;
+            const original = (uploads.files || []).find(file => file.fileId === job.fileId);
+            if (!original) throw new Error('Original audio is no longer available on Server');
+            if (detail.jobId !== job.jobId || detail.fileId !== job.fileId || detail.kind !== 'analyze' || detail.status !== 'succeeded') throw new Error('Analysis result has changed');
+            if (typeof window.demoSplitAI?.restoreAnalysis !== 'function') throw new Error('Please refresh this page and retry');
+            window.demoSplitAI.restoreAnalysis(detail, original);
+            load.textContent = 'Loaded';
+          } catch (error) {
+            jobsMessage.textContent = 'Load Result failed · ' + error.message;
+            load.disabled = false; load.textContent = 'Load Result';
+          }
+        });
+        row.append(load);
+      }
+
       if (job.canCancel) {
         const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'upload-delete-button';
         cancel.textContent = job.status === 'running' && job.kind === 'ai-review' ? 'Cancel AI Review' : 'ยกเลิกคิว';
