@@ -184,3 +184,6 @@
   .home-page #web-demo .demo-home-preview,
   .home-page #demo-preview-dialog .demo-preview-close { transition: none; }
 }
+
+/* Cayin project photograph, scoped to its existing card. */
+.home-page .cayin-card-image{padding:0;overflow:hidden}.home-page .cayin-card-image::before{content:none}.home-page .cayin-card-image img{display:block;width:100%;height:100%;object-fit:cover}
