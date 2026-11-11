@@ -1,5 +1,6 @@
 param([string]$ServiceAccount = 'ELITEBOOK\EliteBook')
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'firewall-verification.ps1')
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 if (-not ([Security.Principal.WindowsPrincipal]$identity).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     throw 'Run this reviewed script from PowerShell as Administrator. No settings were changed.'
@@ -40,7 +41,7 @@ foreach ($item in $items) {
         if ($rule.AccessControlType -eq 'Allow' -and $sid -notin $allowedSids.Value) { throw "ACL verification failed: $($item.FullName)" }
     }
 }
-if (@(Get-NetFirewallProfile | Where-Object { $_.Enabled -ne 'True' }).Count) { throw 'Firewall verification failed' }
+Confirm-AtlFirewallProfiles
 Write-Output "Verified: runtime ACLs restricted to $ServiceAccount, SYSTEM and Administrators."
 Write-Output 'Verified: Domain, Private and Public firewall profiles enabled; default inbound blocked.'
 Write-Output "Rollback metadata: $backup"

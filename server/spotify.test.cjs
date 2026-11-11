@@ -50,4 +50,11 @@ test('Spotify Phase 1: authenticated connect, callback, search, refresh and disc
   assert.equal((await request('/spotify/status')).data.connected, false);
   const denied = new URL((await request('/spotify/connect')).data.url).searchParams.get('state');
   assert.equal((await request('/spotify/callback?state=' + denied + '&error=access_denied')).headers.Location, '/demo/?spotify=denied');
+  const pending = new URL((await request('/spotify/connect')).data.url).searchParams.get('state');
+  user = null;
+  await assert.rejects(request('/spotify/status'), { status: 401 });
+  // The existing callback is authorized by its single-use state, even after
+  // logout; retaining this documents compatibility rather than changing it.
+  assert.equal((await request('/spotify/callback?state=' + pending + '&code=test-code')).headers.Location, '/demo/?spotify=connected');
+  assert.equal((await request('/spotify/callback?state=' + pending + '&code=replay')).headers.Location, '/demo/?spotify=state_error');
 });

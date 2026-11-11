@@ -408,7 +408,7 @@ function createServer(options = {}) {
         lifecycle.removeExport(user.id, data.jobId, 'manual-delete', user); return send(res, 200, { ok: true, jobId: data.jobId });
       }
       throw fail(404, 'Not found');
-    } catch (error) { send(res, error.status || 500, { error: error.status ? error.message : 'Request could not be completed', ...(SAFE_ERROR_CODES.has(error.safeCode) ? { errorCode: error.safeCode } : {}) }); }
+    } catch (error) { send(res, error.status || 500, { error: error.status ? error.message : 'Request could not be completed', ...(SAFE_ERROR_CODES.has(error.safeCode) ? { errorCode: error.safeCode } : {}) }, error.status === 429 && Number.isInteger(error.retryAfter) ? { 'Retry-After': String(error.retryAfter) } : {}); }
   });
   server.on('close', () => { clearInterval(timer); modifyMonitor.close(); queue.close(); runner.close?.(); spotify.close(); auth.close(); if (queue.running) queue.afterRunning = () => activity.close(); else activity.close(); });
   return server;
