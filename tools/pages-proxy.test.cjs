@@ -106,3 +106,64 @@ test('Pages proxy rejects an unsafe backend origin configuration', async t => {
     /Invalid BACKEND_ORIGIN/
   );
 });
+
+test('Staging proxy fails closed when Access service-token credentials are missing or partial', async t => {
+  const { onRequest } = await loadProxy(t);
+  const originalFetch = global.fetch;
+  let fetchCalled = false;
+  t.after(() => { global.fetch = originalFetch; });
+  global.fetch = async () => { fetchCalled = true; return new Response('unexpected'); };
+
+  const missing = await onRequest({
+    request: new Request('https://demo.audiotechlabs.com/api/health'),
+    env: { BACKEND_ORIGIN: 'https://staging-backend.audiotechlabs.com' }
+  });
+  assert.equal(missing.status, 503);
+  assert.deepEqual(await missing.json(), { error: 'Staging backend access credentials unavailable' });
+  assert.equal(fetchCalled, false);
+
+  const partial = await onRequest({
+    request: new Request('https://demo.audiotechlabs.com/api/health'),
+    env: {
+      BACKEND_ORIGIN: 'https://staging-backend.audiotechlabs.com',
+      CF_ACCESS_CLIENT_ID: 'client-id-only'
+    }
+  });
+  assert.equal(partial.status, 503);
+  assert.equal(fetchCalled, false);
+});
+
+test('Staging proxy injects server-side Access credentials and overwrites browser-supplied values', async t => {
+  const { onRequest } = await loadProxy(t);
+  const originalFetch = global.fetch;
+  let received;
+  t.after(() => { global.fetch = originalFetch; });
+  global.fetch = async request => {
+    received = request.headers;
+    return new Response(JSON.stringify({ ok: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  };
+
+  const response = await onRequest({
+    request: new Request('https://demo.audiotechlabs.com/api/health', {
+      headers: {
+        'CF-Access-Client-Id': 'attacker-client-id',
+        'CF-Access-Client-Secret': 'attacker-client-secret'
+      }
+    }),
+    env: {
+      BACKEND_ORIGIN: 'https://staging-backend.audiotechlabs.com',
+      CF_ACCESS_CLIENT_ID: 'server-client-id',
+      CF_ACCESS_CLIENT_SECRET: 'server-client-secret'
+    }
+  });
+
+  assert.equal(received.get('cf-access-client-id'), 'server-client-id');
+  assert.equal(received.get('cf-access-client-secret'), 'server-client-secret');
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('cf-access-client-id'), null);
+  assert.equal(response.headers.get('cf-access-client-secret'), null);
+  assert.deepEqual(await response.json(), { ok: true });
+});

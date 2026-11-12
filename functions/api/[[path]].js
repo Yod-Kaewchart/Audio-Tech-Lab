@@ -25,10 +25,26 @@ export async function onRequest(context) {
   const incoming = new URL(request.url);
   const origin = backendOrigin(env);
   if (incoming.origin === origin) return new Response('Proxy loop rejected', { status: 508 });
+  const accessClientId = typeof env?.CF_ACCESS_CLIENT_ID === 'string' ? env.CF_ACCESS_CLIENT_ID.trim() : '';
+  const accessClientSecret = typeof env?.CF_ACCESS_CLIENT_SECRET === 'string' ? env.CF_ACCESS_CLIENT_SECRET.trim() : '';
+  const stagingBackend = new URL(origin).hostname === 'staging-backend.audiotechlabs.com';
+  if ((Boolean(accessClientId) !== Boolean(accessClientSecret)) || (stagingBackend && (!accessClientId || !accessClientSecret))) {
+    return Response.json(
+      { error: 'Staging backend access credentials unavailable' },
+      { status: 503, headers: noStore({ 'Content-Type': 'application/json; charset=utf-8' }) }
+    );
+  }
   const suffix = incoming.pathname.replace(/^\/api(?=\/|$)/, '') || '/';
   const target = new URL(suffix + incoming.search, origin);
   const headers = new Headers(request.headers);
   headers.delete('host');
+  // Never trust Access credentials supplied by the browser; inject only server-side secrets.
+  headers.delete('cf-access-client-id');
+  headers.delete('cf-access-client-secret');
+  if (accessClientId && accessClientSecret) {
+    headers.set('CF-Access-Client-Id', accessClientId);
+    headers.set('CF-Access-Client-Secret', accessClientSecret);
+  }
   headers.set('X-Forwarded-Proto', 'https');
   headers.set('X-Forwarded-Host', incoming.host);
   const clientIp = request.headers.get('CF-Connecting-IP');
