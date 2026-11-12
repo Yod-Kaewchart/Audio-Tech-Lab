@@ -1,24 +1,45 @@
 'use strict';
 const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
 const active = job => job.status === 'queued' || job.status === 'running';
+const unconfirmed = job => job?.cleanupUnconfirmed === true;
+const occupiesResources = job => active(job) || unconfirmed(job);
 const failure = (status, message) => Object.assign(new Error(message), { status });
 class ProcessingQueue {
-  constructor({ file, maxWaiting = 10, maxPerUser = 3, historyLimit = Infinity, retention = 59 * 60 * 1000, onChange, describe } = {}) {
+  constructor({ file, maxWaiting = 10, maxPerUser = 3, historyLimit = Infinity, retention = 59 * 60 * 1000, onChange, describe, recovery, resolveUnconfirmedOnStart = false } = {}) {
     this.file = file; this.maxWaiting = maxWaiting; this.maxPerUser = maxPerUser;
     this.historyLimit = historyLimit; this.retention = retention; this.onChange = onChange; this.describe = describe;
     this.jobs = new Map(); this.pending = []; this.running = null; this.closed = false;
+    this.recoveryPending = Boolean(recovery && typeof recovery.then === 'function' && !resolveUnconfirmedOnStart);
+    this.recoveryFailed = false;
     if (file) {
       fs.mkdirSync(path.dirname(file), { recursive: true });
       if (fs.existsSync(file)) {
         const saved = JSON.parse(fs.readFileSync(file, 'utf8'));
         for (const job of saved.jobs || []) {
-          Object.assign(job, this.describe?.(job) || {}); this.onChange?.(job);
+          Object.assign(job, this.describe?.(job) || {});
+          if (job.cleanupUnconfirmed === undefined && job.errorCode === 'WORKER_CLEANUP_UNCONFIRMED') job.cleanupUnconfirmed = true;
           if (active(job)) Object.assign(job, { status: 'failed', error: 'Backend restarted. Please submit the job again', finishedAt: Date.now() });
           this.jobs.set(job.id, job); this.onChange?.(job);
         }
       }
       this.prune(); this.save();
     }
+    if (resolveUnconfirmedOnStart) this.resolveUnconfirmed();
+    else if (recovery && typeof recovery.then === 'function') {
+      Promise.resolve(recovery).then(() => {
+        this.recoveryPending = false; this.resolveUnconfirmed();
+      }, () => {
+        this.recoveryPending = false; this.recoveryFailed = true;
+      });
+    }
+  }
+  resolveUnconfirmed() {
+    let changed = false;
+    for (const job of this.jobs.values()) if (unconfirmed(job)) {
+      job.cleanupUnconfirmed = false; changed = true; this.onChange?.(job);
+    }
+    this.recoveryFailed = false;
+    if (changed) { this.prune(); this.save(); }
   }
   save() {
     if (!this.file) return;
@@ -27,12 +48,12 @@ class ProcessingQueue {
     fs.renameSync(this.file + '.tmp', this.file);
   }
   prune() {
-    const completed = [...this.jobs.values()].filter(job => !active(job)).sort((a, b) => b.finishedAt - a.finishedAt);
+    const completed = [...this.jobs.values()].filter(job => !occupiesResources(job)).sort((a, b) => b.finishedAt - a.finishedAt);
     for (let i = 0; i < completed.length; i++) if (i >= this.historyLimit || Date.now() - completed[i].finishedAt > this.retention) this.jobs.delete(completed[i].id);
   }
   forgetJobs(ids) {
     const saved = new Map(this.jobs);
-    if (ids.some(id => active(this.jobs.get(id) || {}))) throw failure(409, 'File has a queued or running job');
+    if (ids.some(id => occupiesResources(this.jobs.get(id) || {}))) throw failure(409, 'File has a queued or running job');
     for (const id of ids) this.jobs.delete(id);
     try { this.save(); } catch (error) { this.jobs = saved; throw error; }
   }
@@ -46,9 +67,10 @@ class ProcessingQueue {
   }
   get(owner, id) { const job = this.jobs.get(id); if (!job || job.owner !== owner) throw failure(404, 'Job not found'); return this.view(job); }
   list(owner) { this.prune(); return [...this.jobs.values()].filter(job => job.owner === owner).sort((a, b) => b.queuedAt - a.queuedAt).map(job => this.view(job, false)); }
-  isBusy(owner, fileId) { return [...this.jobs.values()].some(job => job.owner === owner && active(job) && (job.fileIds || [job.fileId]).includes(fileId)); }
+  isBusy(owner, fileId) { return [...this.jobs.values()].some(job => job.owner === owner && occupiesResources(job) && (job.fileIds || [job.fileId]).includes(fileId)); }
   submit({ owner, kind, fileId, fileIds, filename, requestId, signature, outputId, cancellable = false, execute }) {
     if (this.closed) throw failure(503, 'Backend is restarting. Please retry');
+    if (this.recoveryPending || this.recoveryFailed) throw failure(503, 'Worker cleanup is unconfirmed; processing is stopped');
     this.prune();
     if (requestId) {
       const prior = [...this.jobs.values()].find(job => job.owner === owner && job.requestId === requestId);
@@ -56,7 +78,7 @@ class ProcessingQueue {
     }
     const resources = Array.isArray(fileIds) && fileIds.length ? fileIds : [fileId];
     if (resources.some(id => this.isBusy(owner, id))) throw failure(409, 'One or more files already have a queued or running job');
-    if ([...this.jobs.values()].filter(job => job.owner === owner && active(job)).length >= this.maxPerUser) throw failure(429, 'You already have ' + this.maxPerUser + ' active jobs. Please wait');
+    if ([...this.jobs.values()].filter(job => job.owner === owner && occupiesResources(job)).length >= this.maxPerUser) throw failure(429, 'You already have ' + this.maxPerUser + ' active jobs. Please wait');
     if (this.pending.length >= this.maxWaiting) throw failure(429, 'The processing queue is full. Please retry later');
     const job = { id: crypto.randomUUID(), owner, kind, fileId, ...(resources.length > 1 ? { fileIds: resources } : {}), filename, requestId, signature, outputId, cancellable: Boolean(cancellable), abortController: cancellable ? new AbortController() : null, status: 'queued', queuedAt: Date.now(), execute };
     Object.assign(job, this.describe?.(job) || {});
@@ -93,12 +115,19 @@ class ProcessingQueue {
       if (job.abortController?.signal.aborted) throw Object.assign(new Error('Processing cancelled'), { cancelled: true, safeCode: 'USER_CANCELLED' });
       job.result = result; job.status = 'succeeded';
     } catch (error) {
-      if (error?.cancelled || job.abortController?.signal.aborted) { job.status = 'cancelled'; job.errorCode = 'USER_CANCELLED'; }
+      if (error?.cleanupUnconfirmed || error?.safeCode === 'WORKER_CLEANUP_UNCONFIRMED') {
+        job.status = 'failed'; job.error = error.message || 'Worker cleanup could not be confirmed';
+        job.errorCode = 'WORKER_CLEANUP_UNCONFIRMED'; job.cleanupUnconfirmed = true;
+      } else if (error?.cancelled || job.abortController?.signal.aborted) { job.status = 'cancelled'; job.errorCode = 'USER_CANCELLED'; }
       else { job.status = 'failed'; job.error = error.message || 'Processing failed. Please retry'; if (error?.safeCode) job.errorCode = error.safeCode; }
     }
     finally {
-      job.finishedAt = Date.now(); delete job.execute; delete job.abortController; this.running = null;
-      this.prune(); this.save(); this.onChange?.(job); this.afterRunning?.(); queueMicrotask(() => this.pump());
+      job.finishedAt = Date.now(); delete job.execute; delete job.abortController;
+      const unsafe = unconfirmed(job);
+      if (unsafe) this.recoveryFailed = true;
+      this.running = unsafe ? id : null;
+      this.prune(); this.save(); this.onChange?.(job);
+      if (!unsafe) { this.afterRunning?.(); queueMicrotask(() => this.pump()); }
     }
   }
   close() {

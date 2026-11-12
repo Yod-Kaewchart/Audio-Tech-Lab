@@ -20,7 +20,7 @@ function directoryBytes(directory) {
   }
   return size;
 }
-function createStorageLimits({ uploads, exports, previews, sessions, limits = {}, freeBytes }) {
+function createStorageLimits({ uploads, exports, previews, sessions, limits = {}, freeBytes, isBlocked }) {
   const policy = { ...limitsFromEnv(), ...limits }, reservations = new Map();
   for (const value of Object.values(policy)) if (!Number.isSafeInteger(value) || value <= 0) throw new Error('Invalid storage limit');
   // Both roots are under the same application directory/volume.
@@ -37,6 +37,7 @@ function createStorageLimits({ uploads, exports, previews, sessions, limits = {}
       policy.totalBytes - usage() - reserved(), diskFree() - policy.minFreeBytes - reserved())));
   }
   function check(owner, bytes = 0) {
+    if (isBlocked?.()) throw Object.assign(new Error('Worker cleanup is unconfirmed; storage changes are stopped'), { status: 503 });
     if (!Number.isSafeInteger(bytes) || bytes < 0) throw new Error('Invalid storage reservation');
     if (usage(owner) + reserved(owner) + bytes > policy.userBytes) throw Object.assign(new Error('พื้นที่บัญชีเต็ม กรุณาลบไฟล์ที่ไม่ใช้แล้ว'), { status: 413 });
     if (usage() + reserved() + bytes > policy.totalBytes || diskFree() - reserved() - bytes < policy.minFreeBytes)

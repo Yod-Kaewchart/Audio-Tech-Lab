@@ -43,11 +43,12 @@ function createServer(options = {}) {
     }
     return { username: job.username || names.get(job.owner) || null, size: job.size ?? size };
   }
-  const queue = new ProcessingQueue({ file: path.join(security, 'processing-jobs.json'), retention: Infinity,
-    describe: describeJob, onChange: job => activity.record(job) });
+  const queue = new ProcessingQueue({ file: path.join(security, 'processing-jobs.json'), retention: Infinity, recovery: runner.ready,
+    resolveUnconfirmedOnStart: runner.recoveryConfirmed === true, describe: describeJob, onChange: job => activity.record(job) });
   const MAX = 2000 * 1000 * 1000, CHUNK = 8 * 1024 * 1024;
   for (const directory of [uploads, exports, previews]) fs.mkdirSync(directory, { recursive: true });
-  const storage = createStorageLimits({ uploads, exports, previews, sessions, limits: options.storageLimits, freeBytes: options.freeBytes });
+  const storage = createStorageLimits({ uploads, exports, previews, sessions, limits: options.storageLimits, freeBytes: options.freeBytes,
+    isBlocked: () => queue.recoveryPending || queue.recoveryFailed });
   const migration = path.join(security, 'owner-migration-v1.done');
   if (!fs.existsSync(migration)) {
     const ownerId = auth.ownerId();
@@ -138,7 +139,8 @@ function createServer(options = {}) {
         if (req.method !== 'POST') throw fail(405, 'POST required');
         const data = await json(req);
         if (data.enabled !== true && data.enabled !== false) throw fail(400, 'enabled must be boolean');
-        const activeJobs = [...queue.jobs.values()].filter(job => ['queued', 'running'].includes(job.status)).length;
+        const activeJobs = Math.max(queue.recoveryPending || queue.recoveryFailed ? 1 : 0,
+          [...queue.jobs.values()].filter(job => ['queued', 'running'].includes(job.status) || job.cleanupUnconfirmed === true).length);
         if (data.enabled && (activeJobs || sessions.size || mutations)) return send(res, 409, { error: 'Backend is busy; nothing was stopped', activeJobs, uploads: sessions.size, mutations });
         maintenanceUntil = data.enabled ? Date.now() + 120000 : 0;
         return send(res, 200, { ok: true, maintenance: data.enabled, expiresAt: maintenanceUntil });
@@ -317,6 +319,7 @@ function createServer(options = {}) {
         const data = await json(req), session = sessions.get(data.uploadId);
         if (!session || session.owner !== user.id) throw fail(404, 'Upload session not found');
         if (session.writing || session.received !== session.size) throw fail(409, 'Upload is incomplete');
+        storage.check(user.id);
         fs.renameSync(session.file, path.join(userRoot(uploads, user), session.id + '-' + session.name)); sessions.delete(session.id);
         activity.event({ type: 'upload', ownerId: user.id, username: user.username, actorId: user.id, actorUsername: user.username, fileId: session.id, filename: session.name, size: session.size });
         return send(res, 200, { ok: true, fileId: session.id, name: session.name, size: session.size });

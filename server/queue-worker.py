@@ -1,9 +1,11 @@
 """Run one audio bridge and keep all of its Windows child processes in one job."""
 import ctypes
 from ctypes import wintypes
+import json
 import os
 import runpy
 import sys
+import time
 
 
 def protect_process_tree():
@@ -41,8 +43,35 @@ def protect_process_tree():
     return handle
 
 
+def wait_for_start_marker():
+    marker = os.environ.get("ATL_WORKER_MARKER")
+    token = sys._xoptions.get("atl_worker")
+    if not marker or not token or len(sys.argv) < 3:
+        raise SystemExit("Worker start marker is unavailable")
+    deadline = time.monotonic() + 10
+    while time.monotonic() < deadline:
+        try:
+            with open(marker, "r", encoding="utf-8") as handle:
+                record = json.load(handle)
+        except FileNotFoundError:
+            time.sleep(0.025)
+            continue
+        expected = {
+            "pid": os.getpid(),
+            "token": token,
+            "worker": os.path.abspath(__file__),
+            "script": sys.argv[1],
+            "source": sys.argv[2],
+        }
+        if any(record.get(key) != value for key, value in expected.items()):
+            raise SystemExit("Worker start marker does not match this process")
+        return
+    raise SystemExit("Worker start marker was not committed before the deadline")
+
+
 if __name__ == "__main__":
     _job_handle = protect_process_tree()
+    wait_for_start_marker()
     if len(sys.argv) < 3:
         raise SystemExit("usage: queue-worker.py <bridge> <audio> [export-root]")
     bridge = os.path.abspath(sys.argv[1])

@@ -96,3 +96,15 @@ test('Orphan export history and expired preview reconcile independently of retai
   f.service.cleanup(); assert.ok(fs.existsSync(f.file)); assert.ok(!fs.existsSync(preview));
   assert.deepEqual(f.activity.list(f.owner).map(j => j.jobId), [a.id]);
 });
+
+test('global worker cleanup lock blocks manual deletion and automatic cleanup', t => {
+  const f = fixture(t), old = new Date(Date.now() - RETENTION - 1000);
+  f.queue.recoveryFailed = true;
+  fs.utimesSync(f.file, old, old);
+  assert.throws(() => f.service.removeFile(f.owner, f.id, 'manual-delete'), { status: 409 });
+  f.service.cleanup();
+  assert.ok(fs.existsSync(f.file));
+  f.queue.recoveryFailed = false;
+  f.service.removeFile(f.owner, f.id, 'manual-delete');
+  assert.ok(!fs.existsSync(f.file));
+});

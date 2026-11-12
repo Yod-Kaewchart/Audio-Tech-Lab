@@ -38,6 +38,20 @@ test('Export reserves available capacity and releases it on completion or failur
   reservation.release(); f.storage.check('a', 550);
   f.free(100); assert.throws(() => f.storage.reserveExport('a'), { status: 507 });
 });
+test('storage writes and reservations stay blocked while worker cleanup is unconfirmed', t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atl-storage-worker-block-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const uploads = path.join(root, 'uploads'), exports = path.join(root, 'exports'), sessions = new Map();
+  fs.mkdirSync(uploads); fs.mkdirSync(exports); let blocked = true;
+  const storage = createStorageLimits({ uploads, exports, sessions, isBlocked: () => blocked,
+    limits: { userBytes: 1000, totalBytes: 2000, minFreeBytes: 100, exportBytes: 600 }, freeBytes: () => 10000 });
+  assert.throws(() => storage.check('a', 1), { status: 503 });
+  assert.throws(() => storage.reserveExport('a'), { status: 503 });
+  assert.equal(storage.summary('a').usedBytes, 0);
+  blocked = false; storage.check('a', 1);
+  assert.equal(storage.reserveExport('a').bytes, 600);
+});
+
 test('Storage policy rejects invalid configuration instead of disabling the limits', () => {
   assert.equal(limitsFromEnv({}).userBytes, 10e9);
   for (const value of ['0', '-1', 'NaN', 'Infinity', 'many']) assert.throws(() => limitsFromEnv({ ATL_USER_STORAGE_GB: value }));

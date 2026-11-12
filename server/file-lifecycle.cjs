@@ -23,7 +23,7 @@ function createFileLifecycle({ uploads, exports, previews, sessions, queue, acti
   function exportBusy(owner, id) {
     // Legacy workers choose an output ID only after starting.
     return [...queue.jobs.values()].some(j => j.owner === owner &&
-      ((['export', 'merge'].includes(j.kind) && ['queued', 'running'].includes(j.status)) ||
+      ((['export', 'merge'].includes(j.kind) && (['queued', 'running'].includes(j.status) || j.cleanupUnconfirmed === true)) ||
        (outputId(j) === id && (j.fileIds || [j.fileId]).some(file => queue.isBusy(owner, file)))));
   }
   function assertAvailable(owner, id) {
@@ -52,6 +52,7 @@ function createFileLifecycle({ uploads, exports, previews, sessions, queue, acti
   function remove(owner, id, kind, reason, actor, required = true) {
     if (!validId(owner) || !validId(id)) throw fail(400, 'Invalid storage item');
     try {
+      if (queue.recoveryPending || queue.recoveryFailed) throw fail(409, 'Worker cleanup is unconfirmed; resource changes are stopped');
       const existing = pending.get(key(owner, id, kind));
       if (existing) return execute(existing);
       if ((kind === 'upload' || kind === 'preview') && (queue.isBusy(owner, id) || sessions.get(id)?.writing)) throw fail(409, 'File has a queued or running job');
@@ -94,6 +95,7 @@ function createFileLifecycle({ uploads, exports, previews, sessions, queue, acti
   const removeFile = (owner, id, reason, actor, required) => remove(owner, id, 'upload', reason, actor, required);
   const removeExport = (owner, id, reason, actor, required) => remove(owner, id, 'export', reason, actor, required);
   function cleanup() {
+    if (queue.recoveryPending || queue.recoveryFailed) return;
     const now = Date.now();
     // An unsafe/locked item must not stop other owners' cleanup or API requests.
     const attempt = fn => { try { fn(); } catch (error) {
